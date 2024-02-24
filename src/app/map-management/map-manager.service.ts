@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {MapLoaderService} from "./map-loader.service";
-import {MajorLocation} from "./majorLocation";
+import {MajorLocationInterface} from "./majorLocation.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,12 @@ export class MapManagerService {
   map = this.mapLoaderService.initMapFromFile();
   idCounter: number = 1
 
-  deleteMajorLocation(theLocation: MajorLocation) {
+  deleteMajorLocation(theLocation: MajorLocationInterface) {
     this.map.locations = this.map.locations.filter(location => location !== theLocation)
   }
 
   addMajorLocationWithName(theName: string) {
-    let newMajorLocation:MajorLocation = {
+    let newMajorLocation:MajorLocationInterface = {
       name: theName,
       subLocations: [],
       id: this.idCounter++

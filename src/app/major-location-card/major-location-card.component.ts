@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MajorLocation} from "../majorLocation";
+import {MajorLocationInterface} from "../map-management/majorLocation.interface";
 import {emit} from "@angular-devkit/build-angular/src/tools/esbuild/angular/compilation/parallel-worker";
 
 @Component({
@@ -11,8 +11,8 @@ import {emit} from "@angular-devkit/build-angular/src/tools/esbuild/angular/comp
 })
 export class MajorLocationCardComponent {
 
-  @Input() majorLocation: MajorLocation | undefined;
-  @Output() locationDeleted = new EventEmitter<MajorLocation>();
+  @Input() majorLocation: MajorLocationInterface | undefined;
+  @Output() locationDeleted = new EventEmitter<MajorLocationInterface>();
 
   fireLocationDeleted() {
     this.locationDeleted.emit(this.majorLocation)
