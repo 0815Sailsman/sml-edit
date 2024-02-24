@@ -1,0 +1,10 @@
+{
+  "name":"epic",
+  "locations": [
+    {
+      "id": 0,
+      "name": "Starting Cell",
+      "subLocations": []
+    }
+  ]
+}
