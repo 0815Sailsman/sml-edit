@@ -9,9 +9,7 @@ export class MapLoaderService {
 
   constructor() { }
 
-  idCounter: number = 1
-
-  loadMapFromFile(): Map {
+  initMapFromFile(): Map {
     console.log(map instanceof Map)
     return new Map(map.name, map.locations)
   }

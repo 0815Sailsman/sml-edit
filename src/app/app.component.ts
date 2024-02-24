@@ -5,6 +5,7 @@ import { MapLoaderService } from "./map-loader.service";
 import { MajorLocationCardComponent } from "./major-location-card/major-location-card.component";
 import {MajorLocation} from "./majorLocation";
 import {FormsModule} from "@angular/forms";
+import {MapManagerService} from "./map-manager.service";
 
 @Component({
   selector: 'app-root',
@@ -15,26 +16,18 @@ import {FormsModule} from "@angular/forms";
 })
 export class AppComponent {
 
-  constructor(private mapService: MapLoaderService) {
-  }
+  constructor(protected mapService: MapManagerService) {}
 
-  map = this.mapService.loadMapFromFile();
   newLocationName: string | undefined;
 
   deleteMajorLocation(theLocation: MajorLocation) {
-    this.map.locations = this.map.locations.filter(location => location !== theLocation)
+    this.mapService.deleteMajorLocation(theLocation)
   }
 
   addMajorLocation(theName: string | undefined) {
     if (theName != undefined && theName != "") {
-      let newMajorLocation:MajorLocation = {
-        name: theName,
-        subLocations: [],
-        id: this.mapService.idCounter
-      }
-      this.mapService.idCounter++
-      this.map.locations.push(newMajorLocation)
+      this.mapService.addMajorLocationWithName(theName)
+      this.newLocationName = ""
     }
-    this.newLocationName = ""
   }
 }
