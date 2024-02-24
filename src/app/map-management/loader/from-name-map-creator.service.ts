@@ -6,19 +6,10 @@ import { Map } from '../map';
   providedIn: 'root'
 })
 export class FromNameMapCreatorService extends AbstractMapLoaderService {
-  get mapName(): string {
-    return this._mapName;
-  }
 
-  set mapName(value: string) {
-    this._mapName = value;
-  }
-
-  private _mapName: string = "default";
-
-  load(): Map {
+  load(name: string = "default"): Map {
     return {
-      name: this._mapName,
+      name: name,
       locations:[]
     };
   }

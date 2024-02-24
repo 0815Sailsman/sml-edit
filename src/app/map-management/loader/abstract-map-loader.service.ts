@@ -6,6 +6,6 @@ import { Map } from '../map';
 })
 export abstract class AbstractMapLoaderService {
 
-  abstract load(): Map | null
+  abstract load(): Map | null;
 
 }
