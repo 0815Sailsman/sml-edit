@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { MapLoaderService } from "./map-management/map-loader.service";
+import { AbstractMapLoaderService } from "./map-management/loader/abstract-map-loader.service";
 import { MajorLocationCardComponent } from "./major-location-card/major-location-card.component";
 import {MajorLocationInterface} from "./map-management/majorLocation.interface";
 import {FormsModule} from "@angular/forms";

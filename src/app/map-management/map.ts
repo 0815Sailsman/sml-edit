@@ -1,6 +1,6 @@
 import {MajorLocationInterface} from "./majorLocation.interface";
 
-export class MapClass {
+export class Map {
   name: string
   locations: MajorLocationInterface[]
 

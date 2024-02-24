@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import {MapLoaderService} from "./map-loader.service";
 import {MajorLocationInterface} from "./majorLocation.interface";
+import {FromNameMapCreatorService} from "./loader/from-name-map-creator.service";
+import { Map } from './map';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapManagerService {
 
-  constructor(private mapLoaderService: MapLoaderService) { }
+  constructor(private mapLoaderService: FromNameMapCreatorService) { }
 
-  map = this.mapLoaderService.initMapFromFile();
+  map: Map = this.mapLoaderService.load();
   idCounter: number = 1
 
   deleteMajorLocation(theLocation: MajorLocationInterface) {
