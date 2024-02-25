@@ -5,3 +5,4 @@ Items: <span *ngFor="let item of location?.items">{{item}}</span><br>
 Enemies: <span *ngFor="let enemy of location?.enemies">{{enemy}}</span><br>
 Objects: <span *ngFor="let object of location?.objects">{{object}}</span><br>
 NPCs: <span *ngFor="let npc of location?.npcs">{{npc}}</span><br>
+<button (click)="fireLocationDeleted()">delete</button>

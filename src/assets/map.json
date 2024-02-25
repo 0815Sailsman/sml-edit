@@ -6,7 +6,7 @@
       "name": "Northern Undead Asylum",
       "subLocations": [
         {
-          "id": 0,
+          "id": 1,
           "name": "Starting Cell",
           "connections": [],
           "items": [],

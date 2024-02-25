@@ -5,5 +5,8 @@
   <sml-edit-sub-location-card
     *ngFor="let location of majorLocation?.subLocations"
     [location]="location"
+    (locationDeleted)="deleteSubLocation($event)"
   />
+  <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName">
+  <button (click)="addSubLocation(newLocationName)">add new minor</button>
 </div>
