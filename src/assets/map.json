@@ -3,8 +3,19 @@
   "locations": [
     {
       "id": 0,
-      "name": "Starting Cell",
-      "subLocations": []
+      "name": "Northern Undead Asylum",
+      "subLocations": [
+        {
+          "id": 0,
+          "name": "Starting Cell",
+          "connections": [],
+          "items": [],
+          "enemies": [],
+          "objects": [],
+          "npcs": [],
+          "visited": true
+        }
+      ]
     }
   ]
 }

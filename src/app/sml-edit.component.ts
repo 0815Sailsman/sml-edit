@@ -8,13 +8,13 @@ import {FormsModule} from "@angular/forms";
 import {MapManagerService} from "./map-management/map-manager.service";
 
 @Component({
-  selector: 'app-root',
+  selector: 'sml-edit-root',
   standalone: true,
   imports: [RouterOutlet, MajorLocationCardComponent, CommonModule, FormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './sml-edit.component.html',
+  styleUrl: './sml-edit.component.css'
 })
-export class AppComponent {
+export class SmlEditComponent {
 
   constructor(protected mapService: MapManagerService) {}
 

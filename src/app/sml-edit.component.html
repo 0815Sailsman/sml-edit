@@ -1,6 +1,6 @@
 <div id="majorWrapper">
   <h1>{{mapService.map.name}}</h1>
-  <app-major-location-card
+  <sml-edit-major-location-card
     *ngFor="let everyLocation of mapService.map.locations"
     [majorLocation]="everyLocation"
     (locationDeleted)="deleteMajorLocation($event)"
