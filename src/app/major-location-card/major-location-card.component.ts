@@ -5,6 +5,15 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import {MapManagerService} from "../map-management/map-manager.service";
 import {Location} from "../map-management/location";
+import {Pair} from "../Pair";
+import {Item} from "../map-management/item";
+import {Triplet} from "../Triplet";
+import {Connection} from "../map-management/connection";
+import {Enemy} from "../map-management/enemy";
+import {NPC} from "../map-management/NPC";
+import {OtherObject} from "../map-management/otherObject";
+import {ObjectInSublocation} from "../ObjectInSublocation";
+import {KeyInSublocation} from "../KeyInSublocation";
 
 @Component({
   selector: 'sml-edit-major-location-card',
@@ -46,5 +55,16 @@ export class MajorLocationCardComponent {
     if (this.majorLocation != undefined) {
       this.mapService.deleteSubLocationFrom(this.majorLocation, theLocationToBeDeleted)
     }
+  }
+
+  deleteObjectFromLocation(
+    tripletOfLocationAndObjectAndKey: Triplet<Location, ObjectInSublocation, KeyInSublocation>
+  ): void {
+    this.mapService.deleteGeneralObjectFromLocationInMajorLocation(
+      this.majorLocation,
+      tripletOfLocationAndObjectAndKey.first,
+      tripletOfLocationAndObjectAndKey.second,
+      tripletOfLocationAndObjectAndKey.third
+    )
   }
 }

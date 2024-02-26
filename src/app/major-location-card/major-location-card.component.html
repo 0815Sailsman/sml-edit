@@ -6,6 +6,7 @@
     *ngFor="let location of majorLocation?.subLocations"
     [location]="location"
     (locationDeleted)="deleteSubLocation($event)"
+    (objectDeletedFromLocation)="deleteObjectFromLocation($event)"
   />
   <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName">
   <button (click)="addSubLocation(newLocationName)">add new minor</button>

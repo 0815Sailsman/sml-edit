@@ -1,1 +1,4 @@
-<li>{{this.objectToString(genericObject)}}</li>
+<li>
+  {{this.objectToString(genericObject)}}
+  <button (click)="fireObjectDeleted()">delete {{depluralizeSimple(name)}}</button>
+</li>

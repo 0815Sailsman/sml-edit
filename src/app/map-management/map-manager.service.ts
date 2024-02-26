@@ -52,4 +52,20 @@ export class MapManagerService {
     this.map.locations[index].subLocations =
       this.map.locations[index].subLocations.filter(location => location !== theLocationToBeDeleted)
   }
+
+  deleteGeneralObjectFromLocationInMajorLocation(
+    majorLocation: MajorLocation | undefined,
+    sublocation: Location | undefined,
+    theObject: Item | Connection | NPC | Enemy |  OtherObject | undefined,
+    key: "items" | "connections" | "enemies" | "npcs" | "objects" | undefined)
+  {
+    if (majorLocation == undefined || sublocation == undefined || theObject == undefined || key == undefined) {
+      return
+    }
+    const majorIndex = this.map.locations.indexOf(majorLocation);
+    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(sublocation)
+    // @ts-ignore THIS WORKS, BECAUSE WE DON'T MIX DIFFERENT TYPES
+    this.map.locations[majorIndex].subLocations[minorIndex][key] =
+      this.map.locations[majorIndex].subLocations[minorIndex][key].filter(object => object !== theObject)
+  }
 }

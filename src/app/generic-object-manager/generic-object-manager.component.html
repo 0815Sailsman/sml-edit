@@ -1,6 +1,9 @@
-<ng-content></ng-content>:
+{{name}}:
 <sml-edit-single-generic-object
   *ngFor="let object of genericObjectArray"
   [genericObject]="object"
   [objectToString]="objectToString"
+  [name]="name"
+  (objectDeleted)="deleteObject($event)"
+  [key]="key"
 />

@@ -4,36 +4,37 @@ Visited: {{location?.visited}}<br>
 <sml-edit-generic-object-manager
   [genericObjectArray]="location?.connections"
   [objectToString]="this.connectionToString"
->
-  Connections
-</sml-edit-generic-object-manager>
-<!-- #################################### -->
+  [name]="'Connections'"
+  (objectDeleted)="deleteObject($event)"
+  [key]="'connections'"
+/>
 <sml-edit-generic-object-manager
   [genericObjectArray]="location?.items"
   [objectToString]="this.itemToString"
->
-  Items
-</sml-edit-generic-object-manager>
-<!-- #################################### -->
+  [name]="'Items'"
+  (objectDeleted)="deleteObject($event)"
+  [key]="'items'"
+/>
 <sml-edit-generic-object-manager
   [genericObjectArray]="location?.enemies"
   [objectToString]="this.enemyToString"
->
-  Enemies
-</sml-edit-generic-object-manager>
-<!-- #################################### -->
+  [name]="'Enemies'"
+  (objectDeleted)="deleteObject($event)"
+  [key]="'enemies'"
+/>
 <sml-edit-generic-object-manager
   [genericObjectArray]="location?.objects"
   [objectToString]="otherObjectToString"
->
-  Objects
-</sml-edit-generic-object-manager>
-<!-- #################################### -->
+  [name]="'Objects'"
+  (objectDeleted)="deleteObject($event)"
+  [key]="'objects'"
+/>
 <sml-edit-generic-object-manager
   [genericObjectArray]="location?.npcs"
   [objectToString]="npcToString"
->
-  NPCs
-</sml-edit-generic-object-manager>
+  [name]="'NPCs'"
+  (objectDeleted)="deleteObject($event)"
+  [key]="'npcs'"
+/>
 <button (click)="fireLocationDeleted()">delete minor location</button>
 
