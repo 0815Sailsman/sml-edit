@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MajorLocationInterface} from "../map-management/majorLocation.interface";
+import {MajorLocation} from "../map-management/majorLocation";
 import {SubLocationCardComponent} from "../sub-location-card/sub-location-card.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import {MapManagerService} from "../map-management/map-manager.service";
-import {LocationInterface} from "../map-management/location.interface";
+import {Location} from "../map-management/location";
 
 @Component({
   selector: 'sml-edit-major-location-card',
@@ -22,8 +22,8 @@ export class MajorLocationCardComponent {
 
   constructor(private mapService: MapManagerService) {}
 
-  @Input() majorLocation: MajorLocationInterface | undefined;
-  @Output() locationDeleted = new EventEmitter<MajorLocationInterface>();
+  @Input() majorLocation: MajorLocation | undefined;
+  @Output() locationDeleted = new EventEmitter<MajorLocation>();
   showingDetails: boolean = false;
   newLocationName: string | undefined;
 
@@ -42,7 +42,7 @@ export class MajorLocationCardComponent {
     }
   }
 
-  deleteSubLocation(theLocationToBeDeleted: LocationInterface) {
+  deleteSubLocation(theLocationToBeDeleted: Location) {
     if (this.majorLocation != undefined) {
       this.mapService.deleteSubLocationFrom(this.majorLocation, theLocationToBeDeleted)
     }

@@ -1,15 +1,15 @@
-import {MajorLocationInterface} from "./majorLocation.interface";
+import {MajorLocation} from "./majorLocation";
 
 export class Map {
   name: string
-  locations: MajorLocationInterface[]
+  locations: MajorLocation[]
 
-  constructor(name: string, locations: MajorLocationInterface[]) {
+  constructor(name: string, locations: MajorLocation[]) {
     this.name = name;
     this.locations = locations;
   }
 
-  public toString(): String {
+  public toString(): string {
     return "MapClass named " + this.name
   }
 }

@@ -8,11 +8,40 @@
         {
           "id": 1,
           "name": "Starting Cell",
-          "connections": [],
-          "items": [],
-          "enemies": [],
-          "objects": [],
-          "npcs": [],
+          "connections": [
+            {
+              "to": 1,
+              "if": {
+                "grammar": "",
+                "subConditions": [
+                  {
+                    "name": "",
+                    "parts": []
+                  }
+                ]
+              }
+            }
+          ],
+          "items": [
+            {
+              "name": "itemA"
+            }
+          ],
+          "enemies": [
+            {
+              "name": "enemyX"
+            }
+          ],
+          "objects": [
+            {
+              "name": "object69"
+            }
+          ],
+          "npcs": [
+            {
+              "name": "jerma"
+            }
+          ],
           "visited": true
         }
       ]

@@ -1,9 +1,39 @@
 Name: {{location?.name}}<br>
 Visited: {{location?.visited}}<br>
-<sml-edit-generic-object-manager [genericObject]="location?.connections">Connections</sml-edit-generic-object-manager>
-<sml-edit-generic-object-manager [genericObject]="location?.items">Items</sml-edit-generic-object-manager>
-<sml-edit-generic-object-manager [genericObject]="location?.enemies">Enemies</sml-edit-generic-object-manager>
-<sml-edit-generic-object-manager [genericObject]="location?.objects">Objects</sml-edit-generic-object-manager>
-<sml-edit-generic-object-manager [genericObject]="location?.npcs">NPCs</sml-edit-generic-object-manager>
+
+<sml-edit-generic-object-manager
+  [genericObjectArray]="location?.connections"
+  [objectToString]="this.connectionToString"
+>
+  Connections
+</sml-edit-generic-object-manager>
+<!-- #################################### -->
+<sml-edit-generic-object-manager
+  [genericObjectArray]="location?.items"
+  [objectToString]="this.itemToString"
+>
+  Items
+</sml-edit-generic-object-manager>
+<!-- #################################### -->
+<sml-edit-generic-object-manager
+  [genericObjectArray]="location?.enemies"
+  [objectToString]="this.enemyToString"
+>
+  Enemies
+</sml-edit-generic-object-manager>
+<!-- #################################### -->
+<sml-edit-generic-object-manager
+  [genericObjectArray]="location?.objects"
+  [objectToString]="otherObjectToString"
+>
+  Objects
+</sml-edit-generic-object-manager>
+<!-- #################################### -->
+<sml-edit-generic-object-manager
+  [genericObjectArray]="location?.npcs"
+  [objectToString]="npcToString"
+>
+  NPCs
+</sml-edit-generic-object-manager>
 <button (click)="fireLocationDeleted()">delete</button>
 

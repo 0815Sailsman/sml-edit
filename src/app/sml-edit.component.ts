@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { AbstractMapLoaderService } from "./map-management/loader/abstract-map-loader.service";
 import { MajorLocationCardComponent } from "./major-location-card/major-location-card.component";
-import {MajorLocationInterface} from "./map-management/majorLocation.interface";
+import {MajorLocation} from "./map-management/majorLocation";
 import {FormsModule} from "@angular/forms";
 import {MapManagerService} from "./map-management/map-manager.service";
 
@@ -20,7 +20,7 @@ export class SmlEditComponent {
 
   newLocationName: string | undefined;
 
-  deleteMajorLocation(theLocation: MajorLocationInterface) {
+  deleteMajorLocation(theLocation: MajorLocation) {
     this.mapService.deleteMajorLocation(theLocation)
   }
 

@@ -1,1 +1,6 @@
-<ng-content></ng-content>: <span *ngFor="let object of genericObject">{{object}}</span>
+<ng-content></ng-content>:
+<sml-edit-single-generic-object
+  *ngFor="let object of genericObjectArray"
+  [genericObject]="object"
+  [objectToString]="objectToString"
+/>
