@@ -1,8 +1,9 @@
 Name: {{location?.name}}<br>
 Visited: {{location?.visited}}<br>
-Connections: <span *ngFor="let connection of location?.connections">{{connection}}</span><br>
-Items: <span *ngFor="let item of location?.items">{{item}}</span><br>
-Enemies: <span *ngFor="let enemy of location?.enemies">{{enemy}}</span><br>
-Objects: <span *ngFor="let object of location?.objects">{{object}}</span><br>
-NPCs: <span *ngFor="let npc of location?.npcs">{{npc}}</span><br>
+<sml-edit-generic-object-manager [genericObject]="location?.connections">Connections</sml-edit-generic-object-manager>
+<sml-edit-generic-object-manager [genericObject]="location?.items">Items</sml-edit-generic-object-manager>
+<sml-edit-generic-object-manager [genericObject]="location?.enemies">Enemies</sml-edit-generic-object-manager>
+<sml-edit-generic-object-manager [genericObject]="location?.objects">Objects</sml-edit-generic-object-manager>
+<sml-edit-generic-object-manager [genericObject]="location?.npcs">NPCs</sml-edit-generic-object-manager>
 <button (click)="fireLocationDeleted()">delete</button>
+
