@@ -9,6 +9,8 @@ import {Item} from "./item";
 import {Enemy} from "./enemy";
 import {OtherObject} from "./otherObject";
 import {NPC} from "./NPC";
+import {ObjectInSublocation} from "../ObjectInSublocation";
+import {KeyInSublocation} from "../KeyInSublocation";
 
 @Injectable({
   providedIn: 'root'
@@ -56,8 +58,8 @@ export class MapManagerService {
   deleteGeneralObjectFromLocationInMajorLocation(
     majorLocation: MajorLocation | undefined,
     sublocation: Location | undefined,
-    theObject: Item | Connection | NPC | Enemy |  OtherObject | undefined,
-    key: "items" | "connections" | "enemies" | "npcs" | "objects" | undefined)
+    theObject: ObjectInSublocation | undefined,
+    key: KeyInSublocation | undefined)
   {
     if (majorLocation == undefined || sublocation == undefined || theObject == undefined || key == undefined) {
       return
