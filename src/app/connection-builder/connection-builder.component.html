@@ -1,5 +1,6 @@
-<!--<select name="allSubLocations" id="allSubLocations">-->
-<!--  <option *ngFor="let minorLocation of mapService.allMinorLocations()" value="{{minorLocation.name}}">{{minorLocation.name}}</option>-->
-<!--</select>-->
+<label for="allSubLocations">Create a new connection to </label>
+<select name="allSubLocations" id="allSubLocations">
+  <option *ngFor="let minorLocation of mapService.allMinorLocations()" value="{{minorLocation.name}}">{{minorLocation.name}}</option>
+</select>
 <!--<button (click)="createNewConnection(to, condition)">add new major</button>-->
- Connection needs a to and a condition
+<!-- Connection needs a to and a condition-->

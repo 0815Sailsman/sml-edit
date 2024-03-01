@@ -51,4 +51,6 @@ export class SubLocationCardComponent {
       second: pairOfObjectAndKey.first,
       third: pairOfObjectAndKey.second})
   }
+
+  protected readonly KeyInSublocation = KeyInSublocation;
 }

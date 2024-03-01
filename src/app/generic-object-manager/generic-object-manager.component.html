@@ -1,10 +1,12 @@
-{{name}}:
+{{nameOf(key)}}:
 <sml-edit-single-generic-object
   *ngFor="let object of genericObjectArray"
   [genericObject]="object"
   [objectToString]="objectToString"
-  [name]="name"
   (objectDeleted)="deleteObject($event)"
   [key]="key"
 />
-<sml-edit-generic-object-builder/>
+<div [ngSwitch]="key">
+  <sml-edit-connection-builder *ngSwitchCase="'connections'"/>
+  <p *ngSwitchDefault>to be done</p>
+</div>

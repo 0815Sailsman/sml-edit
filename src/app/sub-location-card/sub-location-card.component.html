@@ -1,39 +1,34 @@
 Name: {{location?.name}}<br>
 <hr style="border-top: 1px solid black;border-bottom: 0;width: 100%;height: 0px">
 <sml-edit-generic-object-manager
-  [genericObjectArray]="location?.connections"
+  [genericObjectArray]="location?.connections == undefined ? [] : location!.connections"
   [objectToString]="this.connectionToString"
-  [name]="'Connections'"
   (objectDeleted)="deleteObject($event)"
-  [key]="'connections'"
+  [key]="KeyInSublocation.Connections"
 />
 <sml-edit-generic-object-manager
-  [genericObjectArray]="location?.items"
+  [genericObjectArray]="location?.items == undefined ? [] : location!.items"
   [objectToString]="this.itemToString"
-  [name]="'Items'"
   (objectDeleted)="deleteObject($event)"
-  [key]="'items'"
+  [key]="KeyInSublocation.Items"
 />
 <sml-edit-generic-object-manager
-  [genericObjectArray]="location?.enemies"
+  [genericObjectArray]="location?.enemies == undefined ? [] : location!.enemies"
   [objectToString]="this.enemyToString"
-  [name]="'Enemies'"
   (objectDeleted)="deleteObject($event)"
-  [key]="'enemies'"
+  [key]="KeyInSublocation.Enemies"
 />
 <sml-edit-generic-object-manager
-  [genericObjectArray]="location?.objects"
+  [genericObjectArray]="location?.objects == undefined ? [] : location!.objects"
   [objectToString]="otherObjectToString"
-  [name]="'Objects'"
   (objectDeleted)="deleteObject($event)"
-  [key]="'objects'"
+  [key]="KeyInSublocation.Objects"
 />
 <sml-edit-generic-object-manager
-  [genericObjectArray]="location?.npcs"
+  [genericObjectArray]="location?.npcs == undefined ? [] : location!.npcs"
   [objectToString]="npcToString"
-  [name]="'NPCs'"
   (objectDeleted)="deleteObject($event)"
-  [key]="'npcs'"
+  [key]="KeyInSublocation.Npcs"
 />
 <button (click)="fireLocationDeleted()">delete minor location</button>
 
