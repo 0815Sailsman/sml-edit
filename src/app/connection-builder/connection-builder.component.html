@@ -1,13 +1,6 @@
-<label for="allSubLocations">Create a new connection to </label>
-<select name="allSubLocations" id="allSubLocations">
-  <option
-    *ngFor="let minorLocation of mapService.allMinorLocations()"
-    value="{{minorLocation.name}}"
-    [ngModel]="targetLocation"
-    ngDefaultControl
-  >
-    {{minorLocation.name}}
-  </option>
-</select>
+<sml-edit-select-from-all-sublocations
+  [label]="'Create a new connection to '"
+  (selectedSublocationChanged)="updateTargetLocation($event)"
+/>
 <sml-edit-condition-builder/>
 <button (click)="createNewConnection()">create</button>
