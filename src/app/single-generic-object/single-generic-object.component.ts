@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterContentInit, Component, EventEmitter, Input, Output} from '@angular/core';
 import {depluralizeSimple} from "../util";
 import {Location} from "../map-management/location";
 import {Pair} from "../Pair";

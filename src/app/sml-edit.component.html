@@ -5,6 +5,6 @@
     [majorLocation]="everyLocation"
     (locationDeleted)="deleteMajorLocation($event)"
   />
-  <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName">
+  <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName" ngDefaultControl>
   <button (click)="addMajorLocation(newLocationName)">add new major</button>
 </div>

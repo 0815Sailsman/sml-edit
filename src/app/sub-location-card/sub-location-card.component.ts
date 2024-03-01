@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ApplicationRef, Component, EventEmitter, Input, Output} from '@angular/core';
 import {GenericObjectManagerComponent} from "../generic-object-manager/generic-object-manager.component";
 import {CommonModule} from "@angular/common";
 

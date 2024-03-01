@@ -75,7 +75,6 @@ export class MapManagerService {
     for (let major of this.map.locations) {
       all.push(...major.subLocations)
     }
-    console.log(all);
     return all
   }
 }

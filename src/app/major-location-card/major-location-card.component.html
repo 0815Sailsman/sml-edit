@@ -8,6 +8,6 @@
     (locationDeleted)="deleteSubLocation($event)"
     (objectDeletedFromLocation)="deleteObjectFromLocation($event)"
   />
-  <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName">
+  <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName" ngDefaultControl>
   <button (click)="addSubLocation(newLocationName)">add new minor</button>
 </div>

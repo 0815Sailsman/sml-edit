@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ApplicationRef, Component, EventEmitter, Input, Output} from '@angular/core';
 import {MajorLocation} from "../map-management/majorLocation";
 import {SubLocationCardComponent} from "../sub-location-card/sub-location-card.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -29,7 +29,10 @@ import {KeyInSublocation} from "../KeyInSublocation";
 })
 export class MajorLocationCardComponent {
 
-  constructor(private mapService: MapManagerService) {}
+  constructor(
+    private mapService: MapManagerService,
+    private app: ApplicationRef
+    ) {}
 
   @Input() majorLocation: MajorLocation | undefined;
   @Output() locationDeleted = new EventEmitter<MajorLocation>();
@@ -48,6 +51,7 @@ export class MajorLocationCardComponent {
     if (theName != undefined && theName != "" && this.majorLocation != undefined) {
       this.mapService.addMinorLocationTo(this.majorLocation, theName)
       this.newLocationName = ""
+      this.app.tick()
     }
   }
 
