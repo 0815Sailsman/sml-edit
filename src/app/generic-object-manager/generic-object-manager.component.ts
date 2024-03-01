@@ -4,11 +4,12 @@ import { SingleGenericObjectComponent } from "../single-generic-object/single-ge
 import {Location} from "../map-management/location";
 import {Pair} from "../Pair";
 import {KeyInSublocation} from "../KeyInSublocation";
+import {GenericObjectBuilderComponent} from "../generic-object-builder/generic-object-builder.component";
 
 @Component({
   selector: 'sml-edit-generic-object-manager',
   standalone: true,
-  imports: [CommonModule, SingleGenericObjectComponent],
+  imports: [CommonModule, SingleGenericObjectComponent, GenericObjectBuilderComponent],
   templateUrl: './generic-object-manager.component.html',
   styleUrl: './generic-object-manager.component.css'
 })
