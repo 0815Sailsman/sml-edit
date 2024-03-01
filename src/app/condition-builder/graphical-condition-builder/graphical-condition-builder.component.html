@@ -1,0 +1,32 @@
+<div >
+  <select
+    name="{{'allLocalConditions'+i}}"
+    *ngFor="let item of [].constructor(this.conditionCount); let i = index"
+  >
+    <option
+      *ngFor="let condition of this.localConditions"
+      value="{{condition}}"
+    >
+      {{condition}}
+    </option>
+  </select>
+  <button (click)="this.increaseConditions()" style="margin-left: 20px">add condition</button>
+  <button (click)="this.decreaseConditions()" *ngIf="conditionCount>1">remove condition</button>
+
+  <br>
+  Available atomic conditions:
+  <ul>
+    <li *ngFor="let condition of localConditions">
+      {{condition}}
+    </li>
+  </ul>
+  <button (click)="inAtomicConditionCreation=true">Create new atomic condition</button>
+
+  <br><br>
+
+  <sml-edit-atomic-condition-builder-dialog
+    [opened]="inAtomicConditionCreation"
+    (createdNewAtomicCondition)="addNewLocalCondition($event)"
+  />
+
+</div>

@@ -1,0 +1,21 @@
+<dialog
+  [attr.open]="this.opened ? opened : null"
+  (close)="this.opened = false"
+>
+  Atomic condition creator
+
+  <hr>
+
+  <select name="subjectType">
+    <option
+      *ngFor="let subject of Object.keys(ConditionSubjects)"
+      value="{{subject}}"
+    >
+      {{subject}}
+    </option>
+  </select>
+
+  <form method="dialog">
+    <button (click)="fireCreateNewAtomicCondition()">create</button>
+  </form>
+</dialog>
