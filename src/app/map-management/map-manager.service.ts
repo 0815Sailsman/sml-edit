@@ -43,8 +43,7 @@ export class MapManagerService {
       items: [],
       enemies: [],
       objects: [],
-      npcs: [],
-      visited: false
+      npcs: []
     }
     this.map.locations[this.map.locations.indexOf(majorLocation)].subLocations.push(newMinorLocation)
   }
@@ -69,5 +68,13 @@ export class MapManagerService {
     // @ts-ignore THIS WORKS, BECAUSE WE DON'T MIX DIFFERENT TYPES
     this.map.locations[majorIndex].subLocations[minorIndex][key] =
       this.map.locations[majorIndex].subLocations[minorIndex][key].filter(object => object !== theObject)
+  }
+
+  allMinorLocations(): Location[] {
+    let all: Location[] = []
+    for (let major of this.map.locations) {
+      all.push(...major.subLocations)
+    }
+    return all
   }
 }

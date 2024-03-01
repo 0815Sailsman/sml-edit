@@ -24,12 +24,16 @@
           ],
           "items": [
             {
-              "name": "itemA"
+              "name": "itemA",
+              "count": 1
             }
           ],
           "enemies": [
             {
-              "name": "enemyX"
+              "name": "enemyX",
+              "souls": 100,
+              "respawns": true,
+              "drops": []
             }
           ],
           "objects": [
@@ -41,8 +45,7 @@
             {
               "name": "jerma"
             }
-          ],
-          "visited": true
+          ]
         }
       ]
     }

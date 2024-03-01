@@ -25,6 +25,7 @@ export class SmlEditComponent {
   }
 
   addMajorLocation(theName: string | undefined) {
+    this.mapService.allMinorLocations()
     if (theName != undefined && theName != "") {
       this.mapService.addMajorLocationWithName(theName)
       this.newLocationName = ""

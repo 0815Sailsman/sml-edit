@@ -12,7 +12,6 @@ export interface Location {
   enemies: Enemy[]
   objects: OtherObject[]
   npcs: NPC[]
-  visited: boolean
 }
 
 export function locationToString(location: Location | undefined): string {
