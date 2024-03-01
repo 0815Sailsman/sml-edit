@@ -6,8 +6,8 @@
   Atomic condition creator
 
   <hr>
-
-  <select name="subjectType">
+  <span>if </span>
+  <select name="subjectType" [(ngModel)]="currentSubject" ngDefaultControl>
     <option
       *ngFor="let subject of Object.keys(ConditionSubjects)"
       value="{{subject}}"
@@ -15,6 +15,15 @@
       {{subject}}
     </option>
   </select>
+
+  <div [ngSwitch]="currentSubject" style="display: inline">
+    <div *ngSwitchCase="ConditionSubjects.Location" style="display: inline">
+      <sml-edit-select-from-all-sublocations/>
+      <span> has been visited</span>
+    </div>
+    <p *ngSwitchDefault>to be done</p>
+  </div>
+
 
   <hr>
 

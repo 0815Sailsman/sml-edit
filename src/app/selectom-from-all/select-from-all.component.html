@@ -1,13 +1,13 @@
-<label for="allSubLocations">{{label}}</label>
+<label for="genericAll">{{label}}</label>
 <select
-  name="allSubLocations"
-  id="allSubLocations"
+  name="genericAll"
+  id="genericAll"
   (change)="fireChangeLocation()"
 >
   <option
     *ngFor="let minorLocation of mapService.allMinorLocations()"
     value="{{minorLocation.name}}"
-    [ngModel]="targetLocation"
+    [(ngModel)]="targetLocation"
     ngDefaultControl
   >
     {{minorLocation.name}}

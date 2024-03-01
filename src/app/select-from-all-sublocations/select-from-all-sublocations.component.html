@@ -1,1 +1,15 @@
-<p>select-from-all-sublocations works!</p>
+<label for="allSubLocations">{{label}}</label>
+<select
+  name="allSubLocations"
+  id="allSubLocations"
+  (change)="fireChangeLocation()"
+>
+  <option
+    *ngFor="let minorLocation of mapService.allMinorLocations()"
+    value="{{minorLocation.name}}"
+    [(ngModel)]="targetLocation"
+    ngDefaultControl
+  >
+    {{minorLocation.name}}
+  </option>
+</select>

@@ -7,7 +7,7 @@ import {BigCondition} from "../map-management/bigCondition";
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {
   SelectFromAllSublocationsComponent
-} from "./select-from-all-sublocations/select-from-all-sublocations.component";
+} from "../select-from-all-sublocations/select-from-all-sublocations.component";
 
 @Component({
   selector: 'sml-edit-connection-builder',

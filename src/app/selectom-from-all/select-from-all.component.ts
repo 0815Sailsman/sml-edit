@@ -1,22 +1,21 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {Location} from "../map-management/location";
 import {MapManagerService} from "../map-management/map-manager.service";
+import {ObjectInSublocation} from "../ObjectInSublocation";
 
 @Component({
-  selector: 'sml-edit-select-from-all-sublocations',
+  selector: 'sml-edit-select-from-all',
   standalone: true,
-  imports: [
-    NgForOf,
-    ReactiveFormsModule,
-    FormsModule
-  ],
-  templateUrl: './select-from-all-sublocations.component.html',
-  styleUrl: './select-from-all-sublocations.component.css'
+    imports: [
+        NgForOf,
+        ReactiveFormsModule
+    ],
+  templateUrl: './select-from-all.component.html',
+  styleUrl: './select-from-all.component.css'
 })
-export class SelectFromAllSublocationsComponent {
-
+export class SelectFromAllComponent<T extends EasilySelectable> {
   targetLocation: Location | undefined;
 
   constructor(protected mapService: MapManagerService) {

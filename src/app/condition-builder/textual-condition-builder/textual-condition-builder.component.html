@@ -1,7 +1,7 @@
 <input
   type="text"
   name="conditionBuilderField"
-  [ngModel]="conditionString"
+  [(ngModel)]="conditionString"
   ngDefaultControl
   [ngClass]="{'valid': isSyntacticallyCorrect(conditionString), 'invalid' : !isSyntacticallyCorrect(conditionString) }"
 >

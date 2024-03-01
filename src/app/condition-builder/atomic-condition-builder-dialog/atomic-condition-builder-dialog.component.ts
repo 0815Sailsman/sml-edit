@@ -2,11 +2,17 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleCha
 import {ConditionSubjects} from "../ConditionSubjects";
 import {CommonModule} from "@angular/common";
 import {AtomicCondition} from "../../map-management/atomicCondition";
+import {ConnectionBuilderComponent} from "../../connection-builder/connection-builder.component";
+import {FormsModule} from "@angular/forms";
+import {
+  SelectFromAllSublocationsComponent
+} from "../../select-from-all-sublocations/select-from-all-sublocations.component";
+
 
 @Component({
   selector: 'sml-edit-atomic-condition-builder-dialog',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, SelectFromAllSublocationsComponent],
   templateUrl: './atomic-condition-builder-dialog.component.html',
   styleUrl: './atomic-condition-builder-dialog.component.css'
 })
@@ -20,6 +26,7 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges{
   @Output() closedDialog = new EventEmitter<void>();
 
   @ViewChild('atomicDialog') dialogTag: ElementRef | undefined;
+  currentSubject: ConditionSubjects = ConditionSubjects.Location;
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.opened) {
