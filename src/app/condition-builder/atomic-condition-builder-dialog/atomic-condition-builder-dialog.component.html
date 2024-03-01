@@ -1,6 +1,7 @@
 <dialog
-  [attr.open]="this.opened ? opened : null"
-  (close)="this.opened = false"
+  (close)="this.fireCloseDialog()"
+  #atomicDialog
+  class="atomicdialog"
 >
   Atomic condition creator
 
@@ -15,7 +16,10 @@
     </option>
   </select>
 
+  <hr>
+
   <form method="dialog">
     <button (click)="fireCreateNewAtomicCondition()">create</button>
+    <button (click)="this.fireCloseDialog()">cancel</button>
   </form>
 </dialog>

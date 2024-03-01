@@ -27,6 +27,7 @@
   <sml-edit-atomic-condition-builder-dialog
     [opened]="inAtomicConditionCreation"
     (createdNewAtomicCondition)="addNewLocalCondition($event)"
+    (closedDialog)="inAtomicConditionCreation = false"
   />
 
 </div>
