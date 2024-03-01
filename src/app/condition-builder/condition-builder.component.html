@@ -1,0 +1,47 @@
+<span> available if </span>
+<input
+  *ngIf="textMode"
+  type="text"
+  name="conditionBuilderField"
+  [ngModel]="conditionString"
+  ngDefaultControl
+  [ngClass]="{'valid': isSyntacticallyCorrect(conditionString), 'invalid' : !isSyntacticallyCorrect(conditionString) }"
+>
+
+<div *ngIf="!textMode" style="display: inline">
+  <select
+    name="{{'allLocalConditions'+i}}"
+    *ngFor="let item of [].constructor(this.conditionCount); let i = index"
+  >
+    <option
+      *ngFor="let condition of this.localConditions"
+      value="{{condition}}"
+    >
+      {{condition}}
+    </option>
+  </select>
+  <button (click)="this.increaseConditions()" style="margin-left: 20px">add condition</button>
+  <button (click)="this.decreaseConditions()" *ngIf="conditionCount>1">remove condition</button>
+</div>
+<br>
+Available atomic conditions:
+<ul>
+  <li *ngFor="let condition of localConditions">
+    {{condition}}
+  </li>
+</ul>
+<button (click)="startAtomicConditionCreation()">Create new atomic condition</button>
+
+<br><br>
+
+<button (click)="toggleConditionEntryMode()">toggle condition entry mode</button>
+
+<dialog
+  [attr.open]="this.inAtomicConditionCreation ? inAtomicConditionCreation : null"
+  (close)="stopAtomicConditionCreation()"
+>
+  Atomic condition creator
+  <form method="dialog">
+    <button>create</button>
+  </form>
+</dialog>

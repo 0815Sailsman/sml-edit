@@ -5,11 +5,12 @@ import {Connection} from "../map-management/connection";
 import {FormsModule} from "@angular/forms";
 import {Location} from "../map-management/location";
 import {BigCondition} from "../map-management/bigCondition";
+import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 
 @Component({
   selector: 'sml-edit-connection-builder',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ConditionBuilderComponent],
   templateUrl: './connection-builder.component.html',
   styleUrl: './connection-builder.component.css'
 })
