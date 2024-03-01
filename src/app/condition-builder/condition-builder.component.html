@@ -41,6 +41,18 @@ Available atomic conditions:
   (close)="stopAtomicConditionCreation()"
 >
   Atomic condition creator
+
+  <hr>
+
+  <select name="subjectType">
+    <option
+      *ngFor="let subject of Object.keys(ConditionSubjects)"
+      value="{{subject}}"
+    >
+      {{subject}}
+    </option>
+  </select>
+
   <form method="dialog">
     <button>create</button>
   </form>

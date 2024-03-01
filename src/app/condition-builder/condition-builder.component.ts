@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule, NgClass, NgForOf, NgIf} from "@angular/common";
 import {AtomicCondition} from "../map-management/atomicCondition";
+import {KeyInSublocation} from "../KeyInSublocation";
+import {ConditionSubjects} from "./ConditionSubjects";
 
 @Component({
   selector: 'sml-edit-condition-builder',
@@ -48,4 +50,7 @@ export class ConditionBuilderComponent {
   stopAtomicConditionCreation() {
     this.inAtomicConditionCreation = false
   }
+
+  protected readonly ConditionSubjects = ConditionSubjects;
+  protected readonly Object = Object;
 }
