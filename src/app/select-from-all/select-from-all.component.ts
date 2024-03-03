@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {EasilySelectable} from "../EasilySelectable";
@@ -14,7 +14,7 @@ import {EasilySelectable} from "../EasilySelectable";
   templateUrl: './select-from-all.component.html',
   styleUrl: './select-from-all.component.css'
 })
-export class SelectFromAllComponent<T extends EasilySelectable> {
+export class SelectFromAllComponent<T extends EasilySelectable>  {
   selected: T | undefined;
 
   @Input() label: string = "";

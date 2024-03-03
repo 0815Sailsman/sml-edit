@@ -36,6 +36,7 @@ export class GraphicalConditionBuilderComponent {
   }
 
   addNewLocalCondition(newCondition: AtomicCondition) {
+    console.log("new local condition " + JSON.stringify(newCondition))
     this.localConditions.push(newCondition)
   }
 }
