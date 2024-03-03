@@ -1,9 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {Location} from "../map-management/location";
-import {MapManagerService} from "../map-management/map-manager.service";
-import {ObjectInSublocation} from "../ObjectInSublocation";
 import {EasilySelectable} from "../EasilySelectable";
 
 @Component({

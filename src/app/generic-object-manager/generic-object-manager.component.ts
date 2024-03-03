@@ -1,7 +1,6 @@
-import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule} from "@angular/common";
 import { SingleGenericObjectComponent } from "../single-generic-object/single-generic-object.component";
-import {Location} from "../map-management/location";
 import {Pair} from "../Pair";
 import {KeyInSublocation, nameOf} from "../KeyInSublocation";
 import {ConnectionBuilderComponent} from "../connection-builder/connection-builder.component";

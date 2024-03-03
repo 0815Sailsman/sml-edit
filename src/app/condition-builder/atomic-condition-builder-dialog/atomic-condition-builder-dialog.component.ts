@@ -2,7 +2,6 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleCha
 import {ConditionSubjects} from "../ConditionSubjects";
 import {CommonModule} from "@angular/common";
 import {AtomicCondition} from "../../map-management/atomicCondition";
-import {ConnectionBuilderComponent} from "../../connection-builder/connection-builder.component";
 import {FormsModule} from "@angular/forms";
 import {SelectFromAllComponent} from "../../select-from-all/select-from-all.component";
 import {MapManagerService} from "../../map-management/map-manager.service";

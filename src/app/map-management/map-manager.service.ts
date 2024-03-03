@@ -71,10 +71,22 @@ export class MapManagerService {
   }
 
   allMinorLocations(): Location[] {
-    let all: Location[] = []
-    for (let major of this.map.locations) {
-      all.push(...major.subLocations)
-    }
-    return all
+    return this.map.locations.flatMap(major => major.subLocations);
+  }
+
+  allItems(): Item[] {
+    return this.allMinorLocations().flatMap(minor => minor.items)
+  }
+
+  allEnemies(): Enemy[] {
+    return this.allMinorLocations().flatMap(minor => minor.enemies)
+  }
+
+  allNPCs(): NPC[] {
+    return this.allMinorLocations().flatMap(minor => minor.npcs)
+  }
+
+  allOtherObjects(): OtherObject[] {
+    return this.allMinorLocations().flatMap(minor => minor.objects)
   }
 }
