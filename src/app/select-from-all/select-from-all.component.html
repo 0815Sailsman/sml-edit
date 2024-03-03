@@ -1,0 +1,15 @@
+<label for="genericAll">{{label}}</label>
+<select
+  name="genericAll"
+  id="genericAll"
+  (change)="fireChange()"
+>
+  <option
+    *ngFor="let option of allOptions"
+    value="{{option.name}}"
+    [(ngModel)]="selected"
+    ngDefaultControl
+  >
+    {{option.name}}
+  </option>
+</select>

@@ -8,15 +8,21 @@ import {ConditionBuilderComponent} from "../condition-builder/condition-builder.
 import {
   SelectFromAllSublocationsComponent
 } from "../select-from-all-sublocations/select-from-all-sublocations.component";
+import {SelectFromAllComponent} from "../select-from-all/select-from-all.component";
+import {EasilySelectable} from "../EasilySelectable";
+import {MapManagerService} from "../map-management/map-manager.service";
 
 @Component({
   selector: 'sml-edit-connection-builder',
   standalone: true,
-  imports: [CommonModule, FormsModule, ConditionBuilderComponent, SelectFromAllSublocationsComponent],
+  imports: [CommonModule, FormsModule, ConditionBuilderComponent, SelectFromAllSublocationsComponent, SelectFromAllComponent],
   templateUrl: './connection-builder.component.html',
   styleUrl: './connection-builder.component.css'
 })
 export class ConnectionBuilderComponent {
+
+  constructor(protected mapService: MapManagerService) {
+  }
 
   @Output() connectionCreated = new EventEmitter<Connection>();
   targetLocation: Location | undefined;
@@ -31,7 +37,11 @@ export class ConnectionBuilderComponent {
     }
   }
 
-  updateTargetLocation(newTargetLocation: Location) {
-    this.targetLocation = newTargetLocation
+  updateTargetLocation(newTargetLocation: EasilySelectable) {
+    if (<Location> newTargetLocation) {
+      this.targetLocation = newTargetLocation as Location
+    }
   }
+
+  protected readonly Location = Location;
 }

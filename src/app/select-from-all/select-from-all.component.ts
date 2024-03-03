@@ -1,30 +1,30 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Location} from "../map-management/location";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {ObjectInSublocation} from "../ObjectInSublocation";
+import {EasilySelectable} from "../EasilySelectable";
 
 @Component({
   selector: 'sml-edit-select-from-all',
   standalone: true,
-    imports: [
-        NgForOf,
-        ReactiveFormsModule
-    ],
+  imports: [
+    NgForOf,
+    ReactiveFormsModule,
+    FormsModule
+  ],
   templateUrl: './select-from-all.component.html',
   styleUrl: './select-from-all.component.css'
 })
 export class SelectFromAllComponent<T extends EasilySelectable> {
-  targetLocation: Location | undefined;
-
-  constructor(protected mapService: MapManagerService) {
-  }
+  selected: T | undefined;
 
   @Input() label: string = "";
-  @Output() selectedSublocationChanged = new EventEmitter<Location>();
+  @Input() allOptions: T[] = [];
+  @Output() selectedChanged = new EventEmitter<T>();
 
-  fireChangeLocation() {
-    this.selectedSublocationChanged.emit(this.targetLocation)
+  fireChange() {
+    this.selectedChanged.emit(this.selected)
   }
 }
