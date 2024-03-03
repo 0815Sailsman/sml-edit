@@ -1,4 +1,8 @@
+import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
+import {ConditionVerb} from "../ConditionVerb";
+
 export interface AtomicCondition {
-  name: string
-  parts: string[]
+  subjectType: ConditionSubjects
+  subjectId: number
+  verb: ConditionVerb
 }

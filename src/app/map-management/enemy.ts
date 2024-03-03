@@ -2,6 +2,7 @@ import {Item} from "./item";
 import {BigCondition} from "./bigCondition";
 
 export interface Enemy {
+  id: number
   name: string
   souls: number
   respawns: boolean

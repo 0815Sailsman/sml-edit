@@ -1,6 +1,7 @@
 import {BigCondition} from "./bigCondition";
 
 export interface OtherObject {
+  id: number
   name: string
   if?: BigCondition
 }

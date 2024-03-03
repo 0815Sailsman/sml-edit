@@ -15,8 +15,9 @@
                 "grammar": "",
                 "subConditions": [
                   {
-                    "name": "",
-                    "parts": []
+                    "subjectType": "Location",
+                    "subjectId": 1,
+                    "verb": "visited"
                   }
                 ]
               }
@@ -24,12 +25,14 @@
           ],
           "items": [
             {
+              "id": 0,
               "name": "itemA",
               "count": 1
             }
           ],
           "enemies": [
             {
+              "id": 0,
               "name": "enemyX",
               "souls": 100,
               "respawns": true,
@@ -38,11 +41,13 @@
           ],
           "objects": [
             {
+              "id": 0,
               "name": "object69"
             }
           ],
           "npcs": [
             {
+              "id": 0,
               "name": "jerma"
             }
           ]

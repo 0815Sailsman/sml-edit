@@ -9,7 +9,7 @@
   <span>if </span>
   <select name="subjectType" [(ngModel)]="currentSubject" ngDefaultControl>
     <option
-      *ngFor="let subject of Object.keys(ConditionSubjects)"
+      *ngFor="let subject of ['Location', 'Item', 'Enemy', 'Object']"
       value="{{subject}}"
     >
       {{subject}}
@@ -17,11 +17,22 @@
   </select>
 
   <div [ngSwitch]="currentSubject" style="display: inline">
-    <div *ngSwitchCase="ConditionSubjects.Location" style="display: inline">
-      <sml-edit-select-from-all [allOptions]="mapService.allMinorLocations()"/>
+    <div *ngSwitchCase="'Location'" style="display: inline">
+      <sml-edit-select-from-all [allOptions]="mapService.allMinorLocations()" (selectedChanged)="target = $event"/>
       <span> has been visited</span>
     </div>
-    <p *ngSwitchDefault>to be done</p>
+    <div *ngSwitchCase="'Item'" style="display: inline">
+      <sml-edit-select-from-all [allOptions]="mapService.allItems()"/>
+      <span> has been collected</span>
+    </div>
+    <div *ngSwitchCase="'Enemy'" style="display: inline">
+      <sml-edit-select-from-all [allOptions]="mapService.allEnemies()"/>
+      <span> has been killed</span>
+    </div>
+    <div *ngSwitchDefault style="display: inline">
+      <sml-edit-select-from-all [allOptions]="mapService.allOtherObjects()"/>
+      <span> has been interacted with</span>
+    </div>
   </div>
 
 

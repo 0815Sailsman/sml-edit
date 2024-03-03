@@ -1,10 +1,11 @@
 import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {ConditionSubjects} from "../ConditionSubjects";
+import {ConditionSubjects, ConditionSubjectsType} from "../ConditionSubjects";
 import {CommonModule} from "@angular/common";
 import {AtomicCondition} from "../../map-management/atomicCondition";
 import {FormsModule} from "@angular/forms";
 import {SelectFromAllComponent} from "../../select-from-all/select-from-all.component";
 import {MapManagerService} from "../../map-management/map-manager.service";
+import {verbFor} from "../../ConditionVerb";
 
 
 @Component({
@@ -18,8 +19,6 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges{
 
   constructor(protected mapService: MapManagerService) {
   }
-
-  protected readonly ConditionSubjects = ConditionSubjects;
   protected readonly Object = Object;
 
   @Input() opened: boolean = false;
@@ -28,6 +27,7 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges{
 
   @ViewChild('atomicDialog') dialogTag: ElementRef | undefined;
   currentSubject: ConditionSubjects = ConditionSubjects.Location;
+  target: ConditionSubjectsType | undefined = undefined;
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.opened) {
@@ -36,10 +36,13 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges{
   }
 
   fireCreateNewAtomicCondition() {
-    this.createdNewAtomicCondition.emit({
-      name: "",
-      parts: []
-    })
+    if (this.target != undefined) {
+      this.createdNewAtomicCondition.emit({
+        subjectType: this.currentSubject,
+        verb: verbFor(this.currentSubject),
+        subjectId: this.target.id
+      })
+    }
   }
 
   fireCloseDialog() {

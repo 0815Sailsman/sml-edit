@@ -22,7 +22,6 @@ import {
 })
 export class GraphicalConditionBuilderComponent {
 
-  protected readonly ConditionSubjects = ConditionSubjects;
   protected readonly Object = Object;
   inAtomicConditionCreation: boolean = false;
   localConditions: AtomicCondition[] = [];

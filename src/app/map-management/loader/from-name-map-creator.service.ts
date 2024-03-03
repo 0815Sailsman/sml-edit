@@ -8,9 +8,6 @@ import { Map } from '../map';
 export class FromNameMapCreatorService extends AbstractMapLoaderService {
 
   load(name: string = "default"): Map {
-    return {
-      name: name,
-      locations:[]
-    };
+    return new Map(name, [])
   }
 }
