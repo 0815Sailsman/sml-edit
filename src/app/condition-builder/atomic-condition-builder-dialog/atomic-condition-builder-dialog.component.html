@@ -18,7 +18,7 @@
 
   <div [ngSwitch]="currentSubject" style="display: inline">
     <div *ngSwitchCase="ConditionSubjects.Location" style="display: inline">
-      <sml-edit-select-from-all-sublocations/>
+      <sml-edit-select-from-all [allOptions]="mapService.allMinorLocations()"/>
       <span> has been visited</span>
     </div>
     <p *ngSwitchDefault>to be done</p>

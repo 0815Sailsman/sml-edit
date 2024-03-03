@@ -5,9 +5,6 @@ import {FormsModule} from "@angular/forms";
 import {Location} from "../map-management/location";
 import {BigCondition} from "../map-management/bigCondition";
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
-import {
-  SelectFromAllSublocationsComponent
-} from "../select-from-all-sublocations/select-from-all-sublocations.component";
 import {SelectFromAllComponent} from "../select-from-all/select-from-all.component";
 import {EasilySelectable} from "../EasilySelectable";
 import {MapManagerService} from "../map-management/map-manager.service";
@@ -15,7 +12,7 @@ import {MapManagerService} from "../map-management/map-manager.service";
 @Component({
   selector: 'sml-edit-connection-builder',
   standalone: true,
-  imports: [CommonModule, FormsModule, ConditionBuilderComponent, SelectFromAllSublocationsComponent, SelectFromAllComponent],
+  imports: [CommonModule, FormsModule, ConditionBuilderComponent, SelectFromAllComponent],
   templateUrl: './connection-builder.component.html',
   styleUrl: './connection-builder.component.css'
 })
