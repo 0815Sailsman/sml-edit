@@ -3,11 +3,11 @@
   name="genericAll"
   id="genericAll"
   (change)="fireChange()"
+  [(ngModel)]="selected"
 >
   <option
     *ngFor="let option of allOptions"
-    value="{{option.name}}"
-    [(ngModel)]="selected"
+    [ngValue]="option"
     ngDefaultControl
   >
     {{option.name}}

@@ -36,7 +36,6 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges{
   }
 
   fireCreateNewAtomicCondition() {
-    console.log("beginning of fire in dialog" + this.target)
     if (this.target != undefined) {
       this.createdNewAtomicCondition.emit({
         subjectType: this.currentSubject,
@@ -52,7 +51,6 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges{
   }
 
   selectTarget(subject: ConditionSubjectsType) {
-    console.log("set target of dialog to " + subject)
     this.target = subject
   }
 }
