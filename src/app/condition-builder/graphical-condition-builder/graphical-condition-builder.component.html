@@ -1,36 +1,38 @@
 <div>
   <div *ngFor="let item of [].constructor(this.conditionCount); let i = index" style="display: inline">
-    <select *ngIf="doBrackets">
-      <option></option>
-      <option>(</option>
+    <select *ngIf="doBrackets" [(ngModel)]="selectedBrackets[2 * i]" (change)="rebuildGrammar()">
+      <option [selected]="true" [ngValue]="OptionalBracket.None">{{OptionalBracket.None}}</option>
+      <option [ngValue]="OptionalBracket.Open">{{OptionalBracket.Open}}</option>
     </select>
     <select
       name="{{'allLocalConditions'+i}}"
+      [(ngModel)]="selectedConditions[i]"
+      (change)="rebuildGrammar()"
     >
       <option
-        *ngFor="let condition of this.localConditions"
+        *ngFor="let condition of this.condition.subConditions"
         [ngValue]="condition"
       >
         {{toString(condition)}}
       </option>
     </select>
-    <select *ngIf="doBrackets">
-      <option></option>
-      <option>)</option>
+    <select *ngIf="doBrackets" [(ngModel)]="selectedBrackets[2 * i + 1]" (change)="rebuildGrammar()">
+      <option [ngValue]="OptionalBracket.None">{{OptionalBracket.None}}</option>
+      <option [ngValue]="OptionalBracket.Close">{{OptionalBracket.Close}}</option>
     </select>
-    <select *ngIf="conditionCount>1 && i != (conditionCount-1)">
-      <option>&&</option>
-      <option>||</option>
+    <select *ngIf="conditionCount>1 && i != (conditionCount-1)" [(ngModel)]="selectedCombinators[i]" (change)="rebuildGrammar()">
+      <option [selected]="true" [ngValue]="Combinator.AND">{{Combinator.AND}}</option>
+      <option [ngValue]="Combinator.OR">{{Combinator.OR}}</option>
     </select>
   </div>
   <button (click)="this.increaseConditions()" style="margin-left: 20px">add condition</button>
   <button (click)="this.decreaseConditions()" *ngIf="conditionCount>1">remove condition</button>
-  <button (click)="this.doBrackets = !this.doBrackets">toggle brackets</button>
+  <button (click)="toggleBrackets()">toggle brackets</button>
 
   <br>
   Available atomic conditions:
   <ul>
-    <li *ngFor="let condition of localConditions">
+    <li *ngFor="let condition of this.condition.subConditions">
       {{toString(condition)}}
     </li>
   </ul>

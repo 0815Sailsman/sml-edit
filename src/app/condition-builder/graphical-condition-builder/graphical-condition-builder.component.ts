@@ -7,6 +7,7 @@ import {
   AtomicConditionBuilderDialogComponent
 } from "../atomic-condition-builder-dialog/atomic-condition-builder-dialog.component";
 import {MapManagerService} from "../../map-management/map-manager.service";
+import {BigCondition} from "../../map-management/bigCondition";
 
 @Component({
   selector: 'sml-edit-graphical-condition-builder',
@@ -28,20 +29,29 @@ export class GraphicalConditionBuilderComponent {
 
   protected readonly Object = Object;
   inAtomicConditionCreation: boolean = false;
-  localConditions: AtomicCondition[] = [];
   conditionCount: number = 1;
   doBrackets: boolean = false;
+  selectedConditions: AtomicCondition[] = []
+  selectedCombinators: Combinator[] = []
+  selectedBrackets: OptionalBracket[] = []
+  condition: BigCondition = {
+    grammar: "",
+    subConditions: []
+  }
 
   increaseConditions() {
     this.conditionCount++
+    this.selectedBrackets.push(OptionalBracket.None, OptionalBracket.None)
   }
 
   decreaseConditions() {
     this.conditionCount--
+    this.selectedBrackets.pop()
+    this.selectedBrackets.pop()
   }
 
   addNewLocalCondition(newCondition: AtomicCondition) {
-    this.localConditions.push(newCondition)
+    this.condition.subConditions.push(newCondition)
   }
 
   toString(condition: AtomicCondition): string {
@@ -53,4 +63,44 @@ export class GraphicalConditionBuilderComponent {
       case ConditionSubjects.OtherObject: return (result + this.mapService.otherObjectById(condition.subjectId).name + " interacted with")
     }
   }
+
+  protected readonly console = console;
+
+  rebuildGrammar() {
+    this.condition.grammar = ""
+    for (let index in this.selectedCombinators) {
+      if (this.doBrackets) this.condition.grammar += this.selectedBrackets[2 * Number(index)];
+      this.condition.grammar += this.selectedConditions[index].abbreviation;
+      if (this.doBrackets) this.condition.grammar += this.selectedBrackets[2 * Number(index) + 1];
+      this.condition.grammar += " " + this.selectedCombinators[index] + " ";
+    }
+    if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 2];
+    this.condition.grammar += this.selectedConditions[this.selectedConditions.length-1].abbreviation;
+    if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 1];
+    console.log(this.condition);
+  }
+
+  toggleBrackets() {
+    this.selectedBrackets = []
+    this.doBrackets = !this.doBrackets
+    if (this.doBrackets) {
+      for (let item of [].constructor(this.conditionCount)) {
+        this.selectedBrackets.push(OptionalBracket.None, OptionalBracket.None)
+      }
+    }
+  }
+
+  protected readonly Combinator = Combinator;
+  protected readonly OptionalBracket = OptionalBracket;
+}
+
+export enum Combinator {
+  AND= "&&",
+  OR="||"
+}
+
+export enum OptionalBracket {
+  Open="(",
+  Close=")",
+  None=""
 }

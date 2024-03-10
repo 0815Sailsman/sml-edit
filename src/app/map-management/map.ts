@@ -85,7 +85,8 @@ export class Map {
     return conditions.map(condition => {return {
       subjectType: this.parseSubjectType(condition.subjectType),
       subjectId: condition.subjectId,
-      verb: this.parseVerb(condition.verb)
+      verb: this.parseVerb(condition.verb),
+      abbreviation: condition.abbreviation
     }})
   }
 
@@ -160,4 +161,5 @@ interface UnparsedAtomicCondition {
   subjectType: string
   subjectId: number
   verb: string
+  abbreviation: string
 }

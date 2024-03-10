@@ -17,7 +17,8 @@
                   {
                     "subjectType": "Location",
                     "subjectId": 1,
-                    "verb": "visited"
+                    "verb": "visited",
+                    "abbreviation": "A"
                   }
                 ]
               }

@@ -5,4 +5,5 @@ export interface AtomicCondition {
   subjectType: ConditionSubjects
   subjectId: number
   verb: ConditionVerb
+  abbreviation: string
 }

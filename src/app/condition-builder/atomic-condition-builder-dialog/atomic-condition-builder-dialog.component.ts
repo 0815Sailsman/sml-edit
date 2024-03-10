@@ -28,6 +28,7 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges{
   @ViewChild('atomicDialog') dialogTag: ElementRef | undefined;
   currentSubject: ConditionSubjects = ConditionSubjects.Location;
   target: ConditionSubjectsType | undefined = undefined;
+  abbreviationTracker: number = 65
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.opened) {
@@ -40,7 +41,8 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges{
       this.createdNewAtomicCondition.emit({
         subjectType: this.currentSubject,
         verb: verbFor(this.currentSubject),
-        subjectId: this.target.id
+        subjectId: this.target.id,
+        abbreviation: String.fromCharCode(this.abbreviationTracker++)
       })
     }
   }
