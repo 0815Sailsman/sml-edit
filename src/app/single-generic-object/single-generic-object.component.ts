@@ -3,15 +3,20 @@ import {depluralizeSimple} from "../util";
 import {Location} from "../map-management/location";
 import {Pair} from "../Pair";
 import {KeyInSublocation} from "../KeyInSublocation";
+import {ObjectInSublocation} from "../ObjectInSublocation";
+import {NgIf} from "@angular/common";
+import {Connection} from "../map-management/connection";
 
 @Component({
   selector: 'sml-edit-single-generic-object',
   standalone: true,
-  imports: [],
+  imports: [
+    NgIf
+  ],
   templateUrl: './single-generic-object.component.html',
   styleUrl: './single-generic-object.component.css'
 })
-export class SingleGenericObjectComponent<T> {
+export class SingleGenericObjectComponent<T extends ObjectInSublocation> {
 
   @Input() genericObject?: T;
   @Input() name: string = "";
@@ -23,5 +28,13 @@ export class SingleGenericObjectComponent<T> {
 
   fireObjectDeleted() {
     this.objectDeleted.emit({first: this.genericObject, second: this.key})
+  }
+
+  isConnection(value: any): value is Connection {
+    return 'to' in value
+  }
+
+  asAny(o: any): any {
+    return o
   }
 }

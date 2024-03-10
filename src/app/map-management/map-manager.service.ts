@@ -30,14 +30,14 @@ export class MapManagerService {
     let newMajorLocation:MajorLocation = {
       name: theName,
       subLocations: [],
-      id: this.idCounter++
+      id: ++this.idCounter
     }
     this.map.locations.push(newMajorLocation)
   }
 
   addMinorLocationTo(majorLocation: MajorLocation, theName: string) {
     let newMinorLocation: Location = {
-      id: this.idCounter++,
+      id: ++this.idCounter,
       name: theName,
       connections: [],
       items: [],
