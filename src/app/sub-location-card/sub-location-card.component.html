@@ -5,6 +5,7 @@
   [objectToString]="this.connectionToString"
   (objectDeleted)="deleteObject($event)"
   [key]="KeyInSublocation.Connections"
+  (connectionCreated)="registerNewConnection($event)"
 />
 <sml-edit-generic-object-manager
   [genericObjectArray]="location?.items == undefined ? [] : location!.items"

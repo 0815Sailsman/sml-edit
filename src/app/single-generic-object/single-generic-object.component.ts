@@ -6,6 +6,8 @@ import {KeyInSublocation} from "../KeyInSublocation";
 import {ObjectInSublocation} from "../ObjectInSublocation";
 import {NgIf} from "@angular/common";
 import {Connection} from "../map-management/connection";
+import {BigCondition} from "../map-management/bigCondition";
+import {MapManagerService} from "../map-management/map-manager.service";
 
 @Component({
   selector: 'sml-edit-single-generic-object',
@@ -25,6 +27,9 @@ export class SingleGenericObjectComponent<T extends ObjectInSublocation> {
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInSublocation>>();
 
   protected readonly depluralizeSimple = depluralizeSimple;
+
+  constructor(protected mapService: MapManagerService) {
+  }
 
   fireObjectDeleted() {
     this.objectDeleted.emit({first: this.genericObject, second: this.key})

@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MajorLocation} from "./majorLocation";
-import {FromNameMapCreatorService} from "./loader/from-name-map-creator.service";
-import { Map } from './map';
+import {Map} from './map';
 import {FromFileMapLoaderService} from "./loader/from-file-map-loader.service";
 import {Location} from "./location";
 import {Connection} from "./connection";
@@ -11,6 +10,9 @@ import {OtherObject} from "./otherObject";
 import {NPC} from "./NPC";
 import {ObjectInSublocation} from "../ObjectInSublocation";
 import {KeyInSublocation} from "../KeyInSublocation";
+import {BigCondition} from "./bigCondition";
+import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
+import {verbFor} from "../ConditionVerb";
 
 @Injectable({
   providedIn: 'root'
@@ -103,5 +105,40 @@ export class MapManagerService {
 
   otherObjectById(id: number): OtherObject {
     return this.allOtherObjects().filter(value => value.id == id)[0]
+  }
+
+  createConnectionFromLocation(major: MajorLocation | undefined, from: Location | undefined, connection: Connection | undefined) {
+    if (from === undefined || connection === undefined ||major === undefined) {
+      return;
+    }
+    const majorIndex = this.map.locations.indexOf(major);
+    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(from)
+    this.map.locations[majorIndex].subLocations[minorIndex].connections.push(connection)
+  }
+
+  conditionToString(condition: BigCondition | undefined): string {
+    if (condition === undefined) {
+      return "";
+    }
+    return condition.grammar
+      .split(' ')
+      .map(wordInGrammar => {
+        const ascii = wordInGrammar.charCodeAt(0)
+        if (ascii >= 65 && ascii <= 90) {
+          const localCondition = condition.subConditions.find(atomicCondition => atomicCondition.abbreviation.charCodeAt(0) == ascii)!
+          let result = "";
+          result += localCondition?.subjectType + " "
+          switch (localCondition?.subjectType) {
+            case ConditionSubjects.Location: result += this.minorLocationById(localCondition.subjectId).name;break;
+            case ConditionSubjects.Item: result += this.itemById(localCondition.subjectId).name;break;
+            case ConditionSubjects.Enemy: result += this.enemyById(localCondition.subjectId).name;break;
+            case ConditionSubjects.OtherObject: result += this.otherObjectById(localCondition.subjectId).name;break;
+          }
+          return result + " has been " + verbFor(localCondition.subjectType);
+        } else {
+          return wordInGrammar
+        }
+      })
+      .join(' ');
   }
 }

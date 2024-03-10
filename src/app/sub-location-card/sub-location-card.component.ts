@@ -32,6 +32,7 @@ export class SubLocationCardComponent {
       ObjectInSublocation,
       KeyInSublocation
     >>();
+  @Output() connectionCreatedFromLocation = new EventEmitter<Pair<Location, Connection>>
 
 
   fireLocationDeleted() {
@@ -53,4 +54,11 @@ export class SubLocationCardComponent {
   }
 
   protected readonly KeyInSublocation = KeyInSublocation;
+
+  registerNewConnection(theConnection: Connection) {
+    this.connectionCreatedFromLocation.emit({
+      first: this.location,
+      second: theConnection
+    })
+  }
 }

@@ -71,4 +71,11 @@ export class MajorLocationCardComponent {
       tripletOfLocationAndObjectAndKey.third
     )
   }
+
+  createConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
+    this.mapService.createConnectionFromLocation(this.majorLocation,
+      pairOfLocationAndConnection.first,
+      pairOfLocationAndConnection.second
+    )
+  }
 }

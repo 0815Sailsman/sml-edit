@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {ConditionSubjects} from "../ConditionSubjects";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
@@ -38,6 +38,7 @@ export class GraphicalConditionBuilderComponent {
     grammar: "",
     subConditions: []
   }
+  @Output() conditionChanged = new EventEmitter<BigCondition>();
 
   increaseConditions() {
     this.conditionCount++
@@ -77,7 +78,7 @@ export class GraphicalConditionBuilderComponent {
     if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 2];
     this.condition.grammar += this.selectedConditions[this.selectedConditions.length-1].abbreviation;
     if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 1];
-    console.log(this.condition);
+    this.conditionChanged.emit(this.condition)
   }
 
   toggleBrackets() {

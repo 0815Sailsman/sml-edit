@@ -41,4 +41,8 @@ export class ConnectionBuilderComponent {
   }
 
   protected readonly Location = Location;
+
+  updateInternalCondition(updatedCondition: BigCondition) {
+    this.condition = updatedCondition;
+  }
 }

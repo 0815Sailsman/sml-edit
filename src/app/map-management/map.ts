@@ -62,7 +62,7 @@ export class Map {
       souls: enemy.souls,
       respawns: enemy.respawns,
       drops: this.parseItems(enemy.drops),
-      spawnsIf: enemy.spawnsIf == null ? undefined : this.parseBigCondition(enemy.spawnsIf)
+      if: enemy.if == null ? undefined : this.parseBigCondition(enemy.if)
     }})
   }
 
@@ -143,7 +143,7 @@ interface UnparsedEnemy {
   souls: number
   respawns: boolean
   drops: UnparsedItem[]
-  spawnsIf?: UnparsedBigCondition
+  if?: UnparsedBigCondition
 }
 
 interface UnparsedOtherObject {

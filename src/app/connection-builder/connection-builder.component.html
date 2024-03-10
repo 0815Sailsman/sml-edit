@@ -3,5 +3,5 @@
   (selectedChanged)="updateTargetLocation($event)"
   [allOptions]="mapService.allMinorLocations()"
 />
-<sml-edit-condition-builder/>
+<sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)"/>
 <button (click)="createNewConnection()">create</button>
