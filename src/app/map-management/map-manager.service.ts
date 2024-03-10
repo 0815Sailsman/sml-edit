@@ -74,12 +74,23 @@ export class MapManagerService {
     return this.map.locations.flatMap(major => major.subLocations);
   }
 
+  minorLocationById(id: number): Location {
+    return this.allMinorLocations().filter(value => value.id == id)[0]
+  }
+
   allItems(): Item[] {
     return this.allMinorLocations().flatMap(minor => minor.items)
+  }
+  itemById(id: number): Item {
+    return this.allItems().filter(value => value.id == id)[0]
   }
 
   allEnemies(): Enemy[] {
     return this.allMinorLocations().flatMap(minor => minor.enemies)
+  }
+
+  enemyById(id: number): Enemy {
+    return this.allEnemies().filter(value => value.id == id)[0]
   }
 
   allNPCs(): NPC[] {
@@ -88,5 +99,9 @@ export class MapManagerService {
 
   allOtherObjects(): OtherObject[] {
     return this.allMinorLocations().flatMap(minor => minor.objects)
+  }
+
+  otherObjectById(id: number): OtherObject {
+    return this.allOtherObjects().filter(value => value.id == id)[0]
   }
 }

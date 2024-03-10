@@ -1,23 +1,37 @@
-<div >
-  <select
-    name="{{'allLocalConditions'+i}}"
-    *ngFor="let item of [].constructor(this.conditionCount); let i = index"
-  >
-    <option
-      *ngFor="let condition of this.localConditions"
-      value="{{condition}}"
+<div>
+  <div *ngFor="let item of [].constructor(this.conditionCount); let i = index" style="display: inline">
+    <select *ngIf="doBrackets">
+      <option></option>
+      <option>(</option>
+    </select>
+    <select
+      name="{{'allLocalConditions'+i}}"
     >
-      {{condition}}
-    </option>
-  </select>
+      <option
+        *ngFor="let condition of this.localConditions"
+        [ngValue]="condition"
+      >
+        {{toString(condition)}}
+      </option>
+    </select>
+    <select *ngIf="doBrackets">
+      <option></option>
+      <option>)</option>
+    </select>
+    <select *ngIf="conditionCount>1 && i != (conditionCount-1)">
+      <option>&&</option>
+      <option>||</option>
+    </select>
+  </div>
   <button (click)="this.increaseConditions()" style="margin-left: 20px">add condition</button>
   <button (click)="this.decreaseConditions()" *ngIf="conditionCount>1">remove condition</button>
+  <button (click)="this.doBrackets = !this.doBrackets">toggle brackets</button>
 
   <br>
   Available atomic conditions:
   <ul>
     <li *ngFor="let condition of localConditions">
-      {{condition}}
+      {{toString(condition)}}
     </li>
   </ul>
   <button (click)="inAtomicConditionCreation=true">Create new atomic condition</button>

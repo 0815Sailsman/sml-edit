@@ -6,6 +6,7 @@ import {AtomicCondition} from "../../map-management/atomicCondition";
 import {
   AtomicConditionBuilderDialogComponent
 } from "../atomic-condition-builder-dialog/atomic-condition-builder-dialog.component";
+import {MapManagerService} from "../../map-management/map-manager.service";
 
 @Component({
   selector: 'sml-edit-graphical-condition-builder',
@@ -22,10 +23,14 @@ import {
 })
 export class GraphicalConditionBuilderComponent {
 
+  constructor(private mapService: MapManagerService) {
+  }
+
   protected readonly Object = Object;
   inAtomicConditionCreation: boolean = false;
   localConditions: AtomicCondition[] = [];
   conditionCount: number = 1;
+  doBrackets: boolean = false;
 
   increaseConditions() {
     this.conditionCount++
@@ -37,5 +42,15 @@ export class GraphicalConditionBuilderComponent {
 
   addNewLocalCondition(newCondition: AtomicCondition) {
     this.localConditions.push(newCondition)
+  }
+
+  toString(condition: AtomicCondition): string {
+    let result = condition.subjectType + " "
+    switch (condition.subjectType) {
+      case ConditionSubjects.Location: return (result + this.mapService.minorLocationById(condition.subjectId).name + " visited")
+      case ConditionSubjects.Item: return (result + this.mapService.itemById(condition.subjectId).name + " collected")
+      case ConditionSubjects.Enemy: return (result + this.mapService.enemyById(condition.subjectId).name + " killed")
+      case ConditionSubjects.OtherObject: return (result + this.mapService.otherObjectById(condition.subjectId).name + " interacted with")
+    }
   }
 }
