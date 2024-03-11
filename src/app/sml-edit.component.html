@@ -5,6 +5,14 @@
     [majorLocation]="everyLocation"
     (locationDeleted)="deleteMajorLocation($event)"
   />
-  <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName" ngDefaultControl>
-  <button (click)="addMajorLocation(newLocationName)">add new major</button>
+  <div id="controllerBar">
+    <div class="doubleStack">
+      <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName" ngDefaultControl>
+      <button (click)="addMajorLocation(newLocationName)">add new major</button>
+    </div>
+    <div class="doubleStack">
+      <input type="text" [(ngModel)]="filename" ngDefaultControl placeholder="filename">
+      <button (click)="saveMapToFile()">save as json</button>
+    </div>
+  </div>
 </div>

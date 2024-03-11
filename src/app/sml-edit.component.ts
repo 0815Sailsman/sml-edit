@@ -19,6 +19,7 @@ export class SmlEditComponent {
   constructor(protected mapService: MapManagerService) {}
 
   newLocationName: string | undefined;
+  filename: string | undefined;
 
   deleteMajorLocation(theLocation: MajorLocation) {
     this.mapService.deleteMajorLocation(theLocation)
@@ -30,5 +31,13 @@ export class SmlEditComponent {
       this.mapService.addMajorLocationWithName(theName)
       this.newLocationName = ""
     }
+  }
+
+  saveMapToFile() {
+    var a = document.createElement("a");
+    var file = new Blob([JSON.stringify(this.mapService.map)], {type: "application/json"});
+    a.href = URL.createObjectURL(file);
+    a.download = (this.filename !== undefined ? this.filename : this.mapService.map.name) + ".sml";
+    a.click();
   }
 }
