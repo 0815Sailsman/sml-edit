@@ -6,6 +6,8 @@ import { MajorLocationCardComponent } from "./major-location-card/major-location
 import {MajorLocation} from "./map-management/majorLocation";
 import {FormsModule} from "@angular/forms";
 import {MapManagerService} from "./map-management/map-manager.service";
+import {FileChangeEvent} from "@angular/compiler-cli/src/perform_watch";
+import {FromFileMapLoaderService} from "./map-management/loader/from-file-map-loader.service";
 
 @Component({
   selector: 'sml-edit-root',
@@ -16,7 +18,7 @@ import {MapManagerService} from "./map-management/map-manager.service";
 })
 export class SmlEditComponent {
 
-  constructor(protected mapService: MapManagerService) {}
+  constructor(protected mapService: MapManagerService, private loader: FromFileMapLoaderService) {}
 
   newLocationName: string | undefined;
   filename: string | undefined;
@@ -39,5 +41,14 @@ export class SmlEditComponent {
     a.href = URL.createObjectURL(file);
     a.download = (this.filename !== undefined ? this.filename : this.mapService.map.name) + ".sml";
     a.click();
+  }
+
+  async loadMap(event: any) {
+    const file = event.target.files[0];
+    const fileContent = await file.text()
+    const uploadedMap = this.loader.loadFromString(fileContent)
+    if (uploadedMap !== undefined) {
+      this.mapService.map = uploadedMap
+    }
   }
 }

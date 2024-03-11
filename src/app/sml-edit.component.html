@@ -14,5 +14,15 @@
       <input type="text" [(ngModel)]="filename" ngDefaultControl placeholder="filename">
       <button (click)="saveMapToFile()">save as json</button>
     </div>
+    <div class="doubleStack">
+      <label for="open map file">Upload map file</label>
+      <input
+        (change)="loadMap($event)"
+        type="file"
+        id="open map file"
+        name="open map file"
+        accept=".sml, .json"
+        multiple />
+    </div>
   </div>
 </div>
