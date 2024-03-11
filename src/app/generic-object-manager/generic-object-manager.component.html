@@ -1,15 +1,22 @@
-{{nameOf(key)}}:
-<sml-edit-single-generic-object
-  *ngFor="let object of genericObjectArray"
-  [genericObject]="object"
-  [objectToString]="objectToString"
-  (objectDeleted)="deleteObject($event)"
-  [key]="key"
-/>
-<div [ngSwitch]="key">
-  <sml-edit-connection-builder
-    *ngSwitchCase="'connections'"
-    (connectionCreated)="createConnection($event)"
+<div>
+  <button (click)="toggleDetails()">toggle visibility</button>
+  {{nameOf(key)}}:
+</div>
+<div *ngIf="showingDetails">
+  <sml-edit-single-generic-object
+    *ngFor="let object of genericObjectArray"
+    [genericObject]="object"
+    [objectToString]="objectToString"
+    (objectDeleted)="deleteObject($event)"
+    [key]="key"
+    style="display: inherit"
   />
-  <p *ngSwitchDefault>to be done</p>
+  <div [ngSwitch]="key">
+    <sml-edit-connection-builder
+      *ngSwitchCase="'connections'"
+      (connectionCreated)="createConnection($event)"
+    />
+    <p *ngSwitchDefault>to be done</p>
+  </div>
+
 </div>

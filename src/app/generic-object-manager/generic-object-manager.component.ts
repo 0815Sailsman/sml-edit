@@ -21,6 +21,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   @Input() objectToString: (a: T | undefined) => string = (obj : T | undefined) => "uninitialized name";
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInSublocation>>();
   @Output() connectionCreated = new EventEmitter<Connection>();
+  showingDetails: boolean = false;
 
   deleteObject(pairOfObjectAndKey: Pair<T, KeyInSublocation>) {
     this.objectDeleted.emit(pairOfObjectAndKey)
@@ -30,5 +31,9 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
 
   createConnection(connection: Connection) {
     this.connectionCreated.emit(connection)
+  }
+
+  toggleDetails() {
+    this.showingDetails = !this.showingDetails
   }
 }

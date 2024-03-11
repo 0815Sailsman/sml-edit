@@ -33,7 +33,7 @@ export class SubLocationCardComponent {
       KeyInSublocation
     >>();
   @Output() connectionCreatedFromLocation = new EventEmitter<Pair<Location, Connection>>
-
+  showingDetails: boolean = false;
 
   fireLocationDeleted() {
     this.locationDeleted.emit(this.location)
@@ -60,5 +60,9 @@ export class SubLocationCardComponent {
       first: this.location,
       second: theConnection
     })
+  }
+
+  toggleDetails() {
+    this.showingDetails = !this.showingDetails
   }
 }

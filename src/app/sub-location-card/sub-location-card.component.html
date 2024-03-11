@@ -1,35 +1,39 @@
-<span>Name: {{location?.name}} | ID: {{location?.id}}</span><br>
+<div>
+  <button (click)="toggleDetails()">toggle visibility</button>
+  <span>Name: {{location?.name}} | ID: {{location?.id}}</span><br>
+</div>
 <hr style="border-top: 1px solid black;border-bottom: 0;width: 100%;height: 0px">
-<sml-edit-generic-object-manager
-  [genericObjectArray]="location?.connections == undefined ? [] : location!.connections"
-  [objectToString]="this.connectionToString"
-  (objectDeleted)="deleteObject($event)"
-  [key]="KeyInSublocation.Connections"
-  (connectionCreated)="registerNewConnection($event)"
-/>
-<sml-edit-generic-object-manager
-  [genericObjectArray]="location?.items == undefined ? [] : location!.items"
-  [objectToString]="this.itemToString"
-  (objectDeleted)="deleteObject($event)"
-  [key]="KeyInSublocation.Items"
-/>
-<sml-edit-generic-object-manager
-  [genericObjectArray]="location?.enemies == undefined ? [] : location!.enemies"
-  [objectToString]="this.enemyToString"
-  (objectDeleted)="deleteObject($event)"
-  [key]="KeyInSublocation.Enemies"
-/>
-<sml-edit-generic-object-manager
-  [genericObjectArray]="location?.objects == undefined ? [] : location!.objects"
-  [objectToString]="otherObjectToString"
-  (objectDeleted)="deleteObject($event)"
-  [key]="KeyInSublocation.Objects"
-/>
-<sml-edit-generic-object-manager
-  [genericObjectArray]="location?.npcs == undefined ? [] : location!.npcs"
-  [objectToString]="npcToString"
-  (objectDeleted)="deleteObject($event)"
-  [key]="KeyInSublocation.Npcs"
-/>
+<div *ngIf="showingDetails">
+  <sml-edit-generic-object-manager
+    [genericObjectArray]="location?.connections == undefined ? [] : location!.connections"
+    [objectToString]="this.connectionToString"
+    (objectDeleted)="deleteObject($event)"
+    [key]="KeyInSublocation.Connections"
+    (connectionCreated)="registerNewConnection($event)"
+  />
+  <sml-edit-generic-object-manager
+    [genericObjectArray]="location?.items == undefined ? [] : location!.items"
+    [objectToString]="this.itemToString"
+    (objectDeleted)="deleteObject($event)"
+    [key]="KeyInSublocation.Items"
+  />
+  <sml-edit-generic-object-manager
+    [genericObjectArray]="location?.enemies == undefined ? [] : location!.enemies"
+    [objectToString]="this.enemyToString"
+    (objectDeleted)="deleteObject($event)"
+    [key]="KeyInSublocation.Enemies"
+  />
+  <sml-edit-generic-object-manager
+    [genericObjectArray]="location?.objects == undefined ? [] : location!.objects"
+    [objectToString]="otherObjectToString"
+    (objectDeleted)="deleteObject($event)"
+    [key]="KeyInSublocation.Objects"
+  />
+  <sml-edit-generic-object-manager
+    [genericObjectArray]="location?.npcs == undefined ? [] : location!.npcs"
+    [objectToString]="npcToString"
+    (objectDeleted)="deleteObject($event)"
+    [key]="KeyInSublocation.Npcs"
+  />
+</div>
 <button (click)="fireLocationDeleted()">delete minor location</button>
-
