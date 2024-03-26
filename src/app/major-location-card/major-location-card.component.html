@@ -7,6 +7,7 @@
     (locationDeleted)="deleteSubLocation($event)"
     (objectDeletedFromLocation)="deleteObjectFromLocation($event)"
     (connectionCreatedFromLocation)="createConnectionFromLocation($event)"
+    (itemCreatedInLocation)="createItemInLocation($event)"
   />
   <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName" ngDefaultControl>
   <button (click)="addSubLocation(newLocationName)">add new minor</button>

@@ -108,12 +108,21 @@ export class MapManagerService {
   }
 
   createConnectionFromLocation(major: MajorLocation | undefined, from: Location | undefined, connection: Connection | undefined) {
-    if (from === undefined || connection === undefined ||major === undefined) {
+    if (from === undefined || connection === undefined || major === undefined) {
       return;
     }
     const majorIndex = this.map.locations.indexOf(major);
     const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(from)
     this.map.locations[majorIndex].subLocations[minorIndex].connections.push(connection)
+  }
+
+  createItemInLocation(major: MajorLocation | undefined, location: Location | undefined, item: Item | undefined) {
+    if (major === undefined || location === undefined || item === undefined) {
+      return;
+    }
+    const majorIndex = this.map.locations.indexOf(major);
+    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location)
+    this.map.locations[majorIndex].subLocations[minorIndex].items.push(item)
   }
 
   conditionToString(condition: BigCondition | undefined): string {

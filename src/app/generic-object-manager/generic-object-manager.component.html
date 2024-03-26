@@ -18,6 +18,7 @@
     />
     <sml-edit-item-builder
       *ngSwitchCase="'items'"
+      (itemCreated)="createItem($event)"
     />
     <sml-edit-enemy-builder
       *ngSwitchCase="'enemies'"

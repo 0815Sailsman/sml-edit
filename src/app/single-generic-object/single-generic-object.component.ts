@@ -8,6 +8,9 @@ import {NgIf} from "@angular/common";
 import {Connection} from "../map-management/connection";
 import {BigCondition} from "../map-management/bigCondition";
 import {MapManagerService} from "../map-management/map-manager.service";
+import {Enemy} from "../map-management/enemy";
+import {OtherObject} from "../map-management/otherObject";
+import {Item} from "../map-management/item";
 
 @Component({
   selector: 'sml-edit-single-generic-object',
@@ -37,6 +40,10 @@ export class SingleGenericObjectComponent<T extends ObjectInSublocation> {
 
   isConnection(value: any): value is Connection {
     return 'to' in value
+  }
+
+  isCountable(value: any): value is Item {
+    return 'count' in value
   }
 
   asAny(o: any): any {

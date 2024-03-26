@@ -16,6 +16,7 @@
     [objectToString]="this.itemToString"
     (objectDeleted)="deleteObject($event)"
     [key]="KeyInSublocation.Items"
+    (itemCreated)="registerNewItem($event)"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location?.enemies == undefined ? [] : location!.enemies"

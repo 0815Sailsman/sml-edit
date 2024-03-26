@@ -74,4 +74,11 @@ export class MajorLocationCardComponent {
       pairOfLocationAndConnection.second
     )
   }
+
+  createItemInLocation(pairOfLocationAndItem: Pair<Location, Item>) {
+    this.mapService.createItemInLocation(this.majorLocation,
+      pairOfLocationAndItem.first,
+      pairOfLocationAndItem.second
+      )
+  }
 }
