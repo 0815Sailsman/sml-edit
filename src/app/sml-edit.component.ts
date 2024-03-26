@@ -43,6 +43,7 @@ export class SmlEditComponent {
     a.click();
   }
 
+  // todo update id counter on load
   async loadMap(event: any) {
     const file = event.target.files[0];
     const fileContent = await file.text()

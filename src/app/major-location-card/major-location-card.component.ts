@@ -36,16 +36,12 @@ export class MajorLocationCardComponent {
 
   @Input() majorLocation: MajorLocation | undefined;
   @Output() locationDeleted = new EventEmitter<MajorLocation>();
-  showingDetails: boolean = false;
   newLocationName: string | undefined;
 
   fireLocationDeleted() {
     this.locationDeleted.emit(this.majorLocation)
   }
 
-  toggleDetails() {
-    this.showingDetails = !this.showingDetails
-  }
 
   addSubLocation(theName: string | undefined) {
     if (theName != undefined && theName != "" && this.majorLocation != undefined) {

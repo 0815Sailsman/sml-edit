@@ -1,7 +1,6 @@
-<button (click)="toggleDetails()">toggle details</button>
 <span>Name: {{majorLocation?.name}} | ID: {{majorLocation?.id}}</span>
 <button (click)="fireLocationDeleted()">delete</button>
-<div *ngIf="showingDetails">
+<div>
   <sml-edit-sub-location-card
     *ngFor="let location of majorLocation?.subLocations"
     [location]="location"

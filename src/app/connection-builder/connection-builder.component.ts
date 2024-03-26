@@ -26,7 +26,7 @@ export class ConnectionBuilderComponent {
   condition: BigCondition | undefined;
 
   createNewConnection() {
-    if (this.targetLocation != undefined && this.condition != undefined) {
+    if (this.targetLocation != undefined) {
       this.connectionCreated.emit({
         to: this.targetLocation?.id,
         if: this.condition

@@ -16,6 +16,12 @@
       *ngSwitchCase="'connections'"
       (connectionCreated)="createConnection($event)"
     />
+    <sml-edit-item-builder
+      *ngSwitchCase="'items'"
+    />
+    <sml-edit-enemy-builder
+      *ngSwitchCase="'enemies'"
+    />
     <p *ngSwitchDefault>to be done</p>
   </div>
 

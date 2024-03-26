@@ -6,11 +6,13 @@ import {KeyInSublocation, nameOf} from "../KeyInSublocation";
 import {ConnectionBuilderComponent} from "../connection-builder/connection-builder.component";
 import {ObjectInSublocation} from "../ObjectInSublocation";
 import {Connection} from "../map-management/connection";
+import {ItemBuilderComponent} from "../item-builder/item-builder.component";
+import {EnemyBuilderComponent} from "../enemy-builder/enemy-builder.component";
 
 @Component({
   selector: 'sml-edit-generic-object-manager',
   standalone: true,
-  imports: [CommonModule, SingleGenericObjectComponent, ConnectionBuilderComponent],
+  imports: [CommonModule, SingleGenericObjectComponent, ConnectionBuilderComponent, ItemBuilderComponent, EnemyBuilderComponent],
   templateUrl: './generic-object-manager.component.html',
   styleUrl: './generic-object-manager.component.css'
 })

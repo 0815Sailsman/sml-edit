@@ -2,7 +2,7 @@ import {BigCondition} from "./bigCondition";
 
 export interface Connection {
   to: number
-  if: BigCondition
+  if?: BigCondition
 }
 
 export function connectionToString(connection: Connection | undefined): string {

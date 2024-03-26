@@ -1,5 +1,5 @@
 {
-  "name":"epic",
+  "name": "epic",
   "locations": [
     {
       "id": 0,
@@ -12,13 +12,33 @@
             {
               "to": 1,
               "if": {
-                "grammar": "A",
+                "grammar": "",
                 "subConditions": [
                   {
                     "subjectType": "Location",
                     "subjectId": 1,
                     "verb": "visited",
                     "abbreviation": "A"
+                  }
+                ]
+              }
+            },
+            {
+              "to": 4,
+              "if": {
+                "grammar": "B && A",
+                "subConditions": [
+                  {
+                    "subjectType": "Enemy",
+                    "verb": "killed",
+                    "subjectId": 0,
+                    "abbreviation": "A"
+                  },
+                  {
+                    "subjectType": "Item",
+                    "verb": "collected",
+                    "subjectId": 0,
+                    "abbreviation": "B"
                   }
                 ]
               }
@@ -54,6 +74,26 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Major 2",
+      "subLocations": [
+        {
+          "id": 4,
+          "name": "sublocation 2 A",
+          "connections": [],
+          "items": [],
+          "enemies": [],
+          "objects": [],
+          "npcs": []
+        }
+      ],
+      "id": 2
+    },
+    {
+      "name": "Major 3",
+      "subLocations": [],
+      "id": 3
     }
   ]
 }
