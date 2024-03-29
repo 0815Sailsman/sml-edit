@@ -134,6 +134,15 @@ export class MapManagerService {
     this.map.locations[majorIndex].subLocations[minorIndex].enemies.push(enemy);
   }
 
+  createObjectInLocation(major: MajorLocation | undefined, location: Location | undefined, object: OtherObject | undefined) {
+    if (major === undefined || location === undefined || object === undefined) {
+      return;
+    }
+    const majorIndex = this.map.locations.indexOf(major);
+    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
+    this.map.locations[majorIndex].subLocations[minorIndex].objects.push(object);
+  }
+
   conditionToString(condition: BigCondition | undefined): string {
     if (condition === undefined) {
       return "";

@@ -88,4 +88,11 @@ export class MajorLocationCardComponent {
       pairOfLocationAndEnemy.second
       );
   }
+
+  createObjectInLocation(pairOfLocationAndObject: Pair<Location, OtherObject>) {
+    this.mapService.createObjectInLocation(this.majorLocation,
+      pairOfLocationAndObject.first,
+      pairOfLocationAndObject.second
+    );
+  }
 }

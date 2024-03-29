@@ -10,11 +10,13 @@ import {ItemBuilderComponent} from "../item-builder/item-builder.component";
 import {EnemyBuilderComponent} from "../enemy-builder/enemy-builder.component";
 import {Item} from "../map-management/item";
 import {Enemy} from "../map-management/enemy";
+import {ObjectBuilderComponent} from "../object-builder/object-builder.component";
+import {OtherObject} from "../map-management/otherObject";
 
 @Component({
   selector: 'sml-edit-generic-object-manager',
   standalone: true,
-  imports: [CommonModule, SingleGenericObjectComponent, ConnectionBuilderComponent, ItemBuilderComponent, EnemyBuilderComponent],
+  imports: [CommonModule, SingleGenericObjectComponent, ConnectionBuilderComponent, ItemBuilderComponent, EnemyBuilderComponent, ObjectBuilderComponent],
   templateUrl: './generic-object-manager.component.html',
   styleUrl: './generic-object-manager.component.css'
 })
@@ -27,6 +29,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   @Output() connectionCreated = new EventEmitter<Connection>();
   @Output() itemCreated = new EventEmitter<Item>();
   @Output() enemyCreated = new EventEmitter<Enemy>();
+  @Output() otherObjectCreated = new EventEmitter<OtherObject>();
   showingDetails: boolean = false;
 
   deleteObject(pairOfObjectAndKey: Pair<T, KeyInSublocation>) {
@@ -45,6 +48,10 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
 
   createEnemy(enemy: Enemy) {
     this.enemyCreated.emit(enemy);
+  }
+
+  createOtherObject(object: OtherObject) {
+    this.otherObjectCreated.emit(object)
   }
 
   toggleDetails() {

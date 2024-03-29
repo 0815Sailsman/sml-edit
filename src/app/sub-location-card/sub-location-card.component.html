@@ -30,6 +30,7 @@
     [objectToString]="otherObjectToString"
     (objectDeleted)="deleteObject($event)"
     [key]="KeyInSublocation.Objects"
+    (otherObjectCreated)="registerNewObject($event)"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location?.npcs == undefined ? [] : location!.npcs"

@@ -9,6 +9,7 @@
     (connectionCreatedFromLocation)="createConnectionFromLocation($event)"
     (itemCreatedInLocation)="createItemInLocation($event)"
     (enemyCreatedInLocation)="createEnemyInLocation($event)"
+    (objectCreatedInLocation)="createObjectInLocation($event)"
   />
   <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName" ngDefaultControl>
   <button (click)="addSubLocation(newLocationName)">add new minor</button>
