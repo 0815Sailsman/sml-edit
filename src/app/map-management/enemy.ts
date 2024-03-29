@@ -1,12 +1,13 @@
 import {Item} from "./item";
 import {BigCondition} from "./bigCondition";
+import {Drop} from "./drop";
 
 export interface Enemy {
   id: number
   name: string
   souls: number
   respawns: boolean
-  drops: Item[]
+  drops: Drop[]
   if?: BigCondition
 }
 

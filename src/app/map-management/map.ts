@@ -9,6 +9,7 @@ import {BigCondition} from "./bigCondition";
 import {AtomicCondition} from "./atomicCondition";
 import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
 import {ConditionVerb} from "../ConditionVerb";
+import {Drop} from "./drop";
 
 export class Map {
   name: string
@@ -55,13 +56,20 @@ export class Map {
     }})
   }
 
+  private parseDrops(drops: UnparsedDrop[]): Drop[] {
+    return drops.map(drop => {return {
+      item: this.parseItems([drop.item])[0],
+      chance: drop.chance,
+    }})
+  }
+
   private parseEnemies(enemies: UnparsedEnemy[]): Enemy[] {
     return enemies.map(enemy => {return {
       id: enemy.id,
       name: enemy.name,
       souls: enemy.souls,
       respawns: enemy.respawns,
-      drops: this.parseItems(enemy.drops),
+      drops: this.parseDrops(enemy.drops),
       if: enemy.if == null ? undefined : this.parseBigCondition(enemy.if)
     }})
   }
@@ -137,12 +145,17 @@ interface UnparsedItem {
   if?: UnparsedBigCondition
 }
 
+interface UnparsedDrop {
+  item: UnparsedItem
+  chance: number
+}
+
 interface UnparsedEnemy {
   id: number
   name: string
   souls: number
   respawns: boolean
-  drops: UnparsedItem[]
+  drops: UnparsedDrop[]
   if?: UnparsedBigCondition
 }
 

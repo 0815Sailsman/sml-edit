@@ -6,3 +6,12 @@
 
   border: 1px solid black;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+
+  margin: 20px;
+
+  border: 1px solid black;
+}
