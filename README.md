@@ -1,5 +1,10 @@
 # SMLEdit
 
+## HOW TO DEPLOY
+just run
+  npm run deploy
+locally and wait 1 minute :thumbsup:
+
 ## Fix TODOs
  -[ ] Revamp item system
  -[ ] Change area / location naming scheme
