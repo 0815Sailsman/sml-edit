@@ -1,7 +1,0 @@
-<sml-edit-select-from-all
-  [label]="'Create new connection to '"
-  (selectedChanged)="updateTargetLocation($event)"
-  [allOptions]="mapService.allMinorLocations()"
-/>
-<sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)"/>
-<button (click)="createNewConnection()">create</button>

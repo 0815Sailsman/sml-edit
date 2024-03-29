@@ -1,7 +1,0 @@
-<li>
-  <span *ngIf="isCountable(genericObject)">{{genericObject.count}}x </span>
-  {{this.objectToString(genericObject)}}
-  <span *ngIf="!isConnection(genericObject)">| ID: {{asAny(genericObject).id}}</span>
-  <span *ngIf="genericObject?.if !== undefined"> if {{mapService.conditionToString(genericObject?.if)}}</span>
-  <button (click)="fireObjectDeleted()">delete {{depluralizeSimple(name)}}</button>
-</li>

@@ -1,8 +1,0 @@
-<div>
-  <label for="name">Create new item with name: </label><input id="name" name="name" [(ngModel)]="itemName" ngDefaultControl/><br>
-</div>
-<div>
-  <label for="count">Count: </label><input id="count" name="count" [(ngModel)]="itemCount" ngDefaultControl/><br>
-</div>
-<sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)"/>
-<button (click)="createNewItem()">create</button>
