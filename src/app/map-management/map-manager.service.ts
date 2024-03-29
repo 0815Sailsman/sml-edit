@@ -121,8 +121,17 @@ export class MapManagerService {
       return;
     }
     const majorIndex = this.map.locations.indexOf(major);
-    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location)
-    this.map.locations[majorIndex].subLocations[minorIndex].items.push(item)
+    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
+    this.map.locations[majorIndex].subLocations[minorIndex].items.push(item);
+  }
+
+  createEnemyInLocation(major: MajorLocation | undefined, location: Location | undefined, enemy: Enemy | undefined) {
+    if (major === undefined || location === undefined || enemy === undefined) {
+      return;
+    }
+    const majorIndex = this.map.locations.indexOf(major);
+    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
+    this.map.locations[majorIndex].subLocations[minorIndex].enemies.push(enemy);
   }
 
   conditionToString(condition: BigCondition | undefined): string {

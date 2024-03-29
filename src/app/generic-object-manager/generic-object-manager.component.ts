@@ -9,6 +9,7 @@ import {Connection} from "../map-management/connection";
 import {ItemBuilderComponent} from "../item-builder/item-builder.component";
 import {EnemyBuilderComponent} from "../enemy-builder/enemy-builder.component";
 import {Item} from "../map-management/item";
+import {Enemy} from "../map-management/enemy";
 
 @Component({
   selector: 'sml-edit-generic-object-manager',
@@ -25,6 +26,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInSublocation>>();
   @Output() connectionCreated = new EventEmitter<Connection>();
   @Output() itemCreated = new EventEmitter<Item>();
+  @Output() enemyCreated = new EventEmitter<Enemy>();
   showingDetails: boolean = false;
 
   deleteObject(pairOfObjectAndKey: Pair<T, KeyInSublocation>) {
@@ -39,6 +41,10 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
 
   createItem(item: Item) {
     this.itemCreated.emit(item)
+  }
+
+  createEnemy(enemy: Enemy) {
+    this.enemyCreated.emit(enemy);
   }
 
   toggleDetails() {

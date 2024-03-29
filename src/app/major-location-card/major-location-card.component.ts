@@ -81,4 +81,11 @@ export class MajorLocationCardComponent {
       pairOfLocationAndItem.second
       )
   }
+
+  createEnemyInLocation(pairOfLocationAndEnemy: Pair<Location, Enemy>) {
+    this.mapService.createEnemyInLocation(this.majorLocation,
+      pairOfLocationAndEnemy.first,
+      pairOfLocationAndEnemy.second
+      );
+  }
 }

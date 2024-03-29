@@ -1,5 +1,9 @@
 # SMLEdit
 
+## Fix TODOs
+ -[ ] Revamp item system
+ -[ ] Change area / location naming scheme
+
 ## Possible Spikes
  -[ ] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
  -[ ] Use forms

@@ -12,7 +12,7 @@
   <span>Drops: </span>
   <ul>
     <li *ngFor="let drop of drops">
-
+      {{drop.item.count}}x {{drop.item.name}} with {{drop.chance}}% chance
     </li>
   </ul>
   <!-- extract to drop builder component -->
