@@ -15,7 +15,7 @@ jobs:
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }} # see the Configuration section for how you can create secrets
         base_href: https://0815sailsman.github.io/sml-edit/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
-        angular_dist_build_folder: dist/sml-edit/
+        angular_dist_build_folder: sml-edit/dist/sml-edit
         deploy_branch: gh-pages # The branch the action should deploy to.
 
 permissions:
