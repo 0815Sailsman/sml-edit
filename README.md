@@ -16,16 +16,20 @@ Each **location** may have any amount of
  - **items**, modeled by selecting an item-type from the root items-object, a count and a condition.
  - **enemies**. They have a name, drop some souls, may respawn, spawn under a condition and can drop some items (either guaranteed or by chance). The items should also be selected from the root items-object. You add a count and specify, if it always drops.
  - **objects** with arbitrary interaction possibilities. This will probably be the hardest thing to model later on. Maybe start out with just being able to interact once with every object to later be able to use them in conditions.
- - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now.
+ - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
+
 
 ## Fix TODOs
  -[ ] Revamp item system
  -[ ] Change area / location naming scheme
+ -[ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
+ -[ ] Quest-Line modeling for npcs with interactions
 
 ## Possible Spikes
  -[ ] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
  -[ ] Use forms
  -[ ] Create from existing object as template
+ -[ ] Possibly split different IDs
 
 ## Known Bugs
  -[ ] Loading maps doesn't update MapManagement ID Counter

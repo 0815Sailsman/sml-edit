@@ -10,6 +10,7 @@ import {AtomicCondition} from "./atomicCondition";
 import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
 import {ConditionVerb} from "../ConditionVerb";
 import {Drop} from "./drop";
+import {ShopItem} from "./ShopItem";
 
 export class Map {
   name: string
@@ -36,7 +37,7 @@ export class Map {
       items: this.parseItems(location.items),
       enemies: this.parseEnemies(location.enemies),
       objects: this.parseObjects(location.objects),
-      npcs: location.npcs
+      npcs: this.parseNPCs(location.npcs)
     }})
   }
 
@@ -79,6 +80,23 @@ export class Map {
       id: object.id,
       name: object.name,
       if: object.if == null ? undefined : this.parseBigCondition(object.if)
+    }})
+  }
+
+  private parseNPCs(npcs: UnparsedNPC[]): NPC[] {
+    return npcs.map(npc => {return {
+      id: npc.id,
+      name: npc.name,
+      shop: this.parseShopItems(npc.shop),
+      if: npc.if == null ? undefined : this.parseBigCondition(npc.if)
+    }})
+  }
+
+  private parseShopItems(shop: UnparsedShopItem[]): ShopItem[] {
+    return shop.map(shopItem => {return {
+      item: this.parseItems([shopItem.item])[0],
+      cost: shopItem.cost,
+      count: shopItem.count
     }})
   }
 
@@ -163,6 +181,19 @@ interface UnparsedOtherObject {
   id: number
   name: string
   if?: UnparsedBigCondition
+}
+
+interface UnparsedNPC {
+  id: number
+  name: string
+  shop: UnparsedShopItem[]
+  if?: UnparsedBigCondition
+}
+
+interface UnparsedShopItem {
+  item: UnparsedItem
+  cost: number
+  count: number
 }
 
 interface UnparsedBigCondition {

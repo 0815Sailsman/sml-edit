@@ -28,7 +28,10 @@
       *ngSwitchCase="'objects'"
       (objectCreated)="createOtherObject($event)"
     />
-    <p *ngSwitchDefault>to be done</p>
+    <sml-edit-npc-builder
+      *ngSwitchDefault
+      (npcCreated)="createNPC($event)"
+    />
   </div>
 
 </div>

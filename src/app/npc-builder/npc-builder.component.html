@@ -1,0 +1,19 @@
+<div>
+  <label for="name">Create new NPC with name: </label><input id="name" name="name" [(ngModel)]="npcName" ngDefaultControl/><br>
+</div>
+<div>
+  <span>Sells: </span>
+  <ul>
+    <li *ngFor="let shopItem of shopItems">
+      {{shopItem.count}}x {{shopItem.item.name}} costing {{shopItem.cost}} souls
+    </li>
+  </ul>
+  <div class="card">
+    <label for="count">Amount: </label><input id="count" name="count" [(ngModel)]="newShopItemCount" ngDefaultControl/>
+    <sml-edit-item-builder (itemCreated)="setNewShopItemItem($event)"/>
+    <label for="cost"> with price </label><input id="cost" name="cost" [(ngModel)]="newShopItemCost" ngDefaultControl/>
+    <button (click)="addShopItem()">Create drop</button>
+  </div>
+</div>
+<sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)"/>
+<button (click)="createNewNpc()">create</button>

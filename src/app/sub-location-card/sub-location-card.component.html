@@ -37,6 +37,7 @@
     [objectToString]="npcToString"
     (objectDeleted)="deleteObject($event)"
     [key]="KeyInSublocation.Npcs"
+    (npcCreated)="registerNewNPC($event)"
   />
 </div>
 <button (click)="fireLocationDeleted()">delete minor location</button>

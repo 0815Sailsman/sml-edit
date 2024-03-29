@@ -36,6 +36,7 @@ export class SubLocationCardComponent {
   @Output() itemCreatedInLocation = new EventEmitter<Pair<Location, Item>>();
   @Output() enemyCreatedInLocation = new EventEmitter<Pair<Location, Enemy>>();
   @Output() objectCreatedInLocation = new EventEmitter<Pair<Location, OtherObject>>();
+  @Output() npcCreatedInLocation = new EventEmitter<Pair<Location, NPC>>();
   showingDetails: boolean = false;
 
   fireLocationDeleted() {
@@ -83,6 +84,13 @@ export class SubLocationCardComponent {
     this.objectCreatedInLocation.emit({
       first: this.location,
       second: theObject
+    });
+  }
+
+  registerNewNPC(theNPC: NPC) {
+    this.npcCreatedInLocation.emit({
+      first: this.location,
+      second: theNPC
     });
   }
 

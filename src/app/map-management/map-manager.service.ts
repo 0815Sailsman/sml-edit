@@ -143,6 +143,15 @@ export class MapManagerService {
     this.map.locations[majorIndex].subLocations[minorIndex].objects.push(object);
   }
 
+  createNPCInLocation(major: MajorLocation | undefined, location: Location | undefined, npc: NPC | undefined) {
+    if (major === undefined || location === undefined || npc === undefined) {
+      return;
+    }
+    const majorIndex = this.map.locations.indexOf(major);
+    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
+    this.map.locations[majorIndex].subLocations[minorIndex].npcs.push(npc);
+  }
+
   conditionToString(condition: BigCondition | undefined): string {
     if (condition === undefined) {
       return "";

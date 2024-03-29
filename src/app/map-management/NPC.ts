@@ -1,8 +1,10 @@
 import {BigCondition} from "./bigCondition";
+import {ShopItem} from "./ShopItem";
 
 export interface NPC {
   id: number
   name: string
+  shop: ShopItem[]
   if?: BigCondition
 }
 
