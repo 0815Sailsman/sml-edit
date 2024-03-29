@@ -4,14 +4,19 @@ on:
   workflow_dispatch
 
 jobs:
-  deploy:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Angular Deploy gh-pages
+    - uses: actions/checkout@v3
+    - name: All things angular
       uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.4.0
       with:
-        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+        github_access_token: ${{ secrets.GITHUB_TOKEN }} # see the Configuration section for how you can create secrets
+        base_href: https://0815sailsman.github.io/sml-edit/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
+        angular_dist_build_folder: /home/runner/work/sml-edit/sml-edit/dist/sml-edit
+        deploy_branch: gh-pages # The branch the action should deploy to.
+
+permissions:
+  contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.

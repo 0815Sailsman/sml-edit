@@ -7,7 +7,8 @@
     "build": "ng build",
     "build:prod": "ng build --configuration production --base-href https://0815sailsman.github.io/sml-edit/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng deploy --dry-run --repo=https://github.com/0815Sailsman/sml-edit.git --base-href=/sml-edit/ --name=\"DeployBot\" --email=sailsman@tutanota.com"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,7 @@
     "@angular/cli": "^17.2.1",
     "@angular/compiler-cli": "^17.2.0",
     "@types/jasmine": "~5.1.0",
+    "angular-cli-ghpages": "^2.0.0-beta.1",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
