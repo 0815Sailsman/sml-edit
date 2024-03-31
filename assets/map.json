@@ -27,7 +27,7 @@
           "items": [
             {
               "id": 0,
-              "name": "itemA",
+              "itemTypeID": 0,
               "count": 1
             }
           ],
@@ -55,6 +55,12 @@
           ]
         }
       ]
+    }
+  ],
+  "items": [
+    {
+      "id": 0,
+      "name": "itemA"
     }
   ]
 }
