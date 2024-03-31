@@ -20,19 +20,20 @@ Each **location** may have any amount of
 
 
 ## Fix TODOs
- -[ ] Revamp item system
- -[ ] Change area / location naming scheme
- -[ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
- -[ ] Quest-Line modeling for npcs with interactions
+- [x] Revamp item system
+- [ ] Revamp ID system (currently only missing updating the ID provider on load of map)
+- [ ] Change area / location naming scheme
+- [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
+- [ ] Quest-Line modeling for npcs with interactions
 
 ## Possible Spikes
- -[ ] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
- -[ ] Use forms
- -[ ] Create from existing object as template
- -[ ] Possibly split different IDs
- -[ ] Move toString methods to own service and out of mapManagerService
+- [ ] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
+- [ ] Use forms
+- [ ] Create from existing object as template
+- [x] Possibly split different IDs
+- [ ] Move toString methods to own service and out of mapManagerService
 
 ## Known Bugs
- -[ ] Loading maps doesn't update MapManagement ID Counter
- -[x] Can't create connections (probably also other Objects) without conditions
- -[ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
+- [ ] Loading maps doesn't update MapManagement ID Counter
+- [x] Can't create connections (probably also other Objects) without conditions
+- [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers

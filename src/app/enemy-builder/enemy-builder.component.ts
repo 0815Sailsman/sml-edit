@@ -11,6 +11,7 @@ import {Drop} from "../map-management/drop";
 import {Enemy} from "../map-management/enemy";
 import {ItemBuilderHeaderComponent} from "../item-builder/item-builder-header/item-builder-header.component";
 import {DropBuilderComponent} from "./drop-builder/drop-builder.component";
+import {IdManagerService} from "../map-management/id-manager.service";
 
 @Component({
   selector: 'sml-edit-enemy-builder',
@@ -29,7 +30,7 @@ import {DropBuilderComponent} from "./drop-builder/drop-builder.component";
 })
 export class EnemyBuilderComponent {
 
-  constructor(protected mapService: MapManagerService) {
+  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
 
   @Output() enemyCreated = new EventEmitter<Enemy>();
@@ -47,7 +48,7 @@ export class EnemyBuilderComponent {
   createNewEnemy() {
     if (this.enemyName !== undefined && this.souls !== undefined) {
       this.enemyCreated.emit({
-        id: ++this.mapService.idCounter,
+        id: this.idService.nextEnemyID(),
         name: this.enemyName,
         souls: this.souls,
         respawns: this.respawns,

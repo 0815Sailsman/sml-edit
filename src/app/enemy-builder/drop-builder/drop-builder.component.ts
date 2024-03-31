@@ -5,6 +5,7 @@ import {Item} from "../../map-management/item";
 import {Drop} from "../../map-management/drop";
 import {ItemType} from "../../map-management/itemType";
 import {MapManagerService} from "../../map-management/map-manager.service";
+import {IdManagerService} from "../../map-management/id-manager.service";
 
 @Component({
   selector: 'sml-edit-drop-builder',
@@ -20,7 +21,7 @@ export class DropBuilderComponent {
 
   @Output() createDrop = new EventEmitter<Drop>();
 
-  constructor(private mapService: MapManagerService) {
+  constructor(private mapService: MapManagerService, private idService: IdManagerService) {
   }
 
   dropChance: number = 100;
@@ -31,7 +32,7 @@ export class DropBuilderComponent {
     if (this.dropItemType !== undefined && this.dropItemCount !== undefined && this.dropChance !== undefined) {
       this.createDrop.emit({
         item: {
-          id: ++this.mapService.idCounter,
+          id: this.idService.nextItemID(),
           itemTypeID: this.dropItemType.id,
           count: this.dropItemCount
         },

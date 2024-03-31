@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OtherObject} from "../map-management/otherObject";
 import {BigCondition} from "../map-management/bigCondition";
 import {MapManagerService} from "../map-management/map-manager.service";
+import {IdManagerService} from "../map-management/id-manager.service";
 
 @Component({
   selector: 'sml-edit-object-builder',
@@ -20,7 +21,7 @@ export class ObjectBuilderComponent {
 
   @Output() objectCreated = new EventEmitter<OtherObject>();
 
-  constructor(private mapService: MapManagerService) {
+  constructor(private mapService: MapManagerService, private idService: IdManagerService) {
   }
 
   objectName: string | undefined;
@@ -33,7 +34,7 @@ export class ObjectBuilderComponent {
   createNewObject() {
     if (this.objectName != undefined) {
       this.objectCreated.emit({
-        id: ++this.mapService.idCounter,
+        id: this.idService.nextObjectID(),
         name: this.objectName,
         if: this.condition
       })

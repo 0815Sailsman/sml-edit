@@ -17,16 +17,16 @@ import {ItemType} from "./itemType";
 import {Drop} from "./drop";
 import {ShopItem} from "./ShopItem";
 import {EasilySelectable} from "../EasilySelectable";
+import {IdManagerService} from "./id-manager.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapManagerService {
 
-  constructor(private mapLoaderService: FromFileMapLoaderService) { }
+  constructor(private mapLoaderService: FromFileMapLoaderService, private idService: IdManagerService) { }
 
   map: Map = this.mapLoaderService.load();
-  idCounter: number = 1
 
   deleteMajorLocation(theLocation: MajorLocation) {
     this.map.locations = this.map.locations.filter(location => location !== theLocation)
@@ -36,14 +36,14 @@ export class MapManagerService {
     let newMajorLocation:MajorLocation = {
       name: theName,
       subLocations: [],
-      id: ++this.idCounter
+      id: this.idService.nextMajorLocationID()
     }
     this.map.locations.push(newMajorLocation)
   }
 
   addMinorLocationTo(majorLocation: MajorLocation, theName: string) {
     let newMinorLocation: Location = {
-      id: ++this.idCounter,
+      id: this.idService.nextMinorLocationID(),
       name: theName,
       connections: [],
       items: [],
@@ -239,7 +239,7 @@ export class MapManagerService {
   // returns the id of the newly created itemtype
   addItemTypeWithName(newItemTypeName: string | undefined): number | undefined {
     if (newItemTypeName !== undefined) {
-      const newID: number = ++this.idCounter;
+      const newID: number = this.idService.nextItemTypeID();
       this.map.items.push({
         name: newItemTypeName,
         id: newID

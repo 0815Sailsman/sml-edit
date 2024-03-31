@@ -10,6 +10,7 @@ import {NPC} from "../map-management/NPC";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {ItemBuilderHeaderComponent} from "../item-builder/item-builder-header/item-builder-header.component";
 import {ItemType} from "../map-management/itemType";
+import {IdManagerService} from "../map-management/id-manager.service";
 
 @Component({
   selector: 'sml-edit-npc-builder',
@@ -29,7 +30,7 @@ export class NpcBuilderComponent {
 
   @Output() npcCreated = new EventEmitter<NPC>();
 
-  constructor(protected mapService: MapManagerService) {
+  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
 
   npcName: string | undefined;
@@ -42,7 +43,7 @@ export class NpcBuilderComponent {
   createNewNpc() {
     if (this.npcName !== undefined) {
       this.npcCreated.emit({
-        id: ++this.mapService.idCounter,
+        id: this.idService.nextNPCID(),
         shop: this.shopItems,
         name: this.npcName,
         if: this.condition
@@ -54,7 +55,7 @@ export class NpcBuilderComponent {
     if (this.newShopItemItemType !== undefined && this.newShopItemCost !== undefined && this.newShopItemCount !== undefined) {
       this.shopItems.push({
         item: {
-          id: ++this.mapService.idCounter,
+          id: this.idService.nextItemID(),
           itemTypeID: this.newShopItemItemType.id,
           count: 1
         },

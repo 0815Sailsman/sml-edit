@@ -8,6 +8,7 @@ import {SelectFromAllComponent} from "../select-from-all/select-from-all.compone
 import {ItemType} from "../map-management/itemType";
 import {NgIf} from "@angular/common";
 import {ItemBuilderHeaderComponent} from "./item-builder-header/item-builder-header.component";
+import {IdManagerService} from "../map-management/id-manager.service";
 
 @Component({
   selector: 'sml-edit-item-builder',
@@ -24,7 +25,7 @@ import {ItemBuilderHeaderComponent} from "./item-builder-header/item-builder-hea
 })
 export class ItemBuilderComponent {
 
-  constructor(protected mapService: MapManagerService) {
+  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
 
   itemType: ItemType | undefined;
@@ -42,7 +43,7 @@ export class ItemBuilderComponent {
   createNewItem() {
     if (this.itemType != undefined && this.itemCount != undefined) {
       this.itemCreated.emit({
-        id: ++this.mapService.idCounter,
+        id: this.idService.nextItemID(),
         itemTypeID: this.itemType.id,
         count: this.itemCount,
         if: this.condition
