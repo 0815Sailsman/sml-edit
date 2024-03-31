@@ -9,6 +9,8 @@ import {Item} from "../map-management/item";
 import {CommonModule} from "@angular/common";
 import {Drop} from "../map-management/drop";
 import {Enemy} from "../map-management/enemy";
+import {ItemBuilderHeaderComponent} from "../item-builder/item-builder-header/item-builder-header.component";
+import {DropBuilderComponent} from "./drop-builder/drop-builder.component";
 
 @Component({
   selector: 'sml-edit-enemy-builder',
@@ -18,7 +20,9 @@ import {Enemy} from "../map-management/enemy";
     ConditionBuilderComponent,
     FormsModule,
     SelectFromAllComponent,
-    ItemBuilderComponent
+    ItemBuilderComponent,
+    ItemBuilderHeaderComponent,
+    DropBuilderComponent
   ],
   templateUrl: './enemy-builder.component.html',
   styleUrl: './enemy-builder.component.css'
@@ -34,8 +38,6 @@ export class EnemyBuilderComponent {
   souls: number | undefined;
   condition: BigCondition | undefined;
   drops: Drop[] = [];
-  dropChance: number = 1.0;
-  dropItem: Item | undefined;
   respawns: boolean = true;
 
   updateInternalCondition(updatedCondition: BigCondition) {
@@ -55,13 +57,7 @@ export class EnemyBuilderComponent {
     }
   }
 
-  addDrop() {
-    if (this.dropItem !== undefined) {
-      this.drops.push({item: this.dropItem, chance: this.dropChance})
-    }
-  }
-
-  setNewDropItem(item: Item) {
-    this.dropItem = item;
+  addDrop(newDrop: Drop) {
+    this.drops.push(newDrop)
   }
 }

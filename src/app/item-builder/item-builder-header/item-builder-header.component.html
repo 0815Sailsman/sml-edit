@@ -1,0 +1,10 @@
+<div>
+  <sml-edit-select-from-all [allOptions]="mapService.allItemTypes()" label="Select itemtype" [(selection)]="itemType" (change)="fireTypeChange()"/>
+  <span> or create a new one with name: </span>
+  <input id="newItemTypeName" name="newItemTypeName" [(ngModel)]="newItemTypeName" ngDefaultControl/>
+  <button (click)="createNewItemType()">Create</button>
+  <br>
+</div>
+<div>
+  <label for="count">Count: </label><input id="count" name="count" (change)="fireCountChange($event)" [(ngModel)]="itemCount" ngDefaultControl/><br>
+</div>

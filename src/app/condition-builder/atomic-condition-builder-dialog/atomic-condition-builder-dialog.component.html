@@ -18,19 +18,19 @@
 
   <div [ngSwitch]="currentSubject" style="display: inline">
     <div *ngSwitchCase="'Location'" style="display: inline">
-      <sml-edit-select-from-all [allOptions]="mapService.allMinorLocations()" (selectedChanged)="selectTarget($event)"/>
+      <sml-edit-select-from-all [allOptions]="mapService.allMinorLocations()" (selectionChange)="selectTarget($event)"/>
       <span> has been visited</span>
     </div>
     <div *ngSwitchCase="'Item'" style="display: inline">
-      <sml-edit-select-from-all [allOptions]="mapService.allItems()" (selectedChanged)="selectTarget($event)"/>
+      <sml-edit-select-from-all [allOptions]="mapService.allItems()" (selectionChange)="selectTarget($event)"/>
       <span> has been collected</span>
     </div>
     <div *ngSwitchCase="'Enemy'" style="display: inline">
-      <sml-edit-select-from-all [allOptions]="mapService.allEnemies()" (selectedChanged)="selectTarget($event)"/>
+      <sml-edit-select-from-all [allOptions]="mapService.allEnemies()" (selectionChange)="selectTarget($event)"/>
       <span> has been killed</span>
     </div>
     <div *ngSwitchDefault style="display: inline">
-      <sml-edit-select-from-all [allOptions]="mapService.allOtherObjects()" (selectedChanged)="selectTarget($event)"/>
+      <sml-edit-select-from-all [allOptions]="mapService.allOtherObjects()" (selectionChange)="selectTarget($event)"/>
       <span> has been interacted with</span>
     </div>
   </div>

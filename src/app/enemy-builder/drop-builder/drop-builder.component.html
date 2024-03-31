@@ -1,0 +1,3 @@
+<sml-edit-item-builder-header (itemTypeChange)="updateItemType($event)" (itemCountChange)="updateItemCount($event)"/>
+<label for="dropChance"> with chance </label><input id="dropChance" name="dropChance" [(ngModel)]="dropChance" ngDefaultControl/>
+<button (click)="fireCreateDrop()">Create drop</button>

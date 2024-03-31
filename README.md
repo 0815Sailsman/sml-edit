@@ -30,6 +30,7 @@ Each **location** may have any amount of
  -[ ] Use forms
  -[ ] Create from existing object as template
  -[ ] Possibly split different IDs
+ -[ ] Move toString methods to own service and out of mapManagerService
 
 ## Known Bugs
  -[ ] Loading maps doesn't update MapManagement ID Counter

@@ -4,7 +4,7 @@ import {CommonModule} from "@angular/common";
 
 import {Location} from "../map-management/location";
 import {Enemy, enemyToString} from "../map-management/enemy";
-import {Item, itemToString} from "../map-management/item";
+import {Item} from "../map-management/item";
 import {Connection, connectionToString} from "../map-management/connection";
 import {OtherObject, otherObjectToString} from "../map-management/otherObject";
 import {NPC, npcToString} from "../map-management/NPC";
@@ -12,6 +12,7 @@ import {Pair} from "../Pair";
 import {Triplet} from "../Triplet";
 import {KeyInSublocation} from "../KeyInSublocation";
 import {ObjectInSublocation} from "../ObjectInSublocation";
+import {MapManagerService} from "../map-management/map-manager.service";
 
 @Component({
   selector: 'sml-edit-sub-location-card',
@@ -37,13 +38,17 @@ export class SubLocationCardComponent {
   @Output() enemyCreatedInLocation = new EventEmitter<Pair<Location, Enemy>>();
   @Output() objectCreatedInLocation = new EventEmitter<Pair<Location, OtherObject>>();
   @Output() npcCreatedInLocation = new EventEmitter<Pair<Location, NPC>>();
+
+  constructor(private mapService: MapManagerService) {
+  }
+
   showingDetails: boolean = false;
 
   fireLocationDeleted() {
     this.locationDeleted.emit(this.location)
   }
 
-  protected readonly itemToString: (item: Item | undefined) => string = itemToString;
+  protected readonly itemToString: (item: Item | undefined) => string = (item) => {return this.mapService.itemToString(item)};
   protected readonly connectionToString: (connection: Connection | undefined) => string = connectionToString;
   protected readonly enemyToString: (enemy: Enemy | undefined) => string = enemyToString;
   protected readonly otherObjectToString: (object: OtherObject | undefined) => string = otherObjectToString;

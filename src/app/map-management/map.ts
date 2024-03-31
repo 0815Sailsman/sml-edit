@@ -11,14 +11,17 @@ import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
 import {ConditionVerb} from "../ConditionVerb";
 import {Drop} from "./drop";
 import {ShopItem} from "./ShopItem";
+import {ItemType} from "./itemType";
 
 export class Map {
   name: string
   locations: MajorLocation[]
+  items: ItemType[]
 
-  constructor(name: string, locations: UnparsedMajorLocation[]) {
+  constructor(name: string, locations: UnparsedMajorLocation[], itemTypes: ItemType[]) {
     this.name = name;
     this.locations = this.parseMajorLocations(locations);
+    this.items = itemTypes;
   }
 
   private parseMajorLocations(locations: UnparsedMajorLocation[]): MajorLocation[] {
@@ -51,7 +54,7 @@ export class Map {
   private parseItems(items: UnparsedItem[]): Item[] {
     return items.map(item => {return {
       id: item.id,
-      name: item.name,
+      itemTypeID: item.itemTypeID,
       count: item.count,
       if: item.if == null ? undefined : this.parseBigCondition(item.if)
     }})
@@ -158,7 +161,7 @@ interface UnparsedConnection {
 
 interface UnparsedItem {
   id: number
-  name: string
+  itemTypeID: number
   count: number
   if?: UnparsedBigCondition
 }

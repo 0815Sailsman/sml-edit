@@ -8,6 +8,8 @@ import {Item} from "../map-management/item";
 import {BigCondition} from "../map-management/bigCondition";
 import {NPC} from "../map-management/NPC";
 import {MapManagerService} from "../map-management/map-manager.service";
+import {ItemBuilderHeaderComponent} from "../item-builder/item-builder-header/item-builder-header.component";
+import {ItemType} from "../map-management/itemType";
 
 @Component({
   selector: 'sml-edit-npc-builder',
@@ -17,7 +19,8 @@ import {MapManagerService} from "../map-management/map-manager.service";
     ReactiveFormsModule,
     FormsModule,
     ItemBuilderComponent,
-    NgForOf
+    NgForOf,
+    ItemBuilderHeaderComponent
   ],
   templateUrl: './npc-builder.component.html',
   styleUrl: './npc-builder.component.css'
@@ -26,12 +29,12 @@ export class NpcBuilderComponent {
 
   @Output() npcCreated = new EventEmitter<NPC>();
 
-  constructor(private mapService: MapManagerService) {
+  constructor(protected mapService: MapManagerService) {
   }
 
   npcName: string | undefined;
   shopItems: ShopItem[] = [];
-  newShopItemItem: Item | undefined;
+  newShopItemItemType: ItemType | undefined;
   newShopItemCount: number | undefined;
   newShopItemCost: number | undefined;
   condition: BigCondition | undefined;
@@ -48,20 +51,28 @@ export class NpcBuilderComponent {
   }
 
   addShopItem() {
-    if (this.newShopItemItem !== undefined && this.newShopItemCost !== undefined && this.newShopItemCount !== undefined) {
+    if (this.newShopItemItemType !== undefined && this.newShopItemCost !== undefined && this.newShopItemCount !== undefined) {
       this.shopItems.push({
-        item: this.newShopItemItem,
+        item: {
+          id: ++this.mapService.idCounter,
+          itemTypeID: this.newShopItemItemType.id,
+          count: 1
+        },
         count: this.newShopItemCount,
         cost: this.newShopItemCost
       })
     }
   }
 
-  setNewShopItemItem(item: Item) {
-    this.newShopItemItem = item;
-  }
-
   updateInternalCondition(updatedCondition: BigCondition) {
     this.condition = updatedCondition;
+  }
+
+  updateNewShopItemCount(newCount: number) {
+    this.newShopItemCount = newCount;
+  }
+
+  updateNewShopItemItemType(newType: ItemType) {
+    this.newShopItemItemType = newType;
   }
 }

@@ -59,7 +59,7 @@ export class GraphicalConditionBuilderComponent {
     let result = condition.subjectType + " "
     switch (condition.subjectType) {
       case ConditionSubjects.Location: return (result + this.mapService.minorLocationById(condition.subjectId).name + " visited")
-      case ConditionSubjects.Item: return (result + this.mapService.itemById(condition.subjectId).name + " collected")
+      case ConditionSubjects.Item: return (result + this.mapService.itemToString(this.mapService.itemByID(condition.subjectId)) + " collected")
       case ConditionSubjects.Enemy: return (result + this.mapService.enemyById(condition.subjectId).name + " killed")
       case ConditionSubjects.OtherObject: return (result + this.mapService.otherObjectById(condition.subjectId).name + " interacted with")
     }

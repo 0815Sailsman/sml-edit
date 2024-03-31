@@ -5,14 +5,13 @@
   <span>Sells: </span>
   <ul>
     <li *ngFor="let shopItem of shopItems">
-      {{shopItem.count}}x {{shopItem.item.name}} costing {{shopItem.cost}} souls
+      {{shopItem.count}}x {{mapService.itemTypeToString(mapService.itemTypeById(shopItem.item.itemTypeID))}} costing {{shopItem.cost}} souls
     </li>
   </ul>
   <div class="card">
-    <label for="count">Amount: </label><input id="count" name="count" [(ngModel)]="newShopItemCount" ngDefaultControl/>
-    <sml-edit-item-builder (itemCreated)="setNewShopItemItem($event)"/>
+    <sml-edit-item-builder-header (itemCountChange)="updateNewShopItemCount($event)" (itemTypeChange)="updateNewShopItemItemType($event)"/>
     <label for="cost"> with price </label><input id="cost" name="cost" [(ngModel)]="newShopItemCost" ngDefaultControl/>
-    <button (click)="addShopItem()">Create drop</button>
+    <button (click)="addShopItem()">Create shopitem</button>
   </div>
 </div>
 <sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)"/>

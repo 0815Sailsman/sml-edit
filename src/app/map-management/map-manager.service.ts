@@ -13,6 +13,10 @@ import {KeyInSublocation} from "../KeyInSublocation";
 import {BigCondition} from "./bigCondition";
 import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
 import {verbFor} from "../ConditionVerb";
+import {ItemType} from "./itemType";
+import {Drop} from "./drop";
+import {ShopItem} from "./ShopItem";
+import {EasilySelectable} from "../EasilySelectable";
 
 @Injectable({
   providedIn: 'root'
@@ -77,22 +81,34 @@ export class MapManagerService {
   }
 
   minorLocationById(id: number): Location {
-    return this.allMinorLocations().filter(value => value.id == id)[0]
+    return this.allMinorLocations().filter(value => value.id == id)[0];
   }
 
   allItems(): Item[] {
-    return this.allMinorLocations().flatMap(minor => minor.items)
+    let result: Item[] = [];
+    result.push(...this.allMinorLocations().flatMap(minor => minor.items));
+    result.push(...this.allEnemies().flatMap(enemy => enemy.drops).flatMap(drop => drop.item));
+    return result;
   }
-  itemById(id: number): Item {
-    return this.allItems().filter(value => value.id == id)[0]
+
+  allItemTypes(): ItemType[] {
+    return this.map.items;
+  }
+
+  itemByID(id: number): Item {
+    return this.allItems().filter(item => item.id == id)[0];
+  }
+
+  itemTypeById(id: number): ItemType {
+    return this.map.items.filter(value => value.id == id)[0];
   }
 
   allEnemies(): Enemy[] {
-    return this.allMinorLocations().flatMap(minor => minor.enemies)
+    return this.allMinorLocations().flatMap(minor => minor.enemies);
   }
 
   enemyById(id: number): Enemy {
-    return this.allEnemies().filter(value => value.id == id)[0]
+    return this.allEnemies().filter(value => value.id == id)[0];
   }
 
   allNPCs(): NPC[] {
@@ -166,7 +182,7 @@ export class MapManagerService {
           result += localCondition?.subjectType + " "
           switch (localCondition?.subjectType) {
             case ConditionSubjects.Location: result += this.minorLocationById(localCondition.subjectId).name;break;
-            case ConditionSubjects.Item: result += this.itemById(localCondition.subjectId).name;break;
+            case ConditionSubjects.Item: result += this.itemTypeById(this.itemByID(localCondition.subjectId).itemTypeID).name;break;
             case ConditionSubjects.Enemy: result += this.enemyById(localCondition.subjectId).name;break;
             case ConditionSubjects.OtherObject: result += this.otherObjectById(localCondition.subjectId).name;break;
           }
@@ -176,5 +192,60 @@ export class MapManagerService {
         }
       })
       .join(' ');
+  }
+
+  itemToString(item: Item | undefined): string {
+    if (item == undefined) {
+      return "undefined"
+    }
+    const itemTypeID: number = this.itemByID(item.id).itemTypeID;
+    return this.itemTypeById(itemTypeID).name;
+  }
+
+  itemTypeToString(itemType: ItemType | undefined): string {
+    if (itemType == undefined) {
+      return "undefined"
+    }
+    return itemType.name;
+  }
+
+  dropToString(drop: Drop | undefined): string {
+    if (drop == undefined) {
+      return "undefined"
+    }
+    return drop.item.count + "x " + this.itemToString(drop.item) + " with " + drop.chance + "% dropchance";
+  }
+
+  shopItemToString(shopItem: ShopItem | undefined): string {
+    if (shopItem == undefined) {
+      return "undefined"
+    }
+    return this.itemToString(shopItem.item);
+  }
+
+  easilySelectableToString(option: EasilySelectable) {
+    if (this.easilySelectableIsItem(option)) return this.itemToString(option)
+    return option.name;
+  }
+
+  easilySelectableIsItem(value: any): value is Item {
+    return !('name' in value);
+  }
+
+  dropItemToString(item: Item) {
+    return this.itemToString(item);
+  }
+
+  // returns the id of the newly created itemtype
+  addItemTypeWithName(newItemTypeName: string | undefined): number | undefined {
+    if (newItemTypeName !== undefined) {
+      const newID: number = ++this.idCounter;
+      this.map.items.push({
+        name: newItemTypeName,
+        id: newID
+      })
+      return newID;
+    }
+    return undefined
   }
 }
