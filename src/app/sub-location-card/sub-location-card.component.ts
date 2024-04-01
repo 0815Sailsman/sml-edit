@@ -1,4 +1,4 @@
-import {ApplicationRef, Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {GenericObjectManagerComponent} from "../generic-object-manager/generic-object-manager.component";
 import {CommonModule} from "@angular/common";
 
@@ -13,39 +13,53 @@ import {Triplet} from "../Triplet";
 import {KeyInSublocation} from "../KeyInSublocation";
 import {ObjectInSublocation} from "../ObjectInSublocation";
 import {MapManagerService} from "../map-management/map-manager.service";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'sml-edit-sub-location-card',
   standalone: true,
   imports: [
     CommonModule,
-    GenericObjectManagerComponent
+    GenericObjectManagerComponent,
+    FormsModule
   ],
   templateUrl: './sub-location-card.component.html',
   styleUrl: './sub-location-card.component.css'
 })
 export class SubLocationCardComponent {
 
-  @Input() location: Location | undefined;
+  showingDetails: boolean = false;
+  currentlyEditing: boolean = false;
+  editedName: string = "";
+
+  constructor(private mapService: MapManagerService) {
+  }
+
+  @Input() location!: Location;
   @Output() locationDeleted = new EventEmitter<Location>();
   @Output() objectDeletedFromLocation = new EventEmitter<Triplet<
-      Location,
-      ObjectInSublocation,
-      KeyInSublocation
-    >>();
+    Location,
+    ObjectInSublocation,
+    KeyInSublocation
+  >>();
   @Output() connectionCreatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
   @Output() itemCreatedInLocation = new EventEmitter<Pair<Location, Item>>();
   @Output() enemyCreatedInLocation = new EventEmitter<Pair<Location, Enemy>>();
   @Output() objectCreatedInLocation = new EventEmitter<Pair<Location, OtherObject>>();
   @Output() npcCreatedInLocation = new EventEmitter<Pair<Location, NPC>>();
 
-  constructor(private mapService: MapManagerService) {
-  }
-
-  showingDetails: boolean = false;
-
   fireLocationDeleted() {
     this.locationDeleted.emit(this.location)
+  }
+
+  toggleEditing() {
+    if (this.currentlyEditing) {
+      this.mapService.updateMinorLocationWithIDToName(this.location.id, this.editedName);
+      this.location.name = this.editedName;
+    } else {
+      this.editedName = this.location.name;
+    }
+    this.currentlyEditing = !this.currentlyEditing;
   }
 
   protected readonly itemToString: (item: Item | undefined) => string = (item) => {return this.mapService.itemToString(item)};

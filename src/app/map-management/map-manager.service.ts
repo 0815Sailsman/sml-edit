@@ -249,7 +249,13 @@ export class MapManagerService {
 
   updateMajorLocationWithIDToName(id: number | undefined, editedName: string) {
     if (id !== undefined) {
-      this.map.locations.filter(major => major.id == id)[0].name = editedName
+      this.map.locations.filter(major => major.id == id)[0].name = editedName;
+    }
+  }
+
+  updateMinorLocationWithIDToName(id: number, editedName: string) {
+    if (id !== undefined) {
+      this.allMinorLocations().filter(minor => minor.id == id)[0].name = editedName;
     }
   }
 }

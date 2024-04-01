@@ -1,5 +1,6 @@
 <span *ngIf="!currentlyEditing">Name: {{majorLocation.name}}</span>
-<label for="editName" *ngIf="currentlyEditing">Edit name: </label><input *ngIf="currentlyEditing" type="text" id="editName" name="editName" [(ngModel)]="editedName"/>
+<label for="editName" *ngIf="currentlyEditing">Edit name: </label>
+<input *ngIf="currentlyEditing" type="text" id="editName" name="editName" [(ngModel)]="editedName"/>
 <span>| ID: {{majorLocation.id}}</span>
 <button (click)="toggleEditing()">
   <span *ngIf="!currentlyEditing">

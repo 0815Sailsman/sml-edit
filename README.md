@@ -26,7 +26,7 @@ Each **location** may have any amount of
 - [x] load existing atomic conditions into corresponding builder on map load
 - [ ] Edit functionality
   - [x] edit major location name
-  - [ ] edit minor location name
+  - [x] edit minor location name
   - [ ] edit connection
   - [ ] edit items
   - [ ] edit enemies
@@ -46,6 +46,7 @@ Each **location** may have any amount of
 - [x] Possibly split different IDs
 - [ ] Move toString methods to own service and out of mapManagerService
 - [ ] Meta tags and info-dump in root of sml file
+- [ ] do we really need this 'bubbling', now that the IDs are clear? -> updating minor stuff without reference to major
 
 ## Known Bugs
 - [x] Loading maps doesn't update MapManagement ID Counter
