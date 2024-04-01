@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ItemBuilderComponent} from "../item-builder/item-builder.component";
@@ -11,6 +11,7 @@ import {MapManagerService} from "../map-management/map-manager.service";
 import {ItemBuilderHeaderComponent} from "../item-builder/item-builder-header/item-builder-header.component";
 import {ItemType} from "../map-management/itemType";
 import {IdManagerService} from "../map-management/id-manager.service";
+import {AtomicCondition} from "../map-management/atomicCondition";
 
 @Component({
   selector: 'sml-edit-npc-builder',
@@ -28,17 +29,18 @@ import {IdManagerService} from "../map-management/id-manager.service";
 })
 export class NpcBuilderComponent {
 
-  @Output() npcCreated = new EventEmitter<NPC>();
-
-  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
-  }
-
   npcName: string | undefined;
   shopItems: ShopItem[] = [];
   newShopItemItemType: ItemType | undefined;
   newShopItemCount: number | undefined;
   newShopItemCost: number | undefined;
   condition: BigCondition | undefined;
+
+  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
+  }
+
+  @Input() startingConditions: AtomicCondition[] = [];
+  @Output() npcCreated = new EventEmitter<NPC>();
 
   createNewNpc() {
     if (this.npcName !== undefined) {

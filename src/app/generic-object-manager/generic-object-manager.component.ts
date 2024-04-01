@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import { CommonModule} from "@angular/common";
-import { SingleGenericObjectComponent } from "../single-generic-object/single-generic-object.component";
+import {CommonModule} from "@angular/common";
+import {SingleGenericObjectComponent} from "../single-generic-object/single-generic-object.component";
 import {Pair} from "../Pair";
 import {KeyInSublocation, nameOf} from "../KeyInSublocation";
 import {ConnectionBuilderComponent} from "../connection-builder/connection-builder.component";
@@ -14,6 +14,7 @@ import {ObjectBuilderComponent} from "../object-builder/object-builder.component
 import {OtherObject} from "../map-management/otherObject";
 import {NpcBuilderComponent} from "../npc-builder/npc-builder.component";
 import {NPC} from "../map-management/NPC";
+import {AtomicCondition} from "../map-management/atomicCondition";
 
 @Component({
   selector: 'sml-edit-generic-object-manager',
@@ -63,5 +64,24 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
 
   toggleDetails() {
     this.showingDetails = !this.showingDetails
+  }
+
+  extractConditions(genericObjectArray: T[]): AtomicCondition[] {
+    const conditionsWithDuplicates =  genericObjectArray
+      .flatMap(genObj => genObj.if?.subConditions ?? []);
+    return this.filterDuplicateConditions(conditionsWithDuplicates);
+  }
+
+  filterDuplicateConditions(arr: AtomicCondition[]): AtomicCondition[] {
+    const seen = new Set<string>(); // Set to store string representations of objects
+    return arr.filter(item => {
+      const stringified = JSON.stringify(item); // Convert object to string
+      if (seen.has(stringified)) {
+        return false;
+      } else {
+        seen.add(stringified);
+        return true;
+      }
+    });
   }
 }

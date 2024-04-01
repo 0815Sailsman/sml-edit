@@ -9,6 +9,7 @@ import {ItemType} from "../map-management/itemType";
 import {NgIf} from "@angular/common";
 import {ItemBuilderHeaderComponent} from "./item-builder-header/item-builder-header.component";
 import {IdManagerService} from "../map-management/id-manager.service";
+import {AtomicCondition} from "../map-management/atomicCondition";
 
 @Component({
   selector: 'sml-edit-item-builder',
@@ -34,6 +35,7 @@ export class ItemBuilderComponent {
   newItemTypeName: string | undefined;
 
   @Input() allowConditions: boolean |undefined = true;
+  @Input() startingConditions: AtomicCondition[] = [];
   @Output() itemCreated = new EventEmitter<Item>();
 
   updateInternalCondition(updatedCondition: BigCondition) {

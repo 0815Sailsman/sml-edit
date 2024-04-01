@@ -15,22 +15,27 @@
     <sml-edit-connection-builder
       *ngSwitchCase="'connections'"
       (connectionCreated)="createConnection($event)"
+      [startingConditions]="extractConditions(genericObjectArray)"
     />
     <sml-edit-item-builder
       *ngSwitchCase="'items'"
       (itemCreated)="createItem($event)"
+      [startingConditions]="extractConditions(genericObjectArray)"
     />
     <sml-edit-enemy-builder
       *ngSwitchCase="'enemies'"
       (enemyCreated)="createEnemy($event)"
+      [startingConditions]="extractConditions(genericObjectArray)"
     />
     <sml-edit-object-builder
       *ngSwitchCase="'objects'"
       (objectCreated)="createOtherObject($event)"
+      [startingConditions]="extractConditions(genericObjectArray)"
     />
     <sml-edit-npc-builder
       *ngSwitchDefault
       (npcCreated)="createNPC($event)"
+      [startingConditions]="extractConditions(genericObjectArray)"
     />
   </div>
 

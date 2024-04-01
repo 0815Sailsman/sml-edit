@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OtherObject} from "../map-management/otherObject";
 import {BigCondition} from "../map-management/bigCondition";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {IdManagerService} from "../map-management/id-manager.service";
+import {AtomicCondition} from "../map-management/atomicCondition";
 
 @Component({
   selector: 'sml-edit-object-builder',
@@ -19,13 +20,14 @@ import {IdManagerService} from "../map-management/id-manager.service";
 })
 export class ObjectBuilderComponent {
 
-  @Output() objectCreated = new EventEmitter<OtherObject>();
+  objectName: string | undefined;
+  condition: BigCondition | undefined;
 
   constructor(private mapService: MapManagerService, private idService: IdManagerService) {
   }
 
-  objectName: string | undefined;
-  condition: BigCondition | undefined;
+  @Input() startingConditions: AtomicCondition[] = [];
+  @Output() objectCreated = new EventEmitter<OtherObject>();
 
   updateInternalCondition(updatedCondition: BigCondition) {
     this.condition = updatedCondition;

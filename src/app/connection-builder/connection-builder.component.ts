@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Connection} from "../map-management/connection";
 import {FormsModule} from "@angular/forms";
@@ -8,6 +8,7 @@ import {ConditionBuilderComponent} from "../condition-builder/condition-builder.
 import {SelectFromAllComponent} from "../select-from-all/select-from-all.component";
 import {EasilySelectable} from "../EasilySelectable";
 import {MapManagerService} from "../map-management/map-manager.service";
+import {AtomicCondition} from "../map-management/atomicCondition";
 
 @Component({
   selector: 'sml-edit-connection-builder',
@@ -18,10 +19,12 @@ import {MapManagerService} from "../map-management/map-manager.service";
 })
 export class ConnectionBuilderComponent {
 
+  @Input() startingConditions: AtomicCondition[] = [];
+  @Output() connectionCreated = new EventEmitter<Connection>();
+
   constructor(protected mapService: MapManagerService) {
   }
 
-  @Output() connectionCreated = new EventEmitter<Connection>();
   targetLocation: Location | undefined;
   condition: BigCondition | undefined;
 

@@ -1,4 +1,5 @@
 # SMLEdit
+Part 1/3 of the sl-route toolchain. Current deployment [here](https://0815sailsman.github.io/sml-edit/)
 
 ## HOW TO DEPLOY
 just run
@@ -18,14 +19,25 @@ Each **location** may have any amount of
  - **objects** with arbitrary interaction possibilities. This will probably be the hardest thing to model later on. Maybe start out with just being able to interact once with every object to later be able to use them in conditions.
  - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
 
-
-## Fix TODOs
+## Roadmap for version alpha1.0.0
 - [x] Revamp item system
 - [x] Revamp ID system
+- [x] Rework map loading
+- [x] load existing atomic conditions into corresponding builder on map load
+- [ ] Edit functionality
+  - [ ] edit major location name
+  - [ ] edit minor location name
+  - [ ] edit connection
+  - [ ] edit items
+  - [ ] edit enemies
+  - [ ] edit other objects
+  - [ ] edit NPCs
 - [ ] Change area / location naming scheme
+- [ ] select from all doesn't show enough information
+
+## Fix TODOs backlog
 - [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
 - [ ] Quest-Line modeling for npcs with interactions
-- [x] Rework map loading
 
 ## Possible Spikes
 - [ ] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
@@ -39,3 +51,4 @@ Each **location** may have any amount of
 - [x] Loading maps doesn't update MapManagement ID Counter
 - [x] Can't create connections (probably also other Objects) without conditions
 - [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
+- [ ] Loading conditions from save doesn't  update abbreviation counter in condition builder

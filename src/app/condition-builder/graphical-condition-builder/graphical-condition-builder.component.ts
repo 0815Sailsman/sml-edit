@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ConditionSubjects} from "../ConditionSubjects";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
@@ -22,10 +22,10 @@ import {BigCondition} from "../../map-management/bigCondition";
   templateUrl: './graphical-condition-builder.component.html',
   styleUrl: './graphical-condition-builder.component.css'
 })
-export class GraphicalConditionBuilderComponent {
+export class GraphicalConditionBuilderComponent implements OnInit {
 
-  constructor(private mapService: MapManagerService) {
-  }
+  // Up here because we ise it in the attributes block
+  @Input() startingConditions: AtomicCondition[] = [];
 
   protected readonly Object = Object;
   inAtomicConditionCreation: boolean = false;
@@ -36,8 +36,16 @@ export class GraphicalConditionBuilderComponent {
   selectedBrackets: OptionalBracket[] = []
   condition: BigCondition = {
     grammar: "",
-    subConditions: []
+    subConditions: this.startingConditions
   }
+
+  constructor(private mapService: MapManagerService) {
+  }
+
+  ngOnInit() {
+    this.condition.subConditions = this.startingConditions;
+  }
+
   @Output() conditionChanged = new EventEmitter<BigCondition>();
 
   increaseConditions() {

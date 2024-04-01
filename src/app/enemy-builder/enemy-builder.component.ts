@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule} from "@angular/forms";
 import {MapManagerService} from "../map-management/map-manager.service";
@@ -12,6 +12,7 @@ import {Enemy} from "../map-management/enemy";
 import {ItemBuilderHeaderComponent} from "../item-builder/item-builder-header/item-builder-header.component";
 import {DropBuilderComponent} from "./drop-builder/drop-builder.component";
 import {IdManagerService} from "../map-management/id-manager.service";
+import {AtomicCondition} from "../map-management/atomicCondition";
 
 @Component({
   selector: 'sml-edit-enemy-builder',
@@ -33,6 +34,7 @@ export class EnemyBuilderComponent {
   constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
 
+  @Input() startingConditions: AtomicCondition[] = [];
   @Output() enemyCreated = new EventEmitter<Enemy>();
 
   enemyName: string | undefined;

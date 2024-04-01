@@ -16,5 +16,5 @@
   </ul>
   <sml-edit-drop-builder (createDrop)="addDrop($event)"/>
 </div>
-<sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)"/>
+<sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
 <button (click)="createNewEnemy()">create</button>
