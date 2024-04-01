@@ -6,17 +6,17 @@
       "name": "Northern Undead Asylum",
       "subLocations": [
         {
-          "id": 1,
+          "id": 0,
           "name": "Starting Cell",
           "connections": [
             {
-              "to": 1,
+              "to": 0,
               "if": {
                 "grammar": "A",
                 "subConditions": [
                   {
                     "subjectType": "Location",
-                    "subjectId": 1,
+                    "subjectId": 0,
                     "verb": "visited",
                     "abbreviation": "A"
                   }
