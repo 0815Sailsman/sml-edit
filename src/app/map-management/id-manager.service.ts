@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Map } from './map';
+import {ExtractorService} from "./extractor-service/extractor.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class IdManagerService {
 
-  constructor() { }
+  constructor(private extractor: ExtractorService) { }
 
   majorLocationID: number = 0;
   minorLocationID: number = 0;
@@ -14,6 +16,20 @@ export class IdManagerService {
   objectID: number = 0;
   npcID: number = 0;
   itemTypeID: number = 0;
+
+  initIDsFromMap(map: Map) {
+    this.majorLocationID = this.extractMaxID(map.locations);
+    this.minorLocationID = this.extractMaxID(this.extractor.allMinorLocations(map));
+    this.itemID = this.extractMaxID(this.extractor.allItems(map));
+    this.enemyID = this.extractMaxID(this.extractor.allEnemies(map));
+    this.objectID = this.extractMaxID(this.extractor.allOtherObjects(map));
+    this.npcID = this.extractMaxID(this.extractor.allNPCs(map));
+    this.itemTypeID = this.extractMaxID(map.items);
+  }
+
+  extractMaxID(arrayWithID: HasID[]) {
+    return arrayWithID.map(obj => obj.id).sort((a, b) => {if (a>=b)return a;return b;})[0];
+  }
 
   nextMajorLocationID(): number {
     return ++this.majorLocationID;
@@ -42,4 +58,8 @@ export class IdManagerService {
   nextItemTypeID(): number {
     return ++this.itemTypeID;
   }
+}
+
+interface HasID {
+  id: number
 }

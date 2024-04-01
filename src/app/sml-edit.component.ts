@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { AbstractMapLoaderService } from "./map-management/loader/abstract-map-loader.service";
 import { MajorLocationCardComponent } from "./major-location-card/major-location-card.component";
 import {MajorLocation} from "./map-management/majorLocation";
 import {FormsModule} from "@angular/forms";
 import {MapManagerService} from "./map-management/map-manager.service";
-import {FileChangeEvent} from "@angular/compiler-cli/src/perform_watch";
 import {FromFileMapLoaderService} from "./map-management/loader/from-file-map-loader.service";
+import {ExtractorService} from "./map-management/extractor-service/extractor.service";
 
 @Component({
   selector: 'sml-edit-root',
@@ -18,7 +17,7 @@ import {FromFileMapLoaderService} from "./map-management/loader/from-file-map-lo
 })
 export class SmlEditComponent {
 
-  constructor(protected mapService: MapManagerService, private loader: FromFileMapLoaderService) {}
+  constructor(protected mapService: MapManagerService, private loader: FromFileMapLoaderService, private extractor: ExtractorService) {}
 
   newLocationName: string | undefined;
   filename: string | undefined;
@@ -28,7 +27,7 @@ export class SmlEditComponent {
   }
 
   addMajorLocation(theName: string | undefined) {
-    this.mapService.allMinorLocations()
+    this.extractor.allMinorLocations(this.mapService.map);
     if (theName != undefined && theName != "") {
       this.mapService.addMajorLocationWithName(theName)
       this.newLocationName = ""

@@ -1,20 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Map } from '../map';
-import { AbstractMapLoaderService } from "./abstract-map-loader.service";
 import map from "../../../assets/map.json";
+import {IdManagerService} from "../id-manager.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class FromFileMapLoaderService extends AbstractMapLoaderService {
-  load(): Map {
-    return new Map(map.name, map.locations, map.items);
+export class FromFileMapLoaderService {
+
+  constructor(private idService: IdManagerService) {
+  }
+
+  // todo rework these any types
+  load(name: string, locations: any, items: any): Map {
+    const map: Map = new Map(name, locations, items);
+    this.idService.initIDsFromMap(map);
+    return map;
+  }
+
+  loadDefault(): Map {
+    return this.load(map.name, map.locations, map.items);
   }
 
   loadFromString(fileContent: string): Map | undefined {
     const parsedObject: any = JSON.parse(fileContent)
     try {
-      return new Map(parsedObject.name, parsedObject.locations, parsedObject.items)
+      return this.load(parsedObject.name, parsedObject.locations, parsedObject.items);
     } catch (e) {
       console.log("Error parsing map file")
     }

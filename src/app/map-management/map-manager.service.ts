@@ -18,15 +18,16 @@ import {Drop} from "./drop";
 import {ShopItem} from "./ShopItem";
 import {EasilySelectable} from "../EasilySelectable";
 import {IdManagerService} from "./id-manager.service";
+import {ExtractorService} from "./extractor-service/extractor.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapManagerService {
 
-  constructor(private mapLoaderService: FromFileMapLoaderService, private idService: IdManagerService) { }
+  constructor(private mapLoaderService: FromFileMapLoaderService, private idService: IdManagerService, private extractor: ExtractorService) { }
 
-  map: Map = this.mapLoaderService.load();
+  map: Map = this.mapLoaderService.loadDefault();
 
   deleteMajorLocation(theLocation: MajorLocation) {
     this.map.locations = this.map.locations.filter(location => location !== theLocation)
@@ -77,50 +78,47 @@ export class MapManagerService {
   }
 
   allMinorLocations(): Location[] {
-    return this.map.locations.flatMap(major => major.subLocations);
-  }
-
-  minorLocationById(id: number): Location {
-    return this.allMinorLocations().filter(value => value.id == id)[0];
+    return this.extractor.allMinorLocations(this.map);
   }
 
   allItems(): Item[] {
-    let result: Item[] = [];
-    result.push(...this.allMinorLocations().flatMap(minor => minor.items));
-    result.push(...this.allEnemies().flatMap(enemy => enemy.drops).flatMap(drop => drop.item));
-    return result;
+    return this.extractor.allItems(this.map);
+  }
+
+  allEnemies(): Enemy[] {
+    return this.extractor.allEnemies(this.map);
   }
 
   allItemTypes(): ItemType[] {
-    return this.map.items;
+    return this.extractor.allItemTypes(this.map);
+  }
+
+  allOtherObjects(): OtherObject[] {
+    return this.extractor.allOtherObjects(this.map);
+  }
+
+  allNPCs(): NPC[] {
+    return this.extractor.allNPCs(this.map);
+  }
+
+  minorLocationById(id: number): Location {
+    return this.extractor.allMinorLocations(this.map).filter(value => value.id == id)[0];
   }
 
   itemByID(id: number): Item {
-    return this.allItems().filter(item => item.id == id)[0];
+    return this.extractor.allItems(this.map).filter(item => item.id == id)[0];
   }
 
   itemTypeById(id: number): ItemType {
     return this.map.items.filter(value => value.id == id)[0];
   }
 
-  allEnemies(): Enemy[] {
-    return this.allMinorLocations().flatMap(minor => minor.enemies);
-  }
-
   enemyById(id: number): Enemy {
-    return this.allEnemies().filter(value => value.id == id)[0];
-  }
-
-  allNPCs(): NPC[] {
-    return this.allMinorLocations().flatMap(minor => minor.npcs)
-  }
-
-  allOtherObjects(): OtherObject[] {
-    return this.allMinorLocations().flatMap(minor => minor.objects)
+    return this.extractor.allEnemies(this.map).filter(value => value.id == id)[0];
   }
 
   otherObjectById(id: number): OtherObject {
-    return this.allOtherObjects().filter(value => value.id == id)[0]
+    return this.extractor.allOtherObjects(this.map).filter(value => value.id == id)[0]
   }
 
   createConnectionFromLocation(major: MajorLocation | undefined, from: Location | undefined, connection: Connection | undefined) {
