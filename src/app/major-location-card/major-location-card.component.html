@@ -1,4 +1,14 @@
-<span>Name: {{majorLocation?.name}} | ID: {{majorLocation?.id}}</span>
+<span *ngIf="!currentlyEditing">Name: {{majorLocation.name}}</span>
+<label for="editName" *ngIf="currentlyEditing">Edit name: </label><input *ngIf="currentlyEditing" type="text" id="editName" name="editName" [(ngModel)]="editedName"/>
+<span>| ID: {{majorLocation.id}}</span>
+<button (click)="toggleEditing()">
+  <span *ngIf="!currentlyEditing">
+    edit
+  </span>
+  <span *ngIf="currentlyEditing">
+    confirm
+  </span>
+</button>
 <button (click)="fireLocationDeleted()">delete</button>
 <div>
   <sml-edit-sub-location-card

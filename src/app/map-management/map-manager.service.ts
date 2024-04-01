@@ -246,4 +246,10 @@ export class MapManagerService {
     }
     return undefined
   }
+
+  updateMajorLocationWithIDToName(id: number | undefined, editedName: string) {
+    if (id !== undefined) {
+      this.map.locations.filter(major => major.id == id)[0].name = editedName
+    }
+  }
 }

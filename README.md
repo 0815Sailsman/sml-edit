@@ -25,7 +25,7 @@ Each **location** may have any amount of
 - [x] Rework map loading
 - [x] load existing atomic conditions into corresponding builder on map load
 - [ ] Edit functionality
-  - [ ] edit major location name
+  - [x] edit major location name
   - [ ] edit minor location name
   - [ ] edit connection
   - [ ] edit items

@@ -29,19 +29,31 @@ import {KeyInSublocation} from "../KeyInSublocation";
 })
 export class MajorLocationCardComponent {
 
+  newLocationName: string | undefined;
+  currentlyEditing: boolean = false;
+  editedName: string = "";
+
   constructor(
     private mapService: MapManagerService,
     private app: ApplicationRef
     ) {}
 
-  @Input() majorLocation: MajorLocation | undefined;
+  @Input() majorLocation!: MajorLocation;
   @Output() locationDeleted = new EventEmitter<MajorLocation>();
-  newLocationName: string | undefined;
 
   fireLocationDeleted() {
     this.locationDeleted.emit(this.majorLocation)
   }
 
+  toggleEditing() {
+    if (this.currentlyEditing) {
+      this.mapService.updateMajorLocationWithIDToName(this.majorLocation?.id, this.editedName);
+      this.majorLocation.name = this.editedName;
+    } else {
+      this.editedName = this.majorLocation?.name;
+    }
+    this.currentlyEditing = !this.currentlyEditing;
+  }
 
   addSubLocation(theName: string | undefined) {
     if (theName != undefined && theName != "" && this.majorLocation != undefined) {
