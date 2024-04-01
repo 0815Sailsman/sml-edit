@@ -1,4 +1,14 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {ConditionSubjects, ConditionSubjectsType} from "../ConditionSubjects";
 import {CommonModule} from "@angular/common";
 import {AtomicCondition} from "../../map-management/atomicCondition";
@@ -15,13 +25,14 @@ import {verbFor} from "../../ConditionVerb";
   templateUrl: './atomic-condition-builder-dialog.component.html',
   styleUrl: './atomic-condition-builder-dialog.component.css'
 })
-export class AtomicConditionBuilderDialogComponent implements OnChanges{
+export class AtomicConditionBuilderDialogComponent implements OnChanges, OnInit {
 
   constructor(protected mapService: MapManagerService) {
   }
   protected readonly Object = Object;
 
   @Input() opened: boolean = false;
+  @Input() preExistingConditionCount: number | undefined;
   @Output() createdNewAtomicCondition = new EventEmitter<AtomicCondition>();
   @Output() closedDialog = new EventEmitter<void>();
 
@@ -33,6 +44,12 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges) {
     if (this.opened) {
       this.dialogTag?.nativeElement.showModal()
+    }
+  }
+
+  ngOnInit() {
+    if (this.preExistingConditionCount !== undefined) {
+      this.abbreviationTracker += this.preExistingConditionCount;
     }
   }
 

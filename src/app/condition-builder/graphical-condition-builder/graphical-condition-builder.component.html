@@ -44,6 +44,7 @@
     [opened]="inAtomicConditionCreation"
     (createdNewAtomicCondition)="addNewLocalCondition($event)"
     (closedDialog)="inAtomicConditionCreation = false"
+    [preExistingConditionCount]="startingConditions.length"
   />
 
 </div>
