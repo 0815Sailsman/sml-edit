@@ -28,7 +28,7 @@ Each **location** may have any amount of
   - [x] edit major location name
   - [x] edit minor location name
   - [ ] edit connection
-    - [ ] connection needs ID
+    - [x] connection needs ID
   - [ ] edit items
   - [ ] edit enemies
   - [ ] edit other objects
@@ -56,4 +56,4 @@ Each **location** may have any amount of
 - [x] Can't create connections (probably also other Objects) without conditions
 - [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
 - [ ] Loading conditions from save doesn't  update abbreviation counter in condition builder
-- [ ] loading connections doesn't work after ID introduction
+- [x] loading connections doesn't work after ID introduction
