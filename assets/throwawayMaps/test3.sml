@@ -1,22 +1,23 @@
 {
-  "name": "epic cum",
+  "name": "epic",
   "locations": [
     {
       "id": 0,
       "name": "Northern Undead Asylum",
       "subLocations": [
         {
-          "id": 1,
+          "id": 0,
           "name": "Starting Cell",
           "connections": [
             {
-              "to": 1,
+              "id": 0,
+              "to": 0,
               "if": {
                 "grammar": "A",
                 "subConditions": [
                   {
                     "subjectType": "Location",
-                    "subjectId": 1,
+                    "subjectId": 0,
                     "verb": "visited",
                     "abbreviation": "A"
                   }
@@ -24,13 +25,37 @@
               }
             },
             {
-              "to": 1
+              "id": 1,
+              "to": 0,
+              "if": {
+                "grammar": "A || (B && C)",
+                "subConditions": [
+                  {
+                    "subjectType": "Location",
+                    "subjectId": 0,
+                    "verb": "visited",
+                    "abbreviation": "A"
+                  },
+                  {
+                    "subjectType": "Item",
+                    "subjectId": 0,
+                    "verb": "collected",
+                    "abbreviation": "B"
+                  },
+                  {
+                    "subjectType": "Enemy",
+                    "verb": "killed",
+                    "subjectId": 0,
+                    "abbreviation": "C"
+                  }
+                ]
+              }
             }
           ],
           "items": [
             {
               "id": 0,
-              "name": "itemA",
+              "itemTypeID": 0,
               "count": 1
             }
           ],
@@ -52,11 +77,18 @@
           "npcs": [
             {
               "id": 0,
-              "name": "jerma"
+              "name": "jerma",
+              "shop": []
             }
           ]
         }
       ]
+    }
+  ],
+  "items": [
+    {
+      "id": 0,
+      "name": "itemA"
     }
   ]
 }
