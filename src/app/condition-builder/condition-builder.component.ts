@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule, NgClass, NgForOf, NgIf} from "@angular/common";
 import {TextualConditionBuilderComponent} from "./textual-condition-builder/textual-condition-builder.component";
@@ -21,18 +21,26 @@ import {AtomicCondition} from "../map-management/atomicCondition";
   templateUrl: './condition-builder.component.html',
   styleUrl: './condition-builder.component.css'
 })
-export class ConditionBuilderComponent {
+export class ConditionBuilderComponent implements OnChanges {
 
   @Input() startingConditions: AtomicCondition[] = [];
-  @Output() internalConditionChanged = new EventEmitter<BigCondition>();
+  @Input() internalCondition: BigCondition  = {
+    grammar: "",
+    subConditions: this.startingConditions
+  };
+  @Output() internalConditionChange = new EventEmitter<BigCondition>();
 
   textMode: boolean = false;
+
+  ngOnChanges(changes: SimpleChanges) {
+
+  }
 
   toggleConditionEntryMode() {
     this.textMode = !this.textMode;
   }
 
   updateInternalCondition(updatedCondition: BigCondition) {
-    this.internalConditionChanged.emit(updatedCondition)
+    this.internalConditionChange.emit(updatedCondition)
   }
 }

@@ -3,6 +3,10 @@
   [(selection)]="targetLocation"
   [allOptions]="mapService.allMinorLocations()"
 />
-<sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
+<sml-edit-condition-builder
+  [(internalCondition)]="condition"
+  [startingConditions]="startingConditions"
+
+/>
 <button *ngIf="editConnection===undefined" (click)="createNewConnection()">create</button>
 <button *ngIf="editConnection!==undefined" (click)="confirmEdit()">confirm edit</button>

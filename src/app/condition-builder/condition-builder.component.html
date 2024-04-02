@@ -4,8 +4,8 @@
 <sml-edit-graphical-condition-builder
   *ngIf="!textMode"
   style="display: inline"
-  (conditionChanged)="updateInternalCondition($event)"
   [startingConditions]="startingConditions"
+  [(condition)]="internalCondition"
 />
 
 <button (click)="toggleConditionEntryMode()">toggle condition entry mode</button>

@@ -14,5 +14,5 @@
     <button (click)="addShopItem()">Create shopitem</button>
   </div>
 </div>
-<sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
+<sml-edit-condition-builder (internalConditionChange)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
 <button (click)="createNewNpc()">create</button>

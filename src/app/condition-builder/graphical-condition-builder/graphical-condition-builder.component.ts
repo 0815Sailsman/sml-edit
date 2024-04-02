@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ConditionSubjects} from "../ConditionSubjects";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
@@ -22,7 +22,7 @@ import {BigCondition} from "../../map-management/bigCondition";
   templateUrl: './graphical-condition-builder.component.html',
   styleUrl: './graphical-condition-builder.component.css'
 })
-export class GraphicalConditionBuilderComponent implements OnInit {
+export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
 
   // Up here because we ise it in the attributes block
   @Input() startingConditions: AtomicCondition[] = [];
@@ -34,7 +34,7 @@ export class GraphicalConditionBuilderComponent implements OnInit {
   selectedConditions: AtomicCondition[] = []
   selectedCombinators: Combinator[] = []
   selectedBrackets: OptionalBracket[] = []
-  condition: BigCondition = {
+  @Input() condition: BigCondition  = {
     grammar: "",
     subConditions: this.startingConditions
   }
@@ -42,11 +42,15 @@ export class GraphicalConditionBuilderComponent implements OnInit {
   constructor(private mapService: MapManagerService) {
   }
 
+  @Output() conditionChange = new EventEmitter<BigCondition>();
+
   ngOnInit() {
     this.condition.subConditions = this.startingConditions;
   }
 
-  @Output() conditionChanged = new EventEmitter<BigCondition>();
+  ngOnChanges(changes: SimpleChanges) {
+    // todo continue here. if condition is not empty condition: reverse parse connection and set condition builder state to it
+  }
 
   increaseConditions() {
     this.conditionCount++
@@ -86,7 +90,7 @@ export class GraphicalConditionBuilderComponent implements OnInit {
     if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 2];
     this.condition.grammar += this.selectedConditions[this.selectedConditions.length-1].abbreviation;
     if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 1];
-    this.conditionChanged.emit(this.condition)
+    this.conditionChange.emit(this.condition)
   }
 
   toggleBrackets() {
