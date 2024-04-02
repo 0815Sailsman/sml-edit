@@ -4,8 +4,9 @@
   [allOptions]="mapService.allMinorLocations()"
 />
 <sml-edit-condition-builder
-  [(internalCondition)]="condition"
+  [editCondition]="editConnection?.if"
   [startingConditions]="startingConditions"
+  (internalConditionChange)="updateCondition($event)"
 
 />
 <button *ngIf="editConnection===undefined" (click)="createNewConnection()">create</button>

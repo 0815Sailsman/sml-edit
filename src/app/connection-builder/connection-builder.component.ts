@@ -28,10 +28,7 @@ export class ConnectionBuilderComponent implements OnChanges {
   }
 
   targetLocation: Location | undefined;
-  condition: BigCondition  = {
-    grammar: "",
-    subConditions: this.startingConditions
-  };
+  condition: BigCondition | undefined;
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.editConnection !== undefined) {
@@ -47,7 +44,7 @@ export class ConnectionBuilderComponent implements OnChanges {
       this.connectionCreated.emit({
         id: this.idService.nextConnectionID(),
         to: this.targetLocation?.id,
-        if: this.condition// todo pass undefined when empty condition
+        if: this.condition
       })
     }
   }
@@ -55,6 +52,18 @@ export class ConnectionBuilderComponent implements OnChanges {
   protected readonly Location = Location;
 
   confirmEdit() {
-    ;
+    if (this.editConnection !== undefined && this.targetLocation !== undefined) {
+      this.mapService.updateConnection({
+        id: this.editConnection.id,
+        to: this.targetLocation.id,
+        if: this.condition
+      });
+    }
+    // todo toggle editing back off
+    this.editConnection = undefined;
+  }
+
+  updateCondition(condition: BigCondition) {
+    this.condition = condition;
   }
 }

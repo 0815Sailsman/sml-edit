@@ -5,7 +5,8 @@
   *ngIf="!textMode"
   style="display: inline"
   [startingConditions]="startingConditions"
-  [(condition)]="internalCondition"
+  [presetCondition]="editCondition"
+  (conditionChange)="updateInternalCondition($event)"
 />
 
 <button (click)="toggleConditionEntryMode()">toggle condition entry mode</button>

@@ -27,12 +27,13 @@ Each **location** may have any amount of
 - [ ] Edit functionality
   - [x] edit major location name
   - [x] edit minor location name
-  - [ ] edit connection
+  - [x] edit connection
     - [x] connection needs ID
   - [ ] edit items
   - [ ] edit enemies
   - [ ] edit other objects
   - [ ] edit NPCs
+- [ ] clear builders on create / confirm edit
 - [ ] Change area / location naming scheme
 - [ ] select from all doesn't show enough information
 

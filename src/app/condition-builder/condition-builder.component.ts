@@ -21,20 +21,13 @@ import {AtomicCondition} from "../map-management/atomicCondition";
   templateUrl: './condition-builder.component.html',
   styleUrl: './condition-builder.component.css'
 })
-export class ConditionBuilderComponent implements OnChanges {
+export class ConditionBuilderComponent {
 
   @Input() startingConditions: AtomicCondition[] = [];
-  @Input() internalCondition: BigCondition  = {
-    grammar: "",
-    subConditions: this.startingConditions
-  };
   @Output() internalConditionChange = new EventEmitter<BigCondition>();
+  @Input() editCondition: BigCondition | undefined;
 
   textMode: boolean = false;
-
-  ngOnChanges(changes: SimpleChanges) {
-
-  }
 
   toggleConditionEntryMode() {
     this.textMode = !this.textMode;

@@ -173,10 +173,15 @@ export class MapManagerService {
     return condition.grammar
       .split(' ')
       .map(wordInGrammar => {
-        const ascii = wordInGrammar.charCodeAt(0)
+        let result = "";
+        let wordIndex: number = 0;
+        if (wordInGrammar.startsWith('(')) {
+          result += '(';
+          wordIndex++;
+        }
+        const ascii = wordInGrammar.charCodeAt(wordIndex)
         if (ascii >= 65 && ascii <= 90) {
           const localCondition = condition.subConditions.find(atomicCondition => atomicCondition.abbreviation.charCodeAt(0) == ascii)!
-          let result = "";
           result += localCondition?.subjectType + " "
           switch (localCondition?.subjectType) {
             case ConditionSubjects.Location: result += this.minorLocationById(localCondition.subjectId).name;break;
@@ -184,7 +189,11 @@ export class MapManagerService {
             case ConditionSubjects.Enemy: result += this.enemyById(localCondition.subjectId).name;break;
             case ConditionSubjects.OtherObject: result += this.otherObjectById(localCondition.subjectId).name;break;
           }
-          return result + " has been " + verbFor(localCondition.subjectType);
+          result += " has been " + verbFor(localCondition.subjectType)
+          if (wordInGrammar.endsWith(')')) {
+            result += ')';
+          }
+          return result;
         } else {
           return wordInGrammar
         }
@@ -257,5 +266,9 @@ export class MapManagerService {
     if (id !== undefined) {
       this.allMinorLocations().filter(minor => minor.id == id)[0].name = editedName;
     }
+  }
+
+  updateConnection(connection: Connection) {
+    this.extractor.allConnections(this.map).filter(oldCon => oldCon.id == connection.id)[0] = connection;
   }
 }

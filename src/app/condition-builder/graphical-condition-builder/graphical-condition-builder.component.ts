@@ -24,7 +24,7 @@ import {BigCondition} from "../../map-management/bigCondition";
 })
 export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
 
-  // Up here because we ise it in the attributes block
+  // Up here because we use it in the attributes block
   @Input() startingConditions: AtomicCondition[] = [];
 
   protected readonly Object = Object;
@@ -34,10 +34,12 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
   selectedConditions: AtomicCondition[] = []
   selectedCombinators: Combinator[] = []
   selectedBrackets: OptionalBracket[] = []
-  @Input() condition: BigCondition  = {
+  condition: BigCondition = {
     grammar: "",
-    subConditions: this.startingConditions
+    subConditions: []
   }
+  editing: boolean = false;
+  @Input() presetCondition: BigCondition | undefined;
 
   constructor(private mapService: MapManagerService) {
   }
@@ -49,7 +51,43 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // todo continue here. if condition is not empty condition: reverse parse connection and set condition builder state to it
+    const presetConditionChanges = changes['presetCondition'];
+    if (presetConditionChanges !== undefined && presetConditionChanges.previousValue !== undefined && presetConditionChanges.currentValue == undefined) {
+      this.editing =false;
+    }
+
+    const containsLetterRegex: RegExp = /.*[A-Z].*/;
+    const containsBracketsRegex: RegExp = /.*\(.*\).*/;
+    const anyBracketRegex: RegExp = /[()]/g;
+    const containsCombinatorRegex: RegExp = /[&|]/;
+
+    if (this.presetCondition !== undefined && this.presetCondition !== null && !this.editing) {
+      // important for proper updating and change detection
+      this.editing = true;
+      this.condition = this.presetCondition;
+
+      const elementsOfGrammar = this.presetCondition.grammar.split(' ');
+      const allAbbreviationBlocksWithBrackets = elementsOfGrammar.filter(elem => containsLetterRegex.test(elem));
+      const allAbbreviationsInOrder = allAbbreviationBlocksWithBrackets.map(block => block.replaceAll(anyBracketRegex, ''));
+      const allBracketsInOrder = allAbbreviationBlocksWithBrackets
+        .flatMap(block => [block.startsWith('(') ? '(' : '', block.endsWith(')') ? ')' : ''])
+        .map(bracketString => this.optionalBracketFromString(bracketString));
+      const allConditionsInOrder: AtomicCondition[] =
+        allAbbreviationsInOrder.map(
+          abbreviation => this.presetCondition?.subConditions.find(
+            cond => cond.abbreviation == abbreviation
+          )
+        ).filter(elem => elem !== undefined) as AtomicCondition[];
+      const allCombinators = elementsOfGrammar
+        .filter(elem => containsCombinatorRegex.test(elem))
+        .map(combinatorString => this.combinatorFromString(combinatorString));
+
+      this.conditionCount = allAbbreviationBlocksWithBrackets.length;
+      this.doBrackets = containsBracketsRegex.test(this.presetCondition.grammar)
+      this.selectedConditions = allConditionsInOrder;
+      this.selectedCombinators = allCombinators;
+      this.selectedBrackets = allBracketsInOrder;
+    }
   }
 
   increaseConditions() {
@@ -70,10 +108,14 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
   toString(condition: AtomicCondition): string {
     let result = condition.subjectType + " "
     switch (condition.subjectType) {
-      case ConditionSubjects.Location: return (result + this.mapService.minorLocationById(condition.subjectId).name + " visited")
-      case ConditionSubjects.Item: return (result + this.mapService.itemToString(this.mapService.itemByID(condition.subjectId)) + " collected")
-      case ConditionSubjects.Enemy: return (result + this.mapService.enemyById(condition.subjectId).name + " killed")
-      case ConditionSubjects.OtherObject: return (result + this.mapService.otherObjectById(condition.subjectId).name + " interacted with")
+      case ConditionSubjects.Location:
+        return (result + this.mapService.minorLocationById(condition.subjectId).name + " visited")
+      case ConditionSubjects.Item:
+        return (result + this.mapService.itemToString(this.mapService.itemByID(condition.subjectId)) + " collected")
+      case ConditionSubjects.Enemy:
+        return (result + this.mapService.enemyById(condition.subjectId).name + " killed")
+      case ConditionSubjects.OtherObject:
+        return (result + this.mapService.otherObjectById(condition.subjectId).name + " interacted with")
     }
   }
 
@@ -88,9 +130,9 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
       this.condition.grammar += " " + this.selectedCombinators[index] + " ";
     }
     if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 2];
-    this.condition.grammar += this.selectedConditions[this.selectedConditions.length-1].abbreviation;
+    this.condition.grammar += this.selectedConditions[this.selectedConditions.length - 1].abbreviation;
     if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 1];
-    this.conditionChange.emit(this.condition)
+    this.conditionChange.emit(this.condition);
   }
 
   toggleBrackets() {
@@ -105,15 +147,31 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
 
   protected readonly Combinator = Combinator;
   protected readonly OptionalBracket = OptionalBracket;
+
+  combinatorFromString(s: string): Combinator {
+    if (s.includes('&')) {
+      return Combinator.AND;
+    }
+    return Combinator.OR;
+  }
+
+  optionalBracketFromString(s: string): OptionalBracket {
+    if (s.includes('(')) {
+      return OptionalBracket.Open;
+    } else if (s.includes(')')) {
+      return OptionalBracket.Close;
+    }
+    return OptionalBracket.None;
+  }
 }
 
 export enum Combinator {
-  AND= "&&",
-  OR="||"
+  AND = "&&",
+  OR = "||"
 }
 
 export enum OptionalBracket {
-  Open="(",
-  Close=")",
-  None=""
+  Open = "(",
+  Close = ")",
+  None = ""
 }
