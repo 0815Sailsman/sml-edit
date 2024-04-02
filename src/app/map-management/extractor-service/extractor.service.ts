@@ -6,6 +6,8 @@ import {NPC} from "../NPC";
 import {OtherObject} from "../otherObject";
 import {ItemType} from "../itemType";
 import {Map} from "../map";
+import {Connection} from "../connection";
+import {min} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,10 @@ export class ExtractorService {
 
   allMinorLocations(map: Map): Location[] {
     return map.locations.flatMap(major => major.subLocations);
+  }
+
+  allConnections(map: Map): Connection[] {
+    return this.allMinorLocations(map).flatMap(minor => minor.connections)
   }
 
   allItems(map: Map): Item[] {

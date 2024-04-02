@@ -28,6 +28,7 @@ Each **location** may have any amount of
   - [x] edit major location name
   - [x] edit minor location name
   - [ ] edit connection
+    - [ ] connection needs ID
   - [ ] edit items
   - [ ] edit enemies
   - [ ] edit other objects
@@ -38,6 +39,7 @@ Each **location** may have any amount of
 ## Fix TODOs backlog
 - [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
 - [ ] Quest-Line modeling for npcs with interactions
+- [ ] de-generalize object manager into different components
 
 ## Possible Spikes
 - [ ] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
@@ -47,9 +49,11 @@ Each **location** may have any amount of
 - [ ] Move toString methods to own service and out of mapManagerService
 - [ ] Meta tags and info-dump in root of sml file
 - [ ] do we really need this 'bubbling', now that the IDs are clear? -> updating minor stuff without reference to major
+- [ ] work with dev preview conditional templaing
 
 ## Known Bugs
 - [x] Loading maps doesn't update MapManagement ID Counter
 - [x] Can't create connections (probably also other Objects) without conditions
 - [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
 - [ ] Loading conditions from save doesn't  update abbreviation counter in condition builder
+- [ ] loading connections doesn't work after ID introduction

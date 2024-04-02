@@ -46,6 +46,7 @@ export class Map {
 
   private parseConnections(connections: UnparsedConnection[]): Connection[] {
     return connections.map(connection => {return {
+      id: connection.id,
       to: connection.to,
       if: this.parseBigCondition(connection.if)
     }})
@@ -155,6 +156,7 @@ interface UnparsedLocation {
 }
 
 interface UnparsedConnection {
+  id: number
   to: number
   if: UnparsedBigCondition
 }

@@ -1,6 +1,7 @@
 import {BigCondition} from "./bigCondition";
 
 export interface Connection {
+  id: number
   to: number
   if?: BigCondition
 }

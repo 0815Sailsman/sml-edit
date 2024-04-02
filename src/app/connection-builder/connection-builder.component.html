@@ -1,7 +1,8 @@
 <sml-edit-select-from-all
   [label]="'Create new connection to '"
-  (selectionChange)="updateTargetLocation($event)"
+  [(selection)]="targetLocation"
   [allOptions]="mapService.allMinorLocations()"
 />
 <sml-edit-condition-builder (internalConditionChanged)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
-<button (click)="createNewConnection()">create</button>
+<button *ngIf="editConnection===undefined" (click)="createNewConnection()">create</button>
+<button *ngIf="editConnection!==undefined" (click)="confirmEdit()">confirm edit</button>

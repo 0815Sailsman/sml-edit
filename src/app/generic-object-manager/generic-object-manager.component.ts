@@ -34,13 +34,22 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   @Output() enemyCreated = new EventEmitter<Enemy>();
   @Output() otherObjectCreated = new EventEmitter<OtherObject>();
   @Output() npcCreated = new EventEmitter<NPC>();
+
   showingDetails: boolean = false;
+  connectionToEdit: Connection | undefined;
+
+  protected readonly nameOf = nameOf;
+
+  editObject(pairOfObjectAndKey: Pair<T, KeyInSublocation>) {
+    switch (pairOfObjectAndKey.second) {
+      case KeyInSublocation.Connections: {this.connectionToEdit = pairOfObjectAndKey.first as Connection;break;}
+      default:;
+    }
+  }
 
   deleteObject(pairOfObjectAndKey: Pair<T, KeyInSublocation>) {
     this.objectDeleted.emit(pairOfObjectAndKey)
   }
-
-  protected readonly nameOf = nameOf;
 
   createConnection(connection: Connection) {
     this.connectionCreated.emit(connection)

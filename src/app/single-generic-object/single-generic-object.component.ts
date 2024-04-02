@@ -11,6 +11,7 @@ import {MapManagerService} from "../map-management/map-manager.service";
 import {Enemy} from "../map-management/enemy";
 import {OtherObject} from "../map-management/otherObject";
 import {Item} from "../map-management/item";
+import {first} from "rxjs";
 
 @Component({
   selector: 'sml-edit-single-generic-object',
@@ -28,6 +29,7 @@ export class SingleGenericObjectComponent<T extends ObjectInSublocation> {
   @Input() key!: KeyInSublocation;
   @Input() objectToString: (a: T | undefined) => string = (obj : T | undefined) => "uninitialized name";
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInSublocation>>();
+  @Output() editObject = new EventEmitter<Pair<T, KeyInSublocation>>();
 
   protected readonly depluralizeSimple = depluralizeSimple;
 
@@ -36,6 +38,10 @@ export class SingleGenericObjectComponent<T extends ObjectInSublocation> {
 
   fireObjectDeleted() {
     this.objectDeleted.emit({first: this.genericObject, second: this.key})
+  }
+
+  fireObjectEdited() {
+    this.editObject.emit({first: this.genericObject, second: this.key});
   }
 
   isConnection(value: any): value is Connection {

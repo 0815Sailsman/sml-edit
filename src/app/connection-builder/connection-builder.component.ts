@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Connection} from "../map-management/connection";
 import {FormsModule} from "@angular/forms";
@@ -9,6 +9,7 @@ import {SelectFromAllComponent} from "../select-from-all/select-from-all.compone
 import {EasilySelectable} from "../EasilySelectable";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {AtomicCondition} from "../map-management/atomicCondition";
+import {IdManagerService} from "../map-management/id-manager.service";
 
 @Component({
   selector: 'sml-edit-connection-builder',
@@ -17,29 +18,31 @@ import {AtomicCondition} from "../map-management/atomicCondition";
   templateUrl: './connection-builder.component.html',
   styleUrl: './connection-builder.component.css'
 })
-export class ConnectionBuilderComponent {
+export class ConnectionBuilderComponent implements OnChanges {
 
   @Input() startingConditions: AtomicCondition[] = [];
+  @Input() editConnection: Connection | undefined;
   @Output() connectionCreated = new EventEmitter<Connection>();
 
-  constructor(protected mapService: MapManagerService) {
+  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
 
   targetLocation: Location | undefined;
   condition: BigCondition | undefined;
 
-  createNewConnection() {
-    if (this.targetLocation != undefined) {
-      this.connectionCreated.emit({
-        to: this.targetLocation?.id,
-        if: this.condition
-      })
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.editConnection !== undefined) {
+      ;//todo continue here
     }
   }
 
-  updateTargetLocation(newTargetLocation: EasilySelectable) {
-    if (<Location> newTargetLocation) {
-      this.targetLocation = newTargetLocation as Location
+  createNewConnection() {
+    if (this.targetLocation != undefined) {
+      this.connectionCreated.emit({
+        id: this.idService.nextConnectionID(),
+        to: this.targetLocation?.id,
+        if: this.condition
+      })
     }
   }
 
@@ -47,5 +50,9 @@ export class ConnectionBuilderComponent {
 
   updateInternalCondition(updatedCondition: BigCondition) {
     this.condition = updatedCondition;
+  }
+
+  confirmEdit() {
+    ;
   }
 }
