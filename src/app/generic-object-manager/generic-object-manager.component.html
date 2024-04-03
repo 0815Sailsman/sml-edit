@@ -18,6 +18,7 @@
       (connectionCreated)="createConnection($event)"
       [startingConditions]="extractConditions(genericObjectArray)"
       [editConnection]="connectionToEdit"
+      (updateConnection)="updateConnection($event)"
     />
     <sml-edit-item-builder
       *ngSwitchCase="'items'"

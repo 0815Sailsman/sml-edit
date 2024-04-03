@@ -22,6 +22,7 @@
     (objectDeleted)="deleteObject($event)"
     [key]="KeyInSublocation.Connections"
     (connectionCreated)="registerNewConnection($event)"
+    (updatedConnection)="updateConnection($event)"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.items"

@@ -22,6 +22,7 @@ export class ConnectionBuilderComponent implements OnChanges {
 
   @Input() startingConditions: AtomicCondition[] = [];
   @Input() editConnection: Connection | undefined;
+  @Output() updateConnection = new EventEmitter<Connection>();
   @Output() connectionCreated = new EventEmitter<Connection>();
 
   constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
@@ -29,9 +30,11 @@ export class ConnectionBuilderComponent implements OnChanges {
 
   targetLocation: Location | undefined;
   condition: BigCondition | undefined;
+  editing: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.editConnection !== undefined) {
+    if (this.editConnection !== undefined && !this.editing) {
+      this.editing = true;
       this.targetLocation = this.mapService.minorLocationById(this.editConnection.to)
       if (this.editConnection.if !== undefined) {
         this.condition = this.editConnection.if
@@ -52,14 +55,16 @@ export class ConnectionBuilderComponent implements OnChanges {
   protected readonly Location = Location;
 
   confirmEdit() {
+    console.log(this.targetLocation);
     if (this.editConnection !== undefined && this.targetLocation !== undefined) {
-      this.mapService.updateConnection({
+      this.updateConnection.emit({
         id: this.editConnection.id,
         to: this.targetLocation.id,
         if: this.condition
       });
     }
     this.editConnection = undefined;
+    this.editing = false;
   }
 
   updateCondition(condition: BigCondition) {

@@ -43,6 +43,7 @@ export class SubLocationCardComponent {
     KeyInSublocation
   >>();
   @Output() connectionCreatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
+  @Output() updateConnectionFromLocation = new EventEmitter<Pair<Location, Connection>>();
   @Output() itemCreatedInLocation = new EventEmitter<Pair<Location, Item>>();
   @Output() updateItemInLocation = new EventEmitter<Pair<Location, Item>>();
   @Output() enemyCreatedInLocation = new EventEmitter<Pair<Location, Enemy>>();
@@ -81,6 +82,13 @@ export class SubLocationCardComponent {
 
   registerNewConnection(theConnection: Connection) {
     this.connectionCreatedFromLocation.emit({
+      first: this.location,
+      second: theConnection
+    });
+  }
+
+  updateConnection(theConnection: Connection) {
+    this.updateConnectionFromLocation.emit({
       first: this.location,
       second: theConnection
     });

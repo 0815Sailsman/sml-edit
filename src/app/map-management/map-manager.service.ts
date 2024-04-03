@@ -268,8 +268,14 @@ export class MapManagerService {
     }
   }
 
-  updateConnection(connection: Connection) {
-    this.extractor.allConnections(this.map).filter(oldCon => oldCon.id == connection.id)[0] = connection;
+  updateConnectionFromLocation(major: MajorLocation | undefined, location: Location | undefined, connection: Connection | undefined) {
+    if (major === undefined || location === undefined || connection === undefined) {
+      return;
+    }
+    const majorIndex = this.map.locations.indexOf(major);
+    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
+    const connectionIndex = this.map.locations[majorIndex].subLocations[minorIndex].connections.findIndex(oldConnection => oldConnection.id == connection?.id);
+    this.map.locations[majorIndex].subLocations[minorIndex].connections[connectionIndex] = connection;
   }
 
   updateItemInLocation(major: MajorLocation | undefined, location: Location | undefined, item: Item | undefined) {

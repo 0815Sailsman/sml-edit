@@ -88,6 +88,14 @@ export class MajorLocationCardComponent {
     )
   }
 
+  updateConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
+    this.mapService.updateConnectionFromLocation(
+      this.majorLocation,
+      pairOfLocationAndConnection.first,
+      pairOfLocationAndConnection.second
+    )
+  }
+
   createItemInLocation(pairOfLocationAndItem: Pair<Location, Item>) {
     this.mapService.createItemInLocation(
       this.majorLocation,
