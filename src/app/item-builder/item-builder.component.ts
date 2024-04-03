@@ -38,8 +38,7 @@ export class ItemBuilderComponent implements OnChanges {
   @Input() allowConditions: boolean |undefined = true;
   @Input() startingConditions: AtomicCondition[] = [];
   @Input() editedItem: Item | undefined;
-  @Output() itemCreated = new EventEmitter<Item>();
-  @Output() updateItem = new EventEmitter<Item>();
+  @Output() itemCreatedOrUpdated = new EventEmitter<Item>();
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.editedItem !== undefined && !this.editing) {
@@ -57,25 +56,14 @@ export class ItemBuilderComponent implements OnChanges {
     this.condition = updatedCondition;
   }
 
-  createNewItem() {
+  createOrUpdateNewItem() {
     if (this.itemType != undefined && this.itemCount != undefined) {
-      this.itemCreated.emit({
-        id: this.idService.nextItemID(),
+      this.itemCreatedOrUpdated.emit({
+        id: this.editedItem !== undefined ? this.editedItem.id : this.idService.nextItemID(),
         itemTypeID: this.itemType.id,
         count: this.itemCount,
         if: this.condition
       })
-    }
-  }
-
-  confirmEdit() {
-    if (this.editedItem !== undefined && this.itemType !== undefined && this.itemCount !== undefined) {
-      this.updateItem.emit({
-        id: this.editedItem.id,
-        itemTypeID: this.itemType.id,
-        count: this.itemCount,
-        if: this.condition
-      });
     }
     this.editedItem = undefined;
     this.editing = false;

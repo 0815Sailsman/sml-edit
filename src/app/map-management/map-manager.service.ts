@@ -135,13 +135,18 @@ export class MapManagerService {
     }
   }
 
-  createItemInLocation(major: MajorLocation | undefined, location: Location | undefined, item: Item | undefined) {
+  createOrUpdateItemInLocation(major: MajorLocation | undefined, location: Location | undefined, item: Item | undefined) {
     if (major === undefined || location === undefined || item === undefined) {
       return;
     }
     const majorIndex = this.map.locations.indexOf(major);
     const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
-    this.map.locations[majorIndex].subLocations[minorIndex].items.push(item);
+    const itemIndex = this.map.locations[majorIndex].subLocations[minorIndex].items.findIndex(oldItem => oldItem.id == item?.id);
+    if (itemIndex == -1) {
+      this.map.locations[majorIndex].subLocations[minorIndex].items.push(item);
+    } else {
+      this.map.locations[majorIndex].subLocations[minorIndex].items[itemIndex] = item;
+    }
   }
 
   createEnemyInLocation(major: MajorLocation | undefined, location: Location | undefined, enemy: Enemy | undefined) {
@@ -275,15 +280,5 @@ export class MapManagerService {
     const majorIndex = this.map.locations.indexOf(major);
     const minorIndex = this.map.locations[majorIndex].subLocations.findIndex(location => location.id == id);
     this.map.locations[majorIndex].subLocations[minorIndex].name = editedName;
-  }
-
-  updateItemInLocation(major: MajorLocation | undefined, location: Location | undefined, item: Item | undefined) {
-    if (major === undefined || location === undefined || item === undefined) {
-      return;
-    }
-    const majorIndex = this.map.locations.indexOf(major);
-    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
-    const itemIndex = this.map.locations[majorIndex].subLocations[minorIndex].items.findIndex(oldItem => oldItem.id == item?.id);
-    this.map.locations[majorIndex].subLocations[minorIndex].items[itemIndex] = item;
   }
 }

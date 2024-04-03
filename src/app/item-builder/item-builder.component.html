@@ -8,5 +8,11 @@
   [startingConditions]="startingConditions"
   [editCondition]="editedItem?. if"
 />
-<button *ngIf="editedItem===undefined" (click)="createNewItem()">create</button>
-<button *ngIf="editedItem!==undefined" (click)="confirmEdit()">confirm edit</button>
+<button (click)="createOrUpdateNewItem()">
+  <span *ngIf="editedItem===undefined">
+    create
+  </span>
+  <span *ngIf="editedItem!==undefined">
+    confirm edit
+  </span>
+</button>

@@ -80,7 +80,7 @@ export class MajorLocationCardComponent {
     )
   }
 
-  createConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
+  createOrUpdateConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
     this.mapService.createOrUpdateConnectionFromLocation(
       this.majorLocation,
       pairOfLocationAndConnection.first,
@@ -88,20 +88,12 @@ export class MajorLocationCardComponent {
     )
   }
 
-  createItemInLocation(pairOfLocationAndItem: Pair<Location, Item>) {
-    this.mapService.createItemInLocation(
+  createOrUpdateItemInLocation(pairOfLocationAndItem: Pair<Location, Item>) {
+    this.mapService.createOrUpdateItemInLocation(
       this.majorLocation,
       pairOfLocationAndItem.first,
       pairOfLocationAndItem.second
       )
-  }
-
-  updateItemInLocation(pairOfLocationAndItem: Pair<Location, Item>) {
-    this.mapService.updateItemInLocation(
-      this.majorLocation,
-      pairOfLocationAndItem.first,
-      pairOfLocationAndItem.second
-    );
   }
 
   createEnemyInLocation(pairOfLocationAndEnemy: Pair<Location, Enemy>) {
