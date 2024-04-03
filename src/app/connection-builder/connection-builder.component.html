@@ -9,5 +9,11 @@
   (internalConditionChange)="updateCondition($event)"
 
 />
-<button *ngIf="editConnection===undefined" (click)="createNewConnection()">create</button>
-<button *ngIf="editConnection!==undefined" (click)="confirmEdit()">confirm edit</button>
+<button (click)="createOrUpdateConnection()">
+  <span *ngIf="editConnection===undefined">
+    create
+  </span>
+  <span *ngIf="editConnection!==undefined">
+    create
+  </span>
+</button>

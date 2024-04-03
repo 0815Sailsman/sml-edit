@@ -52,13 +52,13 @@ Each **location** may have any amount of
 - [ ] Meta tags and info-dump in root of sml file
 - [ ] do we really need this 'bubbling', now that the IDs are clear? -> updating minor stuff without reference to major
 - [ ] work with dev preview conditional templating
-- [ ] unify create and update methods in map-manager service and upstream event stuff
+- [x] unify create and update methods in map-manager service and upstream event stuff
 
 ## Known Bugs
 - [x] Loading maps doesn't update MapManagement ID Counter
 - [x] Can't create connections (probably also other Objects) without conditions
 - [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
-- [ ] Loading conditions from save doesn't  update abbreviation counter in condition builder
+- [x] Loading conditions from save doesn't  update abbreviation counter in condition builder
 - [x] loading connections doesn't work after ID introduction
-- [ ] item builder change detection fires always on change during edit, possibly also other builder
+- [x] item builder change detection fires always on change during edit, possibly also other builder -> might be fixed due to editing flag
 - [x] update connection seems bugged

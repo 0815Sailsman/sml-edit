@@ -121,13 +121,18 @@ export class MapManagerService {
     return this.extractor.allOtherObjects(this.map).filter(value => value.id == id)[0]
   }
 
-  createConnectionFromLocation(major: MajorLocation | undefined, from: Location | undefined, connection: Connection | undefined) {
+  createOrUpdateConnectionFromLocation(major: MajorLocation | undefined, from: Location | undefined, connection: Connection | undefined) {
     if (from === undefined || connection === undefined || major === undefined) {
       return;
     }
     const majorIndex = this.map.locations.indexOf(major);
     const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(from)
-    this.map.locations[majorIndex].subLocations[minorIndex].connections.push(connection)
+    const connectionIndex = this.map.locations[majorIndex].subLocations[minorIndex].connections.findIndex(con => con.id == connection?.id);
+    if (connectionIndex == -1) {
+      this.map.locations[majorIndex].subLocations[minorIndex].connections.push(connection);
+    } else {
+      this.map.locations[majorIndex].subLocations[minorIndex].connections[connectionIndex] = connection;
+    }
   }
 
   createItemInLocation(major: MajorLocation | undefined, location: Location | undefined, item: Item | undefined) {
@@ -258,24 +263,18 @@ export class MapManagerService {
 
   updateMajorLocationWithIDToName(id: number | undefined, editedName: string) {
     if (id !== undefined) {
-      this.map.locations.filter(major => major.id == id)[0].name = editedName;
+      const majorIndex = this.map.locations.findIndex(major => major.id == id);
+      this.map.locations[majorIndex].name = editedName;
     }
   }
 
-  updateMinorLocationWithIDToName(id: number, editedName: string) {
-    if (id !== undefined) {
-      this.allMinorLocations().filter(minor => minor.id == id)[0].name = editedName;
-    }
-  }
-
-  updateConnectionFromLocation(major: MajorLocation | undefined, location: Location | undefined, connection: Connection | undefined) {
-    if (major === undefined || location === undefined || connection === undefined) {
+  updateMinorLocationWithIDToName(major: MajorLocation | undefined, id: number | undefined, editedName: string | undefined) {
+    if (major === undefined || id === undefined || editedName === undefined) {
       return;
     }
     const majorIndex = this.map.locations.indexOf(major);
-    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
-    const connectionIndex = this.map.locations[majorIndex].subLocations[minorIndex].connections.findIndex(oldConnection => oldConnection.id == connection?.id);
-    this.map.locations[majorIndex].subLocations[minorIndex].connections[connectionIndex] = connection;
+    const minorIndex = this.map.locations[majorIndex].subLocations.findIndex(location => location.id == id);
+    this.map.locations[majorIndex].subLocations[minorIndex].name = editedName;
   }
 
   updateItemInLocation(major: MajorLocation | undefined, location: Location | undefined, item: Item | undefined) {

@@ -42,8 +42,8 @@ export class SubLocationCardComponent {
     ObjectInSublocation,
     KeyInSublocation
   >>();
-  @Output() connectionCreatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
-  @Output() updateConnectionFromLocation = new EventEmitter<Pair<Location, Connection>>();
+  @Output() updateMinorLocationWithIDToName = new EventEmitter<Pair<number, string>>
+  @Output() connectionCreatedOrUpdatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
   @Output() itemCreatedInLocation = new EventEmitter<Pair<Location, Item>>();
   @Output() updateItemInLocation = new EventEmitter<Pair<Location, Item>>();
   @Output() enemyCreatedInLocation = new EventEmitter<Pair<Location, Enemy>>();
@@ -56,7 +56,10 @@ export class SubLocationCardComponent {
 
   toggleEditing() {
     if (this.currentlyEditing) {
-      this.mapService.updateMinorLocationWithIDToName(this.location.id, this.editedName);
+      this.updateMinorLocationWithIDToName.emit({
+        first: this.location.id,
+        second: this.editedName
+      });
       this.location.name = this.editedName;
     } else {
       this.editedName = this.location.name;
@@ -80,15 +83,8 @@ export class SubLocationCardComponent {
 
   protected readonly KeyInSublocation = KeyInSublocation;
 
-  registerNewConnection(theConnection: Connection) {
-    this.connectionCreatedFromLocation.emit({
-      first: this.location,
-      second: theConnection
-    });
-  }
-
-  updateConnection(theConnection: Connection) {
-    this.updateConnectionFromLocation.emit({
+  registerOrUpdateNewConnection(theConnection: Connection) {
+    this.connectionCreatedOrUpdatedFromLocation.emit({
       first: this.location,
       second: theConnection
     });

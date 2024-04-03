@@ -29,8 +29,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   @Input() key!: KeyInSublocation;
   @Input() objectToString: (a: T | undefined) => string = (obj : T | undefined) => "uninitialized name";
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInSublocation>>();
-  @Output() connectionCreated = new EventEmitter<Connection>();
-  @Output() updatedConnection = new EventEmitter<Connection>();
+  @Output() connectionCreatedOrUpdated = new EventEmitter<Connection>();
   @Output() itemCreated = new EventEmitter<Item>();
   @Output() updatedItem = new EventEmitter<Item>();
   @Output() enemyCreated = new EventEmitter<Enemy>();
@@ -56,12 +55,8 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
     this.objectDeleted.emit(pairOfObjectAndKey)
   }
 
-  createConnection(connection: Connection) {
-    this.connectionCreated.emit(connection)
-  }
-
-  updateConnection(connection: Connection) {
-    this.updatedConnection.emit(connection)
+  createOrUpdateConnection(connection: Connection) {
+    this.connectionCreatedOrUpdated.emit(connection)
   }
 
   createItem(item: Item) {

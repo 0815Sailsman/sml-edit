@@ -1,4 +1,4 @@
-import {ApplicationRef, Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MajorLocation} from "../map-management/majorLocation";
 import {SubLocationCardComponent} from "../sub-location-card/sub-location-card.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -33,10 +33,7 @@ export class MajorLocationCardComponent {
   currentlyEditing: boolean = false;
   editedName: string = "";
 
-  constructor(
-    private mapService: MapManagerService,
-    private app: ApplicationRef
-    ) {}
+  constructor(private mapService: MapManagerService) {}
 
   @Input() majorLocation!: MajorLocation;
   @Output() locationDeleted = new EventEmitter<MajorLocation>();
@@ -59,8 +56,11 @@ export class MajorLocationCardComponent {
     if (theName != undefined && theName != "" && this.majorLocation != undefined) {
       this.mapService.addMinorLocationTo(this.majorLocation, theName)
       this.newLocationName = ""
-      this.app.tick()
     }
+  }
+
+  updateMinorLocationWithIDToName(pairOfIdAndName: Pair<number, string>) {
+    this.mapService.updateMinorLocationWithIDToName(this.majorLocation, pairOfIdAndName.first, pairOfIdAndName.second);
   }
 
   deleteSubLocation(theLocationToBeDeleted: Location) {
@@ -81,15 +81,7 @@ export class MajorLocationCardComponent {
   }
 
   createConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
-    this.mapService.createConnectionFromLocation(
-      this.majorLocation,
-      pairOfLocationAndConnection.first,
-      pairOfLocationAndConnection.second
-    )
-  }
-
-  updateConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
-    this.mapService.updateConnectionFromLocation(
+    this.mapService.createOrUpdateConnectionFromLocation(
       this.majorLocation,
       pairOfLocationAndConnection.first,
       pairOfLocationAndConnection.second

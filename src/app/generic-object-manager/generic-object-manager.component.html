@@ -15,10 +15,9 @@
   <div [ngSwitch]="key">
     <sml-edit-connection-builder
       *ngSwitchCase="'connections'"
-      (connectionCreated)="createConnection($event)"
+      (connectionCreatedOrUpdated)="createOrUpdateConnection($event)"
       [startingConditions]="extractConditions(genericObjectArray)"
       [editConnection]="connectionToEdit"
-      (updateConnection)="updateConnection($event)"
     />
     <sml-edit-item-builder
       *ngSwitchCase="'items'"

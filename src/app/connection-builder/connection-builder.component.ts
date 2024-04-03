@@ -22,8 +22,7 @@ export class ConnectionBuilderComponent implements OnChanges {
 
   @Input() startingConditions: AtomicCondition[] = [];
   @Input() editConnection: Connection | undefined;
-  @Output() updateConnection = new EventEmitter<Connection>();
-  @Output() connectionCreated = new EventEmitter<Connection>();
+  @Output() connectionCreatedOrUpdated = new EventEmitter<Connection>();
 
   constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
@@ -42,30 +41,19 @@ export class ConnectionBuilderComponent implements OnChanges {
     }
   }
 
-  createNewConnection() {
+  createOrUpdateConnection() {
     if (this.targetLocation != undefined) {
-      this.connectionCreated.emit({
-        id: this.idService.nextConnectionID(),
+      this.connectionCreatedOrUpdated.emit({
+        id: this.editConnection !== undefined ? this.editConnection?.id : this.idService.nextConnectionID(),
         to: this.targetLocation?.id,
         if: this.condition
       })
     }
-  }
-
-  protected readonly Location = Location;
-
-  confirmEdit() {
-    console.log(this.targetLocation);
-    if (this.editConnection !== undefined && this.targetLocation !== undefined) {
-      this.updateConnection.emit({
-        id: this.editConnection.id,
-        to: this.targetLocation.id,
-        if: this.condition
-      });
-    }
     this.editConnection = undefined;
     this.editing = false;
   }
+
+  protected readonly Location = Location;
 
   updateCondition(condition: BigCondition) {
     this.condition = condition;
