@@ -36,13 +36,16 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   @Output() npcCreated = new EventEmitter<NPC>();
 
   showingDetails: boolean = false;
+
   connectionToEdit: Connection | undefined;
+  itemToEdit: Item | undefined;
 
   protected readonly nameOf = nameOf;
 
   editObject(pairOfObjectAndKey: Pair<T, KeyInSublocation>) {
     switch (pairOfObjectAndKey.second) {
       case KeyInSublocation.Connections: {this.connectionToEdit = pairOfObjectAndKey.first as Connection;break;}
+      case KeyInSublocation.Items: {this.itemToEdit = pairOfObjectAndKey.first as Item;break;}
       default:;
     }
   }

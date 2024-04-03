@@ -59,7 +59,6 @@ export class ConnectionBuilderComponent implements OnChanges {
         if: this.condition
       });
     }
-    // todo toggle editing back off
     this.editConnection = undefined;
   }
 

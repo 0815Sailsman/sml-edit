@@ -58,3 +58,4 @@ Each **location** may have any amount of
 - [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
 - [ ] Loading conditions from save doesn't  update abbreviation counter in condition builder
 - [x] loading connections doesn't work after ID introduction
+- [ ] item builder change detection fires always on change during edit, possibly also other builder

@@ -23,6 +23,7 @@
       *ngSwitchCase="'items'"
       (itemCreated)="createItem($event)"
       [startingConditions]="extractConditions(genericObjectArray)"
+      [editedItem]="itemToEdit"
     />
     <sml-edit-enemy-builder
       *ngSwitchCase="'enemies'"

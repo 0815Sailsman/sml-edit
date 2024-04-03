@@ -1,3 +1,12 @@
-<sml-edit-item-builder-header (itemCountChange)="updateItemCount($event)" (itemTypeChange)="updateItemType($event)"/>
-<sml-edit-condition-builder *ngIf="allowConditions !== undefined && allowConditions" (internalConditionChange)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
-<button (click)="createNewItem()">create</button>
+<sml-edit-item-builder-header
+  [(itemCount)]="itemCount"
+  [(itemType)]="itemType"
+/>
+<sml-edit-condition-builder
+  *ngIf="allowConditions !== undefined && allowConditions"
+  (internalConditionChange)="updateInternalCondition($event)"
+  [startingConditions]="startingConditions"
+  [editCondition]="editedItem?. if"
+/>
+<button *ngIf="editedItem===undefined" (click)="createNewItem()">create</button>
+<button *ngIf="editedItem!==undefined" (click)="confirmEdit()">confirm edit</button>

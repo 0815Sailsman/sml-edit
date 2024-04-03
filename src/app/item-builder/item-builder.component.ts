@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {BigCondition} from "../map-management/bigCondition";
 import {FormsModule} from "@angular/forms";
@@ -24,7 +24,7 @@ import {AtomicCondition} from "../map-management/atomicCondition";
   templateUrl: './item-builder.component.html',
   styleUrl: './item-builder.component.css'
 })
-export class ItemBuilderComponent {
+export class ItemBuilderComponent implements OnChanges {
 
   constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
@@ -33,10 +33,23 @@ export class ItemBuilderComponent {
   itemCount: number |undefined;
   condition: BigCondition | undefined;
   newItemTypeName: string | undefined;
+  editing: boolean = false;
 
   @Input() allowConditions: boolean |undefined = true;
   @Input() startingConditions: AtomicCondition[] = [];
+  @Input() editedItem: Item | undefined;
   @Output() itemCreated = new EventEmitter<Item>();
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.editedItem !== undefined && !this.editing) {
+      this.editing = true;
+      this.itemType = this.mapService.itemTypeById(this.editedItem.itemTypeID);
+      this.itemCount = this.editedItem.count
+      if (this.editedItem.if !== undefined) {
+        this.condition = this.editedItem.if
+      }
+    }
+  }
 
   updateInternalCondition(updatedCondition: BigCondition) {
     this.condition = updatedCondition;
@@ -53,11 +66,16 @@ export class ItemBuilderComponent {
     }
   }
 
-  updateItemCount(newItemCount: number) {
-    this.itemCount = newItemCount;
-  }
-
-  updateItemType(newItemType: ItemType) {
-    this.itemType = newItemType;
+  confirmEdit() {
+    if (this.editedItem !== undefined && this.itemType !== undefined && this.itemCount !== undefined) {
+      this.mapService.updateItem({
+        id: this.editedItem.id,
+        itemTypeID: this.itemType.id,
+        count: this.itemCount,
+        if: this.condition
+      });
+    }
+    this.editedItem = undefined;
+    this.editing = false;
   }
 }

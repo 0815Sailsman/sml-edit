@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MapManagerService} from "../../map-management/map-manager.service";
 import {ItemType} from "../../map-management/itemType";
 import {FormsModule} from "@angular/forms";
@@ -16,9 +16,9 @@ import {SelectFromAllComponent} from "../../select-from-all/select-from-all.comp
 })
 export class ItemBuilderHeaderComponent {
 
-  itemType: ItemType | undefined;
+  @Input() itemType: ItemType | undefined;
   newItemTypeName: string | undefined;
-  itemCount: number |undefined;
+  @Input() itemCount: number |undefined;
 
   constructor(protected mapService: MapManagerService) {
   }

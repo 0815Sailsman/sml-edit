@@ -271,4 +271,8 @@ export class MapManagerService {
   updateConnection(connection: Connection) {
     this.extractor.allConnections(this.map).filter(oldCon => oldCon.id == connection.id)[0] = connection;
   }
+
+  updateItem(item: Item) {
+    this.extractor.allItems(this.map).filter(oldItem => oldItem.id == item.id)[0] = item;
+  }
 }
