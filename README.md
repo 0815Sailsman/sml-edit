@@ -29,13 +29,14 @@ Each **location** may have any amount of
   - [x] edit minor location name
   - [x] edit connection
     - [x] connection needs ID
-  - [ ] edit items
+  - [x] edit items
   - [ ] edit enemies
   - [ ] edit other objects
   - [ ] edit NPCs
 - [ ] clear builders on create / confirm edit
 - [ ] Change area / location naming scheme
 - [ ] select from all doesn't show enough information
+- [ ] make condition clearable
 
 ## Fix TODOs backlog
 - [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
@@ -50,7 +51,8 @@ Each **location** may have any amount of
 - [ ] Move toString methods to own service and out of mapManagerService
 - [ ] Meta tags and info-dump in root of sml file
 - [ ] do we really need this 'bubbling', now that the IDs are clear? -> updating minor stuff without reference to major
-- [ ] work with dev preview conditional templaing
+- [ ] work with dev preview conditional templating
+- [ ] unify create and update methods in map-manager service
 
 ## Known Bugs
 - [x] Loading maps doesn't update MapManagement ID Counter
@@ -59,3 +61,4 @@ Each **location** may have any amount of
 - [ ] Loading conditions from save doesn't  update abbreviation counter in condition builder
 - [x] loading connections doesn't work after ID introduction
 - [ ] item builder change detection fires always on change during edit, possibly also other builder
+- [ ] update connection seems bugged

@@ -29,6 +29,7 @@
     (objectDeleted)="deleteObject($event)"
     [key]="KeyInSublocation.Items"
     (itemCreated)="registerNewItem($event)"
+    (updatedItem)="updateItem($event)"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.enemies"

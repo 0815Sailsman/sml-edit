@@ -272,7 +272,13 @@ export class MapManagerService {
     this.extractor.allConnections(this.map).filter(oldCon => oldCon.id == connection.id)[0] = connection;
   }
 
-  updateItem(item: Item) {
-    this.extractor.allItems(this.map).filter(oldItem => oldItem.id == item.id)[0] = item;
+  updateItemInLocation(major: MajorLocation | undefined, location: Location | undefined, item: Item | undefined) {
+    if (major === undefined || location === undefined || item === undefined) {
+      return;
+    }
+    const majorIndex = this.map.locations.indexOf(major);
+    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
+    const itemIndex = this.map.locations[majorIndex].subLocations[minorIndex].items.findIndex(oldItem => oldItem.id == item?.id);
+    this.map.locations[majorIndex].subLocations[minorIndex].items[itemIndex] = item;
   }
 }

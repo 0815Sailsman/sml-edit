@@ -81,35 +81,48 @@ export class MajorLocationCardComponent {
   }
 
   createConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
-    this.mapService.createConnectionFromLocation(this.majorLocation,
+    this.mapService.createConnectionFromLocation(
+      this.majorLocation,
       pairOfLocationAndConnection.first,
       pairOfLocationAndConnection.second
     )
   }
 
   createItemInLocation(pairOfLocationAndItem: Pair<Location, Item>) {
-    this.mapService.createItemInLocation(this.majorLocation,
+    this.mapService.createItemInLocation(
+      this.majorLocation,
       pairOfLocationAndItem.first,
       pairOfLocationAndItem.second
       )
   }
 
+  updateItemInLocation(pairOfLocationAndItem: Pair<Location, Item>) {
+    this.mapService.updateItemInLocation(
+      this.majorLocation,
+      pairOfLocationAndItem.first,
+      pairOfLocationAndItem.second
+    );
+  }
+
   createEnemyInLocation(pairOfLocationAndEnemy: Pair<Location, Enemy>) {
-    this.mapService.createEnemyInLocation(this.majorLocation,
+    this.mapService.createEnemyInLocation(
+      this.majorLocation,
       pairOfLocationAndEnemy.first,
       pairOfLocationAndEnemy.second
       );
   }
 
   createObjectInLocation(pairOfLocationAndObject: Pair<Location, OtherObject>) {
-    this.mapService.createObjectInLocation(this.majorLocation,
+    this.mapService.createObjectInLocation(
+      this.majorLocation,
       pairOfLocationAndObject.first,
       pairOfLocationAndObject.second
     );
   }
 
   createNPCInLocation(pairOfLocationAndNPC: Pair<Location, NPC>) {
-    this.mapService.createNPCInLocation(this.majorLocation,
+    this.mapService.createNPCInLocation(
+      this.majorLocation,
       pairOfLocationAndNPC.first,
       pairOfLocationAndNPC.second
     );

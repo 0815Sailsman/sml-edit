@@ -31,6 +31,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInSublocation>>();
   @Output() connectionCreated = new EventEmitter<Connection>();
   @Output() itemCreated = new EventEmitter<Item>();
+  @Output() updatedItem = new EventEmitter<Item>();
   @Output() enemyCreated = new EventEmitter<Enemy>();
   @Output() otherObjectCreated = new EventEmitter<OtherObject>();
   @Output() npcCreated = new EventEmitter<NPC>();
@@ -60,6 +61,10 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
 
   createItem(item: Item) {
     this.itemCreated.emit(item)
+  }
+
+  updateItem(item: Item) {
+    this.updatedItem.emit(item);
   }
 
   createEnemy(enemy: Enemy) {
