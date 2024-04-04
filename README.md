@@ -31,6 +31,8 @@ Each **location** may have any amount of
     - [x] connection needs ID
   - [x] edit items
   - [ ] edit enemies
+    - [ ] edit drops
+    - [ ] starting conditions
   - [ ] edit other objects
   - [ ] edit NPCs
 - [ ] clear builders on create / confirm edit

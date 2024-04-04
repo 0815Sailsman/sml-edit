@@ -42,7 +42,6 @@ export class ItemBuilderComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.editedItem !== undefined && !this.editing) {
-      console.log("start edit in item")
       this.editing = true;
       this.itemType = this.mapService.itemTypeById(this.editedItem.itemTypeID);
       this.itemCount = this.editedItem.count

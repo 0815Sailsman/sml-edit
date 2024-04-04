@@ -14,7 +14,7 @@
       {{drop.item.count}}x {{mapService.itemTypeToString(mapService.itemTypeById(drop.item.itemTypeID))}} with {{drop.chance}}% chance
     </li>
   </ul>
-  <sml-edit-drop-builder (createDrop)="addDrop($event)"/>
+  <sml-edit-drop-builder (dropCreatedOrUpdated)="addDrop($event)"/>
 </div>
 <sml-edit-condition-builder (internalConditionChange)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
 <button (click)="createNewEnemy()">create</button>

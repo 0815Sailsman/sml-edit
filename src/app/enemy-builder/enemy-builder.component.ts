@@ -60,6 +60,7 @@ export class EnemyBuilderComponent {
     }
   }
 
+  // todo continue here, add update logic
   addDrop(newDrop: Drop) {
     this.drops.push(newDrop)
   }
