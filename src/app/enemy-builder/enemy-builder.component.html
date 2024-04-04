@@ -12,9 +12,11 @@
   <ul>
     <li *ngFor="let drop of drops">
       {{drop.item.count}}x {{mapService.itemTypeToString(mapService.itemTypeById(drop.item.itemTypeID))}} with {{drop.chance}}% chance
+      <button>edit</button>
+      <button (click)="deleteDrop(drop)">delete</button>
     </li>
   </ul>
-  <sml-edit-drop-builder (dropCreatedOrUpdated)="addDrop($event)"/>
+  <sml-edit-drop-builder (dropCreatedOrUpdated)="addOrUpdateDrop($event)"/>
 </div>
 <sml-edit-condition-builder (internalConditionChange)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
 <button (click)="createNewEnemy()">create</button>

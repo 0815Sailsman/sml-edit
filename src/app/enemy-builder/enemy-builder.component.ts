@@ -60,8 +60,22 @@ export class EnemyBuilderComponent {
     }
   }
 
-  // todo continue here, add update logic
-  addDrop(newDrop: Drop) {
-    this.drops.push(newDrop)
+  addOrUpdateDrop(drop: Drop) {
+    const dropIndex = this.findIndexForDrop(drop);
+    if (dropIndex == -1) {
+      this.drops.push(drop);
+    } else {
+      this.drops[dropIndex] = drop;
+    }
+  }
+
+  deleteDrop(drop: Drop) {
+    this.drops = this.drops.filter(existingDrop => existingDrop.item.itemTypeID !== drop.item.itemTypeID)
+  }
+
+  findIndexForDrop(drop: Drop): number {
+    return this.drops
+      .map(drop => drop.item)
+      .findIndex(item => item.itemTypeID == drop.item.itemTypeID);
   }
 }
