@@ -31,14 +31,15 @@ Each **location** may have any amount of
     - [x] connection needs ID
   - [x] edit items
   - [ ] edit enemies
-    - [ ] edit drops
-    - [ ] starting conditions
+    - [x] edit drops
+    - [x] pass starting conditions
   - [ ] edit other objects
   - [ ] edit NPCs
 - [ ] clear builders on create / confirm edit
 - [ ] Change area / location naming scheme
 - [ ] select from all doesn't show enough information
 - [ ] make condition clearable
+- [ ] generally clear fields on create and update
 
 ## Fix TODOs backlog
 - [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions

@@ -42,6 +42,7 @@ export class EnemyBuilderComponent {
   condition: BigCondition | undefined;
   drops: Drop[] = [];
   respawns: boolean = true;
+  dropToEdit: Drop | undefined;
 
   updateInternalCondition(updatedCondition: BigCondition) {
     this.condition = updatedCondition;
@@ -67,6 +68,10 @@ export class EnemyBuilderComponent {
     } else {
       this.drops[dropIndex] = drop;
     }
+  }
+
+  editDrop(drop: Drop) {
+    this.dropToEdit = drop;
   }
 
   deleteDrop(drop: Drop) {
