@@ -7,9 +7,10 @@
       "subLocations": [
         {
           "id": 0,
-          "name": "Starting Cell in epic",
+          "name": "Starting Cell",
           "connections": [
             {
+              "id": 0,
               "to": 0,
               "if": {
                 "grammar": "A",
