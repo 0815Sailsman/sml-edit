@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule} from "@angular/forms";
 import {MapManagerService} from "../map-management/map-manager.service";
@@ -29,13 +29,10 @@ import {AtomicCondition} from "../map-management/atomicCondition";
   templateUrl: './enemy-builder.component.html',
   styleUrl: './enemy-builder.component.css'
 })
-export class EnemyBuilderComponent {
+export class EnemyBuilderComponent implements OnChanges {
 
   constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
-
-  @Input() startingConditions: AtomicCondition[] = [];
-  @Output() enemyCreated = new EventEmitter<Enemy>();
 
   enemyName: string | undefined;
   souls: number | undefined;
@@ -43,15 +40,33 @@ export class EnemyBuilderComponent {
   drops: Drop[] = [];
   respawns: boolean = true;
   dropToEdit: Drop | undefined;
+  editing: boolean = false;
+
+  @Input() startingConditions: AtomicCondition[] = [];
+  @Input() editedEnemy: Enemy | undefined;
+  @Output() enemyCreatedOrUpdated = new EventEmitter<Enemy>();
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.editedEnemy !== undefined && !this.editing) {
+      this.editing = true;
+      this.enemyName = this.editedEnemy.name;
+      this.souls = this.editedEnemy.souls;
+      this.drops = this.editedEnemy.drops;
+      this.respawns = this.editedEnemy.respawns;
+      if (this.editedEnemy.if !== undefined) {
+        this.condition = this.editedEnemy.if
+      }
+    }
+  }
 
   updateInternalCondition(updatedCondition: BigCondition) {
     this.condition = updatedCondition;
   }
 
-  createNewEnemy() {
+  createOrUpdateNewEnemy() {
     if (this.enemyName !== undefined && this.souls !== undefined) {
-      this.enemyCreated.emit({
-        id: this.idService.nextEnemyID(),
+      this.enemyCreatedOrUpdated.emit({
+        id: this.editedEnemy !== undefined ? this.editedEnemy.id : this.idService.nextEnemyID(),
         name: this.enemyName,
         souls: this.souls,
         respawns: this.respawns,
@@ -59,6 +74,8 @@ export class EnemyBuilderComponent {
         if: this.condition
       })
     }
+    this.editedEnemy = undefined;
+    this.editing = false;
   }
 
   addOrUpdateDrop(drop: Drop) {

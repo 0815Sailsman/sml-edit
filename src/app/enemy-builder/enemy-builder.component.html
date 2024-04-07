@@ -18,7 +18,12 @@
   </ul>
   <sml-edit-drop-builder [editedDrop]="dropToEdit" (dropCreatedOrUpdated)="addOrUpdateDrop($event)"/>
 </div>
-<sml-edit-condition-builder (internalConditionChange)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
-<button (click)="createNewEnemy()">
-  <span>create</span>
+<sml-edit-condition-builder
+  (internalConditionChange)="updateInternalCondition($event)"
+  [startingConditions]="startingConditions"
+  [editCondition]="editedEnemy?.if"
+/>
+<button (click)="createOrUpdateNewEnemy()">
+  <span *ngIf="editedEnemy===undefined">create</span>
+  <span *ngIf="editedEnemy!==undefined">update</span>
 </button>

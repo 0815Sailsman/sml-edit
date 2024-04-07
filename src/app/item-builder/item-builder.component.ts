@@ -26,14 +26,14 @@ import {AtomicCondition} from "../map-management/atomicCondition";
 })
 export class ItemBuilderComponent implements OnChanges {
 
-  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
-  }
-
   itemType: ItemType | undefined;
   itemCount: number |undefined;
   condition: BigCondition | undefined;
   newItemTypeName: string | undefined;
   editing: boolean = false;
+
+  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
+  }
 
   @Input() allowConditions: boolean |undefined = true;
   @Input() startingConditions: AtomicCondition[] = [];

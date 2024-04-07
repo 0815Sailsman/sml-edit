@@ -27,8 +27,9 @@
     />
     <sml-edit-enemy-builder
       *ngSwitchCase="'enemies'"
-      (enemyCreated)="createEnemy($event)"
+      (enemyCreatedOrUpdated)="createOrUpdateEnemy($event)"
       [startingConditions]="extractConditions(genericObjectArray)"
+      [editedEnemy]="enemyToEdit"
     />
     <sml-edit-object-builder
       *ngSwitchCase="'objects'"

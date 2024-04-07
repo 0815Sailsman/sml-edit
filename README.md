@@ -30,7 +30,7 @@ Each **location** may have any amount of
   - [x] edit connection
     - [x] connection needs ID
   - [x] edit items
-  - [ ] edit enemies
+  - [x] edit enemies
     - [x] edit drops
     - [x] pass starting conditions
   - [ ] edit other objects

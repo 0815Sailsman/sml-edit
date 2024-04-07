@@ -149,13 +149,18 @@ export class MapManagerService {
     }
   }
 
-  createEnemyInLocation(major: MajorLocation | undefined, location: Location | undefined, enemy: Enemy | undefined) {
+  createOrUpdateEnemyInLocation(major: MajorLocation | undefined, location: Location | undefined, enemy: Enemy | undefined) {
     if (major === undefined || location === undefined || enemy === undefined) {
       return;
     }
     const majorIndex = this.map.locations.indexOf(major);
     const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
-    this.map.locations[majorIndex].subLocations[minorIndex].enemies.push(enemy);
+    const enemyIndex = this.map.locations[majorIndex].subLocations[minorIndex].enemies.findIndex(oldEnemy => oldEnemy.id == enemy?.id);
+    if (enemyIndex == -1) {
+      this.map.locations[majorIndex].subLocations[minorIndex].enemies.push(enemy);
+    } else {
+      this.map.locations[majorIndex].subLocations[minorIndex].enemies[enemyIndex] = enemy;
+    }
   }
 
   createObjectInLocation(major: MajorLocation | undefined, location: Location | undefined, object: OtherObject | undefined) {

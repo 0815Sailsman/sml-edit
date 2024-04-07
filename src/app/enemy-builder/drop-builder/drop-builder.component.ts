@@ -51,6 +51,8 @@ export class DropBuilderComponent implements OnChanges{
         },
         chance: this.dropChance
       })
+      this.editedDrop = undefined;
+      this.editing = false;
     }
   }
 }

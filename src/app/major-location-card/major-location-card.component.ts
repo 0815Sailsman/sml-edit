@@ -96,8 +96,8 @@ export class MajorLocationCardComponent {
       )
   }
 
-  createEnemyInLocation(pairOfLocationAndEnemy: Pair<Location, Enemy>) {
-    this.mapService.createEnemyInLocation(
+  createOrUpdateEnemyInLocation(pairOfLocationAndEnemy: Pair<Location, Enemy>) {
+    this.mapService.createOrUpdateEnemyInLocation(
       this.majorLocation,
       pairOfLocationAndEnemy.first,
       pairOfLocationAndEnemy.second
