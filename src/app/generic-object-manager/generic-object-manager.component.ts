@@ -32,7 +32,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   @Output() connectionCreatedOrUpdated = new EventEmitter<Connection>();
   @Output() itemCreatedOrUpdated = new EventEmitter<Item>();
   @Output() enemyCreatedOrUpdated = new EventEmitter<Enemy>();
-  @Output() otherObjectCreated = new EventEmitter<OtherObject>();
+  @Output() otherObjectCreatedOrUpdated = new EventEmitter<OtherObject>();
   @Output() npcCreated = new EventEmitter<NPC>();
 
   showingDetails: boolean = false;
@@ -40,6 +40,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   connectionToEdit: Connection | undefined;
   itemToEdit: Item | undefined;
   enemyToEdit: Enemy | undefined;
+  otherObjectToEdit: OtherObject | undefined;
 
   protected readonly nameOf = nameOf;
 
@@ -48,6 +49,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
       case KeyInSublocation.Connections: {this.connectionToEdit = pairOfObjectAndKey.first as Connection;break;}
       case KeyInSublocation.Items: {this.itemToEdit = pairOfObjectAndKey.first as Item;break;}
       case KeyInSublocation.Enemies: {this.enemyToEdit = pairOfObjectAndKey.first as Enemy;break;}
+      case KeyInSublocation.Objects: {this.otherObjectToEdit = pairOfObjectAndKey.first as OtherObject;break;}
       default:;
     }
   }
@@ -68,8 +70,8 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
     this.enemyCreatedOrUpdated.emit(enemy);
   }
 
-  createOtherObject(object: OtherObject) {
-    this.otherObjectCreated.emit(object)
+  createOrUpdateOtherObject(object: OtherObject) {
+    this.otherObjectCreatedOrUpdated.emit(object)
   }
 
   createNPC(npc: NPC) {

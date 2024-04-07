@@ -7,13 +7,12 @@
   [editCondition]="editConnection?.if"
   [startingConditions]="startingConditions"
   (internalConditionChange)="updateCondition($event)"
-
 />
 <button (click)="createOrUpdateConnection()">
   <span *ngIf="editConnection===undefined">
     create
   </span>
   <span *ngIf="editConnection!==undefined">
-    create
+    update
   </span>
 </button>

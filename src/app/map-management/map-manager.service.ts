@@ -163,13 +163,18 @@ export class MapManagerService {
     }
   }
 
-  createObjectInLocation(major: MajorLocation | undefined, location: Location | undefined, object: OtherObject | undefined) {
+  createOrUpdateObjectInLocation(major: MajorLocation | undefined, location: Location | undefined, object: OtherObject | undefined) {
     if (major === undefined || location === undefined || object === undefined) {
       return;
     }
     const majorIndex = this.map.locations.indexOf(major);
     const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
-    this.map.locations[majorIndex].subLocations[minorIndex].objects.push(object);
+    const objectIndex = this.map.locations[majorIndex].subLocations[minorIndex].objects.findIndex(oldObject => oldObject.id == object?.id);
+    if (objectIndex == -1) {
+      this.map.locations[majorIndex].subLocations[minorIndex].objects.push(object);
+    } else {
+      this.map.locations[majorIndex].subLocations[minorIndex].objects[objectIndex] = object;
+    }
   }
 
   createNPCInLocation(major: MajorLocation | undefined, location: Location | undefined, npc: NPC | undefined) {

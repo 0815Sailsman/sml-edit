@@ -104,8 +104,8 @@ export class MajorLocationCardComponent {
       );
   }
 
-  createObjectInLocation(pairOfLocationAndObject: Pair<Location, OtherObject>) {
-    this.mapService.createObjectInLocation(
+  createOrUpdateObjectInLocation(pairOfLocationAndObject: Pair<Location, OtherObject>) {
+    this.mapService.createOrUpdateObjectInLocation(
       this.majorLocation,
       pairOfLocationAndObject.first,
       pairOfLocationAndObject.second

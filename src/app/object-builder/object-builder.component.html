@@ -1,5 +1,16 @@
 <div>
   <label for="name">Create new object with name: </label><input id="name" name="name" [(ngModel)]="objectName" ngDefaultControl/><br>
 </div>
-<sml-edit-condition-builder (internalConditionChange)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
-<button (click)="createNewObject()">create</button>
+<sml-edit-condition-builder
+  [editCondition]="editedObject?.if"
+  (internalConditionChange)="updateInternalCondition($event)"
+  [startingConditions]="startingConditions"
+/>
+<button (click)="createOrUpdateNewObject()">
+  <span *ngIf="editedObject===undefined">
+    create
+  </span>
+  <span *ngIf="editedObject!==undefined">
+    update
+  </span>
+</button>

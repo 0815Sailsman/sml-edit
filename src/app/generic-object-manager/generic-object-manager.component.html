@@ -33,8 +33,9 @@
     />
     <sml-edit-object-builder
       *ngSwitchCase="'objects'"
-      (objectCreated)="createOtherObject($event)"
+      (objectCreatedOrUpdated)="createOrUpdateOtherObject($event)"
       [startingConditions]="extractConditions(genericObjectArray)"
+      [editedObject]="otherObjectToEdit"
     />
     <sml-edit-npc-builder
       *ngSwitchDefault

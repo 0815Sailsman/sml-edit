@@ -46,7 +46,7 @@ export class SubLocationCardComponent {
   @Output() connectionCreatedOrUpdatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
   @Output() itemCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, Item>>();
   @Output() enemyCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, Enemy>>();
-  @Output() objectCreatedInLocation = new EventEmitter<Pair<Location, OtherObject>>();
+  @Output() objectCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, OtherObject>>();
   @Output() npcCreatedInLocation = new EventEmitter<Pair<Location, NPC>>();
 
   fireLocationDeleted() {
@@ -102,8 +102,8 @@ export class SubLocationCardComponent {
     });
   }
 
-  registerNewObject(theObject: OtherObject) {
-    this.objectCreatedInLocation.emit({
+  registerOrUpdateNewObject(theObject: OtherObject) {
+    this.objectCreatedOrUpdatedInLocation.emit({
       first: this.location,
       second: theObject
     });

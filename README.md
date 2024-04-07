@@ -33,7 +33,7 @@ Each **location** may have any amount of
   - [x] edit enemies
     - [x] edit drops
     - [x] pass starting conditions
-  - [ ] edit other objects
+  - [x] edit other objects
   - [ ] edit NPCs
 - [ ] clear builders on create / confirm edit
 - [ ] Change area / location naming scheme
