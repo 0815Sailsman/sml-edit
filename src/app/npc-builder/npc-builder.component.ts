@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ItemBuilderComponent} from "../item-builder/item-builder.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {ShopItem} from "../map-management/ShopItem";
 import {Item} from "../map-management/item";
 import {BigCondition} from "../map-management/bigCondition";
@@ -12,6 +12,7 @@ import {ItemBuilderHeaderComponent} from "../item-builder/item-builder-header/it
 import {ItemType} from "../map-management/itemType";
 import {IdManagerService} from "../map-management/id-manager.service";
 import {AtomicCondition} from "../map-management/atomicCondition";
+import {Drop} from "../map-management/drop";
 
 @Component({
   selector: 'sml-edit-npc-builder',
@@ -22,7 +23,8 @@ import {AtomicCondition} from "../map-management/atomicCondition";
     FormsModule,
     ItemBuilderComponent,
     NgForOf,
-    ItemBuilderHeaderComponent
+    ItemBuilderHeaderComponent,
+    NgIf
   ],
   templateUrl: './npc-builder.component.html',
   styleUrl: './npc-builder.component.css'
@@ -35,6 +37,7 @@ export class NpcBuilderComponent {
   newShopItemCount: number | undefined;
   newShopItemCost: number | undefined;
   condition: BigCondition | undefined;
+  editedShopItemID: number | undefined;
 
   constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
@@ -53,18 +56,36 @@ export class NpcBuilderComponent {
     }
   }
 
-  addShopItem() {
+  addOrUpdateShopItem() {
     if (this.newShopItemItemType !== undefined && this.newShopItemCost !== undefined && this.newShopItemCount !== undefined) {
-      this.shopItems.push({
+      const shopItemObject = {
         item: {
-          id: this.idService.nextItemID(),
+          id: this.editedShopItemID !== undefined ? this.editedShopItemID : this.idService.nextItemID(),
           itemTypeID: this.newShopItemItemType.id,
           count: 1
         },
         count: this.newShopItemCount,
         cost: this.newShopItemCost
-      })
+      };
+      if (this.editedShopItemID !== undefined) {
+        const existingShopItemIndex = this.shopItems.findIndex(obj => obj.item.id == this.editedShopItemID)
+        this.shopItems[existingShopItemIndex] = shopItemObject;
+      } else {
+        this.shopItems.push(shopItemObject);
+      }
     }
+    this.editedShopItemID = undefined;
+  }
+
+  editShopItem(shopItem: ShopItem) {
+    this.newShopItemCount = shopItem.item.count;
+    this.newShopItemItemType = this.mapService.itemTypeById(shopItem.item.itemTypeID);
+    this.newShopItemCost = shopItem.cost;
+    this.editedShopItemID = shopItem.item.id;
+  }
+
+  deleteShopItem(shopItem: ShopItem) {
+    this.shopItems = this.shopItems.filter(existingItem => existingItem.item.itemTypeID !== shopItem.item.itemTypeID)
   }
 
   updateInternalCondition(updatedCondition: BigCondition) {

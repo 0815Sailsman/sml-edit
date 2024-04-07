@@ -35,23 +35,27 @@ Each **location** may have any amount of
     - [x] pass starting conditions
   - [x] edit other objects
   - [ ] edit NPCs
+    - [x] edit shop items
 - [ ] clear builders on create / confirm edit
 - [ ] Change area / location naming scheme
 - [ ] select from all doesn't show enough information
 - [ ] make condition clearable
 - [ ] generally clear fields on create and update
 
-## Fix TODOs backlog
-- [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
-- [ ] Quest-Line modeling for npcs with interactions
+## The big refactoring backlog
+- [ ] wrap shop item builder in own component
+- [ ] Move toString methods to own service and out of mapManagerService
 - [ ] de-generalize object manager into different components
 
+## Feature backlog
+- [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
+- [ ] Quest-Line modeling for npcs with interactions
+
 ## Possible Spikes
-- [ ] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
+- [x] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
 - [ ] Use forms
 - [ ] Create from existing object as template
 - [x] Possibly split different IDs
-- [ ] Move toString methods to own service and out of mapManagerService
 - [ ] Meta tags and info-dump in root of sml file
 - [ ] do we really need this 'bubbling', now that the IDs are clear? -> updating minor stuff without reference to major
 - [ ] work with dev preview conditional templating

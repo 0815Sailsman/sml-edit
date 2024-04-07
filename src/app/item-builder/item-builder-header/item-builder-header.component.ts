@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {MapManagerService} from "../../map-management/map-manager.service";
 import {ItemType} from "../../map-management/itemType";
 import {FormsModule} from "@angular/forms";
 import {SelectFromAllComponent} from "../../select-from-all/select-from-all.component";
+import {Item} from "../../map-management/item";
 
 @Component({
   selector: 'sml-edit-item-builder-header',
@@ -16,13 +17,13 @@ import {SelectFromAllComponent} from "../../select-from-all/select-from-all.comp
 })
 export class ItemBuilderHeaderComponent {
 
-  @Input() itemType: ItemType | undefined;
   newItemTypeName: string | undefined;
-  @Input() itemCount: number |undefined;
 
   constructor(protected mapService: MapManagerService) {
   }
 
+  @Input() itemType: ItemType | undefined;
+  @Input() itemCount: number |undefined;
   @Output() itemTypeChange = new EventEmitter<ItemType>();
   @Output() itemCountChange = new EventEmitter<number>();
 
