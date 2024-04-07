@@ -22,7 +22,7 @@
     (itemCreatedOrUpdatedInLocation)="createOrUpdateItemInLocation($event)"
     (enemyCreatedOrUpdatedInLocation)="createOrUpdateEnemyInLocation($event)"
     (objectCreatedOrUpdatedInLocation)="createOrUpdateObjectInLocation($event)"
-    (npcCreatedInLocation)="createNPCInLocation($event)"
+    (npcCreatedOrUpdatedInLocation)="createOrUpdateNPCInLocation($event)"
   />
   <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName" ngDefaultControl>
   <button (click)="addSubLocation(newLocationName)">add new minor</button>

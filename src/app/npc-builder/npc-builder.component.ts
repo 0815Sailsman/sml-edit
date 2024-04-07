@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ItemBuilderComponent} from "../item-builder/item-builder.component";
@@ -29,7 +29,7 @@ import {Drop} from "../map-management/drop";
   templateUrl: './npc-builder.component.html',
   styleUrl: './npc-builder.component.css'
 })
-export class NpcBuilderComponent {
+export class NpcBuilderComponent implements OnChanges {
 
   npcName: string | undefined;
   shopItems: ShopItem[] = [];
@@ -38,22 +38,37 @@ export class NpcBuilderComponent {
   newShopItemCost: number | undefined;
   condition: BigCondition | undefined;
   editedShopItemID: number | undefined;
+  editing: boolean = false;
 
   constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
 
   @Input() startingConditions: AtomicCondition[] = [];
-  @Output() npcCreated = new EventEmitter<NPC>();
+  @Input() editedNPC: NPC | undefined;
+  @Output() npcCreatedOrUpdated = new EventEmitter<NPC>();
 
-  createNewNpc() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.editedNPC !== undefined && !this.editing) {
+      this.editing = true;
+      this.npcName = this.editedNPC.name;
+      this.shopItems = this.editedNPC.shop;
+      if (this.editedNPC.if !== undefined) {
+        this.condition = this.editedNPC.if;
+      }
+    }
+  }
+
+  createOrUpdateNewNpc() {
     if (this.npcName !== undefined) {
-      this.npcCreated.emit({
-        id: this.idService.nextNPCID(),
+      this.npcCreatedOrUpdated.emit({
+        id: this.editedNPC !== undefined ? this.editedNPC.id : this.idService.nextNPCID(),
         shop: this.shopItems,
         name: this.npcName,
         if: this.condition
       })
     }
+    this.editedNPC = undefined;
+    this.editing = false;
   }
 
   addOrUpdateShopItem() {

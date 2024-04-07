@@ -33,7 +33,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   @Output() itemCreatedOrUpdated = new EventEmitter<Item>();
   @Output() enemyCreatedOrUpdated = new EventEmitter<Enemy>();
   @Output() otherObjectCreatedOrUpdated = new EventEmitter<OtherObject>();
-  @Output() npcCreated = new EventEmitter<NPC>();
+  @Output() npcCreatedOrUpdated = new EventEmitter<NPC>();
 
   showingDetails: boolean = false;
 
@@ -41,6 +41,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
   itemToEdit: Item | undefined;
   enemyToEdit: Enemy | undefined;
   otherObjectToEdit: OtherObject | undefined;
+  npcToEdit: NPC | undefined;
 
   protected readonly nameOf = nameOf;
 
@@ -50,7 +51,7 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
       case KeyInSublocation.Items: {this.itemToEdit = pairOfObjectAndKey.first as Item;break;}
       case KeyInSublocation.Enemies: {this.enemyToEdit = pairOfObjectAndKey.first as Enemy;break;}
       case KeyInSublocation.Objects: {this.otherObjectToEdit = pairOfObjectAndKey.first as OtherObject;break;}
-      default:;
+      case KeyInSublocation.Npcs: {this.npcToEdit = pairOfObjectAndKey.first as NPC;break;}
     }
   }
 
@@ -74,8 +75,8 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
     this.otherObjectCreatedOrUpdated.emit(object)
   }
 
-  createNPC(npc: NPC) {
-    this.npcCreated.emit(npc)
+  createOrUpdateNPC(npc: NPC) {
+    this.npcCreatedOrUpdated.emit(npc)
   }
 
   toggleDetails() {

@@ -34,7 +34,7 @@ Each **location** may have any amount of
     - [x] edit drops
     - [x] pass starting conditions
   - [x] edit other objects
-  - [ ] edit NPCs
+  - [x] edit NPCs
     - [x] edit shop items
 - [ ] clear builders on create / confirm edit
 - [ ] Change area / location naming scheme
@@ -46,6 +46,7 @@ Each **location** may have any amount of
 - [ ] wrap shop item builder in own component
 - [ ] Move toString methods to own service and out of mapManagerService
 - [ ] de-generalize object manager into different components
+- [ ] unify createOrUpdate Pipeline
 
 ## Feature backlog
 - [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions

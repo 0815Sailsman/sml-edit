@@ -39,8 +39,9 @@
     />
     <sml-edit-npc-builder
       *ngSwitchDefault
-      (npcCreated)="createNPC($event)"
+      (npcCreatedOrUpdated)="createOrUpdateNPC($event)"
       [startingConditions]="extractConditions(genericObjectArray)"
+      [editedNPC]="npcToEdit"
     />
   </div>
 

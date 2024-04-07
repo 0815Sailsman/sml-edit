@@ -24,5 +24,12 @@
     </button>
   </div>
 </div>
-<sml-edit-condition-builder (internalConditionChange)="updateInternalCondition($event)" [startingConditions]="startingConditions"/>
-<button (click)="createNewNpc()">create</button>
+<sml-edit-condition-builder
+  (internalConditionChange)="updateInternalCondition($event)"
+  [startingConditions]="startingConditions"
+  [editCondition]="editedNPC?.if"
+/>
+<button (click)="createOrUpdateNewNpc()">
+  <span *ngIf="editedNPC===undefined">create</span>
+  <span *ngIf="editedNPC!==undefined">update</span>
+</button>

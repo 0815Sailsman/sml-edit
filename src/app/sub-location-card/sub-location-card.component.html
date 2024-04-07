@@ -49,7 +49,7 @@
     [objectToString]="npcToString"
     (objectDeleted)="deleteObject($event)"
     [key]="KeyInSublocation.Npcs"
-    (npcCreated)="registerNewNPC($event)"
+    (npcCreatedOrUpdated)="registerOrUpdateNewNPC($event)"
     style="margin-bottom: 10px"
   />
 </div>

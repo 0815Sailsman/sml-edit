@@ -54,7 +54,7 @@ export class EnemyBuilderComponent implements OnChanges {
       this.drops = this.editedEnemy.drops;
       this.respawns = this.editedEnemy.respawns;
       if (this.editedEnemy.if !== undefined) {
-        this.condition = this.editedEnemy.if
+        this.condition = this.editedEnemy.if;
       }
     }
   }

@@ -112,8 +112,8 @@ export class MajorLocationCardComponent {
     );
   }
 
-  createNPCInLocation(pairOfLocationAndNPC: Pair<Location, NPC>) {
-    this.mapService.createNPCInLocation(
+  createOrUpdateNPCInLocation(pairOfLocationAndNPC: Pair<Location, NPC>) {
+    this.mapService.createOrUpdateNPCInLocation(
       this.majorLocation,
       pairOfLocationAndNPC.first,
       pairOfLocationAndNPC.second
