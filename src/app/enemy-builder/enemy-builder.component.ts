@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule} from "@angular/forms";
 import {MapManagerService} from "../map-management/map-manager.service";
@@ -31,6 +31,13 @@ import {AtomicCondition} from "../map-management/atomicCondition";
 })
 export class EnemyBuilderComponent implements OnChanges {
 
+  @ViewChild(ConditionBuilderComponent) conditionBuilder!: ConditionBuilderComponent;
+  @ViewChild(DropBuilderComponent) dropBuilder!: DropBuilderComponent;
+
+  @Input() startingConditions: AtomicCondition[] = [];
+  @Input() editedEnemy: Enemy | undefined;
+  @Output() enemyCreatedOrUpdated = new EventEmitter<Enemy>();
+
   constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
   }
 
@@ -41,10 +48,6 @@ export class EnemyBuilderComponent implements OnChanges {
   respawns: boolean = true;
   dropToEdit: Drop | undefined;
   editing: boolean = false;
-
-  @Input() startingConditions: AtomicCondition[] = [];
-  @Input() editedEnemy: Enemy | undefined;
-  @Output() enemyCreatedOrUpdated = new EventEmitter<Enemy>();
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.editedEnemy !== undefined && !this.editing) {
@@ -76,6 +79,14 @@ export class EnemyBuilderComponent implements OnChanges {
     }
     this.editedEnemy = undefined;
     this.editing = false;
+
+    this.enemyName = undefined;
+    this.souls = undefined;
+    this.condition = undefined;
+    this.respawns = false;
+    this.drops = [];
+    this.dropBuilder.clear();
+    this.conditionBuilder.clear();
   }
 
   addOrUpdateDrop(drop: Drop) {

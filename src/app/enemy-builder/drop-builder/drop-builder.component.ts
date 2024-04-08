@@ -53,6 +53,13 @@ export class DropBuilderComponent implements OnChanges{
       })
       this.editedDrop = undefined;
       this.editing = false;
+      this.clear();
     }
+  }
+
+  clear() {
+    this.dropChance = 100;
+    this.dropItemType = undefined;
+    this.dropItemCount = undefined;
   }
 }

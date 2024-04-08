@@ -39,7 +39,7 @@ Each **location** may have any amount of
 - [ ] clear builders on create / confirm edit actions
   - [x] connection builder
   - [x] item builder
-  - [ ] enemy builder
+  - [x] enemy builder
   - [ ] otherObject builder
   - [ ] NPC builder
 - [ ] Change area / location naming scheme
