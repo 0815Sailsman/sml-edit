@@ -36,9 +36,9 @@ Each **location** may have any amount of
   - [x] edit other objects
   - [x] edit NPCs
     - [x] edit shop items
-- [ ] clear builders on create / confirm edit
+- [ ] clear builders on create / confirm edit actions
   - [x] connection builder
-  - [ ] item builder
+  - [x] item builder
   - [ ] enemy builder
   - [ ] otherObject builder
   - [ ] NPC builder

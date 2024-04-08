@@ -17,15 +17,15 @@ import {Item} from "../../map-management/item";
 })
 export class ItemBuilderHeaderComponent {
 
-  newItemTypeName: string | undefined;
-
-  constructor(protected mapService: MapManagerService) {
-  }
-
   @Input() itemType: ItemType | undefined;
   @Input() itemCount: number |undefined;
   @Output() itemTypeChange = new EventEmitter<ItemType>();
   @Output() itemCountChange = new EventEmitter<number>();
+
+  constructor(protected mapService: MapManagerService) {
+  }
+
+  newItemTypeName: string | undefined;
 
   createNewItemType() {
     if (this.newItemTypeName !== undefined) {
@@ -35,6 +35,7 @@ export class ItemBuilderHeaderComponent {
         this.itemTypeChange.emit(this.itemType);
       }
     }
+    this.newItemTypeName = undefined;
   }
 
   fireTypeChange() {

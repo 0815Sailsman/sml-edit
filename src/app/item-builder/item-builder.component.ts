@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {BigCondition} from "../map-management/bigCondition";
 import {FormsModule} from "@angular/forms";
@@ -26,19 +26,21 @@ import {AtomicCondition} from "../map-management/atomicCondition";
 })
 export class ItemBuilderComponent implements OnChanges {
 
-  itemType: ItemType | undefined;
-  itemCount: number |undefined;
-  condition: BigCondition | undefined;
-  newItemTypeName: string | undefined;
-  editing: boolean = false;
-
-  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
-  }
+  @ViewChild(ConditionBuilderComponent) conditionBuilder!: ConditionBuilderComponent;
 
   @Input() allowConditions: boolean |undefined = true;
   @Input() startingConditions: AtomicCondition[] = [];
   @Input() editedItem: Item | undefined;
   @Output() itemCreatedOrUpdated = new EventEmitter<Item>();
+
+  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
+  }
+
+  itemType: ItemType | undefined;
+  itemCount: number |undefined;
+  condition: BigCondition | undefined;
+  newItemTypeName: string | undefined;
+  editing: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.editedItem !== undefined && !this.editing) {
@@ -66,5 +68,10 @@ export class ItemBuilderComponent implements OnChanges {
     }
     this.editedItem = undefined;
     this.editing = false;
+
+    this.itemType = undefined;
+    this.itemCount = undefined;
+    this.condition = undefined;
+    this.conditionBuilder.clear();
   }
 }
