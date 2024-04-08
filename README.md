@@ -41,7 +41,7 @@ Each **location** may have any amount of
   - [x] item builder
   - [x] enemy builder
   - [x] otherObject builder
-  - [ ] NPC builder
+  - [x] NPC builder
 - [ ] Change area / location naming scheme
 - [ ] select from all doesn't show enough information
 - [ ] make condition clearable

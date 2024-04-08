@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ItemBuilderComponent} from "../item-builder/item-builder.component";
@@ -31,6 +31,15 @@ import {Drop} from "../map-management/drop";
 })
 export class NpcBuilderComponent implements OnChanges {
 
+  @ViewChild(ConditionBuilderComponent) conditionBuilder!: ConditionBuilderComponent;
+
+  @Input() startingConditions: AtomicCondition[] = [];
+  @Input() editedNPC: NPC | undefined;
+  @Output() npcCreatedOrUpdated = new EventEmitter<NPC>();
+
+  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
+  }
+
   npcName: string | undefined;
   shopItems: ShopItem[] = [];
   newShopItemItemType: ItemType | undefined;
@@ -39,13 +48,6 @@ export class NpcBuilderComponent implements OnChanges {
   condition: BigCondition | undefined;
   editedShopItemID: number | undefined;
   editing: boolean = false;
-
-  constructor(protected mapService: MapManagerService, private idService: IdManagerService) {
-  }
-
-  @Input() startingConditions: AtomicCondition[] = [];
-  @Input() editedNPC: NPC | undefined;
-  @Output() npcCreatedOrUpdated = new EventEmitter<NPC>();
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.editedNPC !== undefined && !this.editing) {
@@ -69,6 +71,14 @@ export class NpcBuilderComponent implements OnChanges {
     }
     this.editedNPC = undefined;
     this.editing = false;
+
+    this.npcName = undefined;
+    this.shopItems = [];
+    this.newShopItemItemType = undefined;
+    this.newShopItemCount =  undefined;
+    this.newShopItemCost =  undefined;
+    this.condition = undefined;
+    this.conditionBuilder.clear();
   }
 
   addOrUpdateShopItem() {
