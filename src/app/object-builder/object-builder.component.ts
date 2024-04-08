@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OtherObject} from "../map-management/otherObject";
@@ -22,16 +22,18 @@ import {NgIf} from "@angular/common";
 })
 export class ObjectBuilderComponent implements OnChanges {
 
-  objectName: string | undefined;
-  condition: BigCondition | undefined;
-  editing: boolean = false;
-
-  constructor(private mapService: MapManagerService, private idService: IdManagerService) {
-  }
+  @ViewChild(ConditionBuilderComponent) conditionBuilder!: ConditionBuilderComponent;
 
   @Input() startingConditions: AtomicCondition[] = [];
   @Input() editedObject: OtherObject | undefined;
   @Output() objectCreatedOrUpdated = new EventEmitter<OtherObject>();
+
+  constructor(private mapService: MapManagerService, private idService: IdManagerService) {
+  }
+
+  objectName: string | undefined;
+  condition: BigCondition | undefined;
+  editing: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.editedObject !== undefined && !this.editing) {
@@ -57,6 +59,10 @@ export class ObjectBuilderComponent implements OnChanges {
     }
     this.editedObject = undefined;
     this.editing = false;
+
+    this.objectName = undefined;
+    this.condition = undefined;
+    this.conditionBuilder.clear();
   }
 
 }

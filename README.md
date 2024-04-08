@@ -40,7 +40,7 @@ Each **location** may have any amount of
   - [x] connection builder
   - [x] item builder
   - [x] enemy builder
-  - [ ] otherObject builder
+  - [x] otherObject builder
   - [ ] NPC builder
 - [ ] Change area / location naming scheme
 - [ ] select from all doesn't show enough information
