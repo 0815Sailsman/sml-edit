@@ -47,7 +47,10 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
 
   editObject(pairOfObjectAndKey: Pair<T, KeyInSublocation>) {
     switch (pairOfObjectAndKey.second) {
-      case KeyInSublocation.Connections: {this.connectionToEdit = pairOfObjectAndKey.first as Connection;break;}
+      case KeyInSublocation.Connections: {
+        this.connectionToEdit = pairOfObjectAndKey.first as Connection;
+        break;
+      }
       case KeyInSublocation.Items: {this.itemToEdit = pairOfObjectAndKey.first as Item;break;}
       case KeyInSublocation.Enemies: {this.enemyToEdit = pairOfObjectAndKey.first as Enemy;break;}
       case KeyInSublocation.Objects: {this.otherObjectToEdit = pairOfObjectAndKey.first as OtherObject;break;}

@@ -21,4 +21,7 @@ export class TextualConditionBuilderComponent {
     return true;
   }
 
+  clear() {
+    this.conditionString = "";
+  }
 }

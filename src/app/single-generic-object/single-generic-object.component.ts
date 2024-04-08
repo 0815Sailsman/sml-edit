@@ -45,14 +45,14 @@ export class SingleGenericObjectComponent<T extends ObjectInSublocation> {
   }
 
   isConnection(value: any): value is Connection {
-    return 'to' in value
+    return 'to' in value;
   }
 
   isCountable(value: any): value is Item {
-    return 'count' in value
+    return 'count' in value;
   }
 
   asAny(o: any): any {
-    return o
+    return o;
   }
 }

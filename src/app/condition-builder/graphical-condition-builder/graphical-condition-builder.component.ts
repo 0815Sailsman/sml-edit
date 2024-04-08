@@ -40,6 +40,7 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
   }
   editing: boolean = false;
   @Input() presetCondition: BigCondition | undefined;
+  private dontEmit: boolean = false;
 
   constructor(private mapService: MapManagerService) {
   }
@@ -132,10 +133,13 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
     if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 2];
     this.condition.grammar += this.selectedConditions[this.selectedConditions.length - 1].abbreviation;
     if (this.doBrackets) this.condition.grammar += this.selectedBrackets[this.selectedBrackets.length - 1];
-    this.conditionChange.emit(this.condition);
+    if (!this.dontEmit) {
+      this.conditionChange.emit(this.condition);
+    }
   }
 
   toggleBrackets() {
+    this.dontEmit = false;
     this.selectedBrackets = []
     this.doBrackets = !this.doBrackets
     if (this.doBrackets) {
@@ -162,6 +166,15 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
       return OptionalBracket.Close;
     }
     return OptionalBracket.None;
+  }
+
+  clear() {
+    this.dontEmit = true;
+    this.conditionCount = 1;
+    this.doBrackets = false;
+    this.selectedConditions = []
+    this.selectedCombinators = []
+    this.dontEmit = false;
   }
 }
 

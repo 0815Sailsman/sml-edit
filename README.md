@@ -37,6 +37,11 @@ Each **location** may have any amount of
   - [x] edit NPCs
     - [x] edit shop items
 - [ ] clear builders on create / confirm edit
+  - [x] connection builder
+  - [ ] item builder
+  - [ ] enemy builder
+  - [ ] otherObject builder
+  - [ ] NPC builder
 - [ ] Change area / location naming scheme
 - [ ] select from all doesn't show enough information
 - [ ] make condition clearable
@@ -70,3 +75,4 @@ Each **location** may have any amount of
 - [x] loading connections doesn't work after ID introduction
 - [x] item builder change detection fires always on change during edit, possibly also other builder -> might be fixed due to editing flag
 - [x] update connection seems bugged
+- [ ] deep copy condtions in builders to avoid weird references after clearing

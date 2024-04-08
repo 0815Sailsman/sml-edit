@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule, NgClass, NgForOf, NgIf} from "@angular/common";
 import {TextualConditionBuilderComponent} from "./textual-condition-builder/textual-condition-builder.component";
@@ -27,6 +27,9 @@ export class ConditionBuilderComponent {
   @Output() internalConditionChange = new EventEmitter<BigCondition>();
   @Input() editCondition: BigCondition | undefined;
 
+  @ViewChild(TextualConditionBuilderComponent) textualConditionBuilder!: TextualConditionBuilderComponent;
+  @ViewChild(GraphicalConditionBuilderComponent) graphicalConditionBuilder!: GraphicalConditionBuilderComponent;
+
   textMode: boolean = false;
 
   toggleConditionEntryMode() {
@@ -35,5 +38,13 @@ export class ConditionBuilderComponent {
 
   updateInternalCondition(updatedCondition: BigCondition) {
     this.internalConditionChange.emit(updatedCondition)
+  }
+
+  clear() {
+    if (this.textMode) {
+      this.textualConditionBuilder.clear();
+    } else {
+      this.graphicalConditionBuilder.clear();
+    }
   }
 }

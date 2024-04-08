@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Connection} from "../map-management/connection";
 import {FormsModule} from "@angular/forms";
@@ -10,6 +10,9 @@ import {EasilySelectable} from "../EasilySelectable";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {AtomicCondition} from "../map-management/atomicCondition";
 import {IdManagerService} from "../map-management/id-manager.service";
+import {
+  GraphicalConditionBuilderComponent
+} from "../condition-builder/graphical-condition-builder/graphical-condition-builder.component";
 
 @Component({
   selector: 'sml-edit-connection-builder',
@@ -19,6 +22,8 @@ import {IdManagerService} from "../map-management/id-manager.service";
   styleUrl: './connection-builder.component.css'
 })
 export class ConnectionBuilderComponent implements OnChanges {
+
+  @ViewChild(ConditionBuilderComponent) conditionBuilder!: ConditionBuilderComponent;
 
   @Input() startingConditions: AtomicCondition[] = [];
   @Input() editConnection: Connection | undefined;
@@ -43,14 +48,19 @@ export class ConnectionBuilderComponent implements OnChanges {
 
   createOrUpdateConnection() {
     if (this.targetLocation != undefined) {
+      const connectionID = this.editConnection !== undefined ? this.editConnection?.id : this.idService.nextConnectionID();
       this.connectionCreatedOrUpdated.emit({
-        id: this.editConnection !== undefined ? this.editConnection?.id : this.idService.nextConnectionID(),
+        id: connectionID,
         to: this.targetLocation?.id,
-        if: this.condition
+        if: structuredClone(this.condition)
       })
     }
     this.editConnection = undefined;
     this.editing = false;
+
+    this.targetLocation = undefined;
+    this.condition = undefined;
+    this.conditionBuilder.clear();
   }
 
   protected readonly Location = Location;
