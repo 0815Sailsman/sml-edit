@@ -71,7 +71,7 @@ export class EnemyBuilderComponent implements OnChanges {
         souls: this.souls,
         respawns: this.respawns,
         drops: this.drops,
-        if: this.condition
+        if: structuredClone(this.condition)
       })
     }
     this.editedEnemy = undefined;

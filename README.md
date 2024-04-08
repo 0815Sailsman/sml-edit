@@ -75,4 +75,4 @@ Each **location** may have any amount of
 - [x] loading connections doesn't work after ID introduction
 - [x] item builder change detection fires always on change during edit, possibly also other builder -> might be fixed due to editing flag
 - [x] update connection seems bugged
-- [ ] deep copy condtions in builders to avoid weird references after clearing
+- [x] deep copy condtions in builders to avoid weird references after clearing

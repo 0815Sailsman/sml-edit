@@ -64,7 +64,7 @@ export class NpcBuilderComponent implements OnChanges {
         id: this.editedNPC !== undefined ? this.editedNPC.id : this.idService.nextNPCID(),
         shop: this.shopItems,
         name: this.npcName,
-        if: this.condition
+        if: structuredClone(this.condition)
       })
     }
     this.editedNPC = undefined;

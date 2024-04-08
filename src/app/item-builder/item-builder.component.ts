@@ -61,7 +61,7 @@ export class ItemBuilderComponent implements OnChanges {
         id: this.editedItem !== undefined ? this.editedItem.id : this.idService.nextItemID(),
         itemTypeID: this.itemType.id,
         count: this.itemCount,
-        if: this.condition
+        if: structuredClone(this.condition)
       })
     }
     this.editedItem = undefined;
