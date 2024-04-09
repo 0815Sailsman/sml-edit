@@ -24,7 +24,7 @@ Each **location** may have any amount of
 - [x] Revamp ID system
 - [x] Rework map loading
 - [x] load existing atomic conditions into corresponding builder on map load
-- [ ] Edit functionality
+- [x] Edit functionality
   - [x] edit major location name
   - [x] edit minor location name
   - [x] edit connection
@@ -36,7 +36,7 @@ Each **location** may have any amount of
   - [x] edit other objects
   - [x] edit NPCs
     - [x] edit shop items
-- [ ] clear builders on create / confirm edit actions
+- [x] clear builders on create / confirm edit actions
   - [x] connection builder
   - [x] item builder
   - [x] enemy builder
@@ -45,15 +45,17 @@ Each **location** may have any amount of
 - [x] Change area / location naming scheme
   - [x] majorLocation to area
   - [x] minorLocation to location
-- [ ] select from all doesn't show enough information
-- [ ] make condition clearable
-- [ ] generally clear fields on create and update
-- [ ] Stop using === equality for objects in map manager and switch to ID equality
+- [x] select from all doesn't show enough information
+  - too specific requirement, will change with design, so skip for this alpha
+- [x] make condition clearable
+- [x] generally clear fields on create and update
+- [x] Stop using === equality for objects in map manager and switch to ID equality
 
 ## The big refactoring backlog
 - [ ] wrap shop item builder in own component
-- [ ] Move toString methods to own service and out of mapManagerService
-- [ ] de-generalize object manager into different components
+- [ ] Make map objects classes with common abstract ancestor
+- [ ] Move toString methods to related classes
+- [ ] de-generalize object manager into different components (MAYBE)
 - [ ] unify createOrUpdate Pipeline
 
 ## Feature backlog

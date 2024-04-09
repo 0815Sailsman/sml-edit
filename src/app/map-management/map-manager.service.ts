@@ -58,7 +58,7 @@ export class MapManagerService {
   deleteLocationFrom(area: Area, theLocationToBeDeleted: Location) {
     let areaIndex: number = this.map.areas.indexOf(area);
     this.map.areas[areaIndex].locations =
-      this.map.areas[areaIndex].locations.filter(location => location !== theLocationToBeDeleted)
+      this.map.areas[areaIndex].locations.filter(location => location.id !== theLocationToBeDeleted.id)
   }
 
   deleteGeneralObjectFromLocationInArea(
@@ -74,7 +74,7 @@ export class MapManagerService {
     const locationIndex = this.map.areas[areaIndex].locations.indexOf(location)
     // @ts-ignore THIS WORKS, BECAUSE WE DON'T MIX DIFFERENT TYPES
     this.map.areas[areaIndex].locations[locationIndex][key] =
-      this.map.areas[areaIndex].locations[locationIndex][key].filter(object => object !== theObject)
+      this.map.areas[areaIndex].locations[locationIndex][key].filter(object => object.id !== theObject.id)
   }
 
   allLocations(): Location[] {
