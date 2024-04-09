@@ -29,8 +29,8 @@ export class IdManagerService {
     this.itemTypeID = this.extractMaxID(map.items);
   }
 
-  extractMaxID(arrayWithID: HasID[]) {
-    return arrayWithID.map(obj => obj.id).sort((a, b) => {if (a>=b)return a;return b;})[0];
+  extractMaxID(arrayWithID: HasID[]):number {
+    return arrayWithID.map(obj => obj.id).sort((a, b) => {if (a>=b)return a;return b;})[0] ?? 0;
   }
 
   nextAreaID(): number {
