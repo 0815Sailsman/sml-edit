@@ -1,4 +1,4 @@
-import {MajorLocation} from "./majorLocation";
+import {Area} from "./area";
 import {Location} from "./location";
 import {Connection} from "./connection";
 import {Item} from "./item";
@@ -15,20 +15,20 @@ import {ItemType} from "./itemType";
 
 export class Map {
   name: string
-  locations: MajorLocation[]
+  areas: Area[]
   items: ItemType[]
 
-  constructor(name: string, locations: UnparsedMajorLocation[], itemTypes: ItemType[]) {
+  constructor(name: string, unparsedAreas: UnparsedArea[], itemTypes: ItemType[]) {
     this.name = name;
-    this.locations = this.parseMajorLocations(locations);
+    this.areas = this.parseAreas(unparsedAreas);
     this.items = itemTypes;
   }
 
-  private parseMajorLocations(locations: UnparsedMajorLocation[]): MajorLocation[] {
-    return locations.map(location => {return {
-      id: location.id,
-      name: location.name,
-      subLocations: this.parseMinorLocations(location.subLocations)
+  private parseAreas(unparsedAreas: UnparsedArea[]): Area[] {
+    return unparsedAreas.map(area => {return {
+      id: area.id,
+      name: area.name,
+      subLocations: this.parseMinorLocations(area.subLocations)
     }})
   }
 
@@ -139,7 +139,7 @@ export class Map {
   }
 }
 
-interface UnparsedMajorLocation {
+interface UnparsedArea {
   id: number,
   name: string
   subLocations: UnparsedLocation[]

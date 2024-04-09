@@ -1,14 +1,14 @@
-<div id="majorWrapper">
+<div id="areaWrapper">
   <h1>{{mapService.map.name}}</h1>
-  <sml-edit-major-location-card
-    *ngFor="let everyLocation of mapService.map.locations"
-    [majorLocation]="everyLocation"
-    (locationDeleted)="deleteMajorLocation($event)"
+  <sml-edit-area-card
+    *ngFor="let area of mapService.map.areas"
+    [area]="area"
+    (areaDeleted)="deleteArea($event)"
   />
   <div id="controllerBar">
     <div class="doubleStack">
-      <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName" ngDefaultControl>
-      <button (click)="addMajorLocation(newLocationName)">add new major</button>
+      <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newAreaName" ngDefaultControl>
+      <button (click)="addArea(newAreaName)">add new major</button>
     </div>
     <div class="doubleStack">
       <input type="text" [(ngModel)]="filename" ngDefaultControl placeholder="filename">

@@ -17,7 +17,7 @@ export class ExtractorService {
   constructor() { }
 
   allMinorLocations(map: Map): Location[] {
-    return map.locations.flatMap(major => major.subLocations);
+    return map.areas.flatMap(major => major.subLocations);
   }
 
   allConnections(map: Map): Connection[] {

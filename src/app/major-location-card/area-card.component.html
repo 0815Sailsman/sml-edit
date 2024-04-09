@@ -1,7 +1,7 @@
-<span *ngIf="!currentlyEditing">Name: {{majorLocation.name}}</span>
+<span *ngIf="!currentlyEditing">Name: {{area.name}}</span>
 <label for="editName" *ngIf="currentlyEditing">Edit name: </label>
 <input *ngIf="currentlyEditing" type="text" id="editName" name="editName" [(ngModel)]="editedName"/>
-<span>| ID: {{majorLocation.id}}</span>
+<span>| ID: {{area.id}}</span>
 <button (click)="toggleEditing()">
   <span *ngIf="!currentlyEditing">
     edit
@@ -10,10 +10,10 @@
     confirm
   </span>
 </button>
-<button (click)="fireLocationDeleted()">delete</button>
+<button (click)="fireAreaDeleted()">delete</button>
 <div>
   <sml-edit-sub-location-card
-    *ngFor="let location of majorLocation?.subLocations"
+    *ngFor="let location of area?.subLocations"
     [location]="location"
     (locationDeleted)="deleteSubLocation($event)"
     (objectDeletedFromLocation)="deleteObjectFromLocation($event)"
@@ -24,6 +24,6 @@
     (objectCreatedOrUpdatedInLocation)="createOrUpdateObjectInLocation($event)"
     (npcCreatedOrUpdatedInLocation)="createOrUpdateNPCInLocation($event)"
   />
-  <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newLocationName" ngDefaultControl>
-  <button (click)="addSubLocation(newLocationName)">add new minor</button>
+  <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newAreaName" ngDefaultControl>
+  <button (click)="addLocation(newAreaName)">add new minor</button>
 </div>

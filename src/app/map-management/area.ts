@@ -1,6 +1,6 @@
 import {Location} from "./location";
 
-export interface MajorLocation {
+export interface Area {
   id: number
   name: string
   subLocations: Location[]

@@ -43,9 +43,12 @@ Each **location** may have any amount of
   - [x] otherObject builder
   - [x] NPC builder
 - [ ] Change area / location naming scheme
+  - [ ] majorLocation to area
+  - [ ] minorLocation to location
 - [ ] select from all doesn't show enough information
 - [ ] make condition clearable
 - [ ] generally clear fields on create and update
+- [ ] Stop using === equality for objects in map manager and switch to ID equality
 
 ## The big refactoring backlog
 - [ ] wrap shop item builder in own component

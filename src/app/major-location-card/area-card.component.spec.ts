@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MajorLocationCardComponent } from './major-location-card.component';
+import { AreaCardComponent } from './area-card.component';
 
 describe('MajorLocationCardComponent', () => {
-  let component: MajorLocationCardComponent;
-  let fixture: ComponentFixture<MajorLocationCardComponent>;
+  let component: AreaCardComponent;
+  let fixture: ComponentFixture<AreaCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MajorLocationCardComponent]
+      imports: [AreaCardComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(MajorLocationCardComponent);
+
+    fixture = TestBed.createComponent(AreaCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

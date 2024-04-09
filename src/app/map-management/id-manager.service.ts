@@ -9,7 +9,7 @@ export class IdManagerService {
 
   constructor(private extractor: ExtractorService) { }
 
-  majorLocationID: number = 0;
+  areaID: number = 0;
   minorLocationID: number = 0;
   connectionID: number = 0;
   itemID: number = 0;
@@ -19,7 +19,7 @@ export class IdManagerService {
   itemTypeID: number = 0;
 
   initIDsFromMap(map: Map) {
-    this.majorLocationID = this.extractMaxID(map.locations);
+    this.areaID = this.extractMaxID(map.areas);
     this.minorLocationID = this.extractMaxID(this.extractor.allMinorLocations(map));
     this.connectionID = this.extractMaxID(this.extractor.allConnections(map))
     this.itemID = this.extractMaxID(this.extractor.allItems(map));
@@ -33,8 +33,8 @@ export class IdManagerService {
     return arrayWithID.map(obj => obj.id).sort((a, b) => {if (a>=b)return a;return b;})[0];
   }
 
-  nextMajorLocationID(): number {
-    return ++this.majorLocationID;
+  nextAreaID(): number {
+    return ++this.areaID;
   }
 
   nextMinorLocationID(): number {

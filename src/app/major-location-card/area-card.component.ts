@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MajorLocation} from "../map-management/majorLocation";
+import {Area} from "../map-management/area";
 import {SubLocationCardComponent} from "../sub-location-card/sub-location-card.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ import {ObjectInSublocation} from "../ObjectInSublocation";
 import {KeyInSublocation} from "../KeyInSublocation";
 
 @Component({
-  selector: 'sml-edit-major-location-card',
+  selector: 'sml-edit-area-card',
   standalone: true,
   imports: [
     SubLocationCardComponent,
@@ -24,56 +24,56 @@ import {KeyInSublocation} from "../KeyInSublocation";
     ReactiveFormsModule,
     FormsModule
   ],
-  templateUrl: './major-location-card.component.html',
-  styleUrl: './major-location-card.component.css'
+  templateUrl: './area-card.component.html',
+  styleUrl: './area-card.component.css'
 })
-export class MajorLocationCardComponent {
+export class AreaCardComponent {
 
-  newLocationName: string | undefined;
+  newAreaName: string | undefined;
   currentlyEditing: boolean = false;
   editedName: string = "";
 
   constructor(private mapService: MapManagerService) {}
 
-  @Input() majorLocation!: MajorLocation;
-  @Output() locationDeleted = new EventEmitter<MajorLocation>();
+  @Input() area!: Area;
+  @Output() areaDeleted = new EventEmitter<Area>();
 
-  fireLocationDeleted() {
-    this.locationDeleted.emit(this.majorLocation)
+  fireAreaDeleted() {
+    this.areaDeleted.emit(this.area)
   }
 
   toggleEditing() {
     if (this.currentlyEditing) {
-      this.mapService.updateMajorLocationWithIDToName(this.majorLocation?.id, this.editedName);
-      this.majorLocation.name = this.editedName;
+      this.mapService.updateAreaWithIDToName(this.area?.id, this.editedName);
+      this.area.name = this.editedName;
     } else {
-      this.editedName = this.majorLocation?.name;
+      this.editedName = this.area?.name;
     }
     this.currentlyEditing = !this.currentlyEditing;
   }
 
-  addSubLocation(theName: string | undefined) {
-    if (theName != undefined && theName != "" && this.majorLocation != undefined) {
-      this.mapService.addMinorLocationTo(this.majorLocation, theName)
-      this.newLocationName = ""
+  addLocation(theName: string | undefined) {
+    if (theName != undefined && theName != "" && this.area != undefined) {
+      this.mapService.addMinorLocationTo(this.area, theName)
+      this.newAreaName = ""
     }
   }
 
   updateMinorLocationWithIDToName(pairOfIdAndName: Pair<number, string>) {
-    this.mapService.updateMinorLocationWithIDToName(this.majorLocation, pairOfIdAndName.first, pairOfIdAndName.second);
+    this.mapService.updateMinorLocationWithIDToName(this.area, pairOfIdAndName.first, pairOfIdAndName.second);
   }
 
   deleteSubLocation(theLocationToBeDeleted: Location) {
-    if (this.majorLocation != undefined) {
-      this.mapService.deleteSubLocationFrom(this.majorLocation, theLocationToBeDeleted)
+    if (this.area != undefined) {
+      this.mapService.deleteSubLocationFrom(this.area, theLocationToBeDeleted)
     }
   }
 
   deleteObjectFromLocation(
     tripletOfLocationAndObjectAndKey: Triplet<Location, ObjectInSublocation, KeyInSublocation>
   ): void {
-    this.mapService.deleteGeneralObjectFromLocationInMajorLocation(
-      this.majorLocation,
+    this.mapService.deleteGeneralObjectFromLocationInArea(
+      this.area,
       tripletOfLocationAndObjectAndKey.first,
       tripletOfLocationAndObjectAndKey.second,
       tripletOfLocationAndObjectAndKey.third
@@ -82,7 +82,7 @@ export class MajorLocationCardComponent {
 
   createOrUpdateConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
     this.mapService.createOrUpdateConnectionFromLocation(
-      this.majorLocation,
+      this.area,
       pairOfLocationAndConnection.first,
       pairOfLocationAndConnection.second
     )
@@ -90,7 +90,7 @@ export class MajorLocationCardComponent {
 
   createOrUpdateItemInLocation(pairOfLocationAndItem: Pair<Location, Item>) {
     this.mapService.createOrUpdateItemInLocation(
-      this.majorLocation,
+      this.area,
       pairOfLocationAndItem.first,
       pairOfLocationAndItem.second
       )
@@ -98,7 +98,7 @@ export class MajorLocationCardComponent {
 
   createOrUpdateEnemyInLocation(pairOfLocationAndEnemy: Pair<Location, Enemy>) {
     this.mapService.createOrUpdateEnemyInLocation(
-      this.majorLocation,
+      this.area,
       pairOfLocationAndEnemy.first,
       pairOfLocationAndEnemy.second
       );
@@ -106,7 +106,7 @@ export class MajorLocationCardComponent {
 
   createOrUpdateObjectInLocation(pairOfLocationAndObject: Pair<Location, OtherObject>) {
     this.mapService.createOrUpdateObjectInLocation(
-      this.majorLocation,
+      this.area,
       pairOfLocationAndObject.first,
       pairOfLocationAndObject.second
     );
@@ -114,7 +114,7 @@ export class MajorLocationCardComponent {
 
   createOrUpdateNPCInLocation(pairOfLocationAndNPC: Pair<Location, NPC>) {
     this.mapService.createOrUpdateNPCInLocation(
-      this.majorLocation,
+      this.area,
       pairOfLocationAndNPC.first,
       pairOfLocationAndNPC.second
     );

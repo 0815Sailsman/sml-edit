@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {MajorLocation} from "./majorLocation";
+import {Area} from "./area";
 import {Map} from './map';
 import {FromFileMapLoaderService} from "./loader/from-file-map-loader.service";
 import {Location} from "./location";
@@ -29,20 +29,20 @@ export class MapManagerService {
 
   map: Map = this.mapLoaderService.loadDefault();
 
-  deleteMajorLocation(theLocation: MajorLocation) {
-    this.map.locations = this.map.locations.filter(location => location !== theLocation)
+  deleteArea(areaToDelete: Area) {
+    this.map.areas = this.map.areas.filter(area => area !== areaToDelete)
   }
 
-  addMajorLocationWithName(theName: string) {
-    let newMajorLocation:MajorLocation = {
+  addAreaWithName(theName: string) {
+    let newArea:Area = {
       name: theName,
       subLocations: [],
-      id: this.idService.nextMajorLocationID()
+      id: this.idService.nextAreaID()
     }
-    this.map.locations.push(newMajorLocation)
+    this.map.areas.push(newArea)
   }
 
-  addMinorLocationTo(majorLocation: MajorLocation, theName: string) {
+  addMinorLocationTo(area: Area, theName: string) {
     let newMinorLocation: Location = {
       id: this.idService.nextMinorLocationID(),
       name: theName,
@@ -52,29 +52,29 @@ export class MapManagerService {
       objects: [],
       npcs: []
     }
-    this.map.locations[this.map.locations.indexOf(majorLocation)].subLocations.push(newMinorLocation)
+    this.map.areas[this.map.areas.indexOf(area)].subLocations.push(newMinorLocation)
   }
 
-  deleteSubLocationFrom(majorLocation: MajorLocation, theLocationToBeDeleted: Location) {
-    let index: number = this.map.locations.indexOf(majorLocation)
-    this.map.locations[index].subLocations =
-      this.map.locations[index].subLocations.filter(location => location !== theLocationToBeDeleted)
+  deleteSubLocationFrom(area: Area, theLocationToBeDeleted: Location) {
+    let areaIndex: number = this.map.areas.indexOf(area);
+    this.map.areas[areaIndex].subLocations =
+      this.map.areas[areaIndex].subLocations.filter(location => location !== theLocationToBeDeleted)
   }
 
-  deleteGeneralObjectFromLocationInMajorLocation(
-    majorLocation: MajorLocation | undefined,
+  deleteGeneralObjectFromLocationInArea(
+    area: Area | undefined,
     sublocation: Location | undefined,
     theObject: ObjectInSublocation | undefined,
     key: KeyInSublocation | undefined)
   {
-    if (majorLocation == undefined || sublocation == undefined || theObject == undefined || key == undefined) {
+    if (area == undefined || sublocation == undefined || theObject == undefined || key == undefined) {
       return
     }
-    const majorIndex = this.map.locations.indexOf(majorLocation);
-    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(sublocation)
+    const areaIndex = this.map.areas.indexOf(area);
+    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(sublocation)
     // @ts-ignore THIS WORKS, BECAUSE WE DON'T MIX DIFFERENT TYPES
-    this.map.locations[majorIndex].subLocations[minorIndex][key] =
-      this.map.locations[majorIndex].subLocations[minorIndex][key].filter(object => object !== theObject)
+    this.map.areas[areaIndex].subLocations[minorIndex][key] =
+      this.map.areas[areaIndex].subLocations[minorIndex][key].filter(object => object !== theObject)
   }
 
   allMinorLocations(): Location[] {
@@ -97,10 +97,6 @@ export class MapManagerService {
     return this.extractor.allOtherObjects(this.map);
   }
 
-  allNPCs(): NPC[] {
-    return this.extractor.allNPCs(this.map);
-  }
-
   minorLocationById(id: number): Location {
     return this.extractor.allMinorLocations(this.map).filter(value => value.id == id)[0];
   }
@@ -121,73 +117,93 @@ export class MapManagerService {
     return this.extractor.allOtherObjects(this.map).filter(value => value.id == id)[0]
   }
 
-  createOrUpdateConnectionFromLocation(major: MajorLocation | undefined, from: Location | undefined, connection: Connection | undefined) {
-    if (from === undefined || connection === undefined || major === undefined) {
+  createOrUpdateConnectionFromLocation(
+    area: Area | undefined,
+    from: Location | undefined,
+    connection: Connection | undefined)
+  {
+    if (from === undefined || connection === undefined || area === undefined) {
       return;
     }
-    const majorIndex = this.map.locations.indexOf(major);
-    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(from)
-    const connectionIndex = this.map.locations[majorIndex].subLocations[minorIndex].connections.findIndex(con => con.id == connection?.id);
+    const areaIndex = this.map.areas.indexOf(area);
+    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(from)
+    const connectionIndex = this.map.areas[areaIndex].subLocations[minorIndex].connections.findIndex(con => con.id == connection?.id);
     if (connectionIndex == -1) {
-      this.map.locations[majorIndex].subLocations[minorIndex].connections.push(connection);
+      this.map.areas[areaIndex].subLocations[minorIndex].connections.push(connection);
     } else {
-      this.map.locations[majorIndex].subLocations[minorIndex].connections[connectionIndex] = connection;
+      this.map.areas[areaIndex].subLocations[minorIndex].connections[connectionIndex] = connection;
     }
   }
 
-  createOrUpdateItemInLocation(major: MajorLocation | undefined, location: Location | undefined, item: Item | undefined) {
-    if (major === undefined || location === undefined || item === undefined) {
+  createOrUpdateItemInLocation(
+    area: Area | undefined,
+    location: Location | undefined,
+    item: Item | undefined)
+  {
+    if (area === undefined || location === undefined || item === undefined) {
       return;
     }
-    const majorIndex = this.map.locations.indexOf(major);
-    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
-    const itemIndex = this.map.locations[majorIndex].subLocations[minorIndex].items.findIndex(oldItem => oldItem.id == item?.id);
+    const areaIndex = this.map.areas.indexOf(area);
+    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(location);
+    const itemIndex = this.map.areas[areaIndex].subLocations[minorIndex].items.findIndex(oldItem => oldItem.id == item?.id);
     if (itemIndex == -1) {
-      this.map.locations[majorIndex].subLocations[minorIndex].items.push(item);
+      this.map.areas[areaIndex].subLocations[minorIndex].items.push(item);
     } else {
-      this.map.locations[majorIndex].subLocations[minorIndex].items[itemIndex] = item;
+      this.map.areas[areaIndex].subLocations[minorIndex].items[itemIndex] = item;
     }
   }
 
-  createOrUpdateEnemyInLocation(major: MajorLocation | undefined, location: Location | undefined, enemy: Enemy | undefined) {
-    if (major === undefined || location === undefined || enemy === undefined) {
+  createOrUpdateEnemyInLocation(
+    area: Area | undefined,
+    location: Location | undefined,
+    enemy: Enemy | undefined)
+  {
+    if (area === undefined || location === undefined || enemy === undefined) {
       return;
     }
-    const majorIndex = this.map.locations.indexOf(major);
-    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
-    const enemyIndex = this.map.locations[majorIndex].subLocations[minorIndex].enemies.findIndex(oldEnemy => oldEnemy.id == enemy?.id);
+    const areaIndex = this.map.areas.indexOf(area);
+    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(location);
+    const enemyIndex = this.map.areas[areaIndex].subLocations[minorIndex].enemies.findIndex(oldEnemy => oldEnemy.id == enemy?.id);
     if (enemyIndex == -1) {
-      this.map.locations[majorIndex].subLocations[minorIndex].enemies.push(enemy);
+      this.map.areas[areaIndex].subLocations[minorIndex].enemies.push(enemy);
     } else {
-      this.map.locations[majorIndex].subLocations[minorIndex].enemies[enemyIndex] = enemy;
+      this.map.areas[areaIndex].subLocations[minorIndex].enemies[enemyIndex] = enemy;
     }
   }
 
-  createOrUpdateObjectInLocation(major: MajorLocation | undefined, location: Location | undefined, object: OtherObject | undefined) {
-    if (major === undefined || location === undefined || object === undefined) {
+  createOrUpdateObjectInLocation(
+    area: Area | undefined,
+    location: Location | undefined,
+    object: OtherObject | undefined)
+  {
+    if (area === undefined || location === undefined || object === undefined) {
       return;
     }
-    const majorIndex = this.map.locations.indexOf(major);
-    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
-    const objectIndex = this.map.locations[majorIndex].subLocations[minorIndex].objects.findIndex(oldObject => oldObject.id == object?.id);
+    const areaIndex = this.map.areas.indexOf(area);
+    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(location);
+    const objectIndex = this.map.areas[areaIndex].subLocations[minorIndex].objects.findIndex(oldObject => oldObject.id == object?.id);
     if (objectIndex == -1) {
-      this.map.locations[majorIndex].subLocations[minorIndex].objects.push(object);
+      this.map.areas[areaIndex].subLocations[minorIndex].objects.push(object);
     } else {
-      this.map.locations[majorIndex].subLocations[minorIndex].objects[objectIndex] = object;
+      this.map.areas[areaIndex].subLocations[minorIndex].objects[objectIndex] = object;
     }
   }
 
-  createOrUpdateNPCInLocation(major: MajorLocation | undefined, location: Location | undefined, npc: NPC | undefined) {
-    if (major === undefined || location === undefined || npc === undefined) {
+  createOrUpdateNPCInLocation(
+    area: Area | undefined,
+    location: Location | undefined,
+    npc: NPC | undefined)
+  {
+    if (area === undefined || location === undefined || npc === undefined) {
       return;
     }
-    const majorIndex = this.map.locations.indexOf(major);
-    const minorIndex = this.map.locations[majorIndex].subLocations.indexOf(location);
-    const npcIndex = this.map.locations[majorIndex].subLocations[minorIndex].npcs.findIndex(oldNPC => oldNPC.id == npc?.id);
+    const areaIndex = this.map.areas.indexOf(area);
+    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(location);
+    const npcIndex = this.map.areas[areaIndex].subLocations[minorIndex].npcs.findIndex(oldNPC => oldNPC.id == npc?.id);
     if (npcIndex == -1) {
-      this.map.locations[majorIndex].subLocations[minorIndex].npcs.push(npc);
+      this.map.areas[areaIndex].subLocations[minorIndex].npcs.push(npc);
     } else {
-      this.map.locations[majorIndex].subLocations[minorIndex].npcs[npcIndex] = npc;
+      this.map.areas[areaIndex].subLocations[minorIndex].npcs[npcIndex] = npc;
     }
   }
 
@@ -281,19 +297,23 @@ export class MapManagerService {
     return undefined
   }
 
-  updateMajorLocationWithIDToName(id: number | undefined, editedName: string) {
+  updateAreaWithIDToName(id: number | undefined, editedName: string) {
     if (id !== undefined) {
-      const majorIndex = this.map.locations.findIndex(major => major.id == id);
-      this.map.locations[majorIndex].name = editedName;
+      const areaIndex = this.map.areas.findIndex(area => area.id == id);
+      this.map.areas[areaIndex].name = editedName;
     }
   }
 
-  updateMinorLocationWithIDToName(major: MajorLocation | undefined, id: number | undefined, editedName: string | undefined) {
-    if (major === undefined || id === undefined || editedName === undefined) {
+  updateMinorLocationWithIDToName(
+    area: Area | undefined,
+    id: number | undefined,
+    editedName: string | undefined)
+  {
+    if (area === undefined || id === undefined || editedName === undefined) {
       return;
     }
-    const majorIndex = this.map.locations.indexOf(major);
-    const minorIndex = this.map.locations[majorIndex].subLocations.findIndex(location => location.id == id);
-    this.map.locations[majorIndex].subLocations[minorIndex].name = editedName;
+    const areaIndex = this.map.areas.indexOf(area);
+    const minorIndex = this.map.areas[areaIndex].subLocations.findIndex(location => location.id == id);
+    this.map.areas[areaIndex].subLocations[minorIndex].name = editedName;
   }
 }
