@@ -1,7 +1,7 @@
 <sml-edit-select-from-all
   [label]="'Create new connection to '"
   [(selection)]="targetLocation"
-  [allOptions]="mapService.allMinorLocations()"
+  [allOptions]="mapService.allLocations()"
 />
 <sml-edit-condition-builder
   [editCondition]="editConnection?.if"

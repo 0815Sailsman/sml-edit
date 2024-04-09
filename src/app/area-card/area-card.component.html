@@ -12,12 +12,12 @@
 </button>
 <button (click)="fireAreaDeleted()">delete</button>
 <div>
-  <sml-edit-sub-location-card
-    *ngFor="let location of area?.subLocations"
+  <sml-edit-location-card
+    *ngFor="let location of area?.locations"
     [location]="location"
-    (locationDeleted)="deleteSubLocation($event)"
+    (locationDeleted)="deleteLocation($event)"
     (objectDeletedFromLocation)="deleteObjectFromLocation($event)"
-    (updateMinorLocationWithIDToName)="updateMinorLocationWithIDToName($event)"
+    (updateMinorLocationWithIDToName)="updateLocationWithIDToName($event)"
     (connectionCreatedOrUpdatedFromLocation)="createOrUpdateConnectionFromLocation($event)"
     (itemCreatedOrUpdatedInLocation)="createOrUpdateItemInLocation($event)"
     (enemyCreatedOrUpdatedInLocation)="createOrUpdateEnemyInLocation($event)"

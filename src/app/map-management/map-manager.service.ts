@@ -8,8 +8,8 @@ import {Item} from "./item";
 import {Enemy} from "./enemy";
 import {OtherObject} from "./otherObject";
 import {NPC} from "./NPC";
-import {ObjectInSublocation} from "../ObjectInSublocation";
-import {KeyInSublocation} from "../KeyInSublocation";
+import {ObjectInLocation} from "../ObjectInLocation";
+import {KeyInLocation} from "../KeyInLocation";
 import {BigCondition} from "./bigCondition";
 import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
 import {verbFor} from "../ConditionVerb";
@@ -36,15 +36,15 @@ export class MapManagerService {
   addAreaWithName(theName: string) {
     let newArea:Area = {
       name: theName,
-      subLocations: [],
+      locations: [],
       id: this.idService.nextAreaID()
     }
     this.map.areas.push(newArea)
   }
 
-  addMinorLocationTo(area: Area, theName: string) {
-    let newMinorLocation: Location = {
-      id: this.idService.nextMinorLocationID(),
+  addLocationTo(area: Area, theName: string) {
+    let newLocation: Location = {
+      id: this.idService.nextLocationID(),
       name: theName,
       connections: [],
       items: [],
@@ -52,33 +52,33 @@ export class MapManagerService {
       objects: [],
       npcs: []
     }
-    this.map.areas[this.map.areas.indexOf(area)].subLocations.push(newMinorLocation)
+    this.map.areas[this.map.areas.indexOf(area)].locations.push(newLocation)
   }
 
-  deleteSubLocationFrom(area: Area, theLocationToBeDeleted: Location) {
+  deleteLocationFrom(area: Area, theLocationToBeDeleted: Location) {
     let areaIndex: number = this.map.areas.indexOf(area);
-    this.map.areas[areaIndex].subLocations =
-      this.map.areas[areaIndex].subLocations.filter(location => location !== theLocationToBeDeleted)
+    this.map.areas[areaIndex].locations =
+      this.map.areas[areaIndex].locations.filter(location => location !== theLocationToBeDeleted)
   }
 
   deleteGeneralObjectFromLocationInArea(
     area: Area | undefined,
-    sublocation: Location | undefined,
-    theObject: ObjectInSublocation | undefined,
-    key: KeyInSublocation | undefined)
+    location: Location | undefined,
+    theObject: ObjectInLocation | undefined,
+    key: KeyInLocation | undefined)
   {
-    if (area == undefined || sublocation == undefined || theObject == undefined || key == undefined) {
+    if (area == undefined || location == undefined || theObject == undefined || key == undefined) {
       return
     }
     const areaIndex = this.map.areas.indexOf(area);
-    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(sublocation)
+    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location)
     // @ts-ignore THIS WORKS, BECAUSE WE DON'T MIX DIFFERENT TYPES
-    this.map.areas[areaIndex].subLocations[minorIndex][key] =
-      this.map.areas[areaIndex].subLocations[minorIndex][key].filter(object => object !== theObject)
+    this.map.areas[areaIndex].locations[locationIndex][key] =
+      this.map.areas[areaIndex].locations[locationIndex][key].filter(object => object !== theObject)
   }
 
-  allMinorLocations(): Location[] {
-    return this.extractor.allMinorLocations(this.map);
+  allLocations(): Location[] {
+    return this.extractor.allLocations(this.map);
   }
 
   allItems(): Item[] {
@@ -98,7 +98,7 @@ export class MapManagerService {
   }
 
   minorLocationById(id: number): Location {
-    return this.extractor.allMinorLocations(this.map).filter(value => value.id == id)[0];
+    return this.extractor.allLocations(this.map).filter(value => value.id == id)[0];
   }
 
   itemByID(id: number): Item {
@@ -126,12 +126,12 @@ export class MapManagerService {
       return;
     }
     const areaIndex = this.map.areas.indexOf(area);
-    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(from)
-    const connectionIndex = this.map.areas[areaIndex].subLocations[minorIndex].connections.findIndex(con => con.id == connection?.id);
+    const locationIndex = this.map.areas[areaIndex].locations.indexOf(from)
+    const connectionIndex = this.map.areas[areaIndex].locations[locationIndex].connections.findIndex(con => con.id == connection?.id);
     if (connectionIndex == -1) {
-      this.map.areas[areaIndex].subLocations[minorIndex].connections.push(connection);
+      this.map.areas[areaIndex].locations[locationIndex].connections.push(connection);
     } else {
-      this.map.areas[areaIndex].subLocations[minorIndex].connections[connectionIndex] = connection;
+      this.map.areas[areaIndex].locations[locationIndex].connections[connectionIndex] = connection;
     }
   }
 
@@ -144,12 +144,12 @@ export class MapManagerService {
       return;
     }
     const areaIndex = this.map.areas.indexOf(area);
-    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(location);
-    const itemIndex = this.map.areas[areaIndex].subLocations[minorIndex].items.findIndex(oldItem => oldItem.id == item?.id);
+    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
+    const itemIndex = this.map.areas[areaIndex].locations[locationIndex].items.findIndex(oldItem => oldItem.id == item?.id);
     if (itemIndex == -1) {
-      this.map.areas[areaIndex].subLocations[minorIndex].items.push(item);
+      this.map.areas[areaIndex].locations[locationIndex].items.push(item);
     } else {
-      this.map.areas[areaIndex].subLocations[minorIndex].items[itemIndex] = item;
+      this.map.areas[areaIndex].locations[locationIndex].items[itemIndex] = item;
     }
   }
 
@@ -162,12 +162,12 @@ export class MapManagerService {
       return;
     }
     const areaIndex = this.map.areas.indexOf(area);
-    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(location);
-    const enemyIndex = this.map.areas[areaIndex].subLocations[minorIndex].enemies.findIndex(oldEnemy => oldEnemy.id == enemy?.id);
+    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
+    const enemyIndex = this.map.areas[areaIndex].locations[locationIndex].enemies.findIndex(oldEnemy => oldEnemy.id == enemy?.id);
     if (enemyIndex == -1) {
-      this.map.areas[areaIndex].subLocations[minorIndex].enemies.push(enemy);
+      this.map.areas[areaIndex].locations[locationIndex].enemies.push(enemy);
     } else {
-      this.map.areas[areaIndex].subLocations[minorIndex].enemies[enemyIndex] = enemy;
+      this.map.areas[areaIndex].locations[locationIndex].enemies[enemyIndex] = enemy;
     }
   }
 
@@ -180,12 +180,12 @@ export class MapManagerService {
       return;
     }
     const areaIndex = this.map.areas.indexOf(area);
-    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(location);
-    const objectIndex = this.map.areas[areaIndex].subLocations[minorIndex].objects.findIndex(oldObject => oldObject.id == object?.id);
+    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
+    const objectIndex = this.map.areas[areaIndex].locations[locationIndex].objects.findIndex(oldObject => oldObject.id == object?.id);
     if (objectIndex == -1) {
-      this.map.areas[areaIndex].subLocations[minorIndex].objects.push(object);
+      this.map.areas[areaIndex].locations[locationIndex].objects.push(object);
     } else {
-      this.map.areas[areaIndex].subLocations[minorIndex].objects[objectIndex] = object;
+      this.map.areas[areaIndex].locations[locationIndex].objects[objectIndex] = object;
     }
   }
 
@@ -198,12 +198,12 @@ export class MapManagerService {
       return;
     }
     const areaIndex = this.map.areas.indexOf(area);
-    const minorIndex = this.map.areas[areaIndex].subLocations.indexOf(location);
-    const npcIndex = this.map.areas[areaIndex].subLocations[minorIndex].npcs.findIndex(oldNPC => oldNPC.id == npc?.id);
+    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
+    const npcIndex = this.map.areas[areaIndex].locations[locationIndex].npcs.findIndex(oldNPC => oldNPC.id == npc?.id);
     if (npcIndex == -1) {
-      this.map.areas[areaIndex].subLocations[minorIndex].npcs.push(npc);
+      this.map.areas[areaIndex].locations[locationIndex].npcs.push(npc);
     } else {
-      this.map.areas[areaIndex].subLocations[minorIndex].npcs[npcIndex] = npc;
+      this.map.areas[areaIndex].locations[locationIndex].npcs[npcIndex] = npc;
     }
   }
 
@@ -304,7 +304,7 @@ export class MapManagerService {
     }
   }
 
-  updateMinorLocationWithIDToName(
+  updateLocationWithIDToName(
     area: Area | undefined,
     id: number | undefined,
     editedName: string | undefined)
@@ -313,7 +313,7 @@ export class MapManagerService {
       return;
     }
     const areaIndex = this.map.areas.indexOf(area);
-    const minorIndex = this.map.areas[areaIndex].subLocations.findIndex(location => location.id == id);
-    this.map.areas[areaIndex].subLocations[minorIndex].name = editedName;
+    const minorIndex = this.map.areas[areaIndex].locations.findIndex(location => location.id == id);
+    this.map.areas[areaIndex].locations[minorIndex].name = editedName;
   }
 }

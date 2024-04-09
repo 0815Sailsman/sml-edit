@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Area} from "../map-management/area";
-import {SubLocationCardComponent} from "../sub-location-card/sub-location-card.component";
+import {LocationCardComponent} from "../location-card/location-card.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import {MapManagerService} from "../map-management/map-manager.service";
@@ -12,14 +12,14 @@ import {Connection} from "../map-management/connection";
 import {Enemy} from "../map-management/enemy";
 import {NPC} from "../map-management/NPC";
 import {OtherObject} from "../map-management/otherObject";
-import {ObjectInSublocation} from "../ObjectInSublocation";
-import {KeyInSublocation} from "../KeyInSublocation";
+import {ObjectInLocation} from "../ObjectInLocation";
+import {KeyInLocation} from "../KeyInLocation";
 
 @Component({
   selector: 'sml-edit-area-card',
   standalone: true,
   imports: [
-    SubLocationCardComponent,
+    LocationCardComponent,
     CommonModule,
     ReactiveFormsModule,
     FormsModule
@@ -54,23 +54,23 @@ export class AreaCardComponent {
 
   addLocation(theName: string | undefined) {
     if (theName != undefined && theName != "" && this.area != undefined) {
-      this.mapService.addMinorLocationTo(this.area, theName)
+      this.mapService.addLocationTo(this.area, theName)
       this.newAreaName = ""
     }
   }
 
-  updateMinorLocationWithIDToName(pairOfIdAndName: Pair<number, string>) {
-    this.mapService.updateMinorLocationWithIDToName(this.area, pairOfIdAndName.first, pairOfIdAndName.second);
+  updateLocationWithIDToName(pairOfIdAndName: Pair<number, string>) {
+    this.mapService.updateLocationWithIDToName(this.area, pairOfIdAndName.first, pairOfIdAndName.second);
   }
 
-  deleteSubLocation(theLocationToBeDeleted: Location) {
+  deleteLocation(theLocationToBeDeleted: Location) {
     if (this.area != undefined) {
-      this.mapService.deleteSubLocationFrom(this.area, theLocationToBeDeleted)
+      this.mapService.deleteLocationFrom(this.area, theLocationToBeDeleted)
     }
   }
 
   deleteObjectFromLocation(
-    tripletOfLocationAndObjectAndKey: Triplet<Location, ObjectInSublocation, KeyInSublocation>
+    tripletOfLocationAndObjectAndKey: Triplet<Location, ObjectInLocation, KeyInLocation>
   ): void {
     this.mapService.deleteGeneralObjectFromLocationInArea(
       this.area,

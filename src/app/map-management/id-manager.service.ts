@@ -10,7 +10,7 @@ export class IdManagerService {
   constructor(private extractor: ExtractorService) { }
 
   areaID: number = 0;
-  minorLocationID: number = 0;
+  locationID: number = 0;
   connectionID: number = 0;
   itemID: number = 0;
   enemyID: number = 0;
@@ -20,7 +20,7 @@ export class IdManagerService {
 
   initIDsFromMap(map: Map) {
     this.areaID = this.extractMaxID(map.areas);
-    this.minorLocationID = this.extractMaxID(this.extractor.allMinorLocations(map));
+    this.locationID = this.extractMaxID(this.extractor.allLocations(map));
     this.connectionID = this.extractMaxID(this.extractor.allConnections(map))
     this.itemID = this.extractMaxID(this.extractor.allItems(map));
     this.enemyID = this.extractMaxID(this.extractor.allEnemies(map));
@@ -37,8 +37,8 @@ export class IdManagerService {
     return ++this.areaID;
   }
 
-  nextMinorLocationID(): number {
-    return ++this.minorLocationID;
+  nextLocationID(): number {
+    return ++this.locationID;
   }
 
   nextConnectionID(): number {

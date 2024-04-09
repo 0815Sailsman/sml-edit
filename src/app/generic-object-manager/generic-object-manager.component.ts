@@ -2,9 +2,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {SingleGenericObjectComponent} from "../single-generic-object/single-generic-object.component";
 import {Pair} from "../Pair";
-import {KeyInSublocation, nameOf} from "../KeyInSublocation";
+import {KeyInLocation, nameOf} from "../KeyInLocation";
 import {ConnectionBuilderComponent} from "../connection-builder/connection-builder.component";
-import {ObjectInSublocation} from "../ObjectInSublocation";
+import {ObjectInLocation} from "../ObjectInLocation";
 import {Connection} from "../map-management/connection";
 import {ItemBuilderComponent} from "../item-builder/item-builder.component";
 import {EnemyBuilderComponent} from "../enemy-builder/enemy-builder.component";
@@ -23,12 +23,12 @@ import {AtomicCondition} from "../map-management/atomicCondition";
   templateUrl: './generic-object-manager.component.html',
   styleUrl: './generic-object-manager.component.css'
 })
-export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
+export class GenericObjectManagerComponent<T extends ObjectInLocation> {
 
   @Input() genericObjectArray: T[] = [];
-  @Input() key!: KeyInSublocation;
+  @Input() key!: KeyInLocation;
   @Input() objectToString: (a: T | undefined) => string = (obj : T | undefined) => "uninitialized name";
-  @Output() objectDeleted = new EventEmitter<Pair<T, KeyInSublocation>>();
+  @Output() objectDeleted = new EventEmitter<Pair<T, KeyInLocation>>();
   @Output() connectionCreatedOrUpdated = new EventEmitter<Connection>();
   @Output() itemCreatedOrUpdated = new EventEmitter<Item>();
   @Output() enemyCreatedOrUpdated = new EventEmitter<Enemy>();
@@ -45,20 +45,20 @@ export class GenericObjectManagerComponent<T extends ObjectInSublocation> {
 
   protected readonly nameOf = nameOf;
 
-  editObject(pairOfObjectAndKey: Pair<T, KeyInSublocation>) {
+  editObject(pairOfObjectAndKey: Pair<T, KeyInLocation>) {
     switch (pairOfObjectAndKey.second) {
-      case KeyInSublocation.Connections: {
+      case KeyInLocation.Connections: {
         this.connectionToEdit = pairOfObjectAndKey.first as Connection;
         break;
       }
-      case KeyInSublocation.Items: {this.itemToEdit = pairOfObjectAndKey.first as Item;break;}
-      case KeyInSublocation.Enemies: {this.enemyToEdit = pairOfObjectAndKey.first as Enemy;break;}
-      case KeyInSublocation.Objects: {this.otherObjectToEdit = pairOfObjectAndKey.first as OtherObject;break;}
-      case KeyInSublocation.Npcs: {this.npcToEdit = pairOfObjectAndKey.first as NPC;break;}
+      case KeyInLocation.Items: {this.itemToEdit = pairOfObjectAndKey.first as Item;break;}
+      case KeyInLocation.Enemies: {this.enemyToEdit = pairOfObjectAndKey.first as Enemy;break;}
+      case KeyInLocation.Objects: {this.otherObjectToEdit = pairOfObjectAndKey.first as OtherObject;break;}
+      case KeyInLocation.Npcs: {this.npcToEdit = pairOfObjectAndKey.first as NPC;break;}
     }
   }
 
-  deleteObject(pairOfObjectAndKey: Pair<T, KeyInSublocation>) {
+  deleteObject(pairOfObjectAndKey: Pair<T, KeyInLocation>) {
     this.objectDeleted.emit(pairOfObjectAndKey)
   }
 

@@ -2,8 +2,8 @@ import {AfterContentInit, Component, EventEmitter, Input, Output} from '@angular
 import {depluralizeSimple} from "../util";
 import {Location} from "../map-management/location";
 import {Pair} from "../Pair";
-import {KeyInSublocation} from "../KeyInSublocation";
-import {ObjectInSublocation} from "../ObjectInSublocation";
+import {KeyInLocation} from "../KeyInLocation";
+import {ObjectInLocation} from "../ObjectInLocation";
 import {NgIf} from "@angular/common";
 import {Connection} from "../map-management/connection";
 import {BigCondition} from "../map-management/bigCondition";
@@ -22,14 +22,14 @@ import {first} from "rxjs";
   templateUrl: './single-generic-object.component.html',
   styleUrl: './single-generic-object.component.css'
 })
-export class SingleGenericObjectComponent<T extends ObjectInSublocation> {
+export class SingleGenericObjectComponent<T extends ObjectInLocation> {
 
   @Input() genericObject?: T;
   @Input() name: string = "";
-  @Input() key!: KeyInSublocation;
+  @Input() key!: KeyInLocation;
   @Input() objectToString: (a: T | undefined) => string = (obj : T | undefined) => "uninitialized name";
-  @Output() objectDeleted = new EventEmitter<Pair<T, KeyInSublocation>>();
-  @Output() editObject = new EventEmitter<Pair<T, KeyInSublocation>>();
+  @Output() objectDeleted = new EventEmitter<Pair<T, KeyInLocation>>();
+  @Output() editObject = new EventEmitter<Pair<T, KeyInLocation>>();
 
   protected readonly depluralizeSimple = depluralizeSimple;
 

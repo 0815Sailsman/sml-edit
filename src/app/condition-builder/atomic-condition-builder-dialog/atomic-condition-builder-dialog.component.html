@@ -18,7 +18,7 @@
 
   <div [ngSwitch]="currentSubject" style="display: inline">
     <div *ngSwitchCase="'Location'" style="display: inline">
-      <sml-edit-select-from-all [allOptions]="mapService.allMinorLocations()" (selectionChange)="selectTarget($event)"/>
+      <sml-edit-select-from-all [allOptions]="mapService.allLocations()" (selectionChange)="selectTarget($event)"/>
       <span> has been visited</span>
     </div>
     <div *ngSwitchCase="'Item'" style="display: inline">

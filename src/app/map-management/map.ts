@@ -28,7 +28,7 @@ export class Map {
     return unparsedAreas.map(area => {return {
       id: area.id,
       name: area.name,
-      subLocations: this.parseMinorLocations(area.subLocations)
+      locations: this.parseMinorLocations(area.subLocations)
     }})
   }
 

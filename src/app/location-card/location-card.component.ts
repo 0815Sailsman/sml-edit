@@ -10,23 +10,23 @@ import {OtherObject, otherObjectToString} from "../map-management/otherObject";
 import {NPC, npcToString} from "../map-management/NPC";
 import {Pair} from "../Pair";
 import {Triplet} from "../Triplet";
-import {KeyInSublocation} from "../KeyInSublocation";
-import {ObjectInSublocation} from "../ObjectInSublocation";
+import {KeyInLocation} from "../KeyInLocation";
+import {ObjectInLocation} from "../ObjectInLocation";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'sml-edit-sub-location-card',
+  selector: 'sml-edit-location-card',
   standalone: true,
   imports: [
     CommonModule,
     GenericObjectManagerComponent,
     FormsModule
   ],
-  templateUrl: './sub-location-card.component.html',
-  styleUrl: './sub-location-card.component.css'
+  templateUrl: './location-card.component.html',
+  styleUrl: './location-card.component.css'
 })
-export class SubLocationCardComponent {
+export class LocationCardComponent {
 
   showingDetails: boolean = false;
   currentlyEditing: boolean = false;
@@ -39,8 +39,8 @@ export class SubLocationCardComponent {
   @Output() locationDeleted = new EventEmitter<Location>();
   @Output() objectDeletedFromLocation = new EventEmitter<Triplet<
     Location,
-    ObjectInSublocation,
-    KeyInSublocation
+    ObjectInLocation,
+    KeyInLocation
   >>();
   @Output() updateMinorLocationWithIDToName = new EventEmitter<Pair<number, string>>
   @Output() connectionCreatedOrUpdatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
@@ -72,7 +72,7 @@ export class SubLocationCardComponent {
   protected readonly otherObjectToString: (object: OtherObject | undefined) => string = otherObjectToString;
   protected readonly npcToString: (npc: NPC | undefined) => string = npcToString;
 
-  deleteObject(pairOfObjectAndKey: Pair<ObjectInSublocation, KeyInSublocation>)
+  deleteObject(pairOfObjectAndKey: Pair<ObjectInLocation, KeyInLocation>)
   {
     this.objectDeletedFromLocation.emit({
       first: this.location,
@@ -80,7 +80,7 @@ export class SubLocationCardComponent {
       third: pairOfObjectAndKey.second})
   }
 
-  protected readonly KeyInSublocation = KeyInSublocation;
+  protected readonly KeyInSublocation = KeyInLocation;
 
   registerOrUpdateNewConnection(theConnection: Connection) {
     this.connectionCreatedOrUpdatedFromLocation.emit({
