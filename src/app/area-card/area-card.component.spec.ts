@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AreaCardComponent } from './area-card.component';
 
-describe('MajorLocationCardComponent', () => {
+describe('AreaCardComponent', () => {
   let component: AreaCardComponent;
   let fixture: ComponentFixture<AreaCardComponent>;
 
