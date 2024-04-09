@@ -12,7 +12,7 @@
     confirm
   </span>
   </button>
-  <button (click)="fireLocationDeleted()">delete minor location</button>
+  <button (click)="fireLocationDeleted()">delete location</button>
 </div>
 <div *ngIf="showingDetails">
   <hr style="border-top: 1px solid black;border-bottom: 0;width: 100%;height: 0">
@@ -20,35 +20,35 @@
     [genericObjectArray]="location.connections"
     [objectToString]="this.connectionToString"
     (objectDeleted)="deleteObject($event)"
-    [key]="KeyInSublocation.Connections"
+    [key]="KeyInLocation.Connections"
     (connectionCreatedOrUpdated)="registerOrUpdateNewConnection($event)"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.items"
     [objectToString]="this.itemToString"
     (objectDeleted)="deleteObject($event)"
-    [key]="KeyInSublocation.Items"
+    [key]="KeyInLocation.Items"
     (itemCreatedOrUpdated)="registerOrUpdateNewItem($event)"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.enemies"
     [objectToString]="this.enemyToString"
     (objectDeleted)="deleteObject($event)"
-    [key]="KeyInSublocation.Enemies"
+    [key]="KeyInLocation.Enemies"
     (enemyCreatedOrUpdated)="registerOrUpdateNewEnemy($event)"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.objects"
     [objectToString]="otherObjectToString"
     (objectDeleted)="deleteObject($event)"
-    [key]="KeyInSublocation.Objects"
+    [key]="KeyInLocation.Objects"
     (otherObjectCreatedOrUpdated)="registerOrUpdateNewObject($event)"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.npcs"
     [objectToString]="npcToString"
     (objectDeleted)="deleteObject($event)"
-    [key]="KeyInSublocation.Npcs"
+    [key]="KeyInLocation.Npcs"
     (npcCreatedOrUpdated)="registerOrUpdateNewNPC($event)"
     style="margin-bottom: 10px"
   />

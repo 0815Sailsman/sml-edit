@@ -28,11 +28,11 @@ export class Map {
     return unparsedAreas.map(area => {return {
       id: area.id,
       name: area.name,
-      locations: this.parseMinorLocations(area.subLocations)
+      locations: this.parseLocations(area.locations)
     }})
   }
 
-  private parseMinorLocations(locations: UnparsedLocation[]): Location[] {
+  private parseLocations(locations: UnparsedLocation[]): Location[] {
     return locations.map(location => {return {
       id: location.id,
       name: location.name,
@@ -142,7 +142,7 @@ export class Map {
 interface UnparsedArea {
   id: number,
   name: string
-  subLocations: UnparsedLocation[]
+  locations: UnparsedLocation[]
 }
 
 interface UnparsedLocation {

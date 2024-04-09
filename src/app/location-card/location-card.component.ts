@@ -42,7 +42,7 @@ export class LocationCardComponent {
     ObjectInLocation,
     KeyInLocation
   >>();
-  @Output() updateMinorLocationWithIDToName = new EventEmitter<Pair<number, string>>
+  @Output() updateLocationWithIDToName = new EventEmitter<Pair<number, string>>
   @Output() connectionCreatedOrUpdatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
   @Output() itemCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, Item>>();
   @Output() enemyCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, Enemy>>();
@@ -55,7 +55,7 @@ export class LocationCardComponent {
 
   toggleEditing() {
     if (this.currentlyEditing) {
-      this.updateMinorLocationWithIDToName.emit({
+      this.updateLocationWithIDToName.emit({
         first: this.location.id,
         second: this.editedName
       });
@@ -80,7 +80,7 @@ export class LocationCardComponent {
       third: pairOfObjectAndKey.second})
   }
 
-  protected readonly KeyInSublocation = KeyInLocation;
+  protected readonly KeyInLocation = KeyInLocation;
 
   registerOrUpdateNewConnection(theConnection: Connection) {
     this.connectionCreatedOrUpdatedFromLocation.emit({

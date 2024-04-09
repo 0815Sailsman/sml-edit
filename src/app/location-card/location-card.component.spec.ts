@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LocationCardComponent } from './location-card.component';
 
-describe('SubLocationCardComponent', () => {
+describe('LocationCardComponent', () => {
   let component: LocationCardComponent;
   let fixture: ComponentFixture<LocationCardComponent>;
 

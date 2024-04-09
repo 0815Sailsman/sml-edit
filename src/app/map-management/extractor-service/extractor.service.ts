@@ -21,26 +21,26 @@ export class ExtractorService {
   }
 
   allConnections(map: Map): Connection[] {
-    return this.allLocations(map).flatMap(minor => minor.connections)
+    return this.allLocations(map).flatMap(location => location.connections)
   }
 
   allItems(map: Map): Item[] {
-    const minorItems = this.allLocations(map).flatMap(minor => minor.items);
+    const locationItems = this.allLocations(map).flatMap(location => location.items);
     const enemyItems = this.allEnemies(map).flatMap(enemy => enemy.drops.flatMap(drop => drop.item));
 
-    return [...minorItems, ...enemyItems];
+    return [...locationItems, ...enemyItems];
   }
 
   allEnemies(map: Map): Enemy[] {
-    return this.allLocations(map).flatMap(minor => minor.enemies);
+    return this.allLocations(map).flatMap(location => location.enemies);
   }
 
   allNPCs(map: Map): NPC[] {
-    return this.allLocations(map).flatMap(minor => minor.npcs)
+    return this.allLocations(map).flatMap(location => location.npcs)
   }
 
   allOtherObjects(map: Map): OtherObject[] {
-    return this.allLocations(map).flatMap(minor => minor.objects)
+    return this.allLocations(map).flatMap(location => location.objects)
   }
 
   allItemTypes(map: Map): ItemType[] {

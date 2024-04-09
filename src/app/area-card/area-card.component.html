@@ -17,7 +17,7 @@
     [location]="location"
     (locationDeleted)="deleteLocation($event)"
     (objectDeletedFromLocation)="deleteObjectFromLocation($event)"
-    (updateMinorLocationWithIDToName)="updateLocationWithIDToName($event)"
+    (updateLocationWithIDToName)="updateLocationWithIDToName($event)"
     (connectionCreatedOrUpdatedFromLocation)="createOrUpdateConnectionFromLocation($event)"
     (itemCreatedOrUpdatedInLocation)="createOrUpdateItemInLocation($event)"
     (enemyCreatedOrUpdatedInLocation)="createOrUpdateEnemyInLocation($event)"
@@ -25,5 +25,5 @@
     (npcCreatedOrUpdatedInLocation)="createOrUpdateNPCInLocation($event)"
   />
   <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newAreaName" ngDefaultControl>
-  <button (click)="addLocation(newAreaName)">add new minor</button>
+  <button (click)="addLocation(newAreaName)">add new location</button>
 </div>

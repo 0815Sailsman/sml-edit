@@ -110,7 +110,7 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
     let result = condition.subjectType + " "
     switch (condition.subjectType) {
       case ConditionSubjects.Location:
-        return (result + this.mapService.minorLocationById(condition.subjectId).name + " visited")
+        return (result + this.mapService.locationById(condition.subjectId).name + " visited")
       case ConditionSubjects.Item:
         return (result + this.mapService.itemToString(this.mapService.itemByID(condition.subjectId)) + " collected")
       case ConditionSubjects.Enemy:

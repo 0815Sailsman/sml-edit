@@ -42,9 +42,9 @@ Each **location** may have any amount of
   - [x] enemy builder
   - [x] otherObject builder
   - [x] NPC builder
-- [ ] Change area / location naming scheme
+- [x] Change area / location naming scheme
   - [x] majorLocation to area
-  - [ ] minorLocation to location
+  - [x] minorLocation to location
 - [ ] select from all doesn't show enough information
 - [ ] make condition clearable
 - [ ] generally clear fields on create and update

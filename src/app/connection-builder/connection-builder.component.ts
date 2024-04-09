@@ -39,7 +39,7 @@ export class ConnectionBuilderComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.editConnection !== undefined && !this.editing) {
       this.editing = true;
-      this.targetLocation = this.mapService.minorLocationById(this.editConnection.to)
+      this.targetLocation = this.mapService.locationById(this.editConnection.to)
       if (this.editConnection.if !== undefined) {
         this.condition = this.editConnection.if
       }

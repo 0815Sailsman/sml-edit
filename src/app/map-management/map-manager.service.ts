@@ -97,7 +97,7 @@ export class MapManagerService {
     return this.extractor.allOtherObjects(this.map);
   }
 
-  minorLocationById(id: number): Location {
+  locationById(id: number): Location {
     return this.extractor.allLocations(this.map).filter(value => value.id == id)[0];
   }
 
@@ -225,7 +225,7 @@ export class MapManagerService {
           const localCondition = condition.subConditions.find(atomicCondition => atomicCondition.abbreviation.charCodeAt(0) == ascii)!
           result += localCondition?.subjectType + " "
           switch (localCondition?.subjectType) {
-            case ConditionSubjects.Location: result += this.minorLocationById(localCondition.subjectId).name;break;
+            case ConditionSubjects.Location: result += this.locationById(localCondition.subjectId).name;break;
             case ConditionSubjects.Item: result += this.itemTypeById(this.itemByID(localCondition.subjectId).itemTypeID).name;break;
             case ConditionSubjects.Enemy: result += this.enemyById(localCondition.subjectId).name;break;
             case ConditionSubjects.OtherObject: result += this.otherObjectById(localCondition.subjectId).name;break;
@@ -313,7 +313,7 @@ export class MapManagerService {
       return;
     }
     const areaIndex = this.map.areas.indexOf(area);
-    const minorIndex = this.map.areas[areaIndex].locations.findIndex(location => location.id == id);
-    this.map.areas[areaIndex].locations[minorIndex].name = editedName;
+    const locationIndex = this.map.areas[areaIndex].locations.findIndex(location => location.id == id);
+    this.map.areas[areaIndex].locations[locationIndex].name = editedName;
   }
 }
