@@ -36,7 +36,7 @@ Each **location** may have any amount of
   - [x] enemy from interface to class
   - [x] otherObject from interface to class
   - [x] NPC from interface to class
-  - [ ] easily selectable from type union to interface
+  - [x] easily selectable from type union to interface
   - [ ] don't use weird passing of functions in location card component anymore for to string
 - [ ] Move toString methods to related classes
 - [ ] de-generalize object manager into different components (MAYBE)

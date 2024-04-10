@@ -6,13 +6,9 @@ import {Location} from "../map-management/location";
 import {BigCondition} from "../map-management/bigCondition";
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {SelectFromAllComponent} from "../select-from-all/select-from-all.component";
-import {EasilySelectable} from "../EasilySelectable";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {AtomicCondition} from "../map-management/atomicCondition";
 import {IdManagerService} from "../map-management/id-manager.service";
-import {
-  GraphicalConditionBuilderComponent
-} from "../condition-builder/graphical-condition-builder/graphical-condition-builder.component";
 
 @Component({
   selector: 'sml-edit-connection-builder',

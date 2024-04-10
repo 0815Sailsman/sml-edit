@@ -14,9 +14,6 @@ import {BigCondition} from "./bigCondition";
 import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
 import {verbFor} from "../ConditionVerb";
 import {ItemType} from "./itemType";
-import {Drop} from "./drop";
-import {ShopItem} from "./ShopItem";
-import {EasilySelectable} from "../EasilySelectable";
 import {IdManagerService} from "./id-manager.service";
 import {ExtractorService} from "./extractor-service/extractor.service";
 
@@ -236,31 +233,7 @@ export class MapManagerService {
     }
     return itemType.name;
   }
-
-  dropToString(drop: Drop | undefined): string {
-    if (drop == undefined) {
-      return "undefined"
-    }
-    return drop.item.count + "x " + drop.item.toString(this) + " with " + drop.chance + "% dropchance";
-  }
-
-  shopItemToString(shopItem: ShopItem | undefined): string {
-    if (shopItem == undefined) {
-      return "undefined";
-    }
-    return shopItem.item.toString(this);
-  }
-
-  easilySelectableToString(option: EasilySelectable) {
-    if (this.easilySelectableIsItem(option)) return option.toString(this);
-    return option.name;
-  }
-
-  easilySelectableIsItem(value: any): value is Item {
-    return !('name' in value);
-  }
-
-  // returns the id of the newly created itemtype
+// returns the id of the newly created itemtype
   addItemTypeWithName(newItemTypeName: string | undefined): number | undefined {
     if (newItemTypeName !== undefined) {
       const newID: number = this.idService.nextItemTypeID();
