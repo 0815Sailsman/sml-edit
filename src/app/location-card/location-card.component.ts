@@ -67,7 +67,7 @@ export class LocationCardComponent {
   }
 
   protected readonly connectionToString: (connection: Connection | undefined) => string = (connection) => {return connection?.toString() ?? "undefined"};
-  protected readonly itemToString: (item: Item | undefined) => string = (item) => {return this.mapService.itemToString(item)};
+  protected readonly itemToString: (item: Item | undefined) => string = (item) => {return item?.toString(this.mapService) ?? "undefined"};
   protected readonly enemyToString: (enemy: Enemy | undefined) => string = enemyToString;
   protected readonly otherObjectToString: (object: OtherObject | undefined) => string = otherObjectToString;
   protected readonly npcToString: (npc: NPC | undefined) => string = npcToString;

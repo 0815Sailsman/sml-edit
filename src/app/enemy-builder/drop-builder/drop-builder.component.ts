@@ -44,11 +44,11 @@ export class DropBuilderComponent implements OnChanges{
   fireCreateOrUpdateDrop() {
     if (this.dropItemType !== undefined && this.dropItemCount !== undefined && this.dropChance !== undefined) {
       this.dropCreatedOrUpdated.emit({
-        item: {
-          id: this.editedDrop !== undefined ? this.editedDrop.item.id : this.idService.nextItemID(),
-          itemTypeID: this.dropItemType.id,
-          count: this.dropItemCount
-        },
+        item: new Item(
+          this.editedDrop !== undefined ? this.editedDrop.item.id : this.idService.nextItemID(),
+          this.dropItemType.id,
+          this.dropItemCount
+        ),
         chance: this.dropChance
       })
       this.editedDrop = undefined;

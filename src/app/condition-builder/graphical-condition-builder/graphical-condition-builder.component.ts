@@ -112,7 +112,7 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
       case ConditionSubjects.Location:
         return (result + this.mapService.locationById(condition.subjectId).name + " visited")
       case ConditionSubjects.Item:
-        return (result + this.mapService.itemToString(this.mapService.itemByID(condition.subjectId)) + " collected")
+        return (result + this.mapService.itemByID(condition.subjectId).toString(this.mapService) + " collected")
       case ConditionSubjects.Enemy:
         return (result + this.mapService.enemyById(condition.subjectId).name + " killed")
       case ConditionSubjects.OtherObject:

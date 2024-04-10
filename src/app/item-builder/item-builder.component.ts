@@ -59,12 +59,12 @@ export class ItemBuilderComponent implements OnChanges {
 
   createOrUpdateNewItem() {
     if (this.itemType != undefined && this.itemCount != undefined) {
-      this.itemCreatedOrUpdated.emit({
-        id: this.editedItem !== undefined ? this.editedItem.id : this.idService.nextItemID(),
-        itemTypeID: this.itemType.id,
-        count: this.itemCount,
-        availableIf: structuredClone(this.condition)
-      })
+      this.itemCreatedOrUpdated.emit(new Item(
+        this.editedItem !== undefined ? this.editedItem.id : this.idService.nextItemID(),
+        this.itemType.id,
+        this.itemCount,
+        structuredClone(this.condition)
+      ));
     }
     this.editedItem = undefined;
     this.editing = false;

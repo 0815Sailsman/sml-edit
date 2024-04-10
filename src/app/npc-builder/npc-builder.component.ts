@@ -84,11 +84,11 @@ export class NpcBuilderComponent implements OnChanges {
   addOrUpdateShopItem() {
     if (this.newShopItemItemType !== undefined && this.newShopItemCost !== undefined && this.newShopItemCount !== undefined) {
       const shopItemObject = {
-        item: {
-          id: this.editedShopItemID !== undefined ? this.editedShopItemID : this.idService.nextItemID(),
-          itemTypeID: this.newShopItemItemType.id,
-          count: 1
-        },
+        item: new Item(
+          this.editedShopItemID !== undefined ? this.editedShopItemID : this.idService.nextItemID(),
+          this.newShopItemItemType.id,
+          1
+        ),
         count: this.newShopItemCount,
         cost: this.newShopItemCost
       };

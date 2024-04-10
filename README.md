@@ -32,12 +32,12 @@ Each **location** may have any amount of
   - [x] area from interface to class
   - [x] location from interface to class
   - [x] connection from interface to class
-  - [ ] item from interface to class
+  - [x] item from interface to class
   - [ ] enemy from interface to class
   - [ ] otherObject from interface to class
   - [ ] NPC from interface to class
   - [ ] easily selectable from type union to interface
-  - [ ] dont use weird passing of functions in location card component anymore for to string
+  - [ ] don't use weird passing of functions in location card component anymore for to string
 - [ ] Move toString methods to related classes
 - [ ] de-generalize object manager into different components (MAYBE)
 - [ ] unify createOrUpdate Pipeline

@@ -50,12 +50,12 @@ export class Map {
   }
 
   private parseItems(items: UnparsedItem[]): Item[] {
-    return items.map(item => {return {
-      id: item.id,
-      itemTypeID: item.itemTypeID,
-      count: item.count,
-      availableIf: item.if == null ? undefined : this.parseBigCondition(item.if)
-    }})
+    return items.map(item => {return new Item(
+      item.id,
+      item.itemTypeID,
+      item.count,
+      item.if == null ? undefined : this.parseBigCondition(item.if)
+    )});
   }
 
   private parseDrops(drops: UnparsedDrop[]): Drop[] {

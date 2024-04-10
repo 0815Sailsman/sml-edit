@@ -230,14 +230,6 @@ export class MapManagerService {
       .join(' ');
   }
 
-  itemToString(item: Item | undefined): string {
-    if (item == undefined) {
-      return "undefined"
-    }
-    const itemTypeID: number = this.itemByID(item.id).itemTypeID;
-    return this.itemTypeById(itemTypeID).name;
-  }
-
   itemTypeToString(itemType: ItemType | undefined): string {
     if (itemType == undefined) {
       return "undefined"
@@ -249,27 +241,23 @@ export class MapManagerService {
     if (drop == undefined) {
       return "undefined"
     }
-    return drop.item.count + "x " + this.itemToString(drop.item) + " with " + drop.chance + "% dropchance";
+    return drop.item.count + "x " + drop.item.toString(this) + " with " + drop.chance + "% dropchance";
   }
 
   shopItemToString(shopItem: ShopItem | undefined): string {
     if (shopItem == undefined) {
-      return "undefined"
+      return "undefined";
     }
-    return this.itemToString(shopItem.item);
+    return shopItem.item.toString(this);
   }
 
   easilySelectableToString(option: EasilySelectable) {
-    if (this.easilySelectableIsItem(option)) return this.itemToString(option)
+    if (this.easilySelectableIsItem(option)) return option.toString(this);
     return option.name;
   }
 
   easilySelectableIsItem(value: any): value is Item {
     return !('name' in value);
-  }
-
-  dropItemToString(item: Item) {
-    return this.itemToString(item);
   }
 
   // returns the id of the newly created itemtype
