@@ -1,16 +1,25 @@
 import {BigCondition} from "./bigCondition";
 import {ShopItem} from "./ShopItem";
 
-export interface NPC {
+export class NPC {
   id: number
   name: string
   shop: ShopItem[]
   availableIf?: BigCondition
-}
 
-export function npcToString(npc: NPC | undefined): string {
-  if (npc == undefined) {
-    return "undefined"
+  constructor(
+    id: number,
+    name: string,
+    shop: ShopItem[],
+    availableIf?: BigCondition
+  ) {
+    this.id = id;
+    this.name = name;
+    this.shop = shop;
+    this.availableIf = availableIf;
   }
-  return npc.name
+
+  toString(): string {
+    return this.name;
+  }
 }

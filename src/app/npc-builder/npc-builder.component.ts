@@ -62,12 +62,12 @@ export class NpcBuilderComponent implements OnChanges {
 
   createOrUpdateNewNpc() {
     if (this.npcName !== undefined) {
-      this.npcCreatedOrUpdated.emit({
-        id: this.editedNPC !== undefined ? this.editedNPC.id : this.idService.nextNPCID(),
-        shop: this.shopItems,
-        name: this.npcName,
-        availableIf: structuredClone(this.condition)
-      })
+      this.npcCreatedOrUpdated.emit(new NPC(
+        this.editedNPC !== undefined ? this.editedNPC.id : this.idService.nextNPCID(),
+        this.npcName,
+        this.shopItems,
+        structuredClone(this.condition)
+      ));
     }
     this.editedNPC = undefined;
     this.editing = false;

@@ -85,12 +85,12 @@ export class Map {
   }
 
   private parseNPCs(npcs: UnparsedNPC[]): NPC[] {
-    return npcs.map(npc => {return {
-      id: npc.id,
-      name: npc.name,
-      shop: this.parseShopItems(npc.shop),
-      availableIf: npc.if == null ? undefined : this.parseBigCondition(npc.if)
-    }})
+    return npcs.map(npc => {return new NPC(
+      npc.id,
+      npc.name,
+      this.parseShopItems(npc.shop),
+      npc.if == null ? undefined : this.parseBigCondition(npc.if)
+    )})
   }
 
   private parseShopItems(shop: UnparsedShopItem[]): ShopItem[] {
