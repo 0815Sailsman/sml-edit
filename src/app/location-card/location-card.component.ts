@@ -3,7 +3,7 @@ import {GenericObjectManagerComponent} from "../generic-object-manager/generic-o
 import {CommonModule} from "@angular/common";
 
 import {Location} from "../map-management/location";
-import {Enemy, enemyToString} from "../map-management/enemy";
+import {Enemy} from "../map-management/enemy";
 import {Item} from "../map-management/item";
 import {Connection} from "../map-management/connection";
 import {OtherObject, otherObjectToString} from "../map-management/otherObject";
@@ -68,7 +68,7 @@ export class LocationCardComponent {
 
   protected readonly connectionToString: (connection: Connection | undefined) => string = (connection) => {return connection?.toString() ?? "undefined"};
   protected readonly itemToString: (item: Item | undefined) => string = (item) => {return item?.toString(this.mapService) ?? "undefined"};
-  protected readonly enemyToString: (enemy: Enemy | undefined) => string = enemyToString;
+  protected readonly enemyToString: (enemy: Enemy | undefined) => string = (enemy) => {return enemy?.toString() ?? "undefined"};
   protected readonly otherObjectToString: (object: OtherObject | undefined) => string = otherObjectToString;
   protected readonly npcToString: (npc: NPC | undefined) => string = npcToString;
 

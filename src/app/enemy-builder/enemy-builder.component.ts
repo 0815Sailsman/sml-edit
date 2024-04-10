@@ -68,14 +68,14 @@ export class EnemyBuilderComponent implements OnChanges {
 
   createOrUpdateNewEnemy() {
     if (this.enemyName !== undefined && this.souls !== undefined) {
-      this.enemyCreatedOrUpdated.emit({
-        id: this.editedEnemy !== undefined ? this.editedEnemy.id : this.idService.nextEnemyID(),
-        name: this.enemyName,
-        souls: this.souls,
-        respawns: this.respawns,
-        drops: this.drops,
-        availableIf: structuredClone(this.condition)
-      })
+      this.enemyCreatedOrUpdated.emit(new Enemy(
+        this.editedEnemy !== undefined ? this.editedEnemy.id : this.idService.nextEnemyID(),
+        this.enemyName,
+        this.souls,
+        this.respawns,
+        this.drops,
+        structuredClone(this.condition)
+      ));
     }
     this.editedEnemy = undefined;
     this.editing = false;

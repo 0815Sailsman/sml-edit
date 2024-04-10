@@ -66,14 +66,14 @@ export class Map {
   }
 
   private parseEnemies(enemies: UnparsedEnemy[]): Enemy[] {
-    return enemies.map(enemy => {return {
-      id: enemy.id,
-      name: enemy.name,
-      souls: enemy.souls,
-      respawns: enemy.respawns,
-      drops: this.parseDrops(enemy.drops),
-      availableIf: enemy.if == null ? undefined : this.parseBigCondition(enemy.if)
-    }})
+    return enemies.map(enemy => {return new Enemy(
+      enemy.id,
+      enemy.name,
+      enemy.souls,
+      enemy.respawns,
+      this.parseDrops(enemy.drops),
+      enemy.if == null ? undefined : this.parseBigCondition(enemy.if)
+    )})
   }
 
   private parseObjects(objects: UnparsedOtherObject[]): OtherObject[] {

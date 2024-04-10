@@ -1,19 +1,31 @@
-import {Item} from "./item";
 import {BigCondition} from "./bigCondition";
 import {Drop} from "./drop";
 
-export interface Enemy {
+export class Enemy {
   id: number
   name: string
   souls: number
   respawns: boolean
   drops: Drop[]
   availableIf?: BigCondition
-}
 
-export function enemyToString(enemy: Enemy | undefined): string {
-  if (enemy == undefined) {
-    return "undefined"
+  constructor(
+    id: number,
+    name: string,
+    souls: number,
+    respawns: boolean,
+    drops: Drop[],
+    availableIf?: BigCondition
+  ) {
+    this.id = id;
+    this.name = name;
+    this.souls = souls;
+    this.respawns = respawns;
+    this.drops = drops;
+    this.availableIf = availableIf;
   }
-  return enemy.name;
+
+  toString(): string {
+    return this.name;
+  }
 }
