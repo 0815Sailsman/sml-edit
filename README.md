@@ -19,7 +19,48 @@ Each **location** may have any amount of
  - **objects** with arbitrary interaction possibilities. This will probably be the hardest thing to model later on. Maybe start out with just being able to interact once with every object to later be able to use them in conditions.
  - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
 
-## Roadmap for version alpha1.0.0
+## Roadmap for 0.2.0
+ - [ ] Everything from refactoring backlog done
+ - [ ] Written down concrete specs and requirements for this app
+ - [ ] Write tests for these requirements
+
+## The big refactoring backlog
+- [ ] wrap shop item builder in own component
+- [ ] Make map objects classes with common abstract ancestor 
+  - [x] map from interface to class
+  - [ ] area from interface to class
+  - [x] location from interface to class
+  - [ ] connection from interface to class
+  - [ ] item from interface to class
+  - [ ] enemy from interface to class
+  - [ ] otherObject from interface to class
+  - [ ] NPC from interface to class
+- [ ] Move toString methods to related classes
+- [ ] de-generalize object manager into different components (MAYBE)
+- [ ] unify createOrUpdate Pipeline
+
+## Feature backlog
+- [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
+- [ ] Quest-Line modeling for npcs with interactions
+- [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
+
+## Possible Spikes
+- [x] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
+- [ ] Use forms
+- [ ] Create from existing object as template
+- [x] Possibly split different IDs
+- [ ] Meta tags and info-dump in root of sml file
+- [ ] do we really need this 'bubbling', now that the IDs are clear? -> updating minor stuff without reference to major
+- [ ] work with dev preview conditional templating
+- [x] unify create and update methods in map-manager service and upstream event stuff
+
+## Known Bugs
+
+
+# Archive
+Past roadmaps etc
+
+## Roadmap for 0.1.0
 - [x] Revamp item system
 - [x] Revamp ID system
 - [x] Rework map loading
@@ -51,31 +92,9 @@ Each **location** may have any amount of
 - [x] generally clear fields on create and update
 - [x] Stop using === equality for objects in map manager and switch to ID equality
 
-## The big refactoring backlog
-- [ ] wrap shop item builder in own component
-- [ ] Make map objects classes with common abstract ancestor
-- [ ] Move toString methods to related classes
-- [ ] de-generalize object manager into different components (MAYBE)
-- [ ] unify createOrUpdate Pipeline
-
-## Feature backlog
-- [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
-- [ ] Quest-Line modeling for npcs with interactions
-
-## Possible Spikes
-- [x] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
-- [ ] Use forms
-- [ ] Create from existing object as template
-- [x] Possibly split different IDs
-- [ ] Meta tags and info-dump in root of sml file
-- [ ] do we really need this 'bubbling', now that the IDs are clear? -> updating minor stuff without reference to major
-- [ ] work with dev preview conditional templating
-- [x] unify create and update methods in map-manager service and upstream event stuff
-
-## Known Bugs
+## Fixed bugs
 - [x] Loading maps doesn't update MapManagement ID Counter
 - [x] Can't create connections (probably also other Objects) without conditions
-- [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
 - [x] Loading conditions from save doesn't  update abbreviation counter in condition builder
 - [x] loading connections doesn't work after ID introduction
 - [x] item builder change detection fires always on change during edit, possibly also other builder -> might be fixed due to editing flag

@@ -33,15 +33,15 @@ export class Map {
   }
 
   private parseLocations(locations: UnparsedLocation[]): Location[] {
-    return locations.map(location => {return {
-      id: location.id,
-      name: location.name,
-      connections: this.parseConnections(location.connections),
-      items: this.parseItems(location.items),
-      enemies: this.parseEnemies(location.enemies),
-      objects: this.parseObjects(location.objects),
-      npcs: this.parseNPCs(location.npcs)
-    }})
+    return locations.map(location => {return new Location(
+      location.id,
+      location.name,
+      this.parseConnections(location.connections),
+      this.parseItems(location.items),
+      this.parseEnemies(location.enemies),
+      this.parseObjects(location.objects),
+      this.parseNPCs(location.npcs)
+    )})
   }
 
   private parseConnections(connections: UnparsedConnection[]): Connection[] {

@@ -44,15 +44,7 @@ export class MapManagerService {
   }
 
   addLocationTo(area: Area, theName: string) {
-    let newLocation: Location = {
-      id: this.idService.nextLocationID(),
-      name: theName,
-      connections: [],
-      items: [],
-      enemies: [],
-      objects: [],
-      npcs: []
-    }
+    const newLocation = new Location(this.idService.nextLocationID(), theName);
     this.map.areas[this.map.areas.indexOf(area)].locations.push(newLocation)
   }
 

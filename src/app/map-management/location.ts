@@ -4,19 +4,34 @@ import {OtherObject} from "./otherObject";
 import {NPC} from "./NPC";
 import {Connection} from "./connection";
 
-export interface Location {
-  id: number
-  name: string
-  connections: Connection[]
-  items: Item[]
-  enemies: Enemy[]
-  objects: OtherObject[]
-  npcs: NPC[]
-}
+export class Location {
+  id: number;
+  name: string;
+  connections: Connection[];
+  items: Item[];
+  enemies: Enemy[];
+  objects: OtherObject[];
+  npcs: NPC[];
 
-export function locationToString(location: Location | undefined): string {
-  if (location == undefined) {
-    return "undefined"
+  constructor(
+    id: number,
+    name: string,
+    connections?: Connection[],
+    items? : Item[],
+    enemies? : Enemy[],
+    objects? : OtherObject[],
+    npcs?: NPC[]
+  ) {
+    this.id = id;
+    this.name = name;
+    this.connections = connections ?? [];
+    this.items = items ?? [];
+    this.enemies = enemies ?? [];
+    this.objects = objects ?? [];
+    this.npcs = npcs ?? [];
   }
-  return location.name
+
+  toString(): string {
+    return this.name
+  }
 }
