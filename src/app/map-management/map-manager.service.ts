@@ -34,12 +34,7 @@ export class MapManagerService {
   }
 
   addAreaWithName(theName: string) {
-    const newArea:Area = {
-      name: theName,
-      locations: [],
-      id: this.idService.nextAreaID()
-    }
-    console.log(newArea.id);
+    const newArea = new Area(this.idService.nextAreaID(), theName);
     this.map.areas.push(newArea)
   }
 

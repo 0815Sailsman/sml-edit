@@ -25,11 +25,9 @@ export class Map {
   }
 
   private parseAreas(unparsedAreas: UnparsedArea[]): Area[] {
-    return unparsedAreas.map(area => {return {
-      id: area.id,
-      name: area.name,
-      locations: this.parseLocations(area.locations)
-    }})
+    return unparsedAreas.map(area => {
+      return new Area(area.id, area.name, this.parseLocations(area.locations))
+    });
   }
 
   private parseLocations(locations: UnparsedLocation[]): Location[] {

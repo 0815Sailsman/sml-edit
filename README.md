@@ -26,18 +26,20 @@ Each **location** may have any amount of
 
 ## The big refactoring backlog
 - [ ] wrap shop item builder in own component
-- [ ] Make map objects classes with common abstract ancestor 
+- [ ] Make map objects classes with easily-selectable interface implemented
   - [x] map from interface to class
-  - [ ] area from interface to class
+  - [x] area from interface to class
   - [x] location from interface to class
   - [ ] connection from interface to class
   - [ ] item from interface to class
   - [ ] enemy from interface to class
   - [ ] otherObject from interface to class
   - [ ] NPC from interface to class
+  - [ ] easily selectable from type union to interface
 - [ ] Move toString methods to related classes
 - [ ] de-generalize object manager into different components (MAYBE)
 - [ ] unify createOrUpdate Pipeline
+- [ ] move related files to new utils directory in sources root
 
 ## Feature backlog
 - [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
