@@ -1,6 +1,6 @@
 <li>
   <span *ngIf="isCountable(genericObject)">{{genericObject.count}}x </span>
-  {{this.objectToString(genericObject)}}
+  {{ genericObject ? genericObject.toString(mapService) : "undefined"}}
   <span *ngIf="!isConnection(genericObject)">| ID: {{asAny(genericObject).id}}</span>
   <span *ngIf="genericObject?.availableIf !== undefined"> if {{mapService.conditionToString(genericObject?.availableIf)}}</span>
   <button (click)="fireObjectEdited()">

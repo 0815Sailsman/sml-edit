@@ -12,6 +12,7 @@ import {Enemy} from "../map-management/enemy";
 import {OtherObject} from "../map-management/otherObject";
 import {Item} from "../map-management/item";
 import {first} from "rxjs";
+import {EasilySelectable} from "../EasilySelectable";
 
 @Component({
   selector: 'sml-edit-single-generic-object',
@@ -27,7 +28,6 @@ export class SingleGenericObjectComponent<T extends ObjectInLocation> {
   @Input() genericObject?: T;
   @Input() name: string = "";
   @Input() key!: KeyInLocation;
-  @Input() objectToString: (a: T | undefined) => string = (obj : T | undefined) => "uninitialized name";
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInLocation>>();
   @Output() editObject = new EventEmitter<Pair<T, KeyInLocation>>();
 

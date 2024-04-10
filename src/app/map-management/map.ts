@@ -21,7 +21,7 @@ export class Map {
   constructor(name: string, unparsedAreas: UnparsedArea[], itemTypes: ItemType[]) {
     this.name = name;
     this.areas = this.parseAreas(unparsedAreas);
-    this.items = itemTypes;
+    this.items = this.parseItemTypes(itemTypes);
   }
 
   private parseAreas(unparsedAreas: UnparsedArea[]): Area[] {
@@ -47,6 +47,13 @@ export class Map {
       connection.id,
       connection.to,
      connection.if == null ? undefined : this.parseBigCondition(connection.if))})
+  }
+
+  private parseItemTypes(itemTypes: UnparsedItemType[]): ItemType[] {
+    return itemTypes.map(itemType => new ItemType(
+      itemType.id,
+      itemType.name
+    ));
   }
 
   private parseItems(items: UnparsedItem[]): Item[] {
@@ -163,6 +170,11 @@ interface UnparsedItem {
   itemTypeID: number
   count: number
   if?: UnparsedBigCondition
+}
+
+interface UnparsedItemType {
+  id: number
+  name: string
 }
 
 interface UnparsedDrop {

@@ -237,10 +237,10 @@ export class MapManagerService {
   addItemTypeWithName(newItemTypeName: string | undefined): number | undefined {
     if (newItemTypeName !== undefined) {
       const newID: number = this.idService.nextItemTypeID();
-      this.map.items.push({
-        name: newItemTypeName,
-        id: newID
-      })
+      this.map.items.push(new ItemType(
+        newID,
+        newItemTypeName
+      ));
       return newID;
     }
     return undefined

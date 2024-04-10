@@ -6,7 +6,6 @@
   <sml-edit-single-generic-object
     *ngFor="let object of genericObjectArray"
     [genericObject]="object"
-    [objectToString]="objectToString"
     (editObject)="editObject($event)"
     (objectDeleted)="deleteObject($event)"
     [key]="key"

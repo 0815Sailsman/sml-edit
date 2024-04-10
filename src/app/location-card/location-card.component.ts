@@ -66,12 +66,6 @@ export class LocationCardComponent {
     this.currentlyEditing = !this.currentlyEditing;
   }
 
-  protected readonly connectionToString: (connection: Connection | undefined) => string = (connection) => {return connection?.toString() ?? "undefined"};
-  protected readonly itemToString: (item: Item | undefined) => string = (item) => {return item?.toString(this.mapService) ?? "undefined"};
-  protected readonly enemyToString: (enemy: Enemy | undefined) => string = (enemy) => {return enemy?.toString() ?? "undefined"};
-  protected readonly otherObjectToString: (object: OtherObject | undefined) => string = (object) => {return object?.toString() ?? "undefined"};
-  protected readonly npcToString: (npc: NPC | undefined) => string = (npc) => {return npc?.toString() ?? "undefined"};
-
   deleteObject(pairOfObjectAndKey: Pair<ObjectInLocation, KeyInLocation>)
   {
     this.objectDeletedFromLocation.emit({

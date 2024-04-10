@@ -27,7 +27,6 @@ export class GenericObjectManagerComponent<T extends ObjectInLocation> {
 
   @Input() genericObjectArray: T[] = [];
   @Input() key!: KeyInLocation;
-  @Input() objectToString: (a: T | undefined) => string = (obj : T | undefined) => "uninitialized name";
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInLocation>>();
   @Output() connectionCreatedOrUpdated = new EventEmitter<Connection>();
   @Output() itemCreatedOrUpdated = new EventEmitter<Item>();

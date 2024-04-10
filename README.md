@@ -27,7 +27,7 @@ Each **location** may have any amount of
 
 ## The big refactoring backlog
 - [ ] wrap shop item builder in own component
-- [ ] Make map objects classes with easily-selectable interface implemented
+- [x] Make map objects classes with easily-selectable interface implemented
   - [x] map from interface to class
   - [x] area from interface to class
   - [x] location from interface to class
@@ -37,8 +37,8 @@ Each **location** may have any amount of
   - [x] otherObject from interface to class
   - [x] NPC from interface to class
   - [x] easily selectable from type union to interface
-  - [ ] don't use weird passing of functions in location card component anymore for to string
-- [ ] Move toString methods to related classes
+  - [x] don't use weird passing of functions in location card component anymore for to string
+- [x] Move toString methods to related classes
 - [ ] de-generalize object manager into different components (MAYBE)
 - [ ] unify createOrUpdate Pipeline
 - [ ] move related files to new utils directory in sources root
