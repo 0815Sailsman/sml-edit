@@ -19,13 +19,7 @@ Each **location** may have any amount of
  - **objects** with arbitrary interaction possibilities. This will probably be the hardest thing to model later on. Maybe start out with just being able to interact once with every object to later be able to use them in conditions.
  - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
 
-## Roadmap for 0.2.0
- - [x] list of available connections doesn't show a connection just by saying its id => use name of 'to' instead!
- - [ ] Everything from refactoring backlog done
- - [ ] Written down concrete specs and requirements for this app
- - [ ] Write tests for these requirements
-
-## The big refactoring backlog
+## Roadmap for 0.2.0 - The big refactoring & some QOL
 - [ ] wrap shop item builder in own component
 - [x] Make map objects classes with easily-selectable interface implemented
   - [x] map from interface to class
@@ -39,9 +33,14 @@ Each **location** may have any amount of
   - [x] easily selectable from type union to interface
   - [x] don't use weird passing of functions in location card component anymore for to string
 - [x] Move toString methods to related classes
+- [x] list of available connections doesn't show a connection just by saying its id => use name of 'to' instead!
 - [ ] de-generalize object manager into different components (MAYBE)
 - [ ] unify createOrUpdate Pipeline
 - [ ] move related files to new utils directory in sources root
+
+## Roadmap for 0.3.0 - Docs, specs and testing
+- [ ] Written down concrete specs and requirements for this app
+- [ ] Write tests for these requirements
 
 ## Feature backlog
 - [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
