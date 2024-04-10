@@ -34,7 +34,7 @@ Each **location** may have any amount of
   - [x] connection from interface to class
   - [x] item from interface to class
   - [x] enemy from interface to class
-  - [ ] otherObject from interface to class
+  - [x] otherObject from interface to class
   - [ ] NPC from interface to class
   - [ ] easily selectable from type union to interface
   - [ ] don't use weird passing of functions in location card component anymore for to string

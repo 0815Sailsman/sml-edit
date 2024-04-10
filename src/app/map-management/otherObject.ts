@@ -1,14 +1,21 @@
 import {BigCondition} from "./bigCondition";
 
-export interface OtherObject {
+export class OtherObject {
   id: number
   name: string
   availableIf?: BigCondition
-}
 
-export function otherObjectToString(object: OtherObject | undefined): string {
-  if (object == undefined) {
-    return "undefined"
+  constructor(
+    id: number,
+    name: string,
+    availableIf?: BigCondition
+  ) {
+    this.id = id;
+    this.name = name;
+    this.availableIf = availableIf;
   }
-  return object.name
+
+  toString(): string {
+    return this.name;
+  }
 }

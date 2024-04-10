@@ -77,11 +77,11 @@ export class Map {
   }
 
   private parseObjects(objects: UnparsedOtherObject[]): OtherObject[] {
-    return objects.map(object => {return {
-      id: object.id,
-      name: object.name,
-      availableIf: object.if == null ? undefined : this.parseBigCondition(object.if)
-    }})
+    return objects.map(object => {return new OtherObject(
+      object.id,
+      object.name,
+      object.if == null ? undefined : this.parseBigCondition(object.if)
+    )});
   }
 
   private parseNPCs(npcs: UnparsedNPC[]): NPC[] {

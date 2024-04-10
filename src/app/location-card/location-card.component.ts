@@ -6,7 +6,7 @@ import {Location} from "../map-management/location";
 import {Enemy} from "../map-management/enemy";
 import {Item} from "../map-management/item";
 import {Connection} from "../map-management/connection";
-import {OtherObject, otherObjectToString} from "../map-management/otherObject";
+import {OtherObject} from "../map-management/otherObject";
 import {NPC, npcToString} from "../map-management/NPC";
 import {Pair} from "../Pair";
 import {Triplet} from "../Triplet";
@@ -69,7 +69,7 @@ export class LocationCardComponent {
   protected readonly connectionToString: (connection: Connection | undefined) => string = (connection) => {return connection?.toString() ?? "undefined"};
   protected readonly itemToString: (item: Item | undefined) => string = (item) => {return item?.toString(this.mapService) ?? "undefined"};
   protected readonly enemyToString: (enemy: Enemy | undefined) => string = (enemy) => {return enemy?.toString() ?? "undefined"};
-  protected readonly otherObjectToString: (object: OtherObject | undefined) => string = otherObjectToString;
+  protected readonly otherObjectToString: (object: OtherObject | undefined) => string = (object) => {return object?.toString() ?? "undefined"};
   protected readonly npcToString: (npc: NPC | undefined) => string = npcToString;
 
   deleteObject(pairOfObjectAndKey: Pair<ObjectInLocation, KeyInLocation>)

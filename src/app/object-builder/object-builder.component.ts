@@ -51,11 +51,11 @@ export class ObjectBuilderComponent implements OnChanges {
 
   createOrUpdateNewObject() {
     if (this.objectName != undefined) {
-      this.objectCreatedOrUpdated.emit({
-        id: this.editedObject !== undefined ? this.editedObject?.id : this.idService.nextObjectID(),
-        name: this.objectName,
-        availableIf: structuredClone(this.condition)
-      })
+      this.objectCreatedOrUpdated.emit(new OtherObject(
+        this.editedObject !== undefined ? this.editedObject?.id : this.idService.nextObjectID(),
+        this.objectName,
+        structuredClone(this.condition)
+    ));
     }
     this.editedObject = undefined;
     this.editing = false;
