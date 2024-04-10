@@ -20,7 +20,7 @@ Each **location** may have any amount of
  - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
 
 ## Roadmap for 0.2.0
- - [ ] list of available connections doesnt show a connection just by saying its id => use name of to instead!
+ - [x] list of available connections doesn't show a connection just by saying its id => use name of 'to' instead!
  - [ ] Everything from refactoring backlog done
  - [ ] Written down concrete specs and requirements for this app
  - [ ] Write tests for these requirements

@@ -265,4 +265,31 @@ export class MapManagerService {
     const locationIndex = this.map.areas[areaIndex].locations.findIndex(location => location.id == id);
     this.map.areas[areaIndex].locations[locationIndex].name = editedName;
   }
+
+  locationOfItemWithID(itemId: number): Location | undefined {
+    const allLocationsWithItemId = this.extractor.allLocations(this.map)
+      .filter(location => location.items.map(item => item.id).includes(itemId));
+    if (allLocationsWithItemId.length > 0) {
+      return allLocationsWithItemId[0];
+    }
+    return undefined;
+  }
+
+  enemyDroppingItemWithID(itemId: number): Enemy | undefined {
+    const allEnemiesWithDropWithItemId = this.extractor.allEnemies(this.map)
+      .filter(enemy => enemy.drops.map(drop => drop.item.id).includes(itemId));
+    if (allEnemiesWithDropWithItemId.length > 0) {
+      return allEnemiesWithDropWithItemId[0];
+    }
+    return undefined;
+  }
+
+  npcSellingItemWithID(itemId: number): NPC | undefined {
+    const allNPCsSellingItemWithId = this.extractor.allNPCs(this.map)
+      .filter(npc => npc.shop.map(offer => offer.item.id).includes(itemId));
+    if (allNPCsSellingItemWithId.length > 0) {
+      return allNPCsSellingItemWithId[0];
+    }
+    return undefined;
+  }
 }

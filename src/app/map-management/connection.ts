@@ -1,4 +1,5 @@
 import {BigCondition} from "./bigCondition";
+import {MapManagerService} from "./map-manager.service";
 
 export class Connection {
 
@@ -16,7 +17,7 @@ export class Connection {
     this.availableIf = availableIf;
   }
 
-  toString(): string {
-    return "to " + this.to.toString();
+  toString(mapService: MapManagerService): string {
+    return "ID: " + this.to + " | to " + mapService.locationById(this.to).name;
   }
 }
