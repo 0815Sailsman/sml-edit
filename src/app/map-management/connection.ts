@@ -1,14 +1,22 @@
 import {BigCondition} from "./bigCondition";
 
-export interface Connection {
-  id: number
-  to: number
-  if?: BigCondition
-}
+export class Connection {
 
-export function connectionToString(connection: Connection | undefined): string {
-  if (connection == undefined) {
-    return "undefined"
+  id: number;
+  to: number;
+  availableIf?: BigCondition;
+
+  constructor(
+    id: number,
+    to: number,
+    availableIf?: BigCondition
+  ) {
+    this.id = id;
+    this.to = to;
+    this.availableIf = availableIf;
   }
-  return "to " + connection.to.toString()
+
+  toString(): string {
+    return "to " + this.to.toString();
+  }
 }

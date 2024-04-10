@@ -39,8 +39,8 @@ export class ObjectBuilderComponent implements OnChanges {
     if (this.editedObject !== undefined && !this.editing) {
       this.editing = true;
       this.objectName = this.editedObject.name;
-      if (this.editedObject.if !== undefined) {
-        this.condition = this.editedObject.if
+      if (this.editedObject.availableIf !== undefined) {
+        this.condition = this.editedObject.availableIf
       }
     }
   }
@@ -54,7 +54,7 @@ export class ObjectBuilderComponent implements OnChanges {
       this.objectCreatedOrUpdated.emit({
         id: this.editedObject !== undefined ? this.editedObject?.id : this.idService.nextObjectID(),
         name: this.objectName,
-        if: structuredClone(this.condition)
+        availableIf: structuredClone(this.condition)
       })
     }
     this.editedObject = undefined;

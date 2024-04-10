@@ -5,7 +5,7 @@ export interface NPC {
   id: number
   name: string
   shop: ShopItem[]
-  if?: BigCondition
+  availableIf?: BigCondition
 }
 
 export function npcToString(npc: NPC | undefined): string {

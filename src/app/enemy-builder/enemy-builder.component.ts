@@ -56,8 +56,8 @@ export class EnemyBuilderComponent implements OnChanges {
       this.souls = this.editedEnemy.souls;
       this.drops = this.editedEnemy.drops;
       this.respawns = this.editedEnemy.respawns;
-      if (this.editedEnemy.if !== undefined) {
-        this.condition = this.editedEnemy.if;
+      if (this.editedEnemy.availableIf !== undefined) {
+        this.condition = this.editedEnemy.availableIf;
       }
     }
   }
@@ -74,7 +74,7 @@ export class EnemyBuilderComponent implements OnChanges {
         souls: this.souls,
         respawns: this.respawns,
         drops: this.drops,
-        if: structuredClone(this.condition)
+        availableIf: structuredClone(this.condition)
       })
     }
     this.editedEnemy = undefined;

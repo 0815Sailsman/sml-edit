@@ -2,7 +2,7 @@
   <label for="name">Create new object with name: </label><input id="name" name="name" [(ngModel)]="objectName" ngDefaultControl/><br>
 </div>
 <sml-edit-condition-builder
-  [editCondition]="editedObject?.if"
+  [editCondition]="editedObject?.availableIf"
   (internalConditionChange)="updateInternalCondition($event)"
   [startingConditions]="startingConditions"
 />

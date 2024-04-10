@@ -4,5 +4,5 @@ export interface Item {
   id: number
   itemTypeID: number
   count: number
-  if?: BigCondition
+  availableIf?: BigCondition
 }

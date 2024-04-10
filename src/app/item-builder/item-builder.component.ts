@@ -47,8 +47,8 @@ export class ItemBuilderComponent implements OnChanges {
       this.editing = true;
       this.itemType = this.mapService.itemTypeById(this.editedItem.itemTypeID);
       this.itemCount = this.editedItem.count
-      if (this.editedItem.if !== undefined) {
-        this.condition = this.editedItem.if
+      if (this.editedItem.availableIf !== undefined) {
+        this.condition = this.editedItem.availableIf
       }
     }
   }
@@ -63,7 +63,7 @@ export class ItemBuilderComponent implements OnChanges {
         id: this.editedItem !== undefined ? this.editedItem.id : this.idService.nextItemID(),
         itemTypeID: this.itemType.id,
         count: this.itemCount,
-        if: structuredClone(this.condition)
+        availableIf: structuredClone(this.condition)
       })
     }
     this.editedItem = undefined;

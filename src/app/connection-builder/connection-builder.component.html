@@ -4,7 +4,7 @@
   [allOptions]="mapService.allLocations()"
 />
 <sml-edit-condition-builder
-  [editCondition]="editConnection?.if"
+  [editCondition]="editConnection?.availableIf"
   [startingConditions]="startingConditions"
   (internalConditionChange)="updateCondition($event)"
 />

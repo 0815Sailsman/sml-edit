@@ -6,7 +6,7 @@
   *ngIf="allowConditions !== undefined && allowConditions"
   (internalConditionChange)="updateInternalCondition($event)"
   [startingConditions]="startingConditions"
-  [editCondition]="editedItem?. if"
+  [editCondition]="editedItem?. availableIf"
 />
 <button (click)="createOrUpdateNewItem()">
   <span *ngIf="editedItem===undefined">

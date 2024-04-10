@@ -88,7 +88,7 @@ export class GenericObjectManagerComponent<T extends ObjectInLocation> {
 
   extractConditions(genericObjectArray: T[]): AtomicCondition[] {
     const conditionsWithDuplicates =  genericObjectArray
-      .flatMap(genObj => genObj.if?.subConditions ?? []);
+      .flatMap(genObj => genObj.availableIf?.subConditions ?? []);
     return this.filterDuplicateConditions(conditionsWithDuplicates);
   }
 

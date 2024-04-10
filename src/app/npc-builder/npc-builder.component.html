@@ -27,7 +27,7 @@
 <sml-edit-condition-builder
   (internalConditionChange)="updateInternalCondition($event)"
   [startingConditions]="startingConditions"
-  [editCondition]="editedNPC?.if"
+  [editCondition]="editedNPC?.availableIf"
 />
 <button (click)="createOrUpdateNewNpc()">
   <span *ngIf="editedNPC===undefined">create</span>

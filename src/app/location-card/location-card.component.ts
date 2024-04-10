@@ -5,7 +5,7 @@ import {CommonModule} from "@angular/common";
 import {Location} from "../map-management/location";
 import {Enemy, enemyToString} from "../map-management/enemy";
 import {Item} from "../map-management/item";
-import {Connection, connectionToString} from "../map-management/connection";
+import {Connection} from "../map-management/connection";
 import {OtherObject, otherObjectToString} from "../map-management/otherObject";
 import {NPC, npcToString} from "../map-management/NPC";
 import {Pair} from "../Pair";
@@ -66,8 +66,8 @@ export class LocationCardComponent {
     this.currentlyEditing = !this.currentlyEditing;
   }
 
+  protected readonly connectionToString: (connection: Connection | undefined) => string = (connection) => {return connection?.toString() ?? "undefined"};
   protected readonly itemToString: (item: Item | undefined) => string = (item) => {return this.mapService.itemToString(item)};
-  protected readonly connectionToString: (connection: Connection | undefined) => string = connectionToString;
   protected readonly enemyToString: (enemy: Enemy | undefined) => string = enemyToString;
   protected readonly otherObjectToString: (object: OtherObject | undefined) => string = otherObjectToString;
   protected readonly npcToString: (npc: NPC | undefined) => string = npcToString;

@@ -43,11 +43,10 @@ export class Map {
   }
 
   private parseConnections(connections: UnparsedConnection[]): Connection[] {
-    return connections.map(connection => {return {
-      id: connection.id,
-      to: connection.to,
-      if: connection.if == null ? undefined : this.parseBigCondition(connection.if)
-    }})
+    return connections.map(connection => {return new Connection(
+      connection.id,
+      connection.to,
+     connection.if == null ? undefined : this.parseBigCondition(connection.if))})
   }
 
   private parseItems(items: UnparsedItem[]): Item[] {
@@ -55,7 +54,7 @@ export class Map {
       id: item.id,
       itemTypeID: item.itemTypeID,
       count: item.count,
-      if: item.if == null ? undefined : this.parseBigCondition(item.if)
+      availableIf: item.if == null ? undefined : this.parseBigCondition(item.if)
     }})
   }
 
@@ -73,7 +72,7 @@ export class Map {
       souls: enemy.souls,
       respawns: enemy.respawns,
       drops: this.parseDrops(enemy.drops),
-      if: enemy.if == null ? undefined : this.parseBigCondition(enemy.if)
+      availableIf: enemy.if == null ? undefined : this.parseBigCondition(enemy.if)
     }})
   }
 
@@ -81,7 +80,7 @@ export class Map {
     return objects.map(object => {return {
       id: object.id,
       name: object.name,
-      if: object.if == null ? undefined : this.parseBigCondition(object.if)
+      availableIf: object.if == null ? undefined : this.parseBigCondition(object.if)
     }})
   }
 
@@ -90,7 +89,7 @@ export class Map {
       id: npc.id,
       name: npc.name,
       shop: this.parseShopItems(npc.shop),
-      if: npc.if == null ? undefined : this.parseBigCondition(npc.if)
+      availableIf: npc.if == null ? undefined : this.parseBigCondition(npc.if)
     }})
   }
 

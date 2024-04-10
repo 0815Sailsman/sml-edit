@@ -20,6 +20,7 @@ Each **location** may have any amount of
  - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
 
 ## Roadmap for 0.2.0
+ - [ ] list of available connections doesnt show a connection just by saying its id => use name of to instead!
  - [ ] Everything from refactoring backlog done
  - [ ] Written down concrete specs and requirements for this app
  - [ ] Write tests for these requirements
@@ -30,12 +31,13 @@ Each **location** may have any amount of
   - [x] map from interface to class
   - [x] area from interface to class
   - [x] location from interface to class
-  - [ ] connection from interface to class
+  - [x] connection from interface to class
   - [ ] item from interface to class
   - [ ] enemy from interface to class
   - [ ] otherObject from interface to class
   - [ ] NPC from interface to class
   - [ ] easily selectable from type union to interface
+  - [ ] dont use weird passing of functions in location card component anymore for to string
 - [ ] Move toString methods to related classes
 - [ ] de-generalize object manager into different components (MAYBE)
 - [ ] unify createOrUpdate Pipeline

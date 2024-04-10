@@ -8,7 +8,7 @@ export interface Enemy {
   souls: number
   respawns: boolean
   drops: Drop[]
-  if?: BigCondition
+  availableIf?: BigCondition
 }
 
 export function enemyToString(enemy: Enemy | undefined): string {

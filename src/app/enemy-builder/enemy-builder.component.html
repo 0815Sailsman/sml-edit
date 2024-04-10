@@ -21,7 +21,7 @@
 <sml-edit-condition-builder
   (internalConditionChange)="updateInternalCondition($event)"
   [startingConditions]="startingConditions"
-  [editCondition]="editedEnemy?.if"
+  [editCondition]="editedEnemy?.availableIf"
 />
 <button (click)="createOrUpdateNewEnemy()">
   <span *ngIf="editedEnemy===undefined">create</span>

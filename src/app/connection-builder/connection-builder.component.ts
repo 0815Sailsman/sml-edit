@@ -40,8 +40,8 @@ export class ConnectionBuilderComponent implements OnChanges {
     if (this.editConnection !== undefined && !this.editing) {
       this.editing = true;
       this.targetLocation = this.mapService.locationById(this.editConnection.to)
-      if (this.editConnection.if !== undefined) {
-        this.condition = this.editConnection.if
+      if (this.editConnection.availableIf !== undefined) {
+        this.condition = this.editConnection.availableIf
       }
     }
   }
@@ -49,11 +49,7 @@ export class ConnectionBuilderComponent implements OnChanges {
   createOrUpdateConnection() {
     if (this.targetLocation != undefined) {
       const connectionID = this.editConnection !== undefined ? this.editConnection?.id : this.idService.nextConnectionID();
-      this.connectionCreatedOrUpdated.emit({
-        id: connectionID,
-        to: this.targetLocation?.id,
-        if: structuredClone(this.condition)
-      })
+      this.connectionCreatedOrUpdated.emit(new Connection(connectionID, this.targetLocation.id, structuredClone(this.condition)));
     }
     this.editConnection = undefined;
     this.editing = false;
