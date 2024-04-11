@@ -81,18 +81,15 @@ export class NpcBuilderComponent implements OnChanges {
 
   addOrUpdateShopItem(shopItem: ShopItem) {
     const shopItemIndex = this.findIndexForShopItem(shopItem);
-    if (dropIndex == -1) {
-      this.drops.push(drop);
+    if (shopItemIndex == -1) {
+      this.shopItems.push(shopItem);
     } else {
-      this.drops[dropIndex] = drop;
+      this.shopItems[shopItemIndex] = shopItem;
     }
   }
 
   editShopItem(shopItem: ShopItem) {
-    this.newShopItemCount = shopItem.item.count;
-    this.newShopItemItemType = this.mapService.itemTypeById(shopItem.item.itemTypeID);
-    this.newShopItemCost = shopItem.cost;
-    this.editedShopItemID = shopItem.item.id;
+    this.shopItemToEdit = shopItem
   }
 
   deleteShopItem(shopItem: ShopItem) {

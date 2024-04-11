@@ -10,7 +10,7 @@
       <button (click)="deleteShopItem(shopItem)">delete</button>
     </li>
   </ul>
-  <sml-edit-shop-item-builder />
+  <sml-edit-shop-item-builder [editedShopItem]="shopItemToEdit" (shopItemCreatedOrUpdated)="addOrUpdateShopItem($event)"/>
 </div>
 <sml-edit-condition-builder
   (internalConditionChange)="updateInternalCondition($event)"

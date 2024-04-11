@@ -20,7 +20,7 @@ Each **location** may have any amount of
  - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
 
 ## Roadmap for 0.2.0 - The big refactoring & some QOL
-- [ ] wrap shop item builder in own component
+- [x] wrap shop item builder in own component
 - [x] Make map objects classes with easily-selectable interface implemented
   - [x] map from interface to class
   - [x] area from interface to class
