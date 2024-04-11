@@ -13,6 +13,7 @@ import {ItemType} from "../map-management/itemType";
 import {IdManagerService} from "../map-management/id-manager.service";
 import {AtomicCondition} from "../map-management/atomicCondition";
 import {Drop} from "../map-management/drop";
+import {ShopItemBuilderComponent} from "./shop-item-builder/shop-item-builder.component";
 
 @Component({
   selector: 'sml-edit-npc-builder',
@@ -24,7 +25,8 @@ import {Drop} from "../map-management/drop";
     ItemBuilderComponent,
     NgForOf,
     ItemBuilderHeaderComponent,
-    NgIf
+    NgIf,
+    ShopItemBuilderComponent
   ],
   templateUrl: './npc-builder.component.html',
   styleUrl: './npc-builder.component.css'
@@ -32,6 +34,7 @@ import {Drop} from "../map-management/drop";
 export class NpcBuilderComponent implements OnChanges {
 
   @ViewChild(ConditionBuilderComponent) conditionBuilder!: ConditionBuilderComponent;
+  @ViewChild(ShopItemBuilderComponent) shopItemBuilder!: ShopItemBuilderComponent;
 
   @Input() startingConditions: AtomicCondition[] = [];
   @Input() editedNPC: NPC | undefined;
@@ -42,11 +45,8 @@ export class NpcBuilderComponent implements OnChanges {
 
   npcName: string | undefined;
   shopItems: ShopItem[] = [];
-  newShopItemItemType: ItemType | undefined;
-  newShopItemCount: number | undefined;
-  newShopItemCost: number | undefined;
+  shopItemToEdit: ShopItem | undefined;
   condition: BigCondition | undefined;
-  editedShopItemID: number | undefined;
   editing: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) {
@@ -74,32 +74,18 @@ export class NpcBuilderComponent implements OnChanges {
 
     this.npcName = undefined;
     this.shopItems = [];
-    this.newShopItemItemType = undefined;
-    this.newShopItemCount =  undefined;
-    this.newShopItemCost =  undefined;
     this.condition = undefined;
+    this.shopItemBuilder.clear();
     this.conditionBuilder.clear();
   }
 
-  addOrUpdateShopItem() {
-    if (this.newShopItemItemType !== undefined && this.newShopItemCost !== undefined && this.newShopItemCount !== undefined) {
-      const shopItemObject = {
-        item: new Item(
-          this.editedShopItemID !== undefined ? this.editedShopItemID : this.idService.nextItemID(),
-          this.newShopItemItemType.id,
-          1
-        ),
-        count: this.newShopItemCount,
-        cost: this.newShopItemCost
-      };
-      if (this.editedShopItemID !== undefined) {
-        const existingShopItemIndex = this.shopItems.findIndex(obj => obj.item.id == this.editedShopItemID)
-        this.shopItems[existingShopItemIndex] = shopItemObject;
-      } else {
-        this.shopItems.push(shopItemObject);
-      }
+  addOrUpdateShopItem(shopItem: ShopItem) {
+    const shopItemIndex = this.findIndexForShopItem(shopItem);
+    if (dropIndex == -1) {
+      this.drops.push(drop);
+    } else {
+      this.drops[dropIndex] = drop;
     }
-    this.editedShopItemID = undefined;
   }
 
   editShopItem(shopItem: ShopItem) {
@@ -117,11 +103,9 @@ export class NpcBuilderComponent implements OnChanges {
     this.condition = updatedCondition;
   }
 
-  updateNewShopItemCount(newCount: number) {
-    this.newShopItemCount = newCount;
-  }
-
-  updateNewShopItemItemType(newType: ItemType) {
-    this.newShopItemItemType = newType;
+  findIndexForShopItem(shopItem: ShopItem): number {
+    return this.shopItems
+      .map(shopItem => shopItem.item)
+      .findIndex(item => item.itemTypeID == shopItem.item.itemTypeID);
   }
 }

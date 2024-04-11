@@ -1,0 +1,9 @@
+<sml-edit-item-builder-header
+  [(itemType)]="shopItemType"
+  [(itemCount)]="shopItemCount"
+/>
+<label for="cost"> with price </label><input id="cost" name="cost" [(ngModel)]="shopItemCost" ngDefaultControl/>
+<button (click)="fireCreateOrUpdateShopItem()">
+  <span *ngIf="editedShopItem===undefined">Create shopitem</span>
+  <span *ngIf="editedShopItem!==undefined">Update shopitem</span>
+</button>

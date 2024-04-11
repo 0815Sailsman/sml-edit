@@ -10,19 +10,7 @@
       <button (click)="deleteShopItem(shopItem)">delete</button>
     </li>
   </ul>
-  <div class="card">
-    <sml-edit-item-builder-header
-      [itemType]="newShopItemItemType"
-      [itemCount]="newShopItemCount"
-      (itemCountChange)="updateNewShopItemCount($event)"
-      (itemTypeChange)="updateNewShopItemItemType($event)"
-    />
-    <label for="cost"> with price </label><input id="cost" name="cost" [(ngModel)]="newShopItemCost" ngDefaultControl/>
-    <button (click)="addOrUpdateShopItem()">
-      <span *ngIf="editedShopItemID===undefined">Create shopitem</span>
-      <span *ngIf="editedShopItemID!==undefined">Update shopitem</span>
-    </button>
-  </div>
+  <sml-edit-shop-item-builder />
 </div>
 <sml-edit-condition-builder
   (internalConditionChange)="updateInternalCondition($event)"
