@@ -16,11 +16,10 @@
 </div>
 <div *ngIf="showingDetails">
   <hr style="border-top: 1px solid black;border-bottom: 0;width: 100%;height: 0">
-  <sml-edit-generic-object-manager
-    [genericObjectArray]="location.connections"
-    (objectDeleted)="deleteObject($event)"
-    [key]="KeyInLocation.Connections"
+  <sml-edit-connection-manager
     (connectionCreatedOrUpdated)="registerOrUpdateNewConnection($event)"
+    (connectionDeleted)="deleteConnection($event)"
+    [connections]="location.connections"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.items"

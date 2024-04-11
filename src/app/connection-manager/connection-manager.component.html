@@ -1,0 +1,19 @@
+<div>
+  <button (click)="toggleDetails()">toggle visibility</button>
+  Connections:
+</div>
+<div *ngIf="showingDetails">
+  <sml-edit-single-generic-object
+    *ngFor="let object of connections"
+    [genericObject]="object"
+    (editObjectWithoutKey)="editConnection($event)"
+    (objectDeletedWithoutKey)="deleteConnection($event)"
+    [key]=KeyInLocation.Connections
+    style="display: inherit"
+  />
+    <sml-edit-connection-builder
+      (connectionCreatedOrUpdated)="createOrUpdateConnection($event)"
+      [startingConditions]="extractConditions(connections)"
+      [editConnection]="connectionToEdit"
+    />
+</div>

@@ -18,6 +18,6 @@ export class Connection {
   }
 
   toString(mapService: MapManagerService): string {
-    return "ID: " + this.to + " | to " + mapService.locationById(this.to).name;
+    return "to " + mapService.locationById(this.to).name + " (ID: " + this.to + ") ";
   }
 }

@@ -46,6 +46,21 @@ export class MapManagerService {
       this.map.areas[areaIndex].locations.filter(location => location.id !== theLocationToBeDeleted.id)
   }
 
+  deleteConnectionFromLocationInArea(
+    area: Area | undefined,
+    location: Location | undefined,
+    connection: Connection | undefined,
+  ) {
+    if (area == undefined || location == undefined || connection == undefined) {
+      return
+    }
+    const areaIndex = this.map.areas.indexOf(area);
+    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
+    const newConnections = this.map.areas[areaIndex].locations[locationIndex].connections.filter(oldConnection => oldConnection.id !== connection.id);
+    this.map.areas[areaIndex].locations[locationIndex].connections = newConnections;
+  }
+
+  // continue here and split these up. move away from this abstraction
   deleteGeneralObjectFromLocationInArea(
     area: Area | undefined,
     location: Location | undefined,
@@ -211,7 +226,7 @@ export class MapManagerService {
           result += localCondition?.subjectType + " "
           switch (localCondition?.subjectType) {
             case ConditionSubjects.Location: result += this.locationById(localCondition.subjectId).name;break;
-            case ConditionSubjects.Item: result += this.itemTypeById(this.itemByID(localCondition.subjectId).itemTypeID).name;break;
+            case ConditionSubjects.Item: result += this.itemByID(localCondition.subjectId).toString(this);break;
             case ConditionSubjects.Enemy: result += this.enemyById(localCondition.subjectId).name;break;
             case ConditionSubjects.OtherObject: result += this.otherObjectById(localCondition.subjectId).name;break;
           }

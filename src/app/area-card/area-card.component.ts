@@ -80,6 +80,16 @@ export class AreaCardComponent {
     )
   }
 
+  deleteConnectionFromLocation(
+    tripletOfLocationAndObjectAndKey: Pair<Location, Connection>
+  ): void {
+    this.mapService.deleteConnectionFromLocationInArea(
+      this.area,
+      tripletOfLocationAndObjectAndKey.first,
+      tripletOfLocationAndObjectAndKey.second,
+    )
+  }
+
   createOrUpdateConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
     this.mapService.createOrUpdateConnectionFromLocation(
       this.area,

@@ -30,6 +30,8 @@ export class SingleGenericObjectComponent<T extends ObjectInLocation> {
   @Input() key!: KeyInLocation;
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInLocation>>();
   @Output() editObject = new EventEmitter<Pair<T, KeyInLocation>>();
+  @Output() editObjectWithoutKey = new EventEmitter<T>();
+  @Output() objectDeletedWithoutKey = new EventEmitter<T>();
 
   protected readonly depluralizeSimple = depluralizeSimple;
 
@@ -38,10 +40,12 @@ export class SingleGenericObjectComponent<T extends ObjectInLocation> {
 
   fireObjectDeleted() {
     this.objectDeleted.emit({first: this.genericObject, second: this.key})
+    this.objectDeletedWithoutKey.emit(this.genericObject)
   }
 
   fireObjectEdited() {
     this.editObject.emit({first: this.genericObject, second: this.key});
+    this.editObjectWithoutKey.emit(this.genericObject)
   }
 
   isConnection(value: any): value is Connection {

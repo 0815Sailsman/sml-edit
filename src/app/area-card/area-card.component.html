@@ -17,6 +17,7 @@
     [location]="location"
     (locationDeleted)="deleteLocation($event)"
     (objectDeletedFromLocation)="deleteObjectFromLocation($event)"
+    (connectionDeletedFromLocation)="deleteConnectionFromLocation($event)"
     (updateLocationWithIDToName)="updateLocationWithIDToName($event)"
     (connectionCreatedOrUpdatedFromLocation)="createOrUpdateConnectionFromLocation($event)"
     (itemCreatedOrUpdatedInLocation)="createOrUpdateItemInLocation($event)"

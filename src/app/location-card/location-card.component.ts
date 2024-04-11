@@ -14,6 +14,7 @@ import {KeyInLocation} from "../KeyInLocation";
 import {ObjectInLocation} from "../ObjectInLocation";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {FormsModule} from "@angular/forms";
+import {ConnectionManagerComponent} from "../connection-manager/connection-manager.component";
 
 @Component({
   selector: 'sml-edit-location-card',
@@ -21,7 +22,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     GenericObjectManagerComponent,
-    FormsModule
+    FormsModule,
+    ConnectionManagerComponent
   ],
   templateUrl: './location-card.component.html',
   styleUrl: './location-card.component.css'
@@ -42,6 +44,7 @@ export class LocationCardComponent {
     ObjectInLocation,
     KeyInLocation
   >>();
+  @Output() connectionDeletedFromLocation = new EventEmitter<Pair<Location, Connection>>();
   @Output() updateLocationWithIDToName = new EventEmitter<Pair<number, string>>
   @Output() connectionCreatedOrUpdatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
   @Output() itemCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, Item>>();
@@ -72,6 +75,13 @@ export class LocationCardComponent {
       first: this.location,
       second: pairOfObjectAndKey.first,
       third: pairOfObjectAndKey.second})
+  }
+
+  deleteConnection(connection: Connection) {
+    this.connectionDeletedFromLocation.emit({
+      first: this.location,
+      second: connection
+    });
   }
 
   protected readonly KeyInLocation = KeyInLocation;

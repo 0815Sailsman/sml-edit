@@ -21,7 +21,7 @@ export class Item {
   }
 
   toString(mapService: MapManagerService): string {
-    return "ID: " + this.id + " | " + this.count + "x " + mapService.itemTypeById(this.itemTypeID).name + this.originString(mapService);
+    return this.count + "x " + mapService.itemTypeById(this.itemTypeID).name + " (ID: " + this.id + ") " + this.originString(mapService);
   }
 
   private originString(mapService: MapManagerService): string {
