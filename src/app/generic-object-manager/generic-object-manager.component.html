@@ -12,12 +12,6 @@
     style="display: inherit"
   />
   <div [ngSwitch]="key">
-    <sml-edit-enemy-builder
-      *ngSwitchCase="'enemies'"
-      (enemyCreatedOrUpdated)="createOrUpdateEnemy($event)"
-      [startingConditions]="extractConditions(genericObjectArray)"
-      [editedEnemy]="enemyToEdit"
-    />
     <sml-edit-object-builder
       *ngSwitchCase="'objects'"
       (objectCreatedOrUpdated)="createOrUpdateOtherObject($event)"

@@ -16,6 +16,7 @@ import {MapManagerService} from "../map-management/map-manager.service";
 import {FormsModule} from "@angular/forms";
 import {ConnectionManagerComponent} from "../connection-manager/connection-manager.component";
 import {ItemManagerComponent} from "../item-manager/item-manager.component";
+import {EnemyManagerComponent} from "../enemy-manager/enemy-manager.component";
 
 @Component({
   selector: 'sml-edit-location-card',
@@ -25,7 +26,8 @@ import {ItemManagerComponent} from "../item-manager/item-manager.component";
     GenericObjectManagerComponent,
     FormsModule,
     ConnectionManagerComponent,
-    ItemManagerComponent
+    ItemManagerComponent,
+    EnemyManagerComponent
   ],
   templateUrl: './location-card.component.html',
   styleUrl: './location-card.component.css'
@@ -98,6 +100,13 @@ export class LocationCardComponent {
       item: item
     });
   }
+
+  deleteEnemy(enemy: Enemy) {
+    this.enemyDeletedFromLocation.emit({
+      location: this.location,
+      enemy: enemy
+    })
+  };
 
   protected readonly KeyInLocation = KeyInLocation;
 

@@ -26,11 +26,10 @@
     (itemDeleted)="deleteItem($event)"
     [items]="location.items"
   />
-  <sml-edit-generic-object-manager
-    [genericObjectArray]="location.enemies"
-    (objectDeleted)="deleteObject($event)"
-    [key]="KeyInLocation.Enemies"
+  <sml-edit-enemy-manager
     (enemyCreatedOrUpdated)="registerOrUpdateNewEnemy($event)"
+    (enemyDeleted)="deleteEnemy($event)"
+    [enemies]="location.enemies"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.objects"

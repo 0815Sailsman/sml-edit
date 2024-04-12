@@ -1,0 +1,20 @@
+<div>
+  <button (click)="toggleDetails()">toggle visibility</button>
+  Enemies:
+</div>
+<div *ngIf="showingDetails">
+  <sml-edit-single-generic-object
+    *ngFor="let enemy of enemies"
+    [genericObject]="enemy"
+    (editObjectWithoutKey)="editEnemy($event)"
+    (objectDeletedWithoutKey)="deleteEnemy($event)"
+    [key]="KeyInLocation.Enemies"
+    style="display: inherit"
+  />
+  <sml-edit-enemy-builder
+    (enemyCreatedOrUpdated)="createOrUpdateEnemy($event)"
+    [startingConditions]="extractConditions(enemies)"
+    [editedEnemy]="enemyToEdit"
+  />
+
+</div>

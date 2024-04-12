@@ -36,10 +36,11 @@ Each **location** may have any amount of
 - [x] list of available connections doesn't show a connection just by saying its id => use name of 'to' instead!
 - [ ] de-generalize object manager into different components
   - [x] split off connection manager
-  - [ ] split off item manager
-  - [ ] split off enemy manager
+  - [x] split off item manager
+  - [x] split off enemy manager
   - [ ] split off object manager
   - [ ] split off npc manager
+  - [ ] move and unify extract Conditions somewhere reasonable
 - [ ] unify createOrUpdate Pipeline
 - [ ] move related files to new utils directory in sources root
 
