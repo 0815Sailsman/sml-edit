@@ -1,5 +1,6 @@
 import {BigCondition} from "./bigCondition";
 import {Drop} from "./drop";
+import {MapManagerService} from "./map-manager.service";
 
 export class Enemy {
   id: number
@@ -25,7 +26,7 @@ export class Enemy {
     this.availableIf = availableIf;
   }
 
-  toString(): string {
-    return this.name;
+  toString(mapService: MapManagerService): string {
+    return this.name + " (ID: " + this.id + ") spawning in " + (mapService.locationOfEnemyWithID(this.id)?.name ?? "undefined location");
   }
 }

@@ -16,7 +16,7 @@
     *ngFor="let location of area?.locations"
     [location]="location"
     (locationDeleted)="deleteLocation($event)"
-    (objectDeletedFromLocation)="deleteObjectFromLocation($event)"
+    (objectDeletedFromLocation)="deleteObjectFromLocationTOBEREMOVED($event)"
     (connectionDeletedFromLocation)="deleteConnectionFromLocation($event)"
     (updateLocationWithIDToName)="updateLocationWithIDToName($event)"
     (connectionCreatedOrUpdatedFromLocation)="createOrUpdateConnectionFromLocation($event)"

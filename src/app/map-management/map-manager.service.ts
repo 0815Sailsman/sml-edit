@@ -46,47 +46,6 @@ export class MapManagerService {
       this.map.areas[areaIndex].locations.filter(location => location.id !== theLocationToBeDeleted.id)
   }
 
-  deleteConnectionFromLocationInArea(
-    area: Area | undefined,
-    location: Location | undefined,
-    connection: Connection | undefined,
-  ) {
-    this.deleteGeneralObjectFromLocationInArea(area, location, connection, KeyInLocation.Connections);
-  }
-
-  deleteItemFromLocationInArea(
-    area: Area | undefined,
-    location: Location | undefined,
-    item: Item | undefined,
-  ) {
-    this.deleteGeneralObjectFromLocationInArea(area, location, item, KeyInLocation.Items);
-  }
-
-  deleteEnemyFromLocationInArea(
-    area: Area | undefined,
-    location: Location | undefined,
-    enemy: Enemy | undefined,
-  ) {
-    this.deleteGeneralObjectFromLocationInArea(area, location, enemy, KeyInLocation.Enemies);
-  }
-
-  deleteOtherObjectFromLocationInArea(
-    area: Area | undefined,
-    location: Location | undefined,
-    object: OtherObject | undefined,
-  ) {
-    this.deleteGeneralObjectFromLocationInArea(area, location, object, KeyInLocation.Npcs);
-  }
-
-  deleteNPCFromLocationInArea(
-    area: Area | undefined,
-    location: Location | undefined,
-    npc: NPC | undefined,
-  ) {
-    this.deleteGeneralObjectFromLocationInArea(area, location, npc, KeyInLocation.Objects);
-  }
-
-  // continue here and split these up. move away from this abstraction
   deleteGeneralObjectFromLocationInArea(
     area: Area | undefined,
     location: Location | undefined,
@@ -251,10 +210,10 @@ export class MapManagerService {
           const localCondition = condition.subConditions.find(atomicCondition => atomicCondition.abbreviation.charCodeAt(0) == ascii)!
           result += localCondition?.subjectType + " "
           switch (localCondition?.subjectType) {
-            case ConditionSubjects.Location: result += this.locationById(localCondition.subjectId).name;break;
+            case ConditionSubjects.Location: result += this.locationById(localCondition.subjectId).toString();break;
             case ConditionSubjects.Item: result += this.itemByID(localCondition.subjectId).toString(this);break;
-            case ConditionSubjects.Enemy: result += this.enemyById(localCondition.subjectId).name;break;
-            case ConditionSubjects.OtherObject: result += this.otherObjectById(localCondition.subjectId).name;break;
+            case ConditionSubjects.Enemy: result += this.enemyById(localCondition.subjectId).toString(this);break;
+            case ConditionSubjects.OtherObject: result += this.otherObjectById(localCondition.subjectId).toString();break;
           }
           result += " has been " + verbFor(localCondition.subjectType)
           if (wordInGrammar.endsWith(')')) {
@@ -330,6 +289,15 @@ export class MapManagerService {
       .filter(npc => npc.shop.map(offer => offer.item.id).includes(itemId));
     if (allNPCsSellingItemWithId.length > 0) {
       return allNPCsSellingItemWithId[0];
+    }
+    return undefined;
+  }
+
+  locationOfEnemyWithID(enemyId: number): Location | undefined {
+    const allLocationsWithEnemyId = this.extractor.allLocations(this.map)
+      .filter(location => location.enemies.map(enemy => enemy.id).includes(enemyId));
+    if (allLocationsWithEnemyId.length > 0) {
+      return allLocationsWithEnemyId[0];
     }
     return undefined;
   }

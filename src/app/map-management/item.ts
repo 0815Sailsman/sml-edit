@@ -31,17 +31,17 @@ export class Item {
 
     srcLocation = mapService.locationOfItemWithID(this.id);
     if (srcLocation !== undefined) {
-      return " in " + srcLocation.name;
+      return " in " + srcLocation.toString();
     }
 
     srcEnemy = mapService.enemyDroppingItemWithID(this.id);
     if (srcEnemy !== undefined) {
-      return " dropped By " + srcEnemy.name;
+      return " dropped By " + srcEnemy.toString(mapService);
     }
 
     srcNPC = mapService.npcSellingItemWithID(this.id);
     if (srcNPC !== undefined) {
-      return " sold By " + srcNPC.name;
+      return " sold By " + srcNPC.toString();
     }
 
     return "  with unknown origin...";

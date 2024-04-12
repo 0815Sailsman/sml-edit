@@ -4,8 +4,8 @@
 </div>
 <div *ngIf="showingDetails">
   <sml-edit-single-generic-object
-    *ngFor="let object of connections"
-    [genericObject]="object"
+    *ngFor="let connection of connections"
+    [genericObject]="connection"
     (editObjectWithoutKey)="editConnection($event)"
     (objectDeletedWithoutKey)="deleteConnection($event)"
     [key]="KeyInLocation.Connections"

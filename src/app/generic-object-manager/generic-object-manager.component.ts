@@ -28,16 +28,12 @@ export class GenericObjectManagerComponent<T extends ObjectInLocation> {
   @Input() genericObjectArray: T[] = [];
   @Input() key!: KeyInLocation;
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInLocation>>();
-  @Output() connectionCreatedOrUpdated = new EventEmitter<Connection>();
-  @Output() itemCreatedOrUpdated = new EventEmitter<Item>();
   @Output() enemyCreatedOrUpdated = new EventEmitter<Enemy>();
   @Output() otherObjectCreatedOrUpdated = new EventEmitter<OtherObject>();
   @Output() npcCreatedOrUpdated = new EventEmitter<NPC>();
 
   showingDetails: boolean = false;
 
-  connectionToEdit: Connection | undefined;
-  itemToEdit: Item | undefined;
   enemyToEdit: Enemy | undefined;
   otherObjectToEdit: OtherObject | undefined;
   npcToEdit: NPC | undefined;
@@ -46,7 +42,6 @@ export class GenericObjectManagerComponent<T extends ObjectInLocation> {
 
   editObject(pairOfObjectAndKey: Pair<T, KeyInLocation>) {
     switch (pairOfObjectAndKey.second) {
-      case KeyInLocation.Items: {this.itemToEdit = pairOfObjectAndKey.first as Item;break;}
       case KeyInLocation.Enemies: {this.enemyToEdit = pairOfObjectAndKey.first as Enemy;break;}
       case KeyInLocation.Objects: {this.otherObjectToEdit = pairOfObjectAndKey.first as OtherObject;break;}
       case KeyInLocation.Npcs: {this.npcToEdit = pairOfObjectAndKey.first as NPC;break;}
@@ -55,14 +50,6 @@ export class GenericObjectManagerComponent<T extends ObjectInLocation> {
 
   deleteObject(pairOfObjectAndKey: Pair<T, KeyInLocation>) {
     this.objectDeleted.emit(pairOfObjectAndKey)
-  }
-
-  createOrUpdateConnection(connection: Connection) {
-    this.connectionCreatedOrUpdated.emit(connection)
-  }
-
-  createOrUpdateItem(item: Item) {
-    this.itemCreatedOrUpdated.emit(item)
   }
 
   createOrUpdateEnemy(enemy: Enemy) {

@@ -21,11 +21,10 @@
     (connectionDeleted)="deleteConnection($event)"
     [connections]="location.connections"
   />
-  <sml-edit-generic-object-manager
-    [genericObjectArray]="location.items"
-    (objectDeleted)="deleteObject($event)"
-    [key]="KeyInLocation.Items"
+  <sml-edit-item-manager
     (itemCreatedOrUpdated)="registerOrUpdateNewItem($event)"
+    (itemDeleted)="deleteItem($event)"
+    [items]="location.items"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.enemies"

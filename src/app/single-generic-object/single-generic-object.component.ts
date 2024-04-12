@@ -46,10 +46,6 @@ export class SingleGenericObjectComponent<T extends ObjectInLocation> {
     return 'to' in value;
   }
 
-  isCountable(value: any): value is Item {
-    return 'count' in value;
-  }
-
   asAny(o: any): any {
     return o;
   }

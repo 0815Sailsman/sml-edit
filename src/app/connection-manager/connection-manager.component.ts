@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Connection} from "../map-management/connection";
-import {Pair} from "../Pair";
 import {KeyInLocation} from "../KeyInLocation";
 import {ConnectionBuilderComponent} from "../connection-builder/connection-builder.component";
 import {EnemyBuilderComponent} from "../enemy-builder/enemy-builder.component";
@@ -18,12 +17,12 @@ import {AtomicCondition} from "../map-management/atomicCondition";
     ConnectionBuilderComponent,
     EnemyBuilderComponent,
     ItemBuilderComponent,
-    NgForOf,
     NgIf,
     NgSwitchCase,
     NpcBuilderComponent,
     ObjectBuilderComponent,
-    SingleGenericObjectComponent
+    SingleGenericObjectComponent,
+    NgForOf
   ],
   templateUrl: './connection-manager.component.html',
   styleUrl: './connection-manager.component.css'
@@ -53,6 +52,7 @@ export class ConnectionManagerComponent {
     this.connectionCreatedOrUpdated.emit(connection)
   }
 
+  // todo these are duplicate in every manager! reduce to one location!
   extractConditions(connections: Connection[]): AtomicCondition[] {
     const conditionsWithDuplicates = connections
       .flatMap(connection => connection.availableIf?.subConditions ?? []);

@@ -69,7 +69,7 @@ export class AreaCardComponent {
     }
   }
 
-  deleteObjectFromLocation(
+  deleteObjectFromLocationTOBEREMOVED(
     tripletOfLocationAndObjectAndKey: Triplet<Location, ObjectInLocation, KeyInLocation>
   ): void {
     this.mapService.deleteGeneralObjectFromLocationInArea(
@@ -81,13 +81,63 @@ export class AreaCardComponent {
   }
 
   deleteConnectionFromLocation(
-    tripletOfLocationAndObjectAndKey: Pair<Location, Connection>
-  ): void {
-    this.mapService.deleteConnectionFromLocationInArea(
+    locationAndConnection: {location: Location, connection: Connection}
+  ): void
+  {
+    this.mapService.deleteGeneralObjectFromLocationInArea(
       this.area,
-      tripletOfLocationAndObjectAndKey.first,
-      tripletOfLocationAndObjectAndKey.second,
-    )
+      locationAndConnection.location,
+      locationAndConnection.connection,
+      KeyInLocation.Connections
+    );
+  }
+
+  deleteItemFromLocation(
+    locationAndItem: {location: Location, item: Item}
+  ): void
+  {
+    this.mapService.deleteGeneralObjectFromLocationInArea(
+      this.area,
+      locationAndItem.location,
+      locationAndItem.item,
+      KeyInLocation.Items
+    );
+  }
+
+  deleteEnemyFromLocation(
+    locationAndEnemy: {location: Location, enemy: Enemy}
+  ): void
+  {
+    this.mapService.deleteGeneralObjectFromLocationInArea(
+      this.area,
+      locationAndEnemy.location,
+      locationAndEnemy.enemy,
+      KeyInLocation.Enemies
+    );
+  }
+
+  deleteObjectFromLocation(
+    locationAndObject: {location: Location, object: OtherObject}
+  ): void
+  {
+    this.mapService.deleteGeneralObjectFromLocationInArea(
+      this.area,
+      locationAndObject.location,
+      locationAndObject.object,
+      KeyInLocation.Objects
+    );
+  }
+
+  deleteNPCFromLocation(
+    locationAndNPC: {location: Location, npc: NPC}
+  ): void
+  {
+    this.mapService.deleteGeneralObjectFromLocationInArea(
+      this.area,
+      locationAndNPC.location,
+      locationAndNPC.npc,
+      KeyInLocation.Npcs
+    );
   }
 
   createOrUpdateConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {

@@ -15,6 +15,7 @@ import {ObjectInLocation} from "../ObjectInLocation";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {FormsModule} from "@angular/forms";
 import {ConnectionManagerComponent} from "../connection-manager/connection-manager.component";
+import {ItemManagerComponent} from "../item-manager/item-manager.component";
 
 @Component({
   selector: 'sml-edit-location-card',
@@ -23,7 +24,8 @@ import {ConnectionManagerComponent} from "../connection-manager/connection-manag
     CommonModule,
     GenericObjectManagerComponent,
     FormsModule,
-    ConnectionManagerComponent
+    ConnectionManagerComponent,
+    ItemManagerComponent
   ],
   templateUrl: './location-card.component.html',
   styleUrl: './location-card.component.css'
@@ -39,12 +41,18 @@ export class LocationCardComponent {
 
   @Input() location!: Location;
   @Output() locationDeleted = new EventEmitter<Location>();
+
   @Output() objectDeletedFromLocation = new EventEmitter<Triplet<
     Location,
     ObjectInLocation,
     KeyInLocation
   >>();
-  @Output() connectionDeletedFromLocation = new EventEmitter<Pair<Location, Connection>>();
+  @Output() connectionDeletedFromLocation = new EventEmitter<{location: Location, connection: Connection}>();
+  @Output() itemDeletedFromLocation = new EventEmitter<{location: Location, item: Item}>();
+  @Output() enemyDeletedFromLocation = new EventEmitter<{location: Location, enemy: Enemy}>();
+  @Output() otherObjectDeletedFromLocation = new EventEmitter<{location: Location, object: OtherObject}>();
+  @Output() npcDeletedFromLocation = new EventEmitter<{location: Location, npc: NPC}>();
+
   @Output() updateLocationWithIDToName = new EventEmitter<Pair<number, string>>
   @Output() connectionCreatedOrUpdatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
   @Output() itemCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, Item>>();
@@ -79,8 +87,15 @@ export class LocationCardComponent {
 
   deleteConnection(connection: Connection) {
     this.connectionDeletedFromLocation.emit({
-      first: this.location,
-      second: connection
+      location: this.location,
+      connection: connection
+    });
+  }
+
+  deleteItem(item: Item) {
+    this.itemDeletedFromLocation.emit({
+      location: this.location,
+      item: item
     });
   }
 
