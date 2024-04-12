@@ -51,13 +51,39 @@ export class MapManagerService {
     location: Location | undefined,
     connection: Connection | undefined,
   ) {
-    if (area == undefined || location == undefined || connection == undefined) {
-      return
-    }
-    const areaIndex = this.map.areas.indexOf(area);
-    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
-    const newConnections = this.map.areas[areaIndex].locations[locationIndex].connections.filter(oldConnection => oldConnection.id !== connection.id);
-    this.map.areas[areaIndex].locations[locationIndex].connections = newConnections;
+    this.deleteGeneralObjectFromLocationInArea(area, location, connection, KeyInLocation.Connections);
+  }
+
+  deleteItemFromLocationInArea(
+    area: Area | undefined,
+    location: Location | undefined,
+    item: Item | undefined,
+  ) {
+    this.deleteGeneralObjectFromLocationInArea(area, location, item, KeyInLocation.Items);
+  }
+
+  deleteEnemyFromLocationInArea(
+    area: Area | undefined,
+    location: Location | undefined,
+    enemy: Enemy | undefined,
+  ) {
+    this.deleteGeneralObjectFromLocationInArea(area, location, enemy, KeyInLocation.Enemies);
+  }
+
+  deleteOtherObjectFromLocationInArea(
+    area: Area | undefined,
+    location: Location | undefined,
+    object: OtherObject | undefined,
+  ) {
+    this.deleteGeneralObjectFromLocationInArea(area, location, object, KeyInLocation.Npcs);
+  }
+
+  deleteNPCFromLocationInArea(
+    area: Area | undefined,
+    location: Location | undefined,
+    npc: NPC | undefined,
+  ) {
+    this.deleteGeneralObjectFromLocationInArea(area, location, npc, KeyInLocation.Objects);
   }
 
   // continue here and split these up. move away from this abstraction

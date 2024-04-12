@@ -46,10 +46,6 @@ export class GenericObjectManagerComponent<T extends ObjectInLocation> {
 
   editObject(pairOfObjectAndKey: Pair<T, KeyInLocation>) {
     switch (pairOfObjectAndKey.second) {
-      case KeyInLocation.Connections: {
-        this.connectionToEdit = pairOfObjectAndKey.first as Connection;
-        break;
-      }
       case KeyInLocation.Items: {this.itemToEdit = pairOfObjectAndKey.first as Item;break;}
       case KeyInLocation.Enemies: {this.enemyToEdit = pairOfObjectAndKey.first as Enemy;break;}
       case KeyInLocation.Objects: {this.otherObjectToEdit = pairOfObjectAndKey.first as OtherObject;break;}

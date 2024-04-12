@@ -12,12 +12,6 @@
     style="display: inherit"
   />
   <div [ngSwitch]="key">
-    <sml-edit-connection-builder
-      *ngSwitchCase="'connections'"
-      (connectionCreatedOrUpdated)="createOrUpdateConnection($event)"
-      [startingConditions]="extractConditions(genericObjectArray)"
-      [editConnection]="connectionToEdit"
-    />
     <sml-edit-item-builder
       *ngSwitchCase="'items'"
       (itemCreatedOrUpdated)="createOrUpdateItem($event)"

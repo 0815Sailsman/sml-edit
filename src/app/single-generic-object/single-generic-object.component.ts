@@ -1,18 +1,12 @@
-import {AfterContentInit, Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {depluralizeSimple} from "../util";
-import {Location} from "../map-management/location";
 import {Pair} from "../Pair";
 import {KeyInLocation} from "../KeyInLocation";
 import {ObjectInLocation} from "../ObjectInLocation";
 import {NgIf} from "@angular/common";
 import {Connection} from "../map-management/connection";
-import {BigCondition} from "../map-management/bigCondition";
 import {MapManagerService} from "../map-management/map-manager.service";
-import {Enemy} from "../map-management/enemy";
-import {OtherObject} from "../map-management/otherObject";
 import {Item} from "../map-management/item";
-import {first} from "rxjs";
-import {EasilySelectable} from "../EasilySelectable";
 
 @Component({
   selector: 'sml-edit-single-generic-object',
