@@ -25,15 +25,15 @@ export class OtherObjectManagerComponent extends AbstractManager {
 
   objectToEdit: OtherObject | undefined
 
-  editObject(object: OtherObject) {
+  edit(object: OtherObject) {
     this.objectToEdit = object;
   }
 
-  deleteObject(object: OtherObject) {
+  delete(object: OtherObject) {
     this.objectDeleted.emit(object);
   }
 
-  createOrUpdateObject(object: OtherObject) {
+  createOrUpdate(object: OtherObject) {
     this.objectCreatedOrUpdated.emit(object);
   }
 }

@@ -6,13 +6,13 @@
   <sml-edit-single-generic-object
     *ngFor="let npc of npcs"
     [genericObject]="npc"
-    (editObjectWithoutKey)="editNPC($event)"
-    (objectDeletedWithoutKey)="deleteNPC($event)"
+    (editObjectWithoutKey)="edit($event)"
+    (objectDeletedWithoutKey)="delete($event)"
     [key]="KeyInLocation.Npcs"
     style="display: inherit"
   />
   <sml-edit-npc-builder
-    (npcCreatedOrUpdated)="createOrUpdateNPC($event)"
+    (npcCreatedOrUpdated)="createOrUpdate($event)"
     [startingConditions]="extractConditions(npcs)"
     [editedNPC]="npcToEdit"
   />

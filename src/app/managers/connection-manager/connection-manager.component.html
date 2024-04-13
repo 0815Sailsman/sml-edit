@@ -6,13 +6,13 @@
   <sml-edit-single-generic-object
     *ngFor="let connection of connections"
     [genericObject]="connection"
-    (editObjectWithoutKey)="editConnection($event)"
-    (objectDeletedWithoutKey)="deleteConnection($event)"
+    (editObjectWithoutKey)="edit($event)"
+    (objectDeletedWithoutKey)="delete($event)"
     [key]="KeyInLocation.Connections"
     style="display: inherit"
   />
     <sml-edit-connection-builder
-      (connectionCreatedOrUpdated)="createOrUpdateConnection($event)"
+      (connectionCreatedOrUpdated)="createOrUpdate($event)"
       [startingConditions]="extractConditions(connections)"
       [editConnection]="connectionToEdit"
     />

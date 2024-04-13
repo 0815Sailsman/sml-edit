@@ -1,10 +1,16 @@
 import {AtomicCondition} from "../map-management/atomicCondition";
 import {BigCondition} from "../map-management/bigCondition";
 import {KeyInLocation} from "../KeyInLocation";
+import {OtherObject} from "../map-management/otherObject";
+import {ObjectInLocation} from "../ObjectInLocation";
 
 export abstract class AbstractManager {
 
   showingDetails: boolean = false;
+
+  abstract edit(object: ObjectInLocation): void;
+  abstract delete(object: ObjectInLocation): void;
+  abstract createOrUpdate(object: ObjectInLocation): void;
 
   toggleDetails() {
     this.showingDetails = !this.showingDetails;

@@ -6,13 +6,13 @@
   <sml-edit-single-generic-object
     *ngFor="let item of items"
     [genericObject]="item"
-    (editObjectWithoutKey)="editItem($event)"
-    (objectDeletedWithoutKey)="deleteItem($event)"
+    (editObjectWithoutKey)="edit($event)"
+    (objectDeletedWithoutKey)="delete($event)"
     [key]="KeyInLocation.Items"
     style="display: inherit"
   />
     <sml-edit-item-builder
-      (itemCreatedOrUpdated)="createOrUpdateItem($event)"
+      (itemCreatedOrUpdated)="createOrUpdate($event)"
       [startingConditions]="extractConditions(items)"
       [editedItem]="itemToEdit"
     />

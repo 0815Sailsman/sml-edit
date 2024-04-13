@@ -25,15 +25,15 @@ export class NpcManagerComponent extends AbstractManager {
 
   npcToEdit: NPC | undefined;
 
-  editNPC(npc: NPC) {
+  edit(npc: NPC) {
     this.npcToEdit = npc;
   }
 
-  deleteNPC(npc: NPC) {
+  delete(npc: NPC) {
     this.npcDeleted.emit(npc);
   }
 
-  createOrUpdateNPC(npc: NPC) {
+  createOrUpdate(npc: NPC) {
     this.npcCreatedOrUpdated.emit(npc);
   }
 }

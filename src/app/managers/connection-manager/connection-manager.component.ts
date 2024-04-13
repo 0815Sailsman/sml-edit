@@ -34,15 +34,15 @@ export class ConnectionManagerComponent extends AbstractManager {
 
   connectionToEdit: Connection | undefined;
 
-  editConnection(connection: Connection) {
+  edit(connection: Connection) {
     this.connectionToEdit = connection;
   }
 
-  deleteConnection(connection: Connection) {
+  delete(connection: Connection) {
     this.connectionDeleted.emit(connection);
   }
 
-  createOrUpdateConnection(connection: Connection) {
+  createOrUpdate(connection: Connection) {
     this.connectionCreatedOrUpdated.emit(connection)
   }
 }

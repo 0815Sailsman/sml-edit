@@ -25,15 +25,15 @@ export class EnemyManagerComponent extends AbstractManager {
 
   enemyToEdit: Enemy | undefined;
 
-  editEnemy(enemy: Enemy) {
+  edit(enemy: Enemy) {
     this.enemyToEdit = enemy;
   }
 
-  deleteEnemy(enemy: Enemy){
+  delete(enemy: Enemy){
     this.enemyDeleted.emit(enemy);
   }
 
-  createOrUpdateEnemy(enemy: Enemy) {
+  createOrUpdate(enemy: Enemy) {
     this.enemyCreatedOrUpdated.emit(enemy);
   }
 }

@@ -25,15 +25,15 @@ export class ItemManagerComponent extends AbstractManager {
 
   itemToEdit: Item | undefined;
 
-  editItem(item: Item) {
+  edit(item: Item) {
     this.itemToEdit = item;
   }
 
-  deleteItem(item: Item) {
+  delete(item: Item) {
     this.itemDeleted.emit(item);
   }
 
-  createOrUpdateItem(item: Item) {
+  createOrUpdate(item: Item) {
     this.itemCreatedOrUpdated.emit(item)
   }
 }

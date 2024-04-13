@@ -80,15 +80,6 @@ export class LocationCardComponent {
     }
     this.currentlyEditing = !this.currentlyEditing;
   }
-
-  deleteObjectREMOVEME(pairOfObjectAndKey: Pair<ObjectInLocation, KeyInLocation>)
-  {
-    this.objectDeletedFromLocation.emit({
-      first: this.location,
-      second: pairOfObjectAndKey.first,
-      third: pairOfObjectAndKey.second})
-  }
-
   deleteConnection(connection: Connection) {
     this.connectionDeletedFromLocation.emit({
       location: this.location,
