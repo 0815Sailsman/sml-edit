@@ -1,0 +1,20 @@
+<div>
+  <button (click)="toggleDetails()">toggle visibility</button>
+  NPCs:
+</div>
+<div *ngIf="showingDetails">
+  <sml-edit-single-generic-object
+    *ngFor="let npc of npcs"
+    [genericObject]="npc"
+    (editObjectWithoutKey)="editNPC($event)"
+    (objectDeletedWithoutKey)="deleteNPC($event)"
+    [key]="KeyInLocation.Npcs"
+    style="display: inherit"
+  />
+  <sml-edit-npc-builder
+    (npcCreatedOrUpdated)="createOrUpdateNPC($event)"
+    [startingConditions]="extractConditions(npcs)"
+    [editedNPC]="npcToEdit"
+  />
+
+</div>

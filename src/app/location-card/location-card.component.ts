@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {GenericObjectManagerComponent} from "../generic-object-manager/generic-object-manager.component";
 import {CommonModule} from "@angular/common";
 
 import {Location} from "../map-management/location";
@@ -18,18 +17,19 @@ import {ConnectionManagerComponent} from "../connection-manager/connection-manag
 import {ItemManagerComponent} from "../item-manager/item-manager.component";
 import {EnemyManagerComponent} from "../enemy-manager/enemy-manager.component";
 import {OtherObjectManagerComponent} from "../other-object-manager/other-object-manager.component";
+import {NpcManagerComponent} from "../npc-manager/npc-manager.component";
 
 @Component({
   selector: 'sml-edit-location-card',
   standalone: true,
   imports: [
     CommonModule,
-    GenericObjectManagerComponent,
     FormsModule,
     ConnectionManagerComponent,
     ItemManagerComponent,
     EnemyManagerComponent,
-    OtherObjectManagerComponent
+    OtherObjectManagerComponent,
+    NpcManagerComponent
   ],
   templateUrl: './location-card.component.html',
   styleUrl: './location-card.component.css'
@@ -114,6 +114,13 @@ export class LocationCardComponent {
     this.otherObjectDeletedFromLocation.emit({
       location: this.location,
       object: object
+    });
+  }
+
+  deleteNPC(npc: NPC) {
+    this.npcDeletedFromLocation.emit({
+      location: this.location,
+      npc: npc
     });
   }
 

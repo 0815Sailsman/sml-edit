@@ -39,7 +39,7 @@ Each **location** may have any amount of
   - [x] split off item manager
   - [x] split off enemy manager
   - [x] split off object manager
-  - [ ] split off npc manager
+  - [x] split off npc manager
   - [ ] move and unify "extractConditions" somewhere reasonable
 - [ ] unify createOrUpdate Pipeline
 - [ ] move related files to new utils directory in sources root

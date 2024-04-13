@@ -36,11 +36,9 @@
     (objectDeleted)="deleteObject($event)"
     [objects]="location.objects"
   />
-  <sml-edit-generic-object-manager
-    [genericObjectArray]="location.npcs"
-    (objectDeleted)="deleteObjectREMOVEME($event)"
-    [key]="KeyInLocation.Npcs"
+  <sml-edit-npc-manager
     (npcCreatedOrUpdated)="registerOrUpdateNewNPC($event)"
-    style="margin-bottom: 10px"
+    (npcDeleted)="deleteNPC($event)"
+    [npcs]="location.npcs"
   />
 </div>
