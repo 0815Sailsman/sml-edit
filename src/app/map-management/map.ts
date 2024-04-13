@@ -46,7 +46,7 @@ export class Map {
     return connections.map(connection => {return new Connection(
       connection.id,
       connection.to,
-     connection.if == null ? undefined : this.parseBigCondition(connection.if))})
+     connection.availableIf == null ? undefined : this.parseBigCondition(connection.availableIf))})
   }
 
   private parseItemTypes(itemTypes: UnparsedItemType[]): ItemType[] {
@@ -61,7 +61,7 @@ export class Map {
       item.id,
       item.itemTypeID,
       item.count,
-      item.if == null ? undefined : this.parseBigCondition(item.if)
+      item.availableIf == null ? undefined : this.parseBigCondition(item.availableIf)
     )});
   }
 
@@ -79,7 +79,7 @@ export class Map {
       enemy.souls,
       enemy.respawns,
       this.parseDrops(enemy.drops),
-      enemy.if == null ? undefined : this.parseBigCondition(enemy.if)
+      enemy.availableIf == null ? undefined : this.parseBigCondition(enemy.availableIf)
     )})
   }
 
@@ -87,7 +87,7 @@ export class Map {
     return objects.map(object => {return new OtherObject(
       object.id,
       object.name,
-      object.if == null ? undefined : this.parseBigCondition(object.if)
+      object.availableIf == null ? undefined : this.parseBigCondition(object.availableIf)
     )});
   }
 
@@ -96,7 +96,7 @@ export class Map {
       npc.id,
       npc.name,
       this.parseShopItems(npc.shop),
-      npc.if == null ? undefined : this.parseBigCondition(npc.if)
+      npc.availableIf == null ? undefined : this.parseBigCondition(npc.availableIf)
     )})
   }
 
@@ -162,14 +162,14 @@ interface UnparsedLocation {
 interface UnparsedConnection {
   id: number
   to: number
-  if?: UnparsedBigCondition
+  availableIf?: UnparsedBigCondition
 }
 
 interface UnparsedItem {
   id: number
   itemTypeID: number
   count: number
-  if?: UnparsedBigCondition
+  availableIf?: UnparsedBigCondition
 }
 
 interface UnparsedItemType {
@@ -188,20 +188,20 @@ interface UnparsedEnemy {
   souls: number
   respawns: boolean
   drops: UnparsedDrop[]
-  if?: UnparsedBigCondition
+  availableIf?: UnparsedBigCondition
 }
 
 interface UnparsedOtherObject {
   id: number
   name: string
-  if?: UnparsedBigCondition
+  availableIf?: UnparsedBigCondition
 }
 
 interface UnparsedNPC {
   id: number
   name: string
   shop: UnparsedShopItem[]
-  if?: UnparsedBigCondition
+  availableIf?: UnparsedBigCondition
 }
 
 interface UnparsedShopItem {

@@ -13,11 +13,11 @@ import {KeyInLocation} from "../KeyInLocation";
 import {ObjectInLocation} from "../ObjectInLocation";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {FormsModule} from "@angular/forms";
-import {ConnectionManagerComponent} from "../connection-manager/connection-manager.component";
-import {ItemManagerComponent} from "../item-manager/item-manager.component";
-import {EnemyManagerComponent} from "../enemy-manager/enemy-manager.component";
-import {OtherObjectManagerComponent} from "../other-object-manager/other-object-manager.component";
-import {NpcManagerComponent} from "../npc-manager/npc-manager.component";
+import {ConnectionManagerComponent} from "../managers/connection-manager/connection-manager.component";
+import {ItemManagerComponent} from "../managers/item-manager/item-manager.component";
+import {EnemyManagerComponent} from "../managers/enemy-manager/enemy-manager.component";
+import {OtherObjectManagerComponent} from "../managers/other-object-manager/other-object-manager.component";
+import {NpcManagerComponent} from "../managers/npc-manager/npc-manager.component";
 
 @Component({
   selector: 'sml-edit-location-card',
