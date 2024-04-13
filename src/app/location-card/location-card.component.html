@@ -31,15 +31,14 @@
     (enemyDeleted)="deleteEnemy($event)"
     [enemies]="location.enemies"
   />
-  <sml-edit-generic-object-manager
-    [genericObjectArray]="location.objects"
+  <sml-edit-other-object-manager
+    (objectCreatedOrUpdated)="registerOrUpdateNewObject($event)"
     (objectDeleted)="deleteObject($event)"
-    [key]="KeyInLocation.Objects"
-    (otherObjectCreatedOrUpdated)="registerOrUpdateNewObject($event)"
+    [objects]="location.objects"
   />
   <sml-edit-generic-object-manager
     [genericObjectArray]="location.npcs"
-    (objectDeleted)="deleteObject($event)"
+    (objectDeleted)="deleteObjectREMOVEME($event)"
     [key]="KeyInLocation.Npcs"
     (npcCreatedOrUpdated)="registerOrUpdateNewNPC($event)"
     style="margin-bottom: 10px"

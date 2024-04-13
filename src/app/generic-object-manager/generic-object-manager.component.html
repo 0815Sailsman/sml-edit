@@ -12,12 +12,6 @@
     style="display: inherit"
   />
   <div [ngSwitch]="key">
-    <sml-edit-object-builder
-      *ngSwitchCase="'objects'"
-      (objectCreatedOrUpdated)="createOrUpdateOtherObject($event)"
-      [startingConditions]="extractConditions(genericObjectArray)"
-      [editedObject]="otherObjectToEdit"
-    />
     <sml-edit-npc-builder
       *ngSwitchDefault
       (npcCreatedOrUpdated)="createOrUpdateNPC($event)"

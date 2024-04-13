@@ -17,6 +17,7 @@ import {FormsModule} from "@angular/forms";
 import {ConnectionManagerComponent} from "../connection-manager/connection-manager.component";
 import {ItemManagerComponent} from "../item-manager/item-manager.component";
 import {EnemyManagerComponent} from "../enemy-manager/enemy-manager.component";
+import {OtherObjectManagerComponent} from "../other-object-manager/other-object-manager.component";
 
 @Component({
   selector: 'sml-edit-location-card',
@@ -27,7 +28,8 @@ import {EnemyManagerComponent} from "../enemy-manager/enemy-manager.component";
     FormsModule,
     ConnectionManagerComponent,
     ItemManagerComponent,
-    EnemyManagerComponent
+    EnemyManagerComponent,
+    OtherObjectManagerComponent
   ],
   templateUrl: './location-card.component.html',
   styleUrl: './location-card.component.css'
@@ -79,7 +81,7 @@ export class LocationCardComponent {
     this.currentlyEditing = !this.currentlyEditing;
   }
 
-  deleteObject(pairOfObjectAndKey: Pair<ObjectInLocation, KeyInLocation>)
+  deleteObjectREMOVEME(pairOfObjectAndKey: Pair<ObjectInLocation, KeyInLocation>)
   {
     this.objectDeletedFromLocation.emit({
       first: this.location,
@@ -107,6 +109,13 @@ export class LocationCardComponent {
       enemy: enemy
     })
   };
+
+  deleteObject(object: OtherObject) {
+    this.otherObjectDeletedFromLocation.emit({
+      location: this.location,
+      object: object
+    });
+  }
 
   protected readonly KeyInLocation = KeyInLocation;
 

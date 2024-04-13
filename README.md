@@ -38,9 +38,9 @@ Each **location** may have any amount of
   - [x] split off connection manager
   - [x] split off item manager
   - [x] split off enemy manager
-  - [ ] split off object manager
+  - [x] split off object manager
   - [ ] split off npc manager
-  - [ ] move and unify extract Conditions somewhere reasonable
+  - [ ] move and unify "extractConditions" somewhere reasonable
 - [ ] unify createOrUpdate Pipeline
 - [ ] move related files to new utils directory in sources root
 

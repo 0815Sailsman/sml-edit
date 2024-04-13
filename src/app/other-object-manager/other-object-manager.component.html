@@ -1,0 +1,20 @@
+<div>
+  <button (click)="toggleDetails()">toggle visibility</button>
+  Other Objects:
+</div>
+<div *ngIf="showingDetails">
+  <sml-edit-single-generic-object
+    *ngFor="let object of objects"
+    [genericObject]="object"
+    (editObjectWithoutKey)="editObject($event)"
+    (objectDeletedWithoutKey)="deleteObject($event)"
+    [key]="KeyInLocation.Objects"
+    style="display: inherit"
+  />
+  <sml-edit-object-builder
+    (objectCreatedOrUpdated)="createOrUpdateObject($event)"
+    [startingConditions]="extractConditions(objects)"
+    [editedObject]="objectToEdit"
+  />
+
+</div>

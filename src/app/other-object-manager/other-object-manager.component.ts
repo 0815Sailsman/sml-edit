@@ -1,53 +1,54 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {KeyInLocation} from "../KeyInLocation";
 import {SingleGenericObjectComponent} from "../single-generic-object/single-generic-object.component";
 import {NgForOf, NgIf} from "@angular/common";
-import {KeyInLocation} from "../KeyInLocation";
-import {EnemyBuilderComponent} from "../enemy-builder/enemy-builder.component";
+import {ObjectBuilderComponent} from "../object-builder/object-builder.component";
+import {OtherObject} from "../map-management/otherObject";
 import {Enemy} from "../map-management/enemy";
 import {AtomicCondition} from "../map-management/atomicCondition";
 
 @Component({
-  selector: 'sml-edit-enemy-manager',
+  selector: 'sml-edit-other-object-manager',
   standalone: true,
   imports: [
     SingleGenericObjectComponent,
     NgForOf,
-    EnemyBuilderComponent,
+    ObjectBuilderComponent,
     NgIf
   ],
-  templateUrl: './enemy-manager.component.html',
-  styleUrl: './enemy-manager.component.css'
+  templateUrl: './other-object-manager.component.html',
+  styleUrl: './other-object-manager.component.css'
 })
-export class EnemyManagerComponent {
+export class OtherObjectManagerComponent {
 
-  @Input() enemies: Enemy[] = [];
-  @Output() enemyDeleted = new EventEmitter<Enemy>();
-  @Output() enemyCreatedOrUpdated = new EventEmitter<Enemy>();
+  @Input() objects: OtherObject[] = [];
+  @Output() objectDeleted = new EventEmitter<OtherObject>();
+  @Output() objectCreatedOrUpdated = new EventEmitter<OtherObject>();
 
   showingDetails: boolean = false;
-  enemyToEdit: Enemy | undefined;
+  objectToEdit: OtherObject | undefined
 
-  editEnemy(enemy: Enemy) {
-    this.enemyToEdit = enemy;
+  editObject(object: OtherObject) {
+    this.objectToEdit = object;
   }
 
-  deleteEnemy(enemy: Enemy){
-    this.enemyDeleted.emit(enemy);
+  deleteObject(object: OtherObject) {
+    this.objectDeleted.emit(object);
   }
 
   toggleDetails() {
     this.showingDetails = !this.showingDetails;
   }
 
-  createOrUpdateEnemy(enemy: Enemy) {
-    this.enemyCreatedOrUpdated.emit(enemy);
+  createOrUpdateObject(object: OtherObject) {
+    this.objectCreatedOrUpdated.emit(object);
   }
 
   // todo these are duplicate in every manager! reduce to one location!
-  extractConditions(enemies: Enemy[]): AtomicCondition[] {
-    const enemiesWithDuplicates = enemies
-      .flatMap(oldEnemy => oldEnemy.availableIf?.subConditions ?? []);
-    return this.filterDuplicateConditions(enemiesWithDuplicates);
+  extractConditions(object: OtherObject[]): AtomicCondition[] {
+    const objectsWithDuplicates = object
+      .flatMap(oldObject => oldObject.availableIf?.subConditions ?? []);
+    return this.filterDuplicateConditions(objectsWithDuplicates);
   }
 
   filterDuplicateConditions(arr: AtomicCondition[]): AtomicCondition[] {

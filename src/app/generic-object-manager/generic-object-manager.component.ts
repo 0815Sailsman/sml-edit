@@ -25,29 +25,22 @@ export class GenericObjectManagerComponent<T extends ObjectInLocation> {
   @Input() genericObjectArray: T[] = [];
   @Input() key!: KeyInLocation;
   @Output() objectDeleted = new EventEmitter<Pair<T, KeyInLocation>>();
-  @Output() otherObjectCreatedOrUpdated = new EventEmitter<OtherObject>();
   @Output() npcCreatedOrUpdated = new EventEmitter<NPC>();
 
   showingDetails: boolean = false;
 
-  otherObjectToEdit: OtherObject | undefined;
   npcToEdit: NPC | undefined;
 
   protected readonly nameOf = nameOf;
 
   editObject(pairOfObjectAndKey: Pair<T, KeyInLocation>) {
     switch (pairOfObjectAndKey.second) {
-      case KeyInLocation.Objects: {this.otherObjectToEdit = pairOfObjectAndKey.first as OtherObject;break;}
       case KeyInLocation.Npcs: {this.npcToEdit = pairOfObjectAndKey.first as NPC;break;}
     }
   }
 
   deleteObject(pairOfObjectAndKey: Pair<T, KeyInLocation>) {
     this.objectDeleted.emit(pairOfObjectAndKey)
-  }
-
-  createOrUpdateOtherObject(object: OtherObject) {
-    this.otherObjectCreatedOrUpdated.emit(object)
   }
 
   createOrUpdateNPC(npc: NPC) {
