@@ -42,7 +42,8 @@ Each **location** may have any amount of
   - [x] split off npc manager
   - [x] move and unify "extractConditions" to abstract-manager
   - [x] move details and other manager unspecific stuff to abstract-manager
-- [ ] unify createOrUpdate Pipeline
+- [ ] unify createOrUpdate, edit and delete Pipeline
+  - [x] declare in abstractManager
 - [ ] move related files to new utils directory in sources root
 
 ## Roadmap for 0.3.0 - Docs, specs and testing

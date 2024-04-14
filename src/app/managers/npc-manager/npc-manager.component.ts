@@ -19,21 +19,4 @@ import {AbstractManager} from "../abstract-manager";
 })
 export class NpcManagerComponent extends AbstractManager {
 
-  @Input() npcs: NPC[] = [];
-  @Output() npcDeleted = new EventEmitter<NPC>();
-  @Output() npcCreatedOrUpdated = new EventEmitter<NPC>();
-
-  npcToEdit: NPC | undefined;
-
-  edit(npc: NPC) {
-    this.npcToEdit = npc;
-  }
-
-  delete(npc: NPC) {
-    this.npcDeleted.emit(npc);
-  }
-
-  createOrUpdate(npc: NPC) {
-    this.npcCreatedOrUpdated.emit(npc);
-  }
 }

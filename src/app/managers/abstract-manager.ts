@@ -3,14 +3,28 @@ import {BigCondition} from "../map-management/bigCondition";
 import {KeyInLocation} from "../KeyInLocation";
 import {OtherObject} from "../map-management/otherObject";
 import {ObjectInLocation} from "../ObjectInLocation";
+import {EventEmitter, Input, Output} from "@angular/core";
 
 export abstract class AbstractManager {
 
   showingDetails: boolean = false;
+  objectToEdit: ObjectInLocation | undefined;
 
-  abstract edit(object: ObjectInLocation): void;
-  abstract delete(object: ObjectInLocation): void;
-  abstract createOrUpdate(object: ObjectInLocation): void;
+  @Input() objects: ObjectInLocation[] = [];
+  @Output() objectDeleted = new EventEmitter<ObjectInLocation>();
+  @Output() objectCreatedOrUpdated = new EventEmitter<ObjectInLocation>();
+
+  edit(object: ObjectInLocation) {
+    this.objectToEdit = object;
+  }
+
+  delete(object: ObjectInLocation) {
+    this.objectDeleted.emit(object);
+  }
+
+  createOrUpdate(object: ObjectInLocation) {
+    this.objectCreatedOrUpdated.emit(object);
+  }
 
   toggleDetails() {
     this.showingDetails = !this.showingDetails;

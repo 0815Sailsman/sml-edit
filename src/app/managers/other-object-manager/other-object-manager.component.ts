@@ -19,21 +19,4 @@ import {AbstractManager} from "../abstract-manager";
 })
 export class OtherObjectManagerComponent extends AbstractManager {
 
-  @Input() objects: OtherObject[] = [];
-  @Output() objectDeleted = new EventEmitter<OtherObject>();
-  @Output() objectCreatedOrUpdated = new EventEmitter<OtherObject>();
-
-  objectToEdit: OtherObject | undefined
-
-  edit(object: OtherObject) {
-    this.objectToEdit = object;
-  }
-
-  delete(object: OtherObject) {
-    this.objectDeleted.emit(object);
-  }
-
-  createOrUpdate(object: OtherObject) {
-    this.objectCreatedOrUpdated.emit(object);
-  }
 }
