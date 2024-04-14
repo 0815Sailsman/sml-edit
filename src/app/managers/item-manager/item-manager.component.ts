@@ -19,21 +19,6 @@ import {AbstractManager} from "../abstract-manager";
 })
 export class ItemManagerComponent extends AbstractManager {
 
-  @Input() items: Item[] = [];
-  @Output() itemDeleted = new EventEmitter<Item>();
-  @Output() itemCreatedOrUpdated = new EventEmitter<Item>();
+  override objectToEdit: Item | undefined;
 
-  itemToEdit: Item | undefined;
-
-  edit(item: Item) {
-    this.itemToEdit = item;
-  }
-
-  delete(item: Item) {
-    this.itemDeleted.emit(item);
-  }
-
-  createOrUpdate(item: Item) {
-    this.itemCreatedOrUpdated.emit(item)
-  }
 }

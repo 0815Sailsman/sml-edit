@@ -28,21 +28,6 @@ import {AbstractManager} from "../abstract-manager";
 })
 export class ConnectionManagerComponent extends AbstractManager {
 
-  @Input() connections: Connection[] = [];
-  @Output() connectionDeleted = new EventEmitter<Connection>();
-  @Output() connectionCreatedOrUpdated = new EventEmitter<Connection>();
+  override objectToEdit: Connection | undefined;
 
-  connectionToEdit: Connection | undefined;
-
-  edit(connection: Connection) {
-    this.connectionToEdit = connection;
-  }
-
-  delete(connection: Connection) {
-    this.connectionDeleted.emit(connection);
-  }
-
-  createOrUpdate(connection: Connection) {
-    this.connectionCreatedOrUpdated.emit(connection)
-  }
 }

@@ -17,19 +17,19 @@
 <div *ngIf="showingDetails">
   <hr style="border-top: 1px solid black;border-bottom: 0;width: 100%;height: 0">
   <sml-edit-connection-manager
-    (connectionCreatedOrUpdated)="registerOrUpdateNewConnection($event)"
-    (connectionDeleted)="deleteConnection($event)"
-    [connections]="location.connections"
+    (objectCreatedOrUpdated)="registerOrUpdateNewConnection($event)"
+    (objectDeleted)="deleteConnection($event)"
+    [objects]="location.connections"
   />
   <sml-edit-item-manager
-    (itemCreatedOrUpdated)="registerOrUpdateNewItem($event)"
-    (itemDeleted)="deleteItem($event)"
-    [items]="location.items"
+    (objectCreatedOrUpdated)="registerOrUpdateNewItem($event)"
+    (objectDeleted)="deleteItem($event)"
+    [objects]="location.items"
   />
   <sml-edit-enemy-manager
-    (enemyCreatedOrUpdated)="registerOrUpdateNewEnemy($event)"
-    (enemyDeleted)="deleteEnemy($event)"
-    [enemies]="location.enemies"
+    (objectCreatedOrUpdated)="registerOrUpdateNewEnemy($event)"
+    (objectDeleted)="deleteEnemy($event)"
+    [objects]="location.enemies"
   />
   <sml-edit-other-object-manager
     (objectCreatedOrUpdated)="registerOrUpdateNewObject($event)"
@@ -37,8 +37,8 @@
     [objects]="location.objects"
   />
   <sml-edit-npc-manager
-    (npcCreatedOrUpdated)="registerOrUpdateNewNPC($event)"
-    (npcDeleted)="deleteNPC($event)"
-    [npcs]="location.npcs"
+    (objectCreatedOrUpdated)="registerOrUpdateNewNPC($event)"
+    (objectDeleted)="deleteNPC($event)"
+    [objects]="location.npcs"
   />
 </div>

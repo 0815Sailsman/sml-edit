@@ -4,17 +4,16 @@
 </div>
 <div *ngIf="showingDetails">
   <sml-edit-single-generic-object
-    *ngFor="let npc of npcs"
-    [genericObject]="npc"
-    (editObjectWithoutKey)="edit($event)"
-    (objectDeletedWithoutKey)="delete($event)"
-    [key]="KeyInLocation.Npcs"
+    *ngFor="let object of objects"
+    [genericObject]="object"
+    (edit)="edit($event)"
+    (delete)="delete($event)"
     style="display: inherit"
   />
   <sml-edit-npc-builder
     (npcCreatedOrUpdated)="createOrUpdate($event)"
-    [startingConditions]="extractConditions(npcs)"
-    [editedNPC]="npcToEdit"
+    [startingConditions]="extractConditions(objects)"
+    [editedNPC]="objectToEdit"
   />
 
 </div>

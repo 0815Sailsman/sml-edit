@@ -102,93 +102,27 @@ export class MapManagerService {
     return this.extractor.allOtherObjects(this.map).filter(value => value.id == id)[0]
   }
 
-  createOrUpdateConnectionFromLocation(
-    area: Area | undefined,
-    from: Location | undefined,
-    connection: Connection | undefined)
-  {
-    if (from === undefined || connection === undefined || area === undefined) {
-      return;
-    }
-    const areaIndex = this.map.areas.indexOf(area);
-    const locationIndex = this.map.areas[areaIndex].locations.indexOf(from)
-    const connectionIndex = this.map.areas[areaIndex].locations[locationIndex].connections.findIndex(con => con.id == connection?.id);
-    if (connectionIndex == -1) {
-      this.map.areas[areaIndex].locations[locationIndex].connections.push(connection);
-    } else {
-      this.map.areas[areaIndex].locations[locationIndex].connections[connectionIndex] = connection;
-    }
-  }
-
-  createOrUpdateItemInLocation(
+  // THIS WORKS, BECAUSE WE DON'T MIX DIFFERENT TYPES
+  createOrUpdateGeneralObjectFromLocationInArea(
     area: Area | undefined,
     location: Location | undefined,
-    item: Item | undefined)
+    theObject: ObjectInLocation | undefined,
+    key: KeyInLocation | undefined)
   {
-    if (area === undefined || location === undefined || item === undefined) {
-      return;
+    if (area == undefined || location == undefined || theObject == undefined || key == undefined) {
+      return
     }
     const areaIndex = this.map.areas.indexOf(area);
-    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
-    const itemIndex = this.map.areas[areaIndex].locations[locationIndex].items.findIndex(oldItem => oldItem.id == item?.id);
-    if (itemIndex == -1) {
-      this.map.areas[areaIndex].locations[locationIndex].items.push(item);
+    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location)
+    // @ts-ignore
+    const objectIndex = this.map.areas[areaIndex].locations[locationIndex][key].findIndex(oldObject => oldObject.id == theObject.id);
+    console.log(theObject);
+    console.log(objectIndex);
+    if (objectIndex !== -1) {
+      this.map.areas[areaIndex].locations[locationIndex][key][objectIndex] = theObject;
     } else {
-      this.map.areas[areaIndex].locations[locationIndex].items[itemIndex] = item;
-    }
-  }
-
-  createOrUpdateEnemyInLocation(
-    area: Area | undefined,
-    location: Location | undefined,
-    enemy: Enemy | undefined)
-  {
-    if (area === undefined || location === undefined || enemy === undefined) {
-      return;
-    }
-    const areaIndex = this.map.areas.indexOf(area);
-    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
-    const enemyIndex = this.map.areas[areaIndex].locations[locationIndex].enemies.findIndex(oldEnemy => oldEnemy.id == enemy?.id);
-    if (enemyIndex == -1) {
-      this.map.areas[areaIndex].locations[locationIndex].enemies.push(enemy);
-    } else {
-      this.map.areas[areaIndex].locations[locationIndex].enemies[enemyIndex] = enemy;
-    }
-  }
-
-  createOrUpdateObjectInLocation(
-    area: Area | undefined,
-    location: Location | undefined,
-    object: OtherObject | undefined)
-  {
-    if (area === undefined || location === undefined || object === undefined) {
-      return;
-    }
-    const areaIndex = this.map.areas.indexOf(area);
-    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
-    const objectIndex = this.map.areas[areaIndex].locations[locationIndex].objects.findIndex(oldObject => oldObject.id == object?.id);
-    if (objectIndex == -1) {
-      this.map.areas[areaIndex].locations[locationIndex].objects.push(object);
-    } else {
-      this.map.areas[areaIndex].locations[locationIndex].objects[objectIndex] = object;
-    }
-  }
-
-  createOrUpdateNPCInLocation(
-    area: Area | undefined,
-    location: Location | undefined,
-    npc: NPC | undefined)
-  {
-    if (area === undefined || location === undefined || npc === undefined) {
-      return;
-    }
-    const areaIndex = this.map.areas.indexOf(area);
-    const locationIndex = this.map.areas[areaIndex].locations.indexOf(location);
-    const npcIndex = this.map.areas[areaIndex].locations[locationIndex].npcs.findIndex(oldNPC => oldNPC.id == npc?.id);
-    if (npcIndex == -1) {
-      this.map.areas[areaIndex].locations[locationIndex].npcs.push(npc);
-    } else {
-      this.map.areas[areaIndex].locations[locationIndex].npcs[npcIndex] = npc;
+      // @ts-ignore
+      this.map.areas[areaIndex].locations[locationIndex][key].push(theObject);
     }
   }
 

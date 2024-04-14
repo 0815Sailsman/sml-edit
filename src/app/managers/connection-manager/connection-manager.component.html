@@ -4,16 +4,15 @@
 </div>
 <div *ngIf="showingDetails">
   <sml-edit-single-generic-object
-    *ngFor="let connection of connections"
-    [genericObject]="connection"
-    (editObjectWithoutKey)="edit($event)"
-    (objectDeletedWithoutKey)="delete($event)"
-    [key]="KeyInLocation.Connections"
+    *ngFor="let object of objects"
+    [genericObject]="object"
+    (edit)="edit($event)"
+    (delete)="delete($event)"
     style="display: inherit"
   />
     <sml-edit-connection-builder
       (connectionCreatedOrUpdated)="createOrUpdate($event)"
-      [startingConditions]="extractConditions(connections)"
-      [editConnection]="connectionToEdit"
+      [startingConditions]="extractConditions(objects)"
+      [editConnection]="objectToEdit"
     />
 </div>

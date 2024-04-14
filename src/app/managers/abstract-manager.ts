@@ -5,10 +5,15 @@ import {OtherObject} from "../map-management/otherObject";
 import {ObjectInLocation} from "../ObjectInLocation";
 import {EventEmitter, Input, Output} from "@angular/core";
 
+import { Component } from '@angular/core';
+
+@Component({
+  template: ''
+})
 export abstract class AbstractManager {
 
   showingDetails: boolean = false;
-  objectToEdit: ObjectInLocation | undefined;
+  abstract objectToEdit: ObjectInLocation | undefined;
 
   @Input() objects: ObjectInLocation[] = [];
   @Output() objectDeleted = new EventEmitter<ObjectInLocation>();

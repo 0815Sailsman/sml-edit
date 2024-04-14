@@ -4,17 +4,16 @@
 </div>
 <div *ngIf="showingDetails">
   <sml-edit-single-generic-object
-    *ngFor="let enemy of enemies"
-    [genericObject]="enemy"
-    (editObjectWithoutKey)="edit($event)"
-    (objectDeletedWithoutKey)="delete($event)"
-    [key]="KeyInLocation.Enemies"
+    *ngFor="let object of objects"
+    [genericObject]="object"
+    (edit)="edit($event)"
+    (delete)="delete($event)"
     style="display: inherit"
   />
   <sml-edit-enemy-builder
     (enemyCreatedOrUpdated)="createOrUpdate($event)"
-    [startingConditions]="extractConditions(enemies)"
-    [editedEnemy]="enemyToEdit"
+    [startingConditions]="extractConditions(objects)"
+    [editedEnemy]="objectToEdit"
   />
 
 </div>

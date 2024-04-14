@@ -19,4 +19,6 @@ import {AbstractManager} from "../abstract-manager";
 })
 export class OtherObjectManagerComponent extends AbstractManager {
 
+  override objectToEdit: OtherObject | undefined;
+
 }

@@ -1,9 +1,10 @@
 <li>
   {{ genericObject ? genericObject.toString(mapService) : "undefined"}}
-  <span *ngIf="!isConnection(genericObject)"></span>
   <span *ngIf="genericObject?.availableIf !== undefined"> if {{mapService.conditionToString(genericObject?.availableIf)}}</span>
   <button (click)="fireObjectEdited()">
     edit
   </button>
-  <button (click)="fireObjectDeleted()">delete {{depluralizeSimple(name)}}</button>
+  <button (click)="fireObjectDeleted()">
+    delete
+  </button>
 </li>

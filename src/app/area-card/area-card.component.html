@@ -16,14 +16,9 @@
     *ngFor="let location of area?.locations"
     [location]="location"
     (locationDeleted)="deleteLocation($event)"
-    (objectDeletedFromLocation)="deleteObjectFromLocationTOBEREMOVED($event)"
-    (connectionDeletedFromLocation)="deleteConnectionFromLocation($event)"
+    (objectDeletedFromLocation)="deleteObjectFromLocation($event)"
     (updateLocationWithIDToName)="updateLocationWithIDToName($event)"
-    (connectionCreatedOrUpdatedFromLocation)="createOrUpdateConnectionFromLocation($event)"
-    (itemCreatedOrUpdatedInLocation)="createOrUpdateItemInLocation($event)"
-    (enemyCreatedOrUpdatedInLocation)="createOrUpdateEnemyInLocation($event)"
-    (objectCreatedOrUpdatedInLocation)="createOrUpdateObjectInLocation($event)"
-    (npcCreatedOrUpdatedInLocation)="createOrUpdateNPCInLocation($event)"
+    (objectCreatedOrUpdatedFromLocation)="createOrUpdateObjectInLocation($event)"
   />
   <input type="text" id="newLocationName" name="newLocationName" [(ngModel)]="newAreaName" ngDefaultControl>
   <button (click)="addLocation(newAreaName)">add new location</button>

@@ -6,9 +6,8 @@
   <sml-edit-single-generic-object
     *ngFor="let object of objects"
     [genericObject]="object"
-    (editObjectWithoutKey)="edit($event)"
-    (objectDeletedWithoutKey)="delete($event)"
-    [key]="KeyInLocation.Objects"
+    (edit)="edit($event)"
+    (delete)="delete($event)"
     style="display: inherit"
   />
   <sml-edit-object-builder

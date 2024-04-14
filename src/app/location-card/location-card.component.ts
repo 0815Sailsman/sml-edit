@@ -3,12 +3,7 @@ import {CommonModule} from "@angular/common";
 
 import {Location} from "../map-management/location";
 import {Enemy} from "../map-management/enemy";
-import {Item} from "../map-management/item";
-import {Connection} from "../map-management/connection";
-import {OtherObject} from "../map-management/otherObject";
-import {NPC} from "../map-management/NPC";
 import {Pair} from "../Pair";
-import {Triplet} from "../Triplet";
 import {KeyInLocation} from "../KeyInLocation";
 import {ObjectInLocation} from "../ObjectInLocation";
 import {MapManagerService} from "../map-management/map-manager.service";
@@ -44,25 +39,11 @@ export class LocationCardComponent {
   }
 
   @Input() location!: Location;
+  @Output() updateLocationWithIDToName = new EventEmitter<Pair<number, string>>
   @Output() locationDeleted = new EventEmitter<Location>();
 
-  @Output() objectDeletedFromLocation = new EventEmitter<Triplet<
-    Location,
-    ObjectInLocation,
-    KeyInLocation
-  >>();
-  @Output() connectionDeletedFromLocation = new EventEmitter<{location: Location, connection: Connection}>();
-  @Output() itemDeletedFromLocation = new EventEmitter<{location: Location, item: Item}>();
-  @Output() enemyDeletedFromLocation = new EventEmitter<{location: Location, enemy: Enemy}>();
-  @Output() otherObjectDeletedFromLocation = new EventEmitter<{location: Location, object: OtherObject}>();
-  @Output() npcDeletedFromLocation = new EventEmitter<{location: Location, npc: NPC}>();
-
-  @Output() updateLocationWithIDToName = new EventEmitter<Pair<number, string>>
-  @Output() connectionCreatedOrUpdatedFromLocation = new EventEmitter<Pair<Location, Connection>>();
-  @Output() itemCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, Item>>();
-  @Output() enemyCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, Enemy>>();
-  @Output() objectCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, OtherObject>>();
-  @Output() npcCreatedOrUpdatedInLocation = new EventEmitter<Pair<Location, NPC>>();
+  @Output() objectCreatedOrUpdatedFromLocation = new EventEmitter<{location: Location, object: ObjectInLocation, key: KeyInLocation}>
+  @Output() objectDeletedFromLocation = new EventEmitter<{location: Location, object: ObjectInLocation, key: KeyInLocation}>;
 
   fireLocationDeleted() {
     this.locationDeleted.emit(this.location)
@@ -80,74 +61,85 @@ export class LocationCardComponent {
     }
     this.currentlyEditing = !this.currentlyEditing;
   }
-  deleteConnection(connection: Connection) {
-    this.connectionDeletedFromLocation.emit({
+  deleteConnection(connection: ObjectInLocation) {
+    this.objectDeletedFromLocation.emit({
       location: this.location,
-      connection: connection
+      object: connection,
+      key: KeyInLocation.Connections
     });
   }
 
-  deleteItem(item: Item) {
-    this.itemDeletedFromLocation.emit({
+  deleteItem(item: ObjectInLocation) {
+    this.objectDeletedFromLocation.emit({
       location: this.location,
-      item: item
+      object: item,
+      key: KeyInLocation.Items
     });
   }
 
-  deleteEnemy(enemy: Enemy) {
-    this.enemyDeletedFromLocation.emit({
+  deleteEnemy(enemy: ObjectInLocation) {
+    this.objectDeletedFromLocation.emit({
       location: this.location,
-      enemy: enemy
+      object: enemy,
+      key: KeyInLocation.Enemies
     })
   };
 
-  deleteObject(object: OtherObject) {
-    this.otherObjectDeletedFromLocation.emit({
+  deleteObject(object: ObjectInLocation) {
+    this.objectDeletedFromLocation.emit({
       location: this.location,
-      object: object
+      object: object,
+      key: KeyInLocation.Objects
     });
   }
 
-  deleteNPC(npc: NPC) {
-    this.npcDeletedFromLocation.emit({
+  deleteNPC(npc: ObjectInLocation) {
+    this.objectDeletedFromLocation.emit({
       location: this.location,
-      npc: npc
+      object: npc,
+      key: KeyInLocation.Npcs
     });
   }
 
   protected readonly KeyInLocation = KeyInLocation;
 
-  registerOrUpdateNewConnection(theConnection: Connection) {
-    this.connectionCreatedOrUpdatedFromLocation.emit({
-      first: this.location,
-      second: theConnection
+
+  registerOrUpdateNewConnection(connection: ObjectInLocation) {
+    this.objectCreatedOrUpdatedFromLocation.emit({
+      location: this.location,
+      object: connection,
+      key: KeyInLocation.Connections
     });
   }
 
-  registerOrUpdateNewItem(theItem: Item) {
-    this.itemCreatedOrUpdatedInLocation.emit({
-      first: this.location,
-      second: theItem
+  registerOrUpdateNewItem(item: ObjectInLocation) {
+    this.objectCreatedOrUpdatedFromLocation.emit({
+      location: this.location,
+      object: item,
+      key: KeyInLocation.Items
     });
   }
-  registerOrUpdateNewEnemy(theEnemy: Enemy) {
-    this.enemyCreatedOrUpdatedInLocation.emit({
-      first: this.location,
-      second: theEnemy
-    });
-  }
-
-  registerOrUpdateNewObject(theObject: OtherObject) {
-    this.objectCreatedOrUpdatedInLocation.emit({
-      first: this.location,
-      second: theObject
+  registerOrUpdateNewEnemy(enemy: ObjectInLocation) {
+    this.objectCreatedOrUpdatedFromLocation.emit({
+      location: this.location,
+      object: enemy,
+      key: KeyInLocation.Enemies
     });
   }
 
-  registerOrUpdateNewNPC(theNPC: NPC) {
-    this.npcCreatedOrUpdatedInLocation.emit({
-      first: this.location,
-      second: theNPC
+  registerOrUpdateNewObject(object: ObjectInLocation) {
+    this.objectCreatedOrUpdatedFromLocation.emit({
+      location: this.location,
+      object: object,
+      key: KeyInLocation.Objects
+    });
+  }
+
+  registerOrUpdateNewNPC(npc: ObjectInLocation) {
+    this.objectCreatedOrUpdatedFromLocation.emit({
+      location: this.location,
+      object: npc,
+      key: KeyInLocation.Npcs
     });
   }
 

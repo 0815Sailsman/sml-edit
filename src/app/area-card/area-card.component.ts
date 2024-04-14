@@ -69,114 +69,25 @@ export class AreaCardComponent {
     }
   }
 
-  deleteObjectFromLocationTOBEREMOVED(
-    tripletOfLocationAndObjectAndKey: Triplet<Location, ObjectInLocation, KeyInLocation>
+  deleteObjectFromLocation(
+    params: {location: Location, object: ObjectInLocation, key: KeyInLocation}
   ): void {
     this.mapService.deleteGeneralObjectFromLocationInArea(
       this.area,
-      tripletOfLocationAndObjectAndKey.first,
-      tripletOfLocationAndObjectAndKey.second,
-      tripletOfLocationAndObjectAndKey.third
-    )
-  }
-
-  deleteConnectionFromLocation(
-    locationAndConnection: {location: Location, connection: Connection}
-  ): void
-  {
-    this.mapService.deleteGeneralObjectFromLocationInArea(
-      this.area,
-      locationAndConnection.location,
-      locationAndConnection.connection,
-      KeyInLocation.Connections
+      params.location,
+      params.object,
+      params.key
     );
   }
 
-  deleteItemFromLocation(
-    locationAndItem: {location: Location, item: Item}
-  ): void
-  {
-    this.mapService.deleteGeneralObjectFromLocationInArea(
+  createOrUpdateObjectInLocation(
+    params: {location: Location, object: ObjectInLocation, key: KeyInLocation}
+  ): void {
+    this.mapService.createOrUpdateGeneralObjectFromLocationInArea(
       this.area,
-      locationAndItem.location,
-      locationAndItem.item,
-      KeyInLocation.Items
-    );
-  }
-
-  deleteEnemyFromLocation(
-    locationAndEnemy: {location: Location, enemy: Enemy}
-  ): void
-  {
-    this.mapService.deleteGeneralObjectFromLocationInArea(
-      this.area,
-      locationAndEnemy.location,
-      locationAndEnemy.enemy,
-      KeyInLocation.Enemies
-    );
-  }
-
-  deleteObjectFromLocation(
-    locationAndObject: {location: Location, object: OtherObject}
-  ): void
-  {
-    this.mapService.deleteGeneralObjectFromLocationInArea(
-      this.area,
-      locationAndObject.location,
-      locationAndObject.object,
-      KeyInLocation.Objects
-    );
-  }
-
-  deleteNPCFromLocation(
-    locationAndNPC: {location: Location, npc: NPC}
-  ): void
-  {
-    this.mapService.deleteGeneralObjectFromLocationInArea(
-      this.area,
-      locationAndNPC.location,
-      locationAndNPC.npc,
-      KeyInLocation.Npcs
-    );
-  }
-
-  createOrUpdateConnectionFromLocation(pairOfLocationAndConnection: Pair<Location, Connection>) {
-    this.mapService.createOrUpdateConnectionFromLocation(
-      this.area,
-      pairOfLocationAndConnection.first,
-      pairOfLocationAndConnection.second
-    )
-  }
-
-  createOrUpdateItemInLocation(pairOfLocationAndItem: Pair<Location, Item>) {
-    this.mapService.createOrUpdateItemInLocation(
-      this.area,
-      pairOfLocationAndItem.first,
-      pairOfLocationAndItem.second
-      )
-  }
-
-  createOrUpdateEnemyInLocation(pairOfLocationAndEnemy: Pair<Location, Enemy>) {
-    this.mapService.createOrUpdateEnemyInLocation(
-      this.area,
-      pairOfLocationAndEnemy.first,
-      pairOfLocationAndEnemy.second
-      );
-  }
-
-  createOrUpdateObjectInLocation(pairOfLocationAndObject: Pair<Location, OtherObject>) {
-    this.mapService.createOrUpdateObjectInLocation(
-      this.area,
-      pairOfLocationAndObject.first,
-      pairOfLocationAndObject.second
-    );
-  }
-
-  createOrUpdateNPCInLocation(pairOfLocationAndNPC: Pair<Location, NPC>) {
-    this.mapService.createOrUpdateNPCInLocation(
-      this.area,
-      pairOfLocationAndNPC.first,
-      pairOfLocationAndNPC.second
+      params.location,
+      params.object,
+      params.key
     );
   }
 }

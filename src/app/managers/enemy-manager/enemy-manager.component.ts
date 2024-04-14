@@ -19,21 +19,6 @@ import {AbstractManager} from "../abstract-manager";
 })
 export class EnemyManagerComponent extends AbstractManager {
 
-  @Input() enemies: Enemy[] = [];
-  @Output() enemyDeleted = new EventEmitter<Enemy>();
-  @Output() enemyCreatedOrUpdated = new EventEmitter<Enemy>();
+  override objectToEdit: Enemy | undefined;
 
-  enemyToEdit: Enemy | undefined;
-
-  edit(enemy: Enemy) {
-    this.enemyToEdit = enemy;
-  }
-
-  delete(enemy: Enemy){
-    this.enemyDeleted.emit(enemy);
-  }
-
-  createOrUpdate(enemy: Enemy) {
-    this.enemyCreatedOrUpdated.emit(enemy);
-  }
 }

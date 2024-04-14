@@ -4,17 +4,16 @@
 </div>
 <div *ngIf="showingDetails">
   <sml-edit-single-generic-object
-    *ngFor="let item of items"
-    [genericObject]="item"
-    (editObjectWithoutKey)="edit($event)"
-    (objectDeletedWithoutKey)="delete($event)"
-    [key]="KeyInLocation.Items"
+    *ngFor="let object of objects"
+    [genericObject]="object"
+    (edit)="edit($event)"
+    (delete)="delete($event)"
     style="display: inherit"
   />
-    <sml-edit-item-builder
-      (itemCreatedOrUpdated)="createOrUpdate($event)"
-      [startingConditions]="extractConditions(items)"
-      [editedItem]="itemToEdit"
-    />
+  <sml-edit-item-builder
+    (itemCreatedOrUpdated)="createOrUpdate($event)"
+    [startingConditions]="extractConditions(objects)"
+    [editedItem]="objectToEdit"
+  />
 
 </div>

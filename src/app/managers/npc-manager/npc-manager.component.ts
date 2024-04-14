@@ -19,4 +19,6 @@ import {AbstractManager} from "../abstract-manager";
 })
 export class NpcManagerComponent extends AbstractManager {
 
+  override objectToEdit: NPC | undefined;
+
 }
