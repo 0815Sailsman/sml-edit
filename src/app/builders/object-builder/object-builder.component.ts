@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {OtherObject} from "../model/otherObject";
-import {BigCondition} from "../model/bigCondition";
-import {MapManagerService} from "../map-management/map-manager.service";
-import {IdManagerService} from "../map-management/id-manager.service";
-import {AtomicCondition} from "../model/atomicCondition";
+import {OtherObject} from "../../model/otherObject";
+import {BigCondition} from "../../model/bigCondition";
+import {MapManagerService} from "../../map-management/map-manager.service";
+import {IdManagerService} from "../../map-management/id-manager.service";
+import {AtomicCondition} from "../../model/atomicCondition";
 import {NgIf} from "@angular/common";
 
 @Component({

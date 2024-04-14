@@ -1,7 +1,7 @@
-import {Location} from "../model/location";
-import {Item} from "../model/item";
-import {Enemy} from "../model/enemy";
-import {OtherObject} from "../model/otherObject";
+import {Location} from "../../model/location";
+import {Item} from "../../model/item";
+import {Enemy} from "../../model/enemy";
+import {OtherObject} from "../../model/otherObject";
 
 export enum ConditionSubjects {
   Location = "Location",

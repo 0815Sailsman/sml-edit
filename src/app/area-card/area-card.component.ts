@@ -1,19 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Area} from "../map-management/area";
+import {Area} from "../model/area";
 import {LocationCardComponent} from "../location-card/location-card.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import {MapManagerService} from "../map-management/map-manager.service";
-import {Location} from "../map-management/location";
-import {Pair} from "../Pair";
-import {Item} from "../map-management/item";
-import {Triplet} from "../Triplet";
-import {Connection} from "../map-management/connection";
-import {Enemy} from "../map-management/enemy";
-import {NPC} from "../map-management/NPC";
-import {OtherObject} from "../map-management/otherObject";
-import {ObjectInLocation} from "../ObjectInLocation";
-import {KeyInLocation} from "../KeyInLocation";
+import {Location} from "../model/location";
+import {ObjectInLocation} from "../model/ObjectInLocation";
+import {KeyInLocation} from "../model/KeyInLocation";
 
 @Component({
   selector: 'sml-edit-area-card',
@@ -59,8 +52,8 @@ export class AreaCardComponent {
     }
   }
 
-  updateLocationWithIDToName(pairOfIdAndName: Pair<number, string>) {
-    this.mapService.updateLocationWithIDToName(this.area, pairOfIdAndName.first, pairOfIdAndName.second);
+  updateLocationWithIDToName(params: {locationID: number, name: string}) {
+    this.mapService.updateLocationWithIDToName(this.area, params.locationID, params.name);
   }
 
   deleteLocation(theLocationToBeDeleted: Location) {

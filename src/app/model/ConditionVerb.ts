@@ -1,4 +1,4 @@
-import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
+import {ConditionSubjects} from "../builders/condition-builder/ConditionSubjects";
 
 export enum ConditionVerb {
   VISITED = "visited",

@@ -1,11 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from "@angular/common";
 
-import {Location} from "../map-management/location";
-import {Enemy} from "../map-management/enemy";
-import {Pair} from "../Pair";
-import {KeyInLocation} from "../KeyInLocation";
-import {ObjectInLocation} from "../ObjectInLocation";
+import {Location} from "../model/location";
+import {KeyInLocation} from "../model/KeyInLocation";
+import {ObjectInLocation} from "../model/ObjectInLocation";
 import {MapManagerService} from "../map-management/map-manager.service";
 import {FormsModule} from "@angular/forms";
 import {ConnectionManagerComponent} from "../managers/connection-manager/connection-manager.component";
@@ -39,7 +37,7 @@ export class LocationCardComponent {
   }
 
   @Input() location!: Location;
-  @Output() updateLocationWithIDToName = new EventEmitter<Pair<number, string>>
+  @Output() updateLocationWithIDToName = new EventEmitter<{locationID: number, name: string}>
   @Output() locationDeleted = new EventEmitter<Location>();
 
   @Output() objectCreatedOrUpdatedFromLocation = new EventEmitter<{location: Location, object: ObjectInLocation, key: KeyInLocation}>
@@ -52,8 +50,8 @@ export class LocationCardComponent {
   toggleEditing() {
     if (this.currentlyEditing) {
       this.updateLocationWithIDToName.emit({
-        first: this.location.id,
-        second: this.editedName
+        locationID: this.location.id,
+        name: this.editedName
       });
       this.location.name = this.editedName;
     } else {

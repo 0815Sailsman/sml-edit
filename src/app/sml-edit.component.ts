@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { AreaCardComponent } from "./area-card/area-card.component";
-import {Area} from "./map-management/area";
+import {Area} from "./model/area";
 import {FormsModule} from "@angular/forms";
 import {MapManagerService} from "./map-management/map-manager.service";
 import {FromFileMapLoaderService} from "./map-management/loader/from-file-map-loader.service";

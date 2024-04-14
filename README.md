@@ -19,33 +19,6 @@ Each **location** may have any amount of
  - **objects** with arbitrary interaction possibilities. This will probably be the hardest thing to model later on. Maybe start out with just being able to interact once with every object to later be able to use them in conditions.
  - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
 
-## Roadmap for 0.2.0 - The big refactoring & some QOL
-- [x] wrap shop item builder in own component
-- [x] Make map objects classes with easily-selectable interface implemented
-  - [x] map from interface to class
-  - [x] area from interface to class
-  - [x] location from interface to class
-  - [x] connection from interface to class
-  - [x] item from interface to class
-  - [x] enemy from interface to class
-  - [x] otherObject from interface to class
-  - [x] NPC from interface to class
-  - [x] easily selectable from type union to interface
-  - [x] don't use weird passing of functions in location card component anymore for to string
-- [x] Move toString methods to related classes
-- [x] list of available connections doesn't show a connection just by saying its id => use name of 'to' instead!
-- [x] de-generalize object manager into different components
-  - [x] split off connection manager
-  - [x] split off item manager
-  - [x] split off enemy manager
-  - [x] split off object manager
-  - [x] split off npc manager
-  - [x] move and unify "extractConditions" to abstract-manager
-  - [x] move details and other manager unspecific stuff to abstract-manager
-- [ ] unify createOrUpdate, edit and delete Pipeline
-  - [x] declare in abstractManager
-- [ ] move related files to new utils directory in sources root
-
 ## Roadmap for 0.3.0 - Docs, specs and testing
 - [ ] Written down concrete specs and requirements for this app
 - [ ] Write tests for these requirements
@@ -70,6 +43,34 @@ Each **location** may have any amount of
 
 # Archive
 Past roadmaps etc
+
+## Roadmap for 0.2.0 - The big refactoring & some QOL
+- [x] wrap shop item builder in own component
+- [x] Make map objects classes with easily-selectable interface implemented
+  - [x] map from interface to class
+  - [x] area from interface to class
+  - [x] location from interface to class
+  - [x] connection from interface to class
+  - [x] item from interface to class
+  - [x] enemy from interface to class
+  - [x] otherObject from interface to class
+  - [x] NPC from interface to class
+  - [x] easily selectable from type union to interface
+  - [x] don't use weird passing of functions in location card component anymore for to string
+- [x] Move toString methods to related classes
+- [x] list of available connections doesn't show a connection just by saying its id => use name of 'to' instead!
+- [x] de-generalize object manager into different components
+  - [x] split off connection manager
+  - [x] split off item manager
+  - [x] split off enemy manager
+  - [x] split off object manager
+  - [x] split off npc manager
+  - [x] move and unify "extractConditions" to abstract-manager
+  - [x] move details and other manager unspecific stuff to abstract-manager
+- [x] unify createOrUpdate, edit and delete Pipeline
+  - [x] declare in abstractManager
+  - [x] move every shared piece of logic into abstractManager
+- [x] move related files to new utils directory in sources root
 
 ## Roadmap for 0.1.0
 - [x] Revamp item system

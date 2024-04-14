@@ -1,5 +1,5 @@
-import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
-import {ConditionVerb} from "../types/ConditionVerb";
+import {ConditionSubjects} from "../builders/condition-builder/ConditionSubjects";
+import {ConditionVerb} from "./ConditionVerb";
 
 export interface AtomicCondition {
   subjectType: ConditionSubjects

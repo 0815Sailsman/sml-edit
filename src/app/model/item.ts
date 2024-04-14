@@ -1,6 +1,5 @@
-import {BigCondition} from "../model/bigCondition";
-import {MapManagerService} from "./map-manager.service";
-import {map} from "rxjs";
+import {BigCondition} from "./bigCondition";
+import {MapManagerService} from "../map-management/map-manager.service";
 
 export class Item {
   id: number

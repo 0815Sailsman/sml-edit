@@ -1,4 +1,3 @@
-import {BigCondition} from "./bigCondition";
 import {Item} from "./item";
 
 export interface ShopItem {

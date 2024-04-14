@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ObjectInLocation} from "../ObjectInLocation";
+import {ObjectInLocation} from "../model/ObjectInLocation";
 import {NgIf} from "@angular/common";
-import {Connection} from "../map-management/connection";
 import {MapManagerService} from "../map-management/map-manager.service";
 
 @Component({

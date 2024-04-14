@@ -1,18 +1,18 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
 import {FormsModule} from "@angular/forms";
-import {MapManagerService} from "../map-management/map-manager.service";
-import {BigCondition} from "../model/bigCondition";
-import {SelectFromAllComponent} from "../select-from-all/select-from-all.component";
+import {MapManagerService} from "../../map-management/map-manager.service";
+import {BigCondition} from "../../model/bigCondition";
+import {SelectFromAllComponent} from "../../select-from-all/select-from-all.component";
 import {ItemBuilderComponent} from "../item-builder/item-builder.component";
-import {Item} from "../model/item";
+import {Item} from "../../model/item";
 import {CommonModule} from "@angular/common";
-import {Drop} from "../model/drop";
-import {Enemy} from "../model/enemy";
-import {ItemBuilderHeaderComponent} from "../item-builder/item-builder-header/item-builder-header.component";
-import {DropBuilderComponent} from "./drop-builder/drop-builder.component";
-import {IdManagerService} from "../map-management/id-manager.service";
-import {AtomicCondition} from "../model/atomicCondition";
+import {Drop} from "../../model/drop";
+import {Enemy} from "../../model/enemy";
+import {ItemBuilderHeaderComponent} from "../item-builder-header/item-builder-header.component";
+import {DropBuilderComponent} from "../drop-builder/drop-builder.component";
+import {IdManagerService} from "../../map-management/id-manager.service";
+import {AtomicCondition} from "../../model/atomicCondition";
 
 @Component({
   selector: 'sml-edit-enemy-builder',

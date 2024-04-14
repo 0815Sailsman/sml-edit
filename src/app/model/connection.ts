@@ -1,5 +1,5 @@
-import {BigCondition} from "../model/bigCondition";
-import {MapManagerService} from "./map-manager.service";
+import {BigCondition} from "./bigCondition";
+import {MapManagerService} from "../map-management/map-manager.service";
 
 export class Connection {
 

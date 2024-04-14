@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {Connection} from "../model/connection";
+import {Connection} from "../../model/connection";
 import {FormsModule} from "@angular/forms";
-import {Location} from "../model/location";
-import {BigCondition} from "../model/bigCondition";
+import {Location} from "../../model/location";
+import {BigCondition} from "../../model/bigCondition";
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
-import {SelectFromAllComponent} from "../select-from-all/select-from-all.component";
-import {MapManagerService} from "../map-management/map-manager.service";
-import {AtomicCondition} from "../model/atomicCondition";
-import {IdManagerService} from "../map-management/id-manager.service";
+import {SelectFromAllComponent} from "../../select-from-all/select-from-all.component";
+import {MapManagerService} from "../../map-management/map-manager.service";
+import {AtomicCondition} from "../../model/atomicCondition";
+import {IdManagerService} from "../../map-management/id-manager.service";
 
 @Component({
   selector: 'sml-edit-connection-builder',

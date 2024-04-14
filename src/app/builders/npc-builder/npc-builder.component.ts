@@ -3,17 +3,17 @@ import {ConditionBuilderComponent} from "../condition-builder/condition-builder.
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ItemBuilderComponent} from "../item-builder/item-builder.component";
 import {NgForOf, NgIf} from "@angular/common";
-import {ShopItem} from "../model/ShopItem";
-import {Item} from "../model/item";
-import {BigCondition} from "../model/bigCondition";
-import {NPC} from "../model/NPC";
-import {MapManagerService} from "../map-management/map-manager.service";
-import {ItemBuilderHeaderComponent} from "../item-builder/item-builder-header/item-builder-header.component";
-import {ItemType} from "../model/itemType";
-import {IdManagerService} from "../map-management/id-manager.service";
-import {AtomicCondition} from "../model/atomicCondition";
-import {Drop} from "../model/drop";
-import {ShopItemBuilderComponent} from "./shop-item-builder/shop-item-builder.component";
+import {ShopItem} from "../../model/ShopItem";
+import {Item} from "../../model/item";
+import {BigCondition} from "../../model/bigCondition";
+import {NPC} from "../../model/NPC";
+import {MapManagerService} from "../../map-management/map-manager.service";
+import {ItemBuilderHeaderComponent} from "../item-builder-header/item-builder-header.component";
+import {ItemType} from "../../model/itemType";
+import {IdManagerService} from "../../map-management/id-manager.service";
+import {AtomicCondition} from "../../model/atomicCondition";
+import {Drop} from "../../model/drop";
+import {ShopItemBuilderComponent} from "../shop-item-builder/shop-item-builder.component";
 
 @Component({
   selector: 'sml-edit-npc-builder',

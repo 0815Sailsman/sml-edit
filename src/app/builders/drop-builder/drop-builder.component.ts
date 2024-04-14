@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {ItemBuilderHeaderComponent} from "../../item-builder/item-builder-header/item-builder-header.component";
+import {ItemBuilderHeaderComponent} from "../item-builder-header/item-builder-header.component";
 import {Item} from "../../model/item";
 import {Drop} from "../../model/drop";
 import {ItemType} from "../../model/itemType";

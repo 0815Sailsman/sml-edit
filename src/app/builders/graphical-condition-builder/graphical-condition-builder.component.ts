@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {ConditionSubjects} from "../ConditionSubjects";
+import {ConditionSubjects} from "../condition-builder/ConditionSubjects";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
 import {AtomicCondition} from "../../model/atomicCondition";

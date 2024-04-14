@@ -9,7 +9,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {ConditionSubjects, ConditionSubjectsType} from "../ConditionSubjects";
+import {ConditionSubjects, ConditionSubjectsType} from "../condition-builder/ConditionSubjects";
 import {CommonModule} from "@angular/common";
 import {AtomicCondition} from "../../model/atomicCondition";
 import {FormsModule} from "@angular/forms";

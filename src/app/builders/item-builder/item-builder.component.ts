@@ -1,15 +1,15 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ConditionBuilderComponent} from "../condition-builder/condition-builder.component";
-import {BigCondition} from "../model/bigCondition";
+import {BigCondition} from "../../model/bigCondition";
 import {FormsModule} from "@angular/forms";
-import {Item} from "../model/item";
-import {MapManagerService} from "../map-management/map-manager.service";
-import {SelectFromAllComponent} from "../select-from-all/select-from-all.component";
-import {ItemType} from "../model/itemType";
+import {Item} from "../../model/item";
+import {MapManagerService} from "../../map-management/map-manager.service";
+import {SelectFromAllComponent} from "../../select-from-all/select-from-all.component";
+import {ItemType} from "../../model/itemType";
 import {NgIf} from "@angular/common";
-import {ItemBuilderHeaderComponent} from "./item-builder-header/item-builder-header.component";
-import {IdManagerService} from "../map-management/id-manager.service";
-import {AtomicCondition} from "../model/atomicCondition";
+import {ItemBuilderHeaderComponent} from "../item-builder-header/item-builder-header.component";
+import {IdManagerService} from "../../map-management/id-manager.service";
+import {AtomicCondition} from "../../model/atomicCondition";
 
 @Component({
   selector: 'sml-edit-item-builder',

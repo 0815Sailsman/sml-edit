@@ -1,6 +1,6 @@
-import {BigCondition} from "../model/bigCondition";
+import {BigCondition} from "./bigCondition";
 import {Drop} from "./drop";
-import {MapManagerService} from "./map-manager.service";
+import {MapManagerService} from "../map-management/map-manager.service";
 
 export class Enemy {
   id: number

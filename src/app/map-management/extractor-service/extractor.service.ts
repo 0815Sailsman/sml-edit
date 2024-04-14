@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Location} from "../location";
-import {Item} from "../item";
-import {Enemy} from "../enemy";
-import {NPC} from "../NPC";
-import {OtherObject} from "../otherObject";
-import {ItemType} from "../itemType";
+import {Location} from "../../model/location";
+import {Item} from "../../model/item";
+import {Enemy} from "../../model/enemy";
+import {NPC} from "../../model/NPC";
+import {OtherObject} from "../../model/otherObject";
+import {ItemType} from "../../model/itemType";
 import {Map} from "../map";
-import {Connection} from "../connection";
-import {min} from "rxjs";
+import {Connection} from "../../model/connection";
 
 @Injectable({
   providedIn: 'root'

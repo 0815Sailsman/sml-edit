@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule, NgClass, NgForOf, NgIf} from "@angular/common";
-import {TextualConditionBuilderComponent} from "./textual-condition-builder/textual-condition-builder.component";
-import {GraphicalConditionBuilderComponent} from "./graphical-condition-builder/graphical-condition-builder.component";
-import {BigCondition} from "../model/bigCondition";
-import {AtomicCondition} from "../model/atomicCondition";
+import {TextualConditionBuilderComponent} from "../textual-condition-builder/textual-condition-builder.component";
+import {GraphicalConditionBuilderComponent} from "../graphical-condition-builder/graphical-condition-builder.component";
+import {BigCondition} from "../../model/bigCondition";
+import {AtomicCondition} from "../../model/atomicCondition";
 
 @Component({
   selector: 'sml-edit-condition-builder',

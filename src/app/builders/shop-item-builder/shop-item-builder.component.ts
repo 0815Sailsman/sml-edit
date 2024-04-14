@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {ItemBuilderHeaderComponent} from "../../item-builder/item-builder-header/item-builder-header.component";
+import {ItemBuilderHeaderComponent} from "../item-builder-header/item-builder-header.component";
 import {NgIf} from "@angular/common";
 import {ItemType} from "../../model/itemType";
 import {MapManagerService} from "../../map-management/map-manager.service";
