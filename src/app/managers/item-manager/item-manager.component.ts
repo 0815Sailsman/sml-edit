@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ItemBuilderComponent} from "../../item-builder/item-builder.component";
+import {Component} from '@angular/core';
+import {ItemBuilderComponent} from "../../builders/item-builder/item-builder.component";
 import {SingleGenericObjectComponent} from "../../single-generic-object/single-generic-object.component";
 import {NgForOf, NgIf} from "@angular/common";
-import {Item} from "../../map-management/item";
+import {Item} from "../../model/item";
 import {AbstractManager} from "../abstract-manager";
 
 @Component({

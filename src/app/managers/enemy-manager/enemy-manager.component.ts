@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {SingleGenericObjectComponent} from "../../single-generic-object/single-generic-object.component";
 import {NgForOf, NgIf} from "@angular/common";
-import {EnemyBuilderComponent} from "../../enemy-builder/enemy-builder.component";
-import {Enemy} from "../../map-management/enemy";
+import {EnemyBuilderComponent} from "../../builders/enemy-builder/enemy-builder.component";
+import {Enemy} from "../../model/enemy";
 import {AbstractManager} from "../abstract-manager";
 
 @Component({

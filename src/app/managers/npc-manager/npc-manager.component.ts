@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {SingleGenericObjectComponent} from "../../single-generic-object/single-generic-object.component";
-import {NpcBuilderComponent} from "../../npc-builder/npc-builder.component";
-import {NPC} from "../../map-management/NPC";
+import {NpcBuilderComponent} from "../../builders/npc-builder/npc-builder.component";
+import {NPC} from "../../model/NPC";
 import {AbstractManager} from "../abstract-manager";
 
 @Component({

@@ -1,8 +1,7 @@
-import {AtomicCondition} from "../map-management/atomicCondition";
-import {BigCondition} from "../map-management/bigCondition";
-import {KeyInLocation} from "../KeyInLocation";
-import {OtherObject} from "../map-management/otherObject";
-import {ObjectInLocation} from "../ObjectInLocation";
+import {AtomicCondition} from "../model/atomicCondition";
+import {BigCondition} from "../model/bigCondition";
+import {KeyInLocation} from "../model/KeyInLocation";
+import {ObjectInLocation} from "../model/ObjectInLocation";
 import {EventEmitter, Input, Output} from "@angular/core";
 
 import { Component } from '@angular/core';
