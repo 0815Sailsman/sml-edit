@@ -23,15 +23,22 @@ Each **location** may have any amount of
 - [ ] Written down concrete specs and requirements for this app
 - [ ] Write tests for these requirements
 
-## Feature backlog
-- [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
-- [ ] Quest-Line modeling for npcs with interactions
+## Roadmap for 0.4.0 - Modeling more advanced behaviour I
+- [ ] Quest-Line modeling for npcs with interactions, how they travel through the world over time and unlock more shop items / gifts.
+- [ ] Proof of concrept: Model a bonfire with the current OtherObject System
+
+## Roadmap for 0.5.0 - QoL
 - [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
+- [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
+- [ ] Enemy templates similar to item types
+- [ ] Assistance for creating bonfires as other Objects
+
+## Feature backlog
+
 
 ## Possible Spikes
 - [x] Rely more on dependency injection -> Reduce unnecessary event bubbling up and just straight up inject map manager service (e.g. on object creation). But watch out: Might not be possible everywhere, since we may need to know details only known on higher locations.
 - [ ] Use forms
-- [ ] Create from existing object as template
 - [x] Possibly split different IDs
 - [ ] Meta tags and info-dump in root of sml file
 - [ ] do we really need this 'bubbling', now that the IDs are clear? -> updating minor stuff without reference to major
