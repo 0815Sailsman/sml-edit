@@ -20,7 +20,7 @@ Each **location** may have any amount of
  - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
 
 ## Roadmap for 0.3.0 - Docs, specs and testing
-- [ ] Written down concrete specs and requirements for this app
+- [x] Written down concrete specs and requirements for this app
 - [ ] Write tests for these requirements
 
 ## Roadmap for 0.4.0 - Modeling more advanced behaviour I
