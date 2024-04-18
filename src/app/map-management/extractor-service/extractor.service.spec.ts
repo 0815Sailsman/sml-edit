@@ -11,8 +11,12 @@ import {
 import {Connection} from "../../model/connection";
 import {Item} from "../../model/item";
 import {anItem, anotherItem, aThirdItem} from "../../test/test-factories/itemsFactory";
-import {anEnemyDropping} from "../../test/test-factories/enemiesFactory";
-import {anNPCSelling} from "../../test/test-factories/npcFactory";
+import {anEnemy, anEnemyDropping, anotherEnemy} from "../../test/test-factories/enemiesFactory";
+import {anNPC, anNPCSelling, anotherNPC} from "../../test/test-factories/npcFactory";
+import {OtherObject} from "../../model/otherObject";
+import {anOtherObjects, anotherOtherObjects} from "../../test/test-factories/otherObjectFactory";
+import {anItemType, anotherItemType} from "../../test/test-factories/itemTypeFactory";
+import {ItemType} from "../../model/itemType";
 
 describe('ExtractorService', () => {
   let service: ExtractorService;
@@ -47,12 +51,10 @@ describe('ExtractorService', () => {
   });
 
   it('extracts connections correctly', () => {
-    const connectionsA: Connection[] = [new Connection(0, 1)]
-    const connectionsB: Connection[] = [new Connection(1, 0)]
-    const allConnections: Connection[] = connectionsA.concat(connectionsB);
+    const allConnections: Connection[] = [new Connection(0, 1), new Connection(1, 0)];
 
-    const locationsA: Location[] = [aLocationWith({connections:connectionsA})];
-    const locationsB: Location[] = [anotherLocationWith({connections:connectionsB})];
+    const locationsA: Location[] = [aLocationWith({connections:[allConnections[0]]})];
+    const locationsB: Location[] = [anotherLocationWith({connections:[allConnections[1]]})];
 
     const areas: Area[] = [
       new Area(0, "area0Name", locationsA),
@@ -70,17 +72,14 @@ describe('ExtractorService', () => {
   });
 
   it('extracts items correctly', () => {
-    const locationItem: Item = anItem();
-    const enemyItem: Item = anotherItem();
-    const npcItem: Item = aThirdItem();
-    const allItems: Item[] = new Array<Item>().concat(locationItem).concat(enemyItem).concat(npcItem);
+    const allItems: Item[] = [anItem(), anotherItem(), aThirdItem()];
 
     const locationA: Location = aLocationWith({
-      items:[locationItem]
+      items:[allItems[0]]
     });
     const locationB: Location = anotherLocationWith({
-      enemies: [anEnemyDropping([{item:enemyItem, chance: 100}])],
-      npcs: [anNPCSelling([{item:npcItem, cost:1, count:1}])]
+      enemies: [anEnemyDropping([{item:allItems[1], chance: 100}])],
+      npcs: [anNPCSelling([{item:allItems[2], cost:1, count:1}])]
     });
 
     const areas: Area[] = [
@@ -96,5 +95,92 @@ describe('ExtractorService', () => {
     );
 
     expect(service.allItems(sampleMap)).toEqual(allItems);
+  });
+
+  it('extracts enemies correctly', () => {
+    const allEnemies = [anEnemy(), anotherEnemy()];
+
+    const locationA: Location = aLocationWith({
+      enemies: [allEnemies[0]]
+    });
+    const locationB: Location = anotherLocationWith({
+      enemies: [allEnemies[1]]
+    });
+
+    const areas: Area[] = [
+      new Area(0, "area0Name", [locationA]),
+      new Area(1, "area1Name", [locationB]),
+      new Area(2, "area2Name", [])
+    ];
+
+    const sampleMap = new Map(
+      "sample map",
+      areas,
+      []
+    );
+
+    expect(service.allEnemies(sampleMap)).toEqual(allEnemies);
+  });
+
+  it('extracts NPCs correctly', () => {
+    const allNPCs = [anNPC(), anotherNPC()];
+
+    const locationA: Location = aLocationWith({
+      npcs: [allNPCs[0]]
+    });
+    const locationB: Location = anotherLocationWith({
+      npcs: [allNPCs[1]]
+    });
+
+    const areas: Area[] = [
+      new Area(0, "area0Name", [locationA]),
+      new Area(1, "area1Name", [locationB]),
+      new Area(2, "area2Name", [])
+    ];
+
+    const sampleMap = new Map(
+      "sample map",
+      areas,
+      []
+    );
+
+    expect(service.allNPCs(sampleMap)).toEqual(allNPCs);
+  });
+
+  it('extracts otherObjects correctly', () => {
+    const allObjects: OtherObject[] = [anOtherObjects(), anotherOtherObjects()];
+
+    const locationA: Location = aLocationWith({
+      objects: [allObjects[0]]
+    });
+    const locationB: Location = anotherLocationWith({
+      objects: [allObjects[1]]
+    });
+
+    const areas: Area[] = [
+      new Area(0, "area0Name", [locationA]),
+      new Area(1, "area1Name", [locationB]),
+      new Area(2, "area2Name", [])
+    ];
+
+    const sampleMap = new Map(
+      "sample map",
+      areas,
+      []
+    );
+
+    expect(service.allOtherObjects(sampleMap)).toEqual(allObjects);
+  });
+
+  it('extracts itemTypes correctly', () => {
+    const allItemTypes: ItemType[] = [anItemType(), anotherItemType()];
+
+    const sampleMap = new Map(
+      "sample map",
+      [],
+      allItemTypes
+    );
+
+    expect(service.allItemTypes(sampleMap)).toEqual(allItemTypes);
   });
 });

@@ -26,8 +26,9 @@ export class ExtractorService {
   allItems(map: Map): Item[] {
     const locationItems = this.allLocations(map).flatMap(location => location.items);
     const enemyItems = this.allEnemies(map).flatMap(enemy => enemy.drops.flatMap(drop => drop.item));
+    const shopItems = this.allNPCs(map).flatMap(npc => npc.shop.flatMap(shopItem => shopItem.item));
 
-    return [...locationItems, ...enemyItems];
+    return locationItems.concat(enemyItems).concat(shopItems);
   }
 
   allEnemies(map: Map): Enemy[] {
