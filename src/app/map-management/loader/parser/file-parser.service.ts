@@ -39,7 +39,7 @@ export class FileParserService {
     });
   }
 
-  private parseLocations(locations: UnparsedLocation[]): Location[] {
+  public parseLocations(locations: UnparsedLocation[]): Location[] {
     return locations.map(location => {return new Location(
       location.id,
       location.name,
@@ -51,7 +51,7 @@ export class FileParserService {
     )})
   }
 
-  private parseConnections(connections: UnparsedConnection[]): Connection[] {
+  public parseConnections(connections: UnparsedConnection[]): Connection[] {
     return connections.map(connection => {return new Connection(
       connection.id,
       connection.to,
@@ -65,7 +65,7 @@ export class FileParserService {
     ));
   }
 
-  private parseItems(items: UnparsedItem[]): Item[] {
+  public parseItems(items: UnparsedItem[]): Item[] {
     return items.map(item => {return new Item(
       item.id,
       item.itemTypeID,
@@ -74,14 +74,14 @@ export class FileParserService {
     )});
   }
 
-  private parseDrops(drops: UnparsedDrop[]): Drop[] {
+  public parseDrops(drops: UnparsedDrop[]): Drop[] {
     return drops.map(drop => {return {
       item: this.parseItems([drop.item])[0],
       chance: drop.chance,
     }})
   }
 
-  private parseEnemies(enemies: UnparsedEnemy[]): Enemy[] {
+  public parseEnemies(enemies: UnparsedEnemy[]): Enemy[] {
     return enemies.map(enemy => {return new Enemy(
       enemy.id,
       enemy.name,
@@ -92,7 +92,7 @@ export class FileParserService {
     )})
   }
 
-  private parseObjects(objects: UnparsedOtherObject[]): OtherObject[] {
+  public parseObjects(objects: UnparsedOtherObject[]): OtherObject[] {
     return objects.map(object => {return new OtherObject(
       object.id,
       object.name,
@@ -100,7 +100,7 @@ export class FileParserService {
     )});
   }
 
-  private parseNPCs(npcs: UnparsedNPC[]): NPC[] {
+  public parseNPCs(npcs: UnparsedNPC[]): NPC[] {
     return npcs.map(npc => {return new NPC(
       npc.id,
       npc.name,
@@ -109,7 +109,7 @@ export class FileParserService {
     )})
   }
 
-  private parseShopItems(shop: UnparsedShopItem[]): ShopItem[] {
+  public parseShopItems(shop: UnparsedShopItem[]): ShopItem[] {
     return shop.map(shopItem => {return {
       item: this.parseItems([shopItem.item])[0],
       cost: shopItem.cost,
@@ -117,14 +117,14 @@ export class FileParserService {
     }})
   }
 
-  private parseBigCondition(condition: UnparsedBigCondition): BigCondition {
+  public parseBigCondition(condition: UnparsedBigCondition): BigCondition {
     return {
       grammar: condition.grammar,
       subConditions: this.parseAtomicConditions(condition.subConditions)
     }
   }
 
-  private parseAtomicConditions(conditions: UnparsedAtomicCondition[]): AtomicCondition[] {
+  public parseAtomicConditions(conditions: UnparsedAtomicCondition[]): AtomicCondition[] {
     return conditions.map(condition => {return {
       subjectType: this.parseSubjectType(condition.subjectType),
       subjectId: condition.subjectId,
@@ -133,14 +133,14 @@ export class FileParserService {
     }})
   }
 
-  private parseSubjectType(type: string): ConditionSubjects {
+  public parseSubjectType(type: string): ConditionSubjects {
     if (Object.values(ConditionSubjects).includes(type as ConditionSubjects)) {
       return type as ConditionSubjects
     }
     throw new Error('Illegal condition subject: ' + type)
   }
 
-  private parseVerb(verb: string): ConditionVerb {
+  public parseVerb(verb: string): ConditionVerb {
     if (Object.values(ConditionVerb).includes(verb as ConditionVerb)) {
       return verb as ConditionVerb
     }
