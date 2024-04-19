@@ -3,7 +3,7 @@
 This app should be able to:
 - [x] parse sml files into a map object in memory
   - [ ] unit test loader service
-    - [ ] unit test id service
+    - [x] unit- / Integration-test id service
       - [x] unit test extractor service
     - [ ] unit test parser service
 - [x] display the contents of a map object

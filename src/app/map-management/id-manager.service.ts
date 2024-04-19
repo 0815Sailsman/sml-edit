@@ -9,14 +9,14 @@ export class IdManagerService {
 
   constructor(private extractor: ExtractorService) { }
 
-  areaID: number = 0;
-  locationID: number = 0;
-  connectionID: number = 0;
-  itemID: number = 0;
-  enemyID: number = 0;
-  objectID: number = 0;
-  npcID: number = 0;
-  itemTypeID: number = 0;
+  areaID: number = -1;
+  locationID: number = -1;
+  connectionID: number = -1;
+  itemID: number = -1;
+  enemyID: number = -1;
+  objectID: number = -1;
+  npcID: number = -1;
+  itemTypeID: number = -1;
 
   initIDsFromMap(map: Map) {
     this.areaID = this.extractMaxID(map.areas);
@@ -30,7 +30,9 @@ export class IdManagerService {
   }
 
   extractMaxID(arrayWithID: HasID[]):number {
-    return arrayWithID.map(obj => obj.id).sort((a, b) => {if (a>=b)return a;return b;})[0] ?? 0;
+    const descendingly = (a: number, b: number) => {return b-a;};
+    const sorted = arrayWithID.map(obj => obj.id).sort(descendingly);
+    return sorted[0] ?? -1;
   }
 
   nextAreaID(): number {
