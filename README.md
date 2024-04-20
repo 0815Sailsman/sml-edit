@@ -22,6 +22,8 @@ Each **location** may have any amount of
 ## Roadmap for 0.4.0 - Modeling more advanced behaviour I
 - [ ] Quest-Line modeling for npcs with interactions, how they travel through the world over time and unlock more shop items / gifts.
   - [ ] Write specs about NPC questlines and their progression
+  - [x] selection from condition verbs based on subjectType
+    - [x] enemy alive && killed
   - [ ] write down concrete requirements in a user-story like style
   - [ ] tbd
 - [ ] Proof of concrept: Model a bonfire with the current OtherObject System (more of a research task)
@@ -33,6 +35,7 @@ Each **location** may have any amount of
 - [ ] Assistance for creating bonfires as other Objects
 - [ ] edit map names
 - [ ] finish missing displays, mainly enemy and NPC
+- [ ] edit atomic conditions
 
 ## Feature backlog
 

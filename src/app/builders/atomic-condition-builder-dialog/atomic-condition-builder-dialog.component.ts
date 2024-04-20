@@ -15,7 +15,7 @@ import {AtomicCondition} from "../../model/atomicCondition";
 import {FormsModule} from "@angular/forms";
 import {SelectFromAllComponent} from "../../select-from-all/select-from-all.component";
 import {MapManagerService} from "../../map-management/map-manager.service";
-import {verbFor} from "../../model/ConditionVerb";
+import {ConditionVerb, DEPRECATEDverbFor, verbsFor} from "../../model/ConditionVerb";
 
 
 @Component({
@@ -38,8 +38,9 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges, OnInit 
 
   @ViewChild('atomicDialog') dialogTag: ElementRef | undefined;
   currentSubject: ConditionSubjects = ConditionSubjects.Location;
-  target: ConditionSubjectsType | undefined = undefined;
-  abbreviationTracker: number = 65
+  target: ConditionSubjectsType | undefined;
+  verb: ConditionVerb | undefined;
+  abbreviationTracker: number = 65;
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.opened) {
@@ -57,8 +58,8 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges, OnInit 
     if (this.target != undefined) {
       this.createdNewAtomicCondition.emit({
         subjectType: this.currentSubject,
-        verb: verbFor(this.currentSubject),
         subjectId: this.target.id,
+        verb: this.verb ?? DEPRECATEDverbFor(this.currentSubject),
         abbreviation: String.fromCharCode(this.abbreviationTracker++)
       })
     }
@@ -71,5 +72,12 @@ export class AtomicConditionBuilderDialogComponent implements OnChanges, OnInit 
 
   selectTarget(subject: ConditionSubjectsType) {
     this.target = subject
+  }
+
+  protected readonly verbsFor = verbsFor;
+  protected readonly ConditionSubjects = ConditionSubjects;
+
+  selectVerb(verb: ConditionVerb) {
+    this.verb = verb;
   }
 }

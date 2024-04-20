@@ -11,17 +11,19 @@ import {ObjectInLocation} from "../model/ObjectInLocation";
 import {KeyInLocation} from "../model/KeyInLocation";
 import {BigCondition} from "../model/bigCondition";
 import {ConditionSubjects} from "../builders/condition-builder/ConditionSubjects";
-import {verbFor} from "../model/ConditionVerb";
+import {DEPRECATEDverbFor} from "../model/ConditionVerb";
 import {ItemType} from "../model/itemType";
 import {IdManagerService} from "./id-manager.service";
 import {ExtractorService} from "./extractor-service/extractor.service";
+import {AtomicCondition} from "../model/atomicCondition";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapManagerService {
 
-  constructor(private mapLoaderService: FromFileMapLoaderService, private idService: IdManagerService, private extractor: ExtractorService) { }
+  constructor(private mapLoaderService: FromFileMapLoaderService, private idService: IdManagerService, private extractor: ExtractorService) {
+  }
 
   map: Map = this.mapLoaderService.loadDefault();
 
@@ -49,8 +51,7 @@ export class MapManagerService {
     area: Area | undefined,
     location: Location | undefined,
     theObject: ObjectInLocation | undefined,
-    key: KeyInLocation | undefined)
-  {
+    key: KeyInLocation | undefined) {
     if (area == undefined || location == undefined || theObject == undefined || key == undefined) {
       return
     }
@@ -106,8 +107,7 @@ export class MapManagerService {
     area: Area | undefined,
     location: Location | undefined,
     theObject: ObjectInLocation | undefined,
-    key: KeyInLocation | undefined)
-  {
+    key: KeyInLocation | undefined) {
     if (area == undefined || location == undefined || theObject == undefined || key == undefined) {
       return
     }
@@ -115,8 +115,6 @@ export class MapManagerService {
     const locationIndex = this.map.areas[areaIndex].locations.indexOf(location)
     // @ts-ignore
     const objectIndex = this.map.areas[areaIndex].locations[locationIndex][key].findIndex(oldObject => oldObject.id == theObject.id);
-    console.log(theObject);
-    console.log(objectIndex);
     if (objectIndex !== -1) {
       this.map.areas[areaIndex].locations[locationIndex][key][objectIndex] = theObject;
     } else {
@@ -131,33 +129,27 @@ export class MapManagerService {
     }
     return condition.grammar
       .split(' ')
-      .map(wordInGrammar => {
-        let result = "";
-        let wordIndex: number = 0;
-        if (wordInGrammar.startsWith('(')) {
-          result += '(';
-          wordIndex++;
-        }
-        const ascii = wordInGrammar.charCodeAt(wordIndex)
-        if (ascii >= 65 && ascii <= 90) {
-          const localCondition = condition.subConditions.find(atomicCondition => atomicCondition.abbreviation.charCodeAt(0) == ascii)!
-          result += localCondition?.subjectType + " "
-          switch (localCondition?.subjectType) {
-            case ConditionSubjects.Location: result += this.locationById(localCondition.subjectId).toString();break;
-            case ConditionSubjects.Item: result += this.itemByID(localCondition.subjectId).toString(this);break;
-            case ConditionSubjects.Enemy: result += this.enemyById(localCondition.subjectId).toString(this);break;
-            case ConditionSubjects.OtherObject: result += this.otherObjectById(localCondition.subjectId).toString();break;
-          }
-          result += " has been " + verbFor(localCondition.subjectType)
-          if (wordInGrammar.endsWith(')')) {
-            result += ')';
-          }
-          return result;
-        } else {
-          return wordInGrammar
-        }
-      })
+      .map(word => this.wordInGrammarInBigConditionToString(word, condition))
       .join(' ');
+  }
+
+  wordInGrammarInBigConditionToString(wordInGrammar: string, condition: BigCondition) {
+    let result: string = "";
+    let wordIndex: number = 0;
+    if (wordInGrammar.startsWith('(')) {
+      result += '(';
+      wordIndex++;
+    }
+    const ascii = wordInGrammar.charCodeAt(wordIndex)
+    if (ascii >= 65 && ascii <= 90) {
+      result += this.abbreviationToString(ascii, condition);
+      if (wordInGrammar.endsWith(')')) {
+        result += ')';
+      }
+      return result
+    } else {
+      return wordInGrammar
+    }
   }
 
   itemTypeToString(itemType: ItemType | undefined): string {
@@ -166,6 +158,33 @@ export class MapManagerService {
     }
     return itemType.name;
   }
+
+  abbreviationToString(ascii: number, condition: BigCondition): string {
+    const localCondition = condition.subConditions.find(atomicCondition => atomicCondition.abbreviation.charCodeAt(0) == ascii)!;
+    return this.atomicConditionToString(localCondition);
+  }
+
+  atomicConditionToString(condition: AtomicCondition): string {
+    let result: string = "";
+    result += condition.subjectType + " ";
+    switch (condition.subjectType) {
+      case ConditionSubjects.Location:
+        result += this.locationById(condition.subjectId).toString();
+        break;
+      case ConditionSubjects.Item:
+        result += this.itemByID(condition.subjectId).toString(this);
+        break;
+      case ConditionSubjects.Enemy:
+        result += this.enemyById(condition.subjectId).toString(this);
+        break;
+      case ConditionSubjects.OtherObject:
+        result += this.otherObjectById(condition.subjectId).toString();
+        break;
+    }
+    result += " " + condition.verb;
+    return result;
+  }
+
 // returns the id of the newly created itemtype
   addItemTypeWithName(newItemTypeName: string | undefined): number | undefined {
     if (newItemTypeName !== undefined) {
@@ -189,8 +208,7 @@ export class MapManagerService {
   updateLocationWithIDToName(
     area: Area | undefined,
     id: number | undefined,
-    editedName: string | undefined)
-  {
+    editedName: string | undefined) {
     if (area === undefined || id === undefined || editedName === undefined) {
       return;
     }

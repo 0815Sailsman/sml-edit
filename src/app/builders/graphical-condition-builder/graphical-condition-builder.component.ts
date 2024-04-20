@@ -42,7 +42,7 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
   @Input() presetCondition: BigCondition | undefined;
   private dontEmit: boolean = false;
 
-  constructor(private mapService: MapManagerService) {
+  constructor(protected mapService: MapManagerService) {
   }
 
   @Output() conditionChange = new EventEmitter<BigCondition>();
@@ -106,7 +106,7 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
     this.condition.subConditions.push(newCondition)
   }
 
-  toString(condition: AtomicCondition): string {
+  REMOVEMEtoString(condition: AtomicCondition): string {
     let result = condition.subjectType + " "
     switch (condition.subjectType) {
       case ConditionSubjects.Location:
@@ -119,8 +119,6 @@ export class GraphicalConditionBuilderComponent implements OnInit, OnChanges {
         return (result + this.mapService.otherObjectById(condition.subjectId).name + " interacted with")
     }
   }
-
-  protected readonly console = console;
 
   rebuildGrammar() {
     this.condition.grammar = ""

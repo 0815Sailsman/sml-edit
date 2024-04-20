@@ -13,7 +13,7 @@
         *ngFor="let condition of this.condition.subConditions"
         [ngValue]="condition"
       >
-        {{toString(condition)}}
+        {{this.mapService.atomicConditionToString(condition)}}
       </option>
     </select>
     <select *ngIf="doBrackets" [(ngModel)]="selectedBrackets[2 * i + 1]" (change)="rebuildGrammar()">
@@ -33,7 +33,7 @@
   Available atomic conditions:
   <ul>
     <li *ngFor="let condition of this.condition.subConditions">
-      {{toString(condition)}}
+      {{this.mapService.atomicConditionToString(condition)}}
     </li>
   </ul>
   <button (click)="inAtomicConditionCreation=true">Create new atomic condition</button>
