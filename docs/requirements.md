@@ -6,9 +6,55 @@ This app should be able to:
     - [x] unit- / Integration-test id service
       - [x] unit test extractor service
     - [x] unit test parser service
-- [x] display the contents of a map object
 - [x] load sml files from disk
 - [x] store sml files to disk from map object in memory
+
+### Display
+The contents of the map objects currently held in memory should be nicely displayed so that I as a User am able to see
+what the model looks like.
+
+- [x] display the name of the current map
+- [x] display the available areas in the current map
+  - [x] include the name of the area in the display
+  - [x] include the ID of the area in the display
+- [x] display the related locations in an area for each area
+  - [x] include the name of the location in the display
+  - [x] include the ID of the location in the display
+- [x] display the related connections in a location for each location in an area
+  - [x] display the target location of the connection
+    - [x] display the name of the target location
+    - [x] display the ID of the target location
+  - [x] display the condition, under which the connection is available
+- [x] display the related items in a location for each location in an area
+  - [x] display the count of the item
+  - [x] display the name of the itemtype
+  - [x] display the ID of the Item
+  - [x] display the location of the item
+  - [x] display the condition, under which the item appears in the world
+- [ ] display the related enemies in a location for each location in an area
+  - [x] display the name of the enemy
+  - [ ] display the souls an enemy drops on defeat
+  - [ ] display whether an enemy respawns or not
+  - [ ] display what an enemy drops
+    - [ ] display the name of the dropped item
+    - [ ] display the count of the dropped item
+    - [ ] display the chance for the enemy to drop that item on defeat
+  - [x] display the condition, under which the enemy appears in the world
+- [x] display the related otherObjects in a location for each location in the world
+  - [x] display the ID of the object
+  - [x] display the name of the object
+  - [x] display the condition, under which the object appears in the world
+- [ ] display the related NPCs un a location for each location in the world
+  - [x] display the ID of the NPC
+  - [x] display the name of the NPC
+  - [ ] display the shop inventory of the NPC
+    - [ ] display the name of the sold item
+    - [ ] display the count of the item in the NPCs inventory
+    - [ ] display the cost of the item
+  - [x] display the condition, under which the NPC appears in the world
+
+#### Testing display
+- [ ] e2e test all these with playwright ONCE WE HAVE A DESIGN!
 
 ### Adding
 Adding in this context means being able to create a new object with reasonable effort,

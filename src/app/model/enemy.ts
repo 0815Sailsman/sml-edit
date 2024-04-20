@@ -27,6 +27,6 @@ export class Enemy {
   }
 
   toString(mapService: MapManagerService): string {
-    return this.name + " (ID: " + this.id + ") spawning in " + (mapService.locationOfEnemyWithID(this.id)?.name ?? "undefined location");
+    return this.name + " (ID: " + this.id + ") spawning in " + (mapService.locationOfEnemyWithID(this.id)?.toString() ?? "undefined location");
   }
 }

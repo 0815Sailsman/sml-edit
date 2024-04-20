@@ -19,19 +19,20 @@ Each **location** may have any amount of
  - **objects** with arbitrary interaction possibilities. This will probably be the hardest thing to model later on. Maybe start out with just being able to interact once with every object to later be able to use them in conditions.
  - **npcs**. They will also be relatively complex, having different quest-progress states changing their locations, interactions and shop-inventory. Also simplify for now to single state -> just make them have a shop.
 
-## Roadmap for 0.3.0 - Docs, specs and testing
-- [x] Written down concrete specs and requirements for this app
-- [ ] Write tests for these requirements
-
 ## Roadmap for 0.4.0 - Modeling more advanced behaviour I
 - [ ] Quest-Line modeling for npcs with interactions, how they travel through the world over time and unlock more shop items / gifts.
-- [ ] Proof of concrept: Model a bonfire with the current OtherObject System
+  - [ ] Write specs about NPC questlines and their progression
+  - [ ] write down concrete requirements in a user-story like style
+  - [ ] tbd
+- [ ] Proof of concrept: Model a bonfire with the current OtherObject System (more of a research task)
 
 ## Roadmap for 0.5.0 - QoL
 - [ ] Restrict inputs that logically should only accept numbers to actually only accept numbers
 - [ ] OtherObject with type constraints -> not anything, but select from collection of bonfire, lever etc. with fix interactions
 - [ ] Enemy templates similar to item types
 - [ ] Assistance for creating bonfires as other Objects
+- [ ] edit map names
+- [ ] finish missing displays, mainly enemy and NPC
 
 ## Feature backlog
 
@@ -50,6 +51,16 @@ Each **location** may have any amount of
 
 # Archive
 Past roadmaps etc
+
+## Roadmap for 0.3.0 - Docs, specs and testing
+- [x] Written down concrete specs and requirements for this app
+  - [x] Write glossary
+  - [x] Write down current requirements
+- [x] Write tests for some of these requirements (all of them will be progressively completed over the next few releases)
+  - [x] test extractor service
+  - [x] test id service
+  - [x] test parsing service
+  - [x] test map loading service
 
 ## Roadmap for 0.2.0 - The big refactoring & some QOL
 - [x] wrap shop item builder in own component

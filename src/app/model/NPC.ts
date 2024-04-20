@@ -20,6 +20,6 @@ export class NPC {
   }
 
   toString(): string {
-    return this.name;
+    return this.name + " (ID: " + this.id + ")";
   }
 }
